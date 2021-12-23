@@ -1,0 +1,12 @@
+.button {
+  @include buttonDefault;
+  max-width: 44px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: $orange-color;
+  transition: 0.5s;
+  @include hover {
+    background-color: $orange-brith;
+  }
+}

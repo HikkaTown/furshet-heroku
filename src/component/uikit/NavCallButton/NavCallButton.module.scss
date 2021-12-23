@@ -1,0 +1,29 @@
+.button {
+  max-width: 188px;
+  width: 188px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include body3-normal($primary-text);
+  background-color: $orange-color;
+  border-radius: 30px;
+  transition: 0.5s;
+  @include hover {
+    background-color: $orange-brith;
+  }
+
+  @include active {
+    background-color: #f29203;
+  }
+}
+
+.icon_wrapper {
+  margin-right: 11px;
+  max-width: 20px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

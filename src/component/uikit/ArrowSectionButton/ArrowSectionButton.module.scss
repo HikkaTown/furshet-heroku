@@ -1,0 +1,25 @@
+.button {
+  @include buttonDefault;
+  background-color: $white-color;
+  max-width: 44px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  transition: 0.5s;
+  border-radius: 50%;
+  &_left {
+    transform: scale(-1, 1);
+  }
+  @include hover {
+    background-color: $orange-color;
+  }
+}
+
+.icon {
+  max-width: 24;
+  width: 24px;
+  height: 24px;
+  margin: 0 auto;
+}

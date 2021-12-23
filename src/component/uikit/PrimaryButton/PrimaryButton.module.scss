@@ -1,0 +1,17 @@
+.button {
+  @include buttonDefault;
+  max-width: 195px;
+  width: 195px;
+  height: 48px;
+  @include body2-normal($primary-text);
+  border-radius: 30px;
+  transition: 0.5s;
+  background-color: $orange-color;
+  @include hover {
+    background-color: $orange-brith;
+  }
+
+  @include active {
+    background-color: $orange-primary;
+  }
+}

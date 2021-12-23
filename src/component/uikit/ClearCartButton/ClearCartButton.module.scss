@@ -1,0 +1,11 @@
+.button {
+  @include buttonDefault;
+  height: 24px;
+  max-width: 134px;
+  width: 134px;
+  @include body3-normal($text-secondary);
+  transition: 0.5s;
+  &:hover {
+    color: $wine-color;
+  }
+}

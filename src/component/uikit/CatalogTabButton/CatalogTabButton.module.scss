@@ -1,0 +1,20 @@
+.button {
+  @include buttonDefault;
+  @include body3-normal($primary-text);
+  border: 0.5px solid #343434;
+  max-width: 148px;
+  width: 148px;
+  height: 36px;
+  border-radius: 30px;
+  transition: 0.5s;
+
+  @include hover {
+    background-color: $white-color;
+  }
+
+  &_active {
+    background-color: $wine-color;
+    border-color: $wine-color;
+    color: $white-color;
+  }
+}

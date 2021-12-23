@@ -1,0 +1,50 @@
+.container {
+  max-width: 328px;
+  padding-bottom: 16px;
+  border-bottom: 0.5px solid #b4b4b4;
+}
+
+.head {
+  padding: 0;
+  @include body3-normal($text-secondary);
+  margin: 0 0 12px 0;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.amount {
+  @include buttonDefault;
+  cursor: text;
+  max-width: 160px;
+  width: 160px;
+  height: 36px;
+  padding: 8px 24px;
+  background-color: $white-color;
+  border-radius: 30px;
+  box-sizing: border-box;
+  @include body4($primary-text);
+  border: 0.5px solid $white-color;
+  transition: 0.5s;
+
+  @include hover {
+    border: 0.5px solid #343434;
+  }
+
+  &:focus {
+    background-color: $cream-color;
+    border: 0.5px solid #343434;
+  }
+
+  &:first-of-type {
+    margin-right: 8px;
+  }
+
+  &::placeholder {
+    color: $gray-color;
+    text-align: center;
+  }
+}

@@ -1,0 +1,28 @@
+.button {
+  @include buttonDefault;
+  max-width: 197px;
+  width: 197px;
+  height: 48px;
+  @include body2-normal($primary-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 30px;
+  transition: 0.5s;
+  @include hover {
+    background: $orange-color;
+  }
+}
+
+.icon_wrapper {
+  height: 24px;
+  width: 24px;
+  margin-left: 12px;
+}
+
+.icon {
+  stroke: $primary-text;
+  height: 24px;
+  width: 24px;
+}

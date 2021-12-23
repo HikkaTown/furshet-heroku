@@ -1,0 +1,25 @@
+.button {
+  height: 36px;
+  max-width: 36px;
+  width: 36px;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  justify-content: center;
+  border-radius: 50%;
+  transition: 0.5s;
+  @include hover {
+    .icon_stroke {
+      stroke: $wine-color;
+    }
+  }
+}
+
+.icon {
+  max-width: 20px;
+  width: 20px;
+  height: 20px;
+  &_stroke {
+    stroke: $text-secondary;
+  }
+}
