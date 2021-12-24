@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import cs from "classnames";
-import s from "./Counter.module.scss";
 import {
   handlerDecrement,
   handlerIncrement,
@@ -8,8 +7,8 @@ import {
   onClickDecrement,
   onClickIncrement,
 } from "../../../utils/counterFunction";
-
-export default function Counter() {
+import s from "./CounterLight.module.scss";
+export default function CounterLight() {
   const [count, setCount] = useState(1);
   const timer = useRef();
 
@@ -59,13 +58,14 @@ export default function Counter() {
     </div>
   );
 }
+
 const ButtonDecrement = ({ onDown, onUp, onClick }) => {
   return (
     <button
       className={cs(s.button, s.decrement)}
       onPointerDown={onDown}
-      onPointerLeave={onUp}
       onPointerUp={onUp}
+      onPointerLeave={onUp}
       onClick={onClick}
     >
       <svg
