@@ -22,3 +22,15 @@ export const handlerDecrement = (timer, setCount, count) => {
 export const handlerUp = (timer) => {
   clearTimeout(timer.current);
 };
+
+export const onClickIncrement = (count, setCount) => {
+  if (count < 999) {
+    setCount(++count);
+  }
+};
+
+export const onClickDecrement = (count, setCount) => {
+  if (count > 1) {
+    setCount(--count);
+  }
+};

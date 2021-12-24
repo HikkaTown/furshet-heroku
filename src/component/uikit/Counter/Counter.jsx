@@ -5,6 +5,8 @@ import {
   handlerDecrement,
   handlerIncrement,
   handlerUp,
+  onClickDecrement,
+  onClickIncrement,
 } from "../../../utils/counterFunction";
 
 export default function Counter() {
@@ -33,27 +35,38 @@ export default function Counter() {
     handlerDecrement(timer, setCount, count);
   };
 
+  const handlerOnClickIncrement = () => {
+    onClickIncrement(count, setCount);
+  };
+
+  const handlerOnClickDecrement = () => {
+    onClickDecrement(count, setCount);
+  };
+
   return (
     <div className={s.container}>
       <ButtonDecrement
         onDown={handlerDecrementValue}
         onUp={handlerClearTimeout}
+        onClick={handlerOnClickDecrement}
       />
       <InputValue onChange={cb} initState={count} />
       <ButtonIncrement
         onIncrement={handlerAddValue}
         onUp={handlerClearTimeout}
+        onClick={handlerOnClickIncrement}
       />
     </div>
   );
 }
 
-const ButtonDecrement = ({ onDown, onUp }) => {
+const ButtonDecrement = ({ onDown, onUp, onClick }) => {
   return (
     <button
       className={cs(s.button, s.decrement)}
       onPointerDown={onDown}
       onPointerUp={onUp}
+      onClick={onClick}
     >
       <svg
         width="16"
@@ -75,9 +88,10 @@ const ButtonDecrement = ({ onDown, onUp }) => {
   );
 };
 
-const ButtonIncrement = ({ onIncrement, onUp }) => {
+const ButtonIncrement = ({ onIncrement, onUp, onClick }) => {
   return (
     <button
+      onClick={onClick}
       className={cs(s.button, s.increment)}
       onPointerUp={onUp}
       onPointerDown={onIncrement}
