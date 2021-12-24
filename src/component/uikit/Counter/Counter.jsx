@@ -1,11 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
 import cs from "classnames";
 import s from "./Counter.module.scss";
+import {
+  handlerDecrement,
+  handlerIncrement,
+  handlerUp,
+} from "../../../utils/counterFunction";
 
 export default function Counter() {
   const [count, setCount] = useState(1);
+  const timer = useRef();
+
   const cb = (value) => {
-    console.log(value);
     if (value < 1) {
       setCount(1);
     } else {
@@ -13,30 +19,42 @@ export default function Counter() {
     }
   };
 
-  const handlerIncrement = () => {
-    const value = count + 1;
-    setCount(value);
+  const handlerAddValue = (e) => {
+    e.preventDefault();
+    handlerIncrement(timer, setCount, count);
   };
 
-  const handlerDecrement = () => {
-    if (count > 1) {
-      const value = count - 1;
-      setCount(value);
-    }
+  const handlerClearTimeout = () => {
+    handlerUp(timer);
+  };
+
+  const handlerDecrementValue = (e) => {
+    e.preventDefault();
+    handlerDecrement(timer, setCount, count);
   };
 
   return (
     <div className={s.container}>
-      <ButtonDecrement handlerDecrement={handlerDecrement} />
+      <ButtonDecrement
+        onDown={handlerDecrementValue}
+        onUp={handlerClearTimeout}
+      />
       <InputValue onChange={cb} initState={count} />
-      <ButtonIncrement onIncrement={handlerIncrement} />
+      <ButtonIncrement
+        onIncrement={handlerAddValue}
+        onUp={handlerClearTimeout}
+      />
     </div>
   );
 }
 
-const ButtonDecrement = ({ handlerDecrement }) => {
+const ButtonDecrement = ({ onDown, onUp }) => {
   return (
-    <button className={cs(s.button, s.decrement)} onClick={handlerDecrement}>
+    <button
+      className={cs(s.button, s.decrement)}
+      onPointerDown={onDown}
+      onPointerUp={onUp}
+    >
       <svg
         width="16"
         height="2"
@@ -48,7 +66,6 @@ const ButtonDecrement = ({ handlerDecrement }) => {
         <path
           className={s.decrement_line}
           d="M1 1H15"
-          stroke="#B4B4B4"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -58,9 +75,13 @@ const ButtonDecrement = ({ handlerDecrement }) => {
   );
 };
 
-const ButtonIncrement = ({ onIncrement }) => {
+const ButtonIncrement = ({ onIncrement, onUp }) => {
   return (
-    <button className={cs(s.button, s.increment)} onClick={onIncrement}>
+    <button
+      className={cs(s.button, s.increment)}
+      onPointerUp={onUp}
+      onPointerDown={onIncrement}
+    >
       <svg
         width="24"
         height="24"
@@ -88,27 +109,29 @@ const ButtonIncrement = ({ onIncrement }) => {
   );
 };
 
-const InputValue = ({ onChange, initState = "1" }) => {
-  const [count, setCount] = useState(initState);
+const InputValue = ({ onChange, initState }) => {
+  const [counter, setCount] = useState(initState);
 
   const handlerChange = (e) => {
-    if (typeof e.target.value !== "string") {
-      const value = +e.target.value;
-      if (+value >= 1) {
-        setCount(+value);
-      } else if (+value < 1) {
-        setCount(1);
-      }
+    const value = +e.target.value;
+    if (value > 999) {
+      setCount(999);
+      onChange(999);
+    } else if (value >= 1) {
+      setCount(value);
+      onChange(value);
+    } else if (value < 1) {
+      setCount(1);
       onChange(value);
     }
   };
 
   return (
     <input
-      type="text"
+      type="number"
       onChange={handlerChange}
-      className={s.value}
-      value={count}
+      className={s.input}
+      value={initState}
     />
   );
 };

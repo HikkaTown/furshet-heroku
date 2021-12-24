@@ -11,10 +11,10 @@
 .button {
   @include buttonDefault;
   height: 36px;
-  max-width: 36px;
-  width: 36px;
-  padding-left: 13px;
-  padding-right: 13px;
+  max-width: 100%;
+  width: 100%;
+  // padding-left: 13px;
+  // padding-right: 13px;
 
   @include hover {
     .icon_line {
@@ -23,10 +23,22 @@
   }
 }
 
-.decrement_icon {
-  max-width: 14px;
-  width: 14px;
-  height: 24px;
+.decrement {
+  &_icon {
+    max-width: 14px;
+    width: 14px;
+    height: 100%;
+  }
+
+  &_line {
+    stroke: $gray-color;
+    transition: 0.5s;
+  }
+  @include hover {
+    .decrement_line {
+      stroke: $primary-text;
+    }
+  }
 }
 
 .icon_line {
@@ -34,7 +46,7 @@
   stroke: $text-secondary;
 }
 
-.value {
+.input {
   @include buttonDefault;
   cursor: text;
   text-align: center;
@@ -42,4 +54,10 @@
   width: 37px;
   height: 22px;
   @include body4($text-secondary);
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
 }
