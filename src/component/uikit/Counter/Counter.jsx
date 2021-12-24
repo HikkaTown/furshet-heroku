@@ -60,7 +60,7 @@ export default function Counter() {
     </div>
   );
 }
-
+// push
 const ButtonDecrement = ({ onDown, onUp, onClick }) => {
   return (
     <button
@@ -88,7 +88,7 @@ const ButtonDecrement = ({ onDown, onUp, onClick }) => {
     </button>
   );
 };
-
+// dsds
 const ButtonIncrement = ({ onIncrement, onUp, onClick }) => {
   return (
     <button
