@@ -1,0 +1,78 @@
+{
+  "kind": "collectionType",
+  "collectionName": "exit_bars",
+  "info": {
+    "singularName": "exit-bar",
+    "pluralName": "exit-bars",
+    "displayName": "exit_bar",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "richtext"
+    },
+    "Price": {
+      "type": "biginteger"
+    },
+    "NextProductPrice": {
+      "type": "biginteger"
+    },
+    "slidersPc": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "slidersMob": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "minPerson": {
+      "type": "biginteger"
+    },
+    "foodName": {
+      "type": "string"
+    },
+    "exit_bar_types": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::exit-bar-type.exit-bar-type",
+      "mappedBy": "exit_bars"
+    },
+    "tests": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::test.test",
+      "mappedBy": "exit_bars"
+    },
+    "tematics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tematic.tematic",
+      "inversedBy": "exit_bars"
+    },
+    "testes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::teste.teste",
+      "inversedBy": "exit_bars"
+    }
+  }
+}

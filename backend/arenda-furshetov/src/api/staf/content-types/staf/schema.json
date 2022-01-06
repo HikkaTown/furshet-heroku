@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "stafs",
+  "info": {
+    "singularName": "staf",
+    "pluralName": "stafs",
+    "displayName": "staf",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "price": {
+      "type": "biginteger"
+    },
+    "slidersPc": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "slidersMob": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

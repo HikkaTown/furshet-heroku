@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "master_class_types",
+  "info": {
+    "singularName": "master-class-type",
+    "pluralName": "master-class-types",
+    "displayName": "MasterClassType"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nameType": {
+      "type": "string"
+    },
+    "master_class": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::master-class.master-class",
+      "inversedBy": "master_class_types"
+    }
+  }
+}

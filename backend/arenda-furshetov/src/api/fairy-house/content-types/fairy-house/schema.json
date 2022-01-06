@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "fairy_houses",
+  "info": {
+    "singularName": "fairy-house",
+    "pluralName": "fairy-houses",
+    "displayName": "fairy_house",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "richtext"
+    },
+    "slidersPc": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "price": {
+      "type": "biginteger"
+    },
+    "slidersMob": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

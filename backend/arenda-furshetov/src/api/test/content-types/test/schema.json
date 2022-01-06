@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tests",
+  "info": {
+    "singularName": "test",
+    "pluralName": "tests",
+    "displayName": "test",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Text": {
+      "type": "string"
+    },
+    "exit_bars": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::exit-bar.exit-bar",
+      "inversedBy": "tests"
+    }
+  }
+}

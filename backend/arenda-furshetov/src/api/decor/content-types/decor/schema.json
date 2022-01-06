@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "decors",
+  "info": {
+    "singularName": "decor",
+    "pluralName": "decors",
+    "displayName": "Decor",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "price": {
+      "type": "biginteger"
+    },
+    "slidersPc": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "Description": {
+      "type": "richtext"
+    },
+    "slidersMob": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

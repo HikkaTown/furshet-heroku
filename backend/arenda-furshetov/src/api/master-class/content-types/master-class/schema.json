@@ -1,0 +1,57 @@
+{
+  "kind": "collectionType",
+  "collectionName": "master_classes",
+  "info": {
+    "singularName": "master-class",
+    "pluralName": "master-classes",
+    "displayName": "Master_class",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "price": {
+      "type": "biginteger"
+    },
+    "slidersPc": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "slidersMob": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "minPerson": {
+      "type": "biginteger"
+    },
+    "NextPersonPrice": {
+      "type": "biginteger"
+    },
+    "master_class_types": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::master-class-type.master-class-type",
+      "mappedBy": "master_class"
+    }
+  }
+}

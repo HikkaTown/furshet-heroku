@@ -1,0 +1,48 @@
+.button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: (255, 255, 255, 0.6);
+  height: 44px;
+  max-width: 44px;
+  width: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: 0.5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &_added {
+    .icon {
+      fill: $wine-color;
+      stroke: $wine-color;
+    }
+  }
+
+  @include active {
+    .icon {
+      fill: $wine-color;
+      stroke: $wine-color;
+    }
+  }
+
+  @include hover {
+    background-color: #fff;
+    .icon {
+      stroke: #910c5c;
+    }
+  }
+}
+
+.icon {
+  max-width: 28px;
+  width: 28px;
+  height: 28px;
+  stroke: $text-secondary;
+  transition: 0.5s;
+}

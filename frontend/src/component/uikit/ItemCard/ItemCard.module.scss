@@ -1,0 +1,107 @@
+.block {
+  max-width: 328px;
+  width: 328px;
+  background-color: $white-color;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: 0.5s;
+  padding: 12px;
+  border: 0.5px solid $white-color;
+  overflow: hidden;
+  position: relative;
+  @include hover {
+    border: 0.5px solid #343434;
+  }
+
+  @include tablet {
+    max-width: 280px;
+    width: 280px;
+    height: 404px;
+  }
+}
+
+.favorite {
+  position: absolute;
+  top: 21.5px;
+  right: 21.5px;
+  z-index: 2;
+
+  @include tablet {
+    top: 20px;
+    right: 20px;
+  }
+}
+
+.wrapper {
+  max-width: 304px;
+  width: 304px;
+  height: 304px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+
+  @include tablet {
+    border-radius: 8px;
+    max-width: 256px;
+    width: 256px;
+    height: 256px;
+  }
+}
+
+.image {
+  max-width: 304px;
+  border-radius: 8px;
+  width: 304px;
+  height: 304px;
+  object-fit: cover;
+  @include tablet {
+    border-radius: 8px;
+    max-width: 256px;
+    width: 256px;
+    height: 256px;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.name {
+  margin: 0;
+  padding: 0;
+  @include body3-normal($primary-text);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.params {
+  display: inline-block;
+  @include body4($primary-text);
+  text-align: center;
+  padding: 6px 12px;
+  margin: 0 auto;
+  border: 1px solid #fab576;
+  box-sizing: border-box;
+  border-radius: 15px;
+}
+
+.pay {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  @include body4($primary-text);
+}
+
+.amount {
+  @include body1-medium($primary-text);
+}
+
+.currency {
+  @include body1-medium($primary-text);
+}

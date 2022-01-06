@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bar_counters",
+  "info": {
+    "singularName": "bar-counter",
+    "pluralName": "bar-counters",
+    "displayName": "bar_counter"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "price": {
+      "type": "biginteger"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "sliderPc": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "slidersMob": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

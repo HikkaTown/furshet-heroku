@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tematics",
+  "info": {
+    "singularName": "tematic",
+    "pluralName": "tematics",
+    "displayName": "tematic",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "exit_bars": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::exit-bar.exit-bar",
+      "inversedBy": "tematics"
+    },
+    "Name_Category": {
+      "type": "string"
+    },
+    "gastro_stations": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::gastro-station.gastro-station",
+      "mappedBy": "tematics"
+    }
+  }
+}
