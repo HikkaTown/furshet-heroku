@@ -32,28 +32,32 @@ export default function SliderForCard({ data }) {
           </div>
           <div className={cs("keen-slider__slide", s.slide)}>2</div>
           <div className={cs("keen-slider__slide", s.slide)}>3</div>
-          <div className={cs("keen-slider__slide", s.slide)}>4</div>
-          <div className={cs("keen-slider__slide", s.slide)}>5</div>
-          <div className={cs("keen-slider__slide", s.slide)}>6</div>
         </div>
+        {loaded && instanceRef.current && (
+          <div className={s.dots}>
+            {[
+              ...Array(instanceRef.current.track.details.slides.length).keys(),
+            ].map((idx) => {
+              return (
+                <div
+                  key={idx}
+                  onMouseEnter={() => {
+                    instanceRef.current?.moveToIdx(idx);
+                  }}
+                  className={s.dot_wrapper}
+                >
+                  <button
+                    onClick={() => {
+                      instanceRef.current?.moveToIdx(idx);
+                    }}
+                    className={cs(s.dot, currentSlide === idx ? s.active : "")}
+                  ></button>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
-      {/* {loaded && instanceRef.current && (
-        <div className="dots">
-          {[
-            ...Array(instanceRef.current.track.details.slides.length).keys(),
-          ].map((idx) => {
-            return (
-              <button
-                key={idx}
-                onClick={() => {
-                  instanceRef.current?.moveToIdx(idx);
-                }}
-                className={"dot" + (currentSlide === idx ? " active" : "")}
-              ></button>
-            );
-          })}
-        </div>
-      )} */}
     </>
   );
 }

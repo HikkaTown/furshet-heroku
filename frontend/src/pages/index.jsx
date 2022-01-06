@@ -8,6 +8,7 @@ import GiftItem from "../component/uikit/GitfItem/GiftItem";
 import ItemCard from "../component/uikit/ItemCard/ItemCard";
 import NavigationButton from "../component/uikit/NavigationButton/NavigationButton";
 import { useEffect } from "react";
+import { URL_SERVER } from "../utils/const";
 
 function Home({ data, error }) {
   console.log(data);
@@ -21,7 +22,7 @@ function Home({ data, error }) {
 
 Home.getInitialProps = async (ctx) => {
   try {
-    const res = await axios.get("http://localhost:1337/api/exit-bars", {
+    const res = await axios.get(`${URL_SERVER}/exit-bars`, {
       params: {
         populate: "*",
       },

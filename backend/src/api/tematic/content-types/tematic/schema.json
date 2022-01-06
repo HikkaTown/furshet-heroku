@@ -16,7 +16,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::exit-bar.exit-bar",
-      "inversedBy": "tematics"
+      "mappedBy": "tematics"
     },
     "Name_Category": {
       "type": "string"
@@ -31,7 +31,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::master-class.master-class",
-      "inversedBy": "tematics"
+      "mappedBy": "tematics"
     }
   }
 }

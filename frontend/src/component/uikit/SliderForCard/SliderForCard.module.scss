@@ -25,3 +25,35 @@
   width: 100%;
   height: 100%;
 }
+
+.dots {
+  position: absolute;
+  bottom: 10px;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.dot_wrapper {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  margin-right: 4px;
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.dot {
+  @include buttonDefault;
+  height: 4px;
+  width: 56px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+}
+
+.active {
+  background-color: #fff;
+}

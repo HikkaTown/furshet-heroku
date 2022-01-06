@@ -4,7 +4,8 @@
   "info": {
     "singularName": "exit-bar-type",
     "pluralName": "exit-bar-types",
-    "displayName": "ExitBarType"
+    "displayName": "exitBarType",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true

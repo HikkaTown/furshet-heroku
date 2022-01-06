@@ -4,7 +4,7 @@
   "info": {
     "singularName": "exit-bar",
     "pluralName": "exit-bars",
-    "displayName": "exit_bar",
+    "displayName": "exitBar",
     "description": ""
   },
   "options": {

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "bar-counter",
     "pluralName": "bar-counters",
-    "displayName": "bar_counter"
+    "displayName": "barCounter",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -21,22 +22,24 @@
       "type": "richtext"
     },
     "sliderPc": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "slidersMob": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     }
   }
 }

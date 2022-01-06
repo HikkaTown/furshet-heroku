@@ -4,7 +4,8 @@
   "info": {
     "singularName": "master-class-type",
     "pluralName": "master-class-types",
-    "displayName": "MasterClassType"
+    "displayName": "masterClassType",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true

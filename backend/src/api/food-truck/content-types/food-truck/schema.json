@@ -4,7 +4,7 @@
   "info": {
     "singularName": "food-truck",
     "pluralName": "food-trucks",
-    "displayName": "Food_truck",
+    "displayName": "foodTruck",
     "description": ""
   },
   "options": {
@@ -32,13 +32,14 @@
       "type": "richtext"
     },
     "slidersMob": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     }
   }
 }
