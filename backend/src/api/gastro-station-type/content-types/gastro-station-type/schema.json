@@ -13,6 +13,12 @@
   "attributes": {
     "name_type": {
       "type": "string"
+    },
+    "gastro_stations": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::gastro-station.gastro-station",
+      "inversedBy": "gastro_station_types"
     }
   }
 }

@@ -26,6 +26,12 @@
       "relation": "manyToMany",
       "target": "api::gastro-station.gastro-station",
       "mappedBy": "tematics"
+    },
+    "master_classes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::master-class.master-class",
+      "inversedBy": "tematics"
     }
   }
 }

@@ -56,14 +56,11 @@
       "target": "api::tematic.tematic",
       "inversedBy": "gastro_stations"
     },
-    "dslls": {
-      "type": "enumeration",
-      "enum": [
-        "dasd",
-        "d2sd",
-        "da23",
-        "dsd31"
-      ]
+    "gastro_station_types": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::gastro-station-type.gastro-station-type",
+      "inversedBy": "gastro_stations"
     }
   }
 }

@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "master_classes",
+  "collectionName": "exit_bars",
   "info": {
-    "singularName": "master-class",
-    "pluralName": "master-classes",
-    "displayName": "Master_class",
+    "singularName": "exit-bar",
+    "pluralName": "exit-bars",
+    "displayName": "exit_bar",
     "description": ""
   },
   "options": {
@@ -12,13 +12,16 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name": {
+    "Name": {
       "type": "string"
     },
-    "description": {
+    "Description": {
       "type": "richtext"
     },
-    "price": {
+    "Price": {
+      "type": "biginteger"
+    },
+    "NextProductPrice": {
       "type": "biginteger"
     },
     "slidersPc": {
@@ -44,14 +47,20 @@
     "minPerson": {
       "type": "biginteger"
     },
-    "NextPersonPrice": {
-      "type": "biginteger"
+    "foodName": {
+      "type": "string"
     },
-    "master_class_types": {
+    "exit_bar_types": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::master-class-type.master-class-type",
-      "mappedBy": "master_class"
+      "relation": "manyToMany",
+      "target": "api::exit-bar-type.exit-bar-type",
+      "mappedBy": "exit_bars"
+    },
+    "tematics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tematic.tematic",
+      "inversedBy": "exit_bars"
     }
   }
 }
