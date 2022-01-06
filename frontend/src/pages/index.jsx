@@ -10,6 +10,7 @@ import NavigationButton from "../component/uikit/NavigationButton/NavigationButt
 import { useEffect } from "react";
 
 function Home({ data, error }) {
+  console.log(data);
   return (
     <>
       <ItemCard data={null} />
@@ -20,9 +21,11 @@ function Home({ data, error }) {
 
 Home.getInitialProps = async (ctx) => {
   try {
-    const res = await axios.get(
-      "http://localhost:1337/api/exit-bars/?populate=*"
-    );
+    const res = await axios.get("http://localhost:1337/api/exit-bars", {
+      params: {
+        populate: "*",
+      },
+    });
     const data = res.data;
     return data;
   } catch (error) {
