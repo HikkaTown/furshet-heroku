@@ -12,6 +12,9 @@ export default function SliderForCard({ data }) {
     slideChanged(slider) {
       setCurrentSlide(slider.track.details.rel);
     },
+    defaultAnimation: {
+      duration: 1200,
+    },
     created() {
       setLoaded(true);
     },
@@ -32,6 +35,7 @@ export default function SliderForCard({ data }) {
           </div>
           <div className={cs("keen-slider__slide", s.slide)}>2</div>
           <div className={cs("keen-slider__slide", s.slide)}>3</div>
+          <div className={cs("keen-slider__slide", s.slide)}>4</div>
         </div>
         {loaded && instanceRef.current && (
           <div className={s.dots}>

@@ -22,11 +22,13 @@ export default function FurshetCard({ data }) {
 
   return (
     <div className={s.card}>
+      {/* TODO: Description button for mobile version */}
       <div className={s.favorite}>
         <FavoriteButton added={added} onClick={handleAddedFavorites} />
       </div>
       <div className={s.slider_block}>
         <SliderForCard data={null} />
+        {/* TODO: description */}
       </div>
       <div className={s.content}>
         <h3 className={s.name}>Фуршетный набор №1/Фуршетный набор №1</h3>
