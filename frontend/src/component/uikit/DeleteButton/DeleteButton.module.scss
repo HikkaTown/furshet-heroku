@@ -1,11 +1,17 @@
 .btn {
   @include buttonDefault;
   @include body3-medium($primary-text);
-  padding: 6px 24px;
   background-color: $orange-light;
   border-radius: 30px;
   transition: 0.5s;
+  max-width: 123px;
+  width: 123px;
+  height: 44px;
   @include hover {
     background-color: rgba($color: $orange-light, $alpha: 0.5);
+  }
+
+  @include tablet {
+    height: 36px;
   }
 }

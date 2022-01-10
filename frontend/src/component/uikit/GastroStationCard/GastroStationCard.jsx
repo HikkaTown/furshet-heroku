@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import s from "./MasterClassCard.module.scss";
+import s from "./GastroStationCard.module.scss";
 import cs from "classnames";
-import SliderForCard from "../SliderForCard/SliderForCard";
-import SliderCloseButton from "../SliderCloseButton/SliderCloseButton";
-import OpacityButton from "../OpacityButton/OpacityButton";
-import Counter from "../Counter/Counter";
-import Checkbox from "../Checkbox/Checkbox";
 import useWindowSize from "../../../hooks/useWindowSize";
-import FavoriteButton from "../FavoriteButton/FavoriteButton";
-import converterNumber from "../../../utils/converterNumber";
-import PrimaryButton from "../PrimaryButton/PrimaryButton";
-import DescriptionInCard from "../DescriptionInCard/DescriptionInCard";
+import Counter from "../Counter/Counter";
 import DeleteButton from "../DeleteButton/DeleteButton";
+import DescriptionInCard from "../DescriptionInCard/DescriptionInCard";
+import FavoriteButton from "../FavoriteButton/FavoriteButton";
+import OpacityButton from "../OpacityButton/OpacityButton";
+import PrimaryButton from "../PrimaryButton/PrimaryButton";
+import SliderCloseButton from "../SliderCloseButton/SliderCloseButton";
+import SliderForCard from "../SliderForCard/SliderForCard";
+import converterNumber from "../../../utils/converterNumber";
 
-export default function MasterClassCard({ data }) {
+export default function GastroStationCard({ data }) {
   const size = useWindowSize();
+
   const [isEdit, setEdit] = useState(false);
   const [added, setAdded] = useState(false);
   const [descriptionVision, setDescription] = useState(false);
@@ -77,27 +77,19 @@ export default function MasterClassCard({ data }) {
         onPointerLeave={hiddenDescription}
         onPointerEnter={visibleDescription}
       >
-        <h3 className={s.name}>{data.name}</h3>
+        <h3 className={s.name}>{"data.name"}</h3>
         <div className={s.counter_block}>
-          <p className={s.people}>Люди</p>
+          <p className={s.people}>{data.nameFood}</p>
           <div className={s.counter}>
-            <Counter minValue={+data.minPerson} />
+            <Counter minValue={+data.minPosition} />
           </div>
         </div>
         <p className={s.nextPeople}>
-          Доп человек{" "}
+          Доп порция{" "}
           <span className={s.amount_nextPerson}>
-            {data.nextPersonPrice} &#8381;
+            {data.dopPositionPrice} &#8381;
           </span>
         </p>
-        <div className={s.settings}>
-          <div className={s.checkbox}>
-            <Checkbox />
-          </div>
-          <p className={s.checkbox_text}>
-            В нашей студии <span className={s.select}>-15%</span>
-          </p>
-        </div>
         <div className={s.pay}>
           <p className={s.price}>
             <span className={s.amount}>{converterNumber(data.price)}</span>

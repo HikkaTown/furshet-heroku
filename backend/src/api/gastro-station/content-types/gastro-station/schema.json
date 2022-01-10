@@ -12,11 +12,8 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string"
-    },
-    "Description": {
-      "type": "richtext"
     },
     "price": {
       "type": "biginteger"
@@ -31,7 +28,7 @@
         "videos"
       ]
     },
-    "NameFood": {
+    "nameFood": {
       "type": "string"
     },
     "slidersMob": {
@@ -61,6 +58,11 @@
       "relation": "manyToMany",
       "target": "api::gastro-station-type.gastro-station-type",
       "inversedBy": "gastro_stations"
+    },
+    "descriptionList": {
+      "type": "component",
+      "repeatable": true,
+      "component": "furshet-card.desc-list"
     }
   }
 }

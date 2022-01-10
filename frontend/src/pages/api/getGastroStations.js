@@ -1,4 +1,4 @@
-// /api/master-classes
+// /gastro-stations
 
 import axios from "axios";
 import { URL_SERVER } from "../../utils/const";
@@ -10,12 +10,13 @@ const parseObj = (data) => {
     const id = item.id;
     const nameCard = attributes.name;
     const priceCard = attributes.price;
-    const nextPersonPrice = +attributes.NextPersonPrice;
-    const minPerson = attributes.minPerson;
+    const dopPositionPrice = +attributes.dopPositionPrice;
+    const minPosition = attributes.minPosition;
+    const nameFood = attributes.nameFood;
     const descriptionList = attributes.descriptionList.map((item) => item.Text);
     const sliderMobData = attributes.slidersMob.data;
     const sliderPcData = attributes.slidersPc.data;
-    const typeCard = attributes.master_class_types.data.map((item) => ({
+    const typeCard = attributes.gastro_station_types.data.map((item) => ({
       id: item.id,
       text: item.attributes.nameType,
     }));
@@ -32,12 +33,13 @@ const parseObj = (data) => {
     let object = {
       id: id,
       name: nameCard,
-      nextPersonPrice: nextPersonPrice,
+      dopPositionPrice: dopPositionPrice,
       price: priceCard,
       descriptionList: descriptionList,
       slidersMob: sliderMob,
       slidersPc: sliderPc,
-      minPerson: minPerson,
+      minPosition: minPosition,
+      nameFood: nameFood,
       tematics: tematicsCard,
       type: typeCard,
     };
@@ -46,9 +48,9 @@ const parseObj = (data) => {
   return JSON.stringify(array);
 };
 
-const getMasterClass = async () => {
+const getGastroStation = async () => {
   try {
-    const res = await axios.get(`${URL_SERVER}/master-classes`, {
+    const res = await axios.get(`${URL_SERVER}/gastro-stations`, {
       params: {
         populate: "*",
       },
@@ -62,4 +64,4 @@ const getMasterClass = async () => {
   }
 };
 
-export { getMasterClass };
+export { getGastroStation };

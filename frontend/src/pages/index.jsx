@@ -12,15 +12,18 @@ import { URL_SERVER } from "../utils/const";
 import { getBuffets } from "../pages/api/getBuffets";
 import MasterClassCard from "../component/uikit/MasterClassCard/MasterClassCard";
 import { getMasterClass } from "./api/getMasterClass";
+import GastroStationCard from "../component/uikit/GastroStationCard/GastroStationCard";
+import { getGastroStation } from "./api/getGastroStations";
 
 export default function Home({
   allBufets,
   allMasterClass,
+  allGastroStation,
   preview,
   data,
   error,
 }) {
-  console.log(allBufets);
+  console.log(allGastroStation);
   return (
     <>
       <ItemCard data={null} />
@@ -31,6 +34,10 @@ export default function Home({
       {allMasterClass.map((item) => (
         <MasterClassCard key={item.id} data={item} />
       ))}
+
+      {allGastroStation.map((item) => (
+        <GastroStationCard key={item.id} data={item} />
+      ))}
     </>
   );
 }
@@ -38,9 +45,11 @@ export default function Home({
 export async function getStaticProps({ preview = null }) {
   const allBufets = (await getBuffets(preview)) || [];
   const allMasterClass = await getMasterClass();
+  const allGastroStation = await getGastroStation();
   return {
     props: {
       allBufets: JSON.parse(allBufets),
+      allGastroStation: JSON.parse(allGastroStation),
       allMasterClass: JSON.parse(allMasterClass),
       preview,
     },
