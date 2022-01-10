@@ -11,6 +11,7 @@ import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import converterNumber from "../../../utils/converterNumber";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import DescriptionInCard from "../DescriptionInCard/DescriptionInCard";
+import DeleteButton from "../DeleteButton/DeleteButton";
 
 export default function MasterClassCard({ data }) {
   const size = useWindowSize();
@@ -34,6 +35,11 @@ export default function MasterClassCard({ data }) {
   const handleAddInCart = (e) => {
     e.preventDefault();
     setEdit(isEdit ? false : true);
+  };
+
+  const handleDeletFromCart = (e) => {
+    e.preventDefault();
+    setEdit(false);
   };
 
   const handleAddedFavorites = (e) => {
@@ -95,7 +101,7 @@ export default function MasterClassCard({ data }) {
             <span className={s.currency}> &#8381;</span>
           </p>
           {isEdit ? (
-            <button>Удалить</button>
+            <DeleteButton onClick={handleDeletFromCart} />
           ) : (
             <PrimaryButton
               className={s.pay_button}
