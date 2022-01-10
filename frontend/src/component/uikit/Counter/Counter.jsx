@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import cs from "classnames";
 import s from "./Counter.module.scss";
 import {
@@ -9,13 +9,13 @@ import {
   onClickIncrement,
 } from "../../../utils/counterFunction";
 
-export default function Counter() {
+export default function Counter({ minValue }) {
   const [count, setCount] = useState(1);
   const timer = useRef();
 
   const cb = (value) => {
-    if (value < 1) {
-      setCount(1);
+    if (value < minValue) {
+      setCount(minValue);
     } else {
       setCount(value);
     }
@@ -32,7 +32,7 @@ export default function Counter() {
 
   const handlerDecrementValue = (e) => {
     e.preventDefault();
-    handlerDecrement(timer, setCount, count);
+    handlerDecrement(timer, setCount, count, minValue);
   };
 
   const handlerOnClickIncrement = () => {
@@ -42,6 +42,10 @@ export default function Counter() {
   const handlerOnClickDecrement = () => {
     onClickDecrement(count, setCount);
   };
+
+  useEffect(() => {
+    setCount(+minValue);
+  }, [minValue]);
 
   return (
     <div className={s.container}>
@@ -134,8 +138,8 @@ const InputValue = ({ onChange, initState }) => {
     } else if (value >= 1) {
       setCount(value);
       onChange(value);
-    } else if (value < 1) {
-      setCount(1);
+    } else if (value < minValue) {
+      setCount(minValue);
       onChange(value);
     }
   };

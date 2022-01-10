@@ -1,7 +1,7 @@
 .card {
   max-width: 328px;
   width: 328px;
-  height: 500px;
+  height: 538px;
   background-color: #fff;
   box-sizing: border-box;
   border-radius: 8px;
@@ -19,7 +19,7 @@
   @include tablet {
     max-width: 280px;
     width: 280px;
-    height: 444px;
+    height: 490px;
   }
 
   @include desktop {
@@ -29,6 +29,13 @@
     border: 0.5px solid #343434;
     border-radius: 8px;
   }
+}
+
+.favorite {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 4;
 }
 
 .btn_desc {
@@ -51,21 +58,13 @@
   }
 }
 
-.favorite {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 4;
-}
-
 .slider_block {
   max-width: 100%;
   width: 100vw;
   height: 328px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  // overflow: hidden;
-  background-color: brown;
+  background-color: rgba(255, 255, 255, 0.5);
   position: relative;
   @include tablet {
     max-width: 100%;
@@ -78,11 +77,10 @@
   padding: 8px 12px 12px 12px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  max-height: 172px;
+  max-height: 178px;
   height: 100vh;
   @include tablet {
-    max-height: 164px;
+    max-height: 210px;
     height: 100vh;
   }
 }
@@ -90,37 +88,57 @@
 .name {
   margin: 0 0 8px 0;
   padding: 0;
-  // max-width: 304px;
-  // width: 304px;
   @include body2-normal($primary-text);
 }
 
-.params {
-  display: inline-block;
-  @include body4($primary-text);
-  text-align: center;
-  padding: 6px 12px;
-  border: 1px solid #fab576;
-  box-sizing: border-box;
-  border-radius: 15px;
-  margin: 0;
+.counter_block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: auto;
+  margin-bottom: 8px;
+}
+
+.people {
+  @include body3-medium($primary-text);
+  padding: 0;
+  margin: 0;
+}
+
+.counter {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.nextPeople {
+  @include body4($primary-text);
+  padding: 0;
+  margin: 0;
+}
+
+.amount_nextPerson {
+  @include body4($wine-color);
+}
+
+.settings {
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.checkbox {
+  margin-right: 12px;
+}
+
+.checkbox_text {
+  @include body4($primary-text);
+  padding: 0;
+  margin: 0;
 }
 
 .select {
-  @include body4-medium($primary-text);
-}
-
-.pay_button {
-  max-width: 123px;
-  width: 123px;
-  height: 44px;
-
-  @include body3-medium($primary-text);
-
-  @include tablet {
-    height: 36px;
-  }
+  @include body3-medium(#0ec477);
+  margin-left: 8px;
 }
 
 .pay {
@@ -128,7 +146,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-top: 16px;
+  margin-top: 20px;
 }
 
 .price {
@@ -147,4 +165,16 @@
   @include body1-medium($primary-text);
   padding: 0;
   margin: 0;
+}
+
+.pay_button {
+  max-width: 123px;
+  width: 123px;
+  height: 44px;
+
+  @include body3-medium($primary-text);
+
+  @include tablet {
+    height: 36px;
+  }
 }

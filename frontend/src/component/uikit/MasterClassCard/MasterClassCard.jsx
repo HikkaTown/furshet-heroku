@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import PrimaryButton from "../PrimaryButton/PrimaryButton";
-import CounterLight from "../CounterLight/CounterLight";
-import s from "./FurshetCard.module.scss";
+import s from "./MasterClassCard.module.scss";
 import cs from "classnames";
-import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import SliderForCard from "../SliderForCard/SliderForCard";
-import DescriptionInCard from "../DescriptionInCard/DescriptionInCard";
-import useWindowSize from "../../../hooks/useWindowSize";
-import converterNumber from "../../../utils/converterNumber";
-import OpacityButton from "../OpacityButton/OpacityButton";
 import SliderCloseButton from "../SliderCloseButton/SliderCloseButton";
+import OpacityButton from "../OpacityButton/OpacityButton";
+import Counter from "../Counter/Counter";
+import Checkbox from "../Checkbox/Checkbox";
+import useWindowSize from "../../../hooks/useWindowSize";
+import FavoriteButton from "../FavoriteButton/FavoriteButton";
+import converterNumber from "../../../utils/converterNumber";
+import PrimaryButton from "../PrimaryButton/PrimaryButton";
+import DescriptionInCard from "../DescriptionInCard/DescriptionInCard";
 
-export default function FurshetCard({ data }) {
+export default function MasterClassCard({ data }) {
   const size = useWindowSize();
   const [isEdit, setEdit] = useState(false);
   const [added, setAdded] = useState(false);
@@ -41,7 +42,7 @@ export default function FurshetCard({ data }) {
   };
 
   return (
-    <div className={s.card} onPointerLeave={hiddenDescription}>
+    <div className={s.card}>
       {size.width < 1175 && !descriptionVision && (
         <OpacityButton
           text={"Описание"}
@@ -62,7 +63,7 @@ export default function FurshetCard({ data }) {
         <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc} />
         <DescriptionInCard
           descriptionVision={descriptionVision}
-          content={data.descriptionList}
+          content={["data.descriptionList", "dsds", "dsdsd", "dsd"]}
         />
       </div>
       <div
@@ -70,18 +71,31 @@ export default function FurshetCard({ data }) {
         onPointerLeave={hiddenDescription}
         onPointerEnter={visibleDescription}
       >
-        <h3 className={s.name}>{data.name}</h3>
-        <p className={s.params}>
-          <span className={s.select}>{data.params.peopleNumber} чел</span>/
-          {data.params.CountNumber} шт/{data.params.countVesInGramm} гр
+        <h3 className={s.name}>{"Имя карточки"}</h3>
+        <div className={s.counter_block}>
+          <p className={s.people}>Люди</p>
+          <div className={s.counter}>
+            <Counter minValue={+data.minPerson} />
+          </div>
+        </div>
+        <p className={s.nextPeople}>
+          Доп человек <span className={s.amount_nextPerson}>+1300 &#8381;</span>
         </p>
+        <div className={s.settings}>
+          <div className={s.checkbox}>
+            <Checkbox />
+          </div>
+          <p className={s.checkbox_text}>
+            В нашей студии <span className={s.select}>-15%</span>
+          </p>
+        </div>
         <div className={s.pay}>
           <p className={s.price}>
-            <span className={s.amount}>{converterNumber(data.price)}</span>
+            <span className={s.amount}>{converterNumber(123543)}</span>
             <span className={s.currency}> &#8381;</span>
           </p>
           {isEdit ? (
-            <CounterLight />
+            <button>Удалить</button>
           ) : (
             <PrimaryButton
               className={s.pay_button}

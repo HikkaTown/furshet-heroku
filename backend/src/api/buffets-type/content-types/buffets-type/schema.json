@@ -18,7 +18,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::buffet.buffet",
-      "inversedBy": "buffets_types"
+      "mappedBy": "buffets_types"
     }
   }
 }

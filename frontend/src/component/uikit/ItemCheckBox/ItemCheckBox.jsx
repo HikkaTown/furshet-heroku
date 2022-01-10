@@ -4,7 +4,6 @@ import s from "./ItemCheckBox.module.scss";
 
 export default function ItemCheckBox() {
   const [isCheck, setIsCheck] = useState(false);
-  console.log(isCheck);
 
   return (
     <div

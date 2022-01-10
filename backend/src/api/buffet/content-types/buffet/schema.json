@@ -15,9 +15,6 @@
     "name": {
       "type": "string"
     },
-    "params": {
-      "type": "richtext"
-    },
     "price": {
       "type": "biginteger"
     },
@@ -57,6 +54,11 @@
       "relation": "manyToMany",
       "target": "api::buffets-type.buffets-type",
       "inversedBy": "buffets"
+    },
+    "paramsBlock": {
+      "type": "component",
+      "repeatable": true,
+      "component": "furshet-card.params-buffet"
     }
   }
 }

@@ -15,9 +15,6 @@
     "Name": {
       "type": "string"
     },
-    "Description": {
-      "type": "richtext"
-    },
     "Price": {
       "type": "biginteger"
     },
@@ -61,6 +58,11 @@
       "relation": "manyToMany",
       "target": "api::tematic.tematic",
       "inversedBy": "exit_bars"
+    },
+    "descriptionList": {
+      "type": "component",
+      "repeatable": true,
+      "component": "furshet-card.desc-list"
     }
   }
 }

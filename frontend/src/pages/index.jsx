@@ -10,8 +10,16 @@ import NavigationButton from "../component/uikit/NavigationButton/NavigationButt
 import { useEffect } from "react";
 import { URL_SERVER } from "../utils/const";
 import { getBuffets } from "../pages/api/getBuffets";
+import MasterClassCard from "../component/uikit/MasterClassCard/MasterClassCard";
+import { getMasterClass } from "./api/getMasterClass";
 
-export default function Home({ allBufets, preview, data, error }) {
+export default function Home({
+  allBufets,
+  allMasterClass,
+  preview,
+  data,
+  error,
+}) {
   console.log(allBufets);
   return (
     <>
@@ -19,36 +27,22 @@ export default function Home({ allBufets, preview, data, error }) {
       {allBufets.map((item) => (
         <FurshetCard key={item.id} data={item} />
       ))}
+
+      {allMasterClass.map((item) => (
+        <MasterClassCard key={item.id} data={item} />
+      ))}
     </>
   );
 }
 
 export async function getStaticProps({ preview = null }) {
   const allBufets = (await getBuffets(preview)) || [];
+  const allMasterClass = await getMasterClass();
   return {
-    props: { allBufets: JSON.parse(allBufets), preview },
+    props: {
+      allBufets: JSON.parse(allBufets),
+      allMasterClass: JSON.parse(allMasterClass),
+      preview,
+    },
   };
 }
-
-// Home.getInitialProps = async (ctx) => {
-//   try {
-//     const res = await axios.get(`${URL_SERVER}/buffets`, {
-//       params: {
-//         populate: "*",
-//       },
-//     });
-//     const data = res.data;
-//     return data;
-//   } catch (error) {
-//     return error;
-//   }
-// };
-
-// Home.getInitialProps = async () => {
-//   try {
-//     const res = await fetch("http://localhos:3000/api/getBuffers");
-//     return res;
-//   } catch (error) {
-//     return error;
-//   }
-// };

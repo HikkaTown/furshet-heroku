@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_furshet_card_params_buffets",
+  "info": {
+    "displayName": "ParamsBuffet",
+    "icon": "ad"
+  },
+  "options": {},
+  "attributes": {
+    "CountNumber": {
+      "type": "biginteger"
+    },
+    "countVesInGramm": {
+      "type": "biginteger"
+    },
+    "peopleNumber": {
+      "type": "biginteger"
+    }
+  }
+}
