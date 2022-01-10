@@ -12,13 +12,13 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
+    "name": {
       "type": "string"
     },
-    "Price": {
+    "price": {
       "type": "biginteger"
     },
-    "NextProductPrice": {
+    "dopPositionPrice": {
       "type": "biginteger"
     },
     "slidersPc": {
@@ -41,11 +41,12 @@
         "videos"
       ]
     },
-    "minPerson": {
+    "minPosition": {
       "type": "biginteger"
     },
     "foodName": {
-      "type": "string"
+      "type": "string",
+      "default": "Напитки"
     },
     "exit_bar_types": {
       "type": "relation",

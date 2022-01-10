@@ -63,7 +63,7 @@ export default function GastroStationCard({ data }) {
         />
       )}
       <div className={s.favorite}>
-        <FavoriteButton added={added} onClick={handleAddedFavorites} />
+        <FavoriteButton a dded={added} onClick={handleAddedFavorites} />
       </div>
       <div className={s.slider_block}>
         <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc} />
@@ -77,7 +77,7 @@ export default function GastroStationCard({ data }) {
         onPointerLeave={hiddenDescription}
         onPointerEnter={visibleDescription}
       >
-        <h3 className={s.name}>{"data.name"}</h3>
+        <h3 className={s.name}>{data.name}</h3>
         <div className={s.counter_block}>
           <p className={s.people}>{data.nameFood}</p>
           <div className={s.counter}>

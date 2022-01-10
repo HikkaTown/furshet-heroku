@@ -1,24 +1,28 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Head from "next/head";
 // import Script from "next/script";
-// import { useEffect } from "react";
+import { useEffect } from "react";
 // import { Provider } from "react-redux";
 // import { useStore } from "../src/redux/store";
 import "normalize.css";
 import "../styles/globals.scss";
 import "keen-slider/keen-slider.min.css";
 // import { PREVIEV_L, PREVIEV_M } from "../utils/const";
+import { loadFont } from "../utils/loadFont";
 
 function MyApp({ Component, pageProps }) {
   // const store = useStore(pageProps.initialReduxState);
 
-  // useEffect(() => {
-  //   store.dispatch({ type: "INITIAL_FAVORITE_STORE" });
+  useEffect(() => {
+    //   store.dispatch({ type: "INITIAL_FAVORITE_STORE" });
 
-  //   window.addEventListener("beforeunload", function () {
-  //     localStorage.setItem("cartStore", JSON.stringify(store.getState()));
-  //   });
-  // }, []);
+    //   window.addEventListener("beforeunload", function () {
+    //     localStorage.setItem("cartStore", JSON.stringify(store.getState()));
+    //   });
+    setTimeout(() => {
+      loadFont("/fonts/fonts.css");
+    }, 0);
+  }, []);
 
   return (
     <>
