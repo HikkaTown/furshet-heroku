@@ -70,6 +70,7 @@ export default function GastroStationCard({ data }) {
         <DescriptionInCard
           descriptionVision={descriptionVision}
           content={data.descriptionList}
+          className={s.text_center}
         />
       </div>
       <div

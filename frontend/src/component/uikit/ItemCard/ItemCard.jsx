@@ -5,6 +5,7 @@ import { LazyImageWrapper } from "../../LazyImage/LazyImage";
 import AddBasketButton from "../AddBasketButton/AddBasketButton";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import CounterLight from "../CounterLight/CounterLight";
+import { PATH_IMAGES } from "../../../utils/const";
 
 // карточка для обычных продуктов или стаффа
 
@@ -30,18 +31,17 @@ export default function ItemCard({ data }) {
       <LazyImageWrapper
         wrapperClass={s.wrapper}
         className={[s.image]}
-        src={"/images/banner-min.jpg"}
-        srcTablet={"/images/banner-min.jpg"}
-        srcMobile={"/images/banner-min.jpg"}
-        alt={"dsd"}
+        src={`${PATH_IMAGES}${data.imagePc}`}
+        srcMobile={`${PATH_IMAGES}${data.imageMob}`}
+        alt={data.name}
       />
       <div className={s.info}>
         <h3 className={s.name}>Официант</h3>
-        <p className={s.params}>{"ШВ: 0,8 х 1,1 м"}</p>
+        {data.params && <p className={s.params}>{data.params}</p>}
       </div>
       <div className={s.pay}>
         <p className={s.price}>
-          <span className={s.amount}>{"12 000"}</span>
+          <span className={s.amount}>{data.price}</span>
           <span className={s.currency}> &#8381;</span>/шт
         </p>
         {isEdit ? (

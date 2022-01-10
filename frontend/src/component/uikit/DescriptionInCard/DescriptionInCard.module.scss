@@ -17,17 +17,17 @@
 }
 
 .list {
-  @include body3-normal($text-secondary);
   margin: 0;
   padding: 0;
   list-style-type: none;
   padding: 60px 12px 12px 12px;
-  @include tablet {
-    @include body4($text-secondary);
-  }
 }
 
 .item {
   color: $text-secondary;
   word-wrap: break-word;
+  @include body3-normal($text-secondary);
+  @include tablet {
+    @include body4($text-secondary);
+  }
 }
