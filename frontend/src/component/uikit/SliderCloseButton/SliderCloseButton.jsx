@@ -1,8 +1,9 @@
 import React from "react";
+import cs from "classnames";
 import s from "./SliderCloseButton.module.scss";
-export default function SliderCloseButton() {
+export default function SliderCloseButton({ onClick, className }) {
   return (
-    <button className={s.button}>
+    <button onClick={onClick} className={cs(s.button, className)}>
       <span className={s.icon_wrapper}>
         <svg
           width="32"

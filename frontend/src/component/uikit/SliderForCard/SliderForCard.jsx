@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useKeenSlider } from "keen-slider/react";
 import cs from "classnames";
 import s from "./SliderForCard.module.scss";
 import { LazyImageWrapper } from "../../LazyImage/LazyImage";
+import useWindowSize from "../../../hooks/useWindowSize";
+import { PATH_IMAGES } from "../../../utils/const";
 
-export default function SliderForCard({ data }) {
+export default function SliderForCard({ sliderMob, sliderPc }) {
+  const size = useWindowSize();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -19,25 +22,25 @@ export default function SliderForCard({ data }) {
       setLoaded(true);
     },
   });
-
   return (
     <>
       <div className={cs("navigation-wrapper", s.slider_wrapper)}>
         <div ref={sliderRef} className={cs("keen-slider", s.slider)}>
-          <div className={cs("keen-slider__slide", s.slide)}>
-            <LazyImageWrapper
-              src={"/images/banner-min.jpg"}
-              srcMob={"/images/banner-min.jpg"}
-              wrapperClass={s.image_wrapper}
-              className={[s.image]}
-              alt={"name"}
-            />
-          </div>
-          <div className={cs("keen-slider__slide", s.slide)}>2</div>
-          <div className={cs("keen-slider__slide", s.slide)}>3</div>
-          <div className={cs("keen-slider__slide", s.slide)}>4</div>
+          {sliderMob.map((item, index) => {
+            return (
+              <div key={index} className={cs("keen-slider__slide", s.slide)}>
+                <LazyImageWrapper
+                  src={`${PATH_IMAGES}${sliderPc[index]}`}
+                  srcMob={`${PATH_IMAGES}${item}`}
+                  wrapperClass={s.image_wrapper}
+                  className={[s.image]}
+                  alt={"name"}
+                />
+              </div>
+            );
+          })}
         </div>
-        {loaded && instanceRef.current && (
+        {loaded && instanceRef.current && instanceRef.current.slides.length && (
           <div className={s.dots}>
             {[
               ...Array(instanceRef.current.track.details.slides.length).keys(),

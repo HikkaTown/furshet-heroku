@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "buffets",
+  "info": {
+    "singularName": "buffet",
+    "pluralName": "buffets",
+    "displayName": "buffet",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "params": {
+      "type": "richtext"
+    },
+    "price": {
+      "type": "biginteger"
+    },
+    "slidersPc": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "slidersMob": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "descriptionList": {
+      "type": "component",
+      "repeatable": true,
+      "component": "furshet-card.desc-list"
+    },
+    "tematics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tematic.tematic",
+      "inversedBy": "buffets"
+    },
+    "buffets_types": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::buffets-type.buffets-type",
+      "inversedBy": "buffets"
+    }
+  }
+}

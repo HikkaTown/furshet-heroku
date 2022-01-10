@@ -1,0 +1,33 @@
+.block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 6;
+  display: block;
+  opacity: 1;
+  transition: 0.5s;
+}
+
+.block_none {
+  display: none;
+  opacity: 0;
+}
+
+.list {
+  @include body3-normal($text-secondary);
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  padding: 60px 12px 12px 12px;
+  @include tablet {
+    @include body4($text-secondary);
+  }
+}
+
+.item {
+  color: $text-secondary;
+  word-wrap: break-word;
+}
