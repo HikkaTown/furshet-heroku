@@ -1,0 +1,53 @@
+.section {
+  padding-top: 80px;
+  padding-bottom: 250px;
+  overflow: hidden;
+  position: relative;
+}
+
+.container {
+  max-width: 328px;
+  width: 100vw;
+  margin: 0 auto;
+  position: relative;
+  @include tablet {
+    max-width: 648px;
+    width: 100vw;
+    margin-left: 44px;
+  }
+  @include desktop {
+    margin-left: 124px;
+    max-width: 1192px;
+  }
+}
+
+.background_block {
+  position: absolute;
+  max-width: 570px;
+  width: 100vw;
+  height: 607px;
+  background-repeat: no-repeat;
+  // background-size: contain;
+
+  @include tablet {
+    max-width: 685px;
+    height: 623px;
+    top: 0;
+    background-size: contain;
+    right: -100px;
+  }
+  @include tablet {
+    max-width: 685px;
+    height: 623px;
+    right: 0;
+  }
+}
+
+.head {
+  margin: 0 0 48px 0;
+  padding: 0;
+  @include headline2-mobile($primary-text);
+  @include tablet {
+    @include headline2($primary-text);
+  }
+}

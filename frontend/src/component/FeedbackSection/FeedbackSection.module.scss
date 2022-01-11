@@ -1,0 +1,107 @@
+.section {
+  max-width: 100%;
+  width: 100vw;
+  height: 560px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.separator {
+  max-width: 100%;
+  width: 100vw;
+  height: 56px;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  z-index: 2;
+}
+
+.separator_top {
+  transform: scale(-1, 1);
+  top: 0;
+  left: 1px;
+  @include tablet {
+    top: -1px;
+    left: 1px;
+  }
+  @include desktop {
+    top: 0;
+    left: 0;
+  }
+}
+
+.separator_bottom {
+  bottom: -1px;
+  right: -1px;
+}
+
+.container {
+  max-width: 328px;
+  width: 100vw;
+  margin: 0 auto;
+  @include tablet {
+    max-width: 465px;
+    margin-left: auto;
+    margin-right: 44px;
+  }
+  @include desktop {
+    margin-right: 124px;
+  }
+}
+
+.head {
+  @include headline2-mobile($white-color);
+  margin: 0 0 16px 0;
+  padding: 0;
+  @include tablet {
+    @include headline2($white-color);
+  }
+}
+
+.adress {
+  @include body3-normal(#fab576);
+  padding: 0;
+  margin: 0 0 32px 0;
+  @include tablet {
+  }
+}
+
+.callme {
+  @include body3-normal($white-color);
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+
+.phone_number {
+  @include headline2-mobile($white-color);
+  padding: 0;
+  margin: 0;
+  transition: 0.5s;
+  @include hover {
+    opacity: 0.5;
+  }
+  @include tablet {
+    @include headline2($white-color);
+  }
+}
+
+.subtitle {
+  @include body3-normal($white-color);
+  padding: 0;
+  margin: 48px 0 16px 0;
+  @include tablet {
+    margin-top: 32px;
+  }
+}
+
+.btn {
+  max-width: 208px;
+  width: 208px;
+  height: 44px;
+}

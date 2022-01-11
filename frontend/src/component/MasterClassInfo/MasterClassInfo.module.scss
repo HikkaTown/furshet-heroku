@@ -1,0 +1,64 @@
+.section {
+  position: relative;
+  max-width: 100%;
+  width: 100vw;
+  height: 658px;
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  @include tablet {
+    background-position-x: right;
+    background-size: cover;
+  }
+  @include desktop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-size: contain;
+  }
+}
+
+.container {
+  max-width: 328px;
+  width: 100vw;
+  margin: 0 auto;
+  padding-top: 64px;
+  @include tablet {
+    max-width: 584px;
+    padding-top: 0;
+  }
+  @include desktop {
+    max-width: 1192px;
+    padding-top: 0;
+  }
+}
+
+.head {
+  @include headline2-mobile($primary-text);
+  margin: 0 0 24px 0px;
+  padding: 0;
+  @include tablet {
+    @include headline2($primary-text);
+  }
+  @include desktop {
+    max-width: 584px;
+    width: 100vw;
+    margin-left: 0;
+  }
+}
+
+.subtitle {
+  @include body1-normal($primary-text);
+  margin: 0 0 32px 0;
+  padding: 0;
+  @include desktop {
+    max-width: 584px;
+    width: 100vw;
+    margin-left: 0;
+  }
+}

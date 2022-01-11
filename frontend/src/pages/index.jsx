@@ -19,6 +19,12 @@ import { getBarCounter } from "./api/getAnotherItems";
 import StationSliderSection from "../component/StationSliderSection/StationSliderSection";
 import SectionTwo from "../component/SectionTwo/SectionTwo";
 import SeoBlock from "../component/SeoBlock/SeoBlock";
+import FeedbackSection from "../component/FeedbackSection/FeedbackSection";
+import MasterClassInfo from "../component/MasterClassInfo/MasterClassInfo";
+import BarInfoSection from "../component/BarInfoSection/BarInfoSection";
+import Question from "../component/uikit/Question/Question";
+import AskingBlock from "../component/AskingBlock/AskingBlock";
+import BufetsInfoSection from "../component/BufetsInfoSection/BufetsInfoSection";
 
 export default function Home({
   allBufets,
@@ -50,8 +56,14 @@ export default function Home({
       {allExitBars.map((item) => (
         <GastroStationCard key={item.id} data={item} />
       ))} */}
-      {/* <StationSliderSection /> */}
+
       <SectionTwo />
+      <StationSliderSection />
+      <MasterClassInfo />
+      <BufetsInfoSection />
+      <BarInfoSection />
+      <AskingBlock />
+      <FeedbackSection />
       <SeoBlock />
     </>
   );

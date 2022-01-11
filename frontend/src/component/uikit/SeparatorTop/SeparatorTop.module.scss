@@ -1,0 +1,20 @@
+.separator {
+  max-width: 100%;
+  width: 100vw;
+  height: 56px;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: 100% 100%;
+  top: -2px;
+  left: 0;
+  z-index: 2;
+  @include tablet {
+    top: -2px;
+    left: 1px;
+  }
+  @include desktop {
+    top: 0;
+    left: 0;
+  }
+}

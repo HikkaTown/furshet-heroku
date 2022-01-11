@@ -1,4 +1,10 @@
 .section {
+  padding-top: 80px;
+  padding-bottom: calc(80px - 32px);
+  @include desktop {
+    padding-top: 100px;
+    padding-bottom: calc(100px - 32px);
+  }
 }
 
 .container {

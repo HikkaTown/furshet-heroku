@@ -1,0 +1,15 @@
+.separator {
+  max-width: 100%;
+  width: 100vw;
+  height: 56px;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: 100% 100%;
+  bottom: -1px;
+  right: -1px;
+  @include desktop {
+    bottom: 0;
+    right: 0;
+  }
+}

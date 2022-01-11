@@ -9,6 +9,7 @@
   justify-content: center;
   box-sizing: border-box;
   border-radius: 30px;
+  background-color: rgba($color: #fff, $alpha: 1);
   transition: 0.5s;
   @include hover {
     background: $orange-color;
