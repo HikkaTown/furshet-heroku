@@ -18,6 +18,7 @@ import { getExitBars } from "./api/getExitBars";
 import { getBarCounter } from "./api/getAnotherItems";
 import StationSliderSection from "../component/StationSliderSection/StationSliderSection";
 import SectionTwo from "../component/SectionTwo/SectionTwo";
+import SeoBlock from "../component/SeoBlock/SeoBlock";
 
 export default function Home({
   allBufets,
@@ -51,6 +52,7 @@ export default function Home({
       ))} */}
       {/* <StationSliderSection /> */}
       <SectionTwo />
+      <SeoBlock />
     </>
   );
 }
