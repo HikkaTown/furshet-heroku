@@ -64,6 +64,9 @@ export default function FurshetCard({ data }) {
           descriptionVision={descriptionVision}
           content={data.descriptionList}
         />
+        {data.vegan && (
+          <PrimaryButton className={s.vegan_btn} text="Вегетарианский" />
+        )}
       </div>
       <div
         className={s.content}

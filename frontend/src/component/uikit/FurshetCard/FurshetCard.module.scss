@@ -31,6 +31,22 @@
   }
 }
 
+.vegan_btn {
+  position: absolute;
+  bottom: 24px;
+  left: 12px;
+  z-index: 1;
+  max-width: 141px;
+  width: 141px;
+  height: 32px;
+  background-color: #82e586;
+  cursor: default;
+  @include body4($primary-text);
+  @include hover {
+    background-color: #82e586;
+  }
+}
+
 .btn_desc {
   position: absolute;
   top: 16px;

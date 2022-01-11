@@ -12,6 +12,7 @@ const parseObject = (data) => {
     const sliderMobData = attributes.slidersMob.data;
     const sliderPcData = attributes.slidersPc.data;
     const descriptionList = attributes.descriptionList.map((item) => item.Text);
+    const vegan = attributes.vegan;
     const sliderMob = Array.from(sliderMobData).map(
       (item) => item.attributes.url
     );
@@ -36,6 +37,7 @@ const parseObject = (data) => {
       slidersPc: sliderPc,
       tematic: tematicsCard,
       type: typeCard,
+      vegan: vegan,
     };
     array.push(object);
   });
