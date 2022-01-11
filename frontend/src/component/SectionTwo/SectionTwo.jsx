@@ -2,7 +2,8 @@ import React from "react";
 import cs from "classnames";
 import s from "./SectionTwo.module.scss";
 import { LazyImageWrapper } from "../LazyImage/LazyImage";
-
+import SelectIcon from "../icons/SelectIcon/SelectIcon";
+// TODO: Добавить динамическую подругзку и отрисовку данных
 export default function SectionTwo({ data }) {
   return (
     <section className={s.section}>
@@ -17,35 +18,25 @@ export default function SectionTwo({ data }) {
           />
           <ul className={s.list}>
             <li className={s.item}>
-              <LazyImageWrapper
-                wrapperClass={s.item_icon_wrapper}
-                className={[s.item_icon]}
-                src={"/images/banner-min.jpg"}
+              <SelectIcon name="wallet" classNameWrapper={s.classNameWrapper} />
+              <h3 className={s.item_head}>Наборы на любой вкус и кошелёк</h3>
+            </li>
+            <li className={s.item}>
+              <SelectIcon
+                name="hot_food"
+                classNameWrapper={s.classNameWrapper}
               />
               <h3 className={s.item_head}>Наборы на любой вкус и кошелёк</h3>
             </li>
             <li className={s.item}>
-              <LazyImageWrapper
-                wrapperClass={s.item_icon_wrapper}
-                className={[s.item_icon]}
-                src={"/images/banner-min.jpg"}
+              <SelectIcon
+                name="natural"
+                classNameWrapper={s.classNameWrapper}
               />
               <h3 className={s.item_head}>Наборы на любой вкус и кошелёк</h3>
             </li>
             <li className={s.item}>
-              <LazyImageWrapper
-                wrapperClass={s.item_icon_wrapper}
-                className={[s.item_icon]}
-                src={"/images/banner-min.jpg"}
-              />
-              <h3 className={s.item_head}>Наборы на любой вкус и кошелёк</h3>
-            </li>
-            <li className={s.item}>
-              <LazyImageWrapper
-                wrapperClass={s.item_icon_wrapper}
-                className={[s.item_icon]}
-                src={"/images/banner-min.jpg"}
-              />
+              <SelectIcon name="witer" classNameWrapper={s.classNameWrapper} />
               <h3 className={s.item_head}>Наборы на любой вкус и кошелёк</h3>
             </li>
           </ul>
