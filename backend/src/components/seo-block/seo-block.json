@@ -1,0 +1,73 @@
+{
+  "collectionName": "components_seo_block_seo_blocks",
+  "info": {
+    "displayName": "seoBlock",
+    "icon": "angle-double-down"
+  },
+  "options": {},
+  "attributes": {
+    "head": {
+      "type": "text"
+    },
+    "description_first": {
+      "type": "richtext"
+    },
+    "description_second": {
+      "type": "richtext"
+    },
+    "firstImagePc": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "firstImageTablet": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "firstImageMobile": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "secondImagePc": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "secondImageTablet": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "secondImageMobile": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "kind": "singleType",
+  "collectionName": "indices",
+  "info": {
+    "singularName": "index",
+    "pluralName": "indices",
+    "displayName": "index",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "metaHead": {
+      "type": "string"
+    },
+    "metaTitle": {
+      "type": "string"
+    },
+    "h1": {
+      "type": "string"
+    },
+    "titleP": {
+      "type": "text"
+    },
+    "sliderSection": {
+      "type": "component",
+      "repeatable": true,
+      "component": "section-sliders.section-slider"
+    },
+    "seoBlock": {
+      "type": "component",
+      "repeatable": true,
+      "component": "seo-block.seo-block"
+    },
+    "sectionTwo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "section-two.section-two"
+    }
+  }
+}

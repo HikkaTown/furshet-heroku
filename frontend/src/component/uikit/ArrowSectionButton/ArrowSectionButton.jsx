@@ -3,9 +3,16 @@ import cs from "classnames";
 import s from "./ArrowSectionButton.module.scss";
 // position = true - arrow left
 // position = false - arrow right
-export default function ArrowSectionButton({ position }) {
+export default function ArrowSectionButton({ position, onClick, className }) {
   return (
-    <button className={position ? cs(s.button, s.button_left) : s.button}>
+    <button
+      onClick={onClick}
+      className={
+        position
+          ? cs(s.button, s.button_left, className)
+          : cs(s.button, className)
+      }
+    >
       <svg
         width="32"
         height="32"

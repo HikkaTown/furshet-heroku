@@ -1,0 +1,106 @@
+{
+  "collectionName": "components_section_two_section_twos",
+  "info": {
+    "displayName": "sectionTwo",
+    "icon": "allergies",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "header": {
+      "type": "text"
+    },
+    "firstImageText": {
+      "type": "text"
+    },
+    "secondImageText": {
+      "type": "text"
+    },
+    "threeImageText": {
+      "type": "text"
+    },
+    "fourImageText": {
+      "type": "text"
+    },
+    "firstIcon": {
+      "type": "enumeration",
+      "enum": [
+        "witer",
+        "wallet",
+        "hot_food",
+        "natural",
+        "cock2",
+        "cock1",
+        "barman",
+        "photo",
+        "grill",
+        "wow",
+        "hands",
+        "calendar",
+        "food",
+        "povar",
+        "dish"
+      ]
+    },
+    "secondIcon": {
+      "type": "enumeration",
+      "enum": [
+        "witer",
+        "wallet",
+        "hot_food",
+        "natural",
+        "cock2",
+        "cock1",
+        "barman",
+        "photo",
+        "grill",
+        "wow",
+        "hands",
+        "calendar",
+        "food",
+        "povar",
+        "dish"
+      ]
+    },
+    "threeIcon": {
+      "type": "enumeration",
+      "enum": [
+        "witer",
+        "wallet",
+        "hot_food",
+        "natural",
+        "cock2",
+        "cock1",
+        "barman",
+        "photo",
+        "grill",
+        "wow",
+        "hands",
+        "calendar",
+        "food",
+        "povar",
+        "dish"
+      ]
+    },
+    "fourIcon": {
+      "type": "enumeration",
+      "enum": [
+        "witer",
+        "wallet",
+        "hot_food",
+        "natural",
+        "cock2",
+        "cock1",
+        "barman",
+        "photo",
+        "grill",
+        "wow",
+        "hands",
+        "calendar",
+        "food",
+        "povar",
+        "dish"
+      ]
+    }
+  }
+}

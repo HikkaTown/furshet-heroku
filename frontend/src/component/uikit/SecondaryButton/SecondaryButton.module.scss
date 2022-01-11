@@ -1,0 +1,11 @@
+.btn {
+  @include buttonDefault;
+  @include body2-normal($primary-text);
+  padding: 11px 32px;
+  background-color: $white-color;
+  border-radius: 30px;
+  transition: 0.5s;
+  @include hover {
+    background-color: #fab576;
+  }
+}

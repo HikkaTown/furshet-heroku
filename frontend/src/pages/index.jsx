@@ -16,6 +16,8 @@ import GastroStationCard from "../component/uikit/GastroStationCard/GastroStatio
 import { getGastroStation } from "./api/getGastroStations";
 import { getExitBars } from "./api/getExitBars";
 import { getBarCounter } from "./api/getAnotherItems";
+import StationSliderSection from "../component/StationSliderSection/StationSliderSection";
+import SectionTwo from "../component/SectionTwo/SectionTwo";
 
 export default function Home({
   allBufets,
@@ -27,10 +29,9 @@ export default function Home({
   data,
   error,
 }) {
-  console.log(barCounter);
   return (
     <>
-      {barCounter.map((item) => (
+      {/* {barCounter.map((item) => (
         <ItemCard key={item.id} data={item} />
       ))}
 
@@ -47,7 +48,9 @@ export default function Home({
       ))}
       {allExitBars.map((item) => (
         <GastroStationCard key={item.id} data={item} />
-      ))}
+      ))} */}
+      {/* <StationSliderSection /> */}
+      <SectionTwo />
     </>
   );
 }

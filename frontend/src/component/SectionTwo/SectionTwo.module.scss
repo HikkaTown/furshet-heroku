@@ -1,0 +1,140 @@
+.section {
+}
+
+.container {
+  max-width: 328px;
+  width: 100vw;
+  margin: 0 auto;
+  @include tablet {
+    max-width: 685px;
+  }
+
+  @include desktop {
+    max-width: 1192px;
+    position: relative;
+  }
+}
+
+.head {
+  @include headline2-mobile($primary-text);
+  padding: 0;
+  margin: 0 0 48px 0;
+  @include tablet {
+    @include headline2($primary-text);
+    margin-bottom: 44px;
+  }
+  @include desktop {
+    max-width: 685px;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  @include desktop {
+    flex-direction: row-reverse;
+  }
+}
+
+.wrapper_big {
+  max-width: 328px;
+  width: 100vw;
+  height: 328px;
+  border-radius: 50%;
+  @include tablet {
+    max-width: 466px;
+    width: 466px;
+    height: 466px;
+    margin: 0 auto;
+  }
+}
+
+.big_image {
+  max-width: 328px;
+  width: 100vw;
+  height: 328px;
+  border-radius: 50%;
+  object-fit: cover;
+  @include tablet {
+    max-width: 466px;
+    width: 466px;
+    height: 466px;
+  }
+}
+
+.list {
+  margin: 64px auto 0 auto;
+  padding: 0;
+  max-width: 280px;
+  width: 100vw;
+  list-style-type: none;
+  @include tablet {
+    max-width: 584px;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  @include desktop {
+    align-self: end;
+  }
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 64px;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  @include tablet {
+    max-width: 280px;
+    width: 100vw;
+    margin: 0 0 64px 0;
+    &:nth-child(odd) {
+      margin-right: 24px;
+    }
+    &:last-of-type {
+      margin-bottom: 64px;
+    }
+  }
+  @include desktop {
+    margin-bottom: 0;
+    justify-content: flex-end;
+    &:nth-child(1) {
+      margin-bottom: 64px;
+    }
+    &:nth-child(2) {
+      margin-bottom: 64px;
+    }
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.item_icon_wrapper {
+  height: 56px;
+  max-width: 56px;
+  width: 56px;
+  margin-bottom: 16px;
+}
+
+.item_icon {
+  height: 56px;
+  max-width: 56px;
+  width: 56px;
+}
+
+.item_head {
+  @include body2-normal($primary-text);
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
