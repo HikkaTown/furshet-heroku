@@ -26,19 +26,31 @@
   height: 100%;
 }
 
-.content {
+.slider_block {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.content {
+  position: absolute;
   z-index: 5;
   padding: 0 16px;
   @include tablet {
-    margin-left: 44px;
+    left: 44px;
     padding-left: 0;
     padding-right: 0;
     max-width: 584px;
     width: 100vw;
+    margin: 0 auto;
   }
   @include desktop {
-    margin-left: 124px;
+    // margin-left: 124px;
+    left: 20%;
+    margin: 0 auto;
+    max-width: 1192px;
+    width: 100vw;
   }
 }
 
@@ -55,6 +67,9 @@
   @include body1-normal($white-color);
   padding: 0;
   margin: 0 0 32px 0;
+  @include tablet {
+    max-width: 584px;
+  }
 }
 
 .arrows {
