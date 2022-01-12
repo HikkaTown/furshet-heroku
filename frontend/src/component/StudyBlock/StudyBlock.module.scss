@@ -1,0 +1,94 @@
+.section {
+  position: relative;
+  margin-top: 64px;
+  margin-bottom: 64px;
+  @include tablet {
+    margin-top: 80px;
+    margin-bottom: 80px;
+  }
+  @include desktop {
+    margin-top: 124px;
+    margin-bottom: 124px;
+  }
+}
+
+.container {
+  max-width: 328px;
+  width: 100vw;
+  margin: 0 auto;
+  @include tablet {
+    max-width: 680px;
+  }
+  @include desktop {
+    max-width: 1192px;
+    display: flex;
+    min-height: 693px;
+    position: relative;
+  }
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 608px;
+  width: 100vw;
+}
+
+.head {
+  padding: 0;
+  margin: 0 0 32px 0;
+  @include headline2-mobile($primary-text);
+  @include tablet {
+    @include headline2($primary-text);
+  }
+}
+
+.select {
+  @include headline2-mobile($wine-color);
+  @include tablet {
+    @include headline2($wine-color);
+  }
+}
+
+.title {
+  @include body1-normal($primary-text);
+  padding: 0;
+  margin: 0;
+}
+
+.offer {
+  margin-top: 32px;
+}
+
+.offer_text {
+  @include headline3-mobile($primary-text);
+  padding: 0;
+  margin: 0 0 12px 0;
+}
+
+.select_offer {
+  @include headline3-mobile($wine-color);
+}
+
+.skidka {
+  @include headline4($white-color);
+  text-align: center;
+  background-color: #0ec477;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: -1px;
+    border: 16px solid transparent;
+    border-right: 16px solid #f3efe9;
+  }
+  @include desktop {
+    max-width: 533px;
+    width: 100vw;
+  }
+}

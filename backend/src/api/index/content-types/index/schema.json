@@ -38,6 +38,11 @@
       "type": "component",
       "repeatable": false,
       "component": "section-two.section-two"
+    },
+    "studyBlock": {
+      "type": "component",
+      "repeatable": false,
+      "component": "study-block.study-block"
     }
   }
 }

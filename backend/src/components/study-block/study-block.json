@@ -1,0 +1,70 @@
+{
+  "collectionName": "components_study_block_study_blocks",
+  "info": {
+    "displayName": "studyBlock",
+    "icon": "ambulance"
+  },
+  "options": {},
+  "attributes": {
+    "header": {
+      "type": "text"
+    },
+    "selectInHeader": {
+      "type": "text"
+    },
+    "firstImage": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "firsImageText": {
+      "type": "text"
+    },
+    "secondImage": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "threeImage": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "fourImage": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "secondImageText": {
+      "type": "text"
+    },
+    "threeImageText": {
+      "type": "text"
+    },
+    "fourImageText": {
+      "type": "text"
+    },
+    "promotion": {
+      "type": "boolean"
+    },
+    "title": {
+      "type": "text"
+    }
+  }
+}

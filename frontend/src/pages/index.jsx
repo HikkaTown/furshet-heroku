@@ -25,6 +25,7 @@ import BarInfoSection from "../component/BarInfoSection/BarInfoSection";
 import Question from "../component/uikit/Question/Question";
 import AskingBlock from "../component/AskingBlock/AskingBlock";
 import BufetsInfoSection from "../component/BufetsInfoSection/BufetsInfoSection";
+import StudyBlock from "../component/StudyBlock/StudyBlock";
 
 export default function Home({
   allBufets,
@@ -56,8 +57,8 @@ export default function Home({
       {allExitBars.map((item) => (
         <GastroStationCard key={item.id} data={item} />
       ))} */}
-
       <SectionTwo />
+      <StudyBlock />
       <StationSliderSection />
       <MasterClassInfo />
       <BufetsInfoSection />
