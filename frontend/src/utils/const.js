@@ -1,6 +1,9 @@
 // adminka furshet-zakazat@info.ru
 // pass 57211111zZ
 
+export const PREVIEW_L = "preview/large.png";
+export const PREVIEW_S = "preview/small.png";
+
 export const PHONE_NUMBER_TEXT = "+7 495 999 99 99";
 export const PHONE_NUMBER_LINK = "+74959999999";
 
