@@ -1,0 +1,30 @@
+.slider_wrapper {
+  max-width: 328px;
+  width: 328px;
+  position: absolute;
+  bottom: -70px;
+  @include tablet {
+    bottom: 70px;
+    max-width: 380px;
+    width: 380px;
+  }
+}
+
+.slider_block {
+}
+
+.slide {
+}
+
+.arrows {
+  position: absolute;
+  bottom: -55px;
+  z-index: 9;
+  margin-left: -52px;
+  left: 50%;
+  display: flex;
+}
+
+.arrow_left {
+  margin-right: 16px;
+}

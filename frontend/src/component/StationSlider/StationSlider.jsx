@@ -6,8 +6,9 @@ import { LazyBackgroundImage } from "../LazyBackgroundImage/LazyBackgroundImage"
 import { LazyImageWrapper } from "../LazyImage/LazyImage";
 import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
 import ArrowSectionButton from "../uikit/ArrowSectionButton/ArrowSectionButton";
+import AboutMoreButton from "../uikit/AboutMoreButton/AboutMoreButton";
 // TODO: Добавить динамическую загрузку в этот слайдер и сделать проверку на редирект
-export default function StationSlider({ data }) {
+export default function StationSlider({ data, secondBtn }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -39,7 +40,11 @@ export default function StationSlider({ data }) {
                 Создаем фуршетную линию, полностью организуем ваше мероприятие с
                 накрытием на стол, декором и официантами
               </p>
-              <SecondaryButton text={"Свяжитесь со мной"} />
+              {secondBtn ? (
+                <SecondaryButton text={"Свяжитесь со мной"} />
+              ) : (
+                <AboutMoreButton />
+              )}
             </div>
           </div>
         </div>

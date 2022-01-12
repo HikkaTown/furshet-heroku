@@ -1,0 +1,77 @@
+.section {
+}
+
+.section_bg {
+  position: relative;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  padding-top: 128px;
+  padding-bottom: 148px;
+
+  @include tablet {
+    padding-top: 196px;
+    padding-bottom: 332px;
+  }
+  @include desktop {
+    padding-top: 216px;
+    padding-bottom: 164px;
+  }
+}
+
+.container {
+  max-width: 328px;
+  width: 100vw;
+  margin: 0 auto;
+  position: relative;
+  @include tablet {
+    max-width: 680px;
+  }
+  @include desktop {
+    max-width: 1192px;
+  }
+}
+
+.header {
+  padding: 0;
+  margin: 0 0 24px 0;
+  @include headline1-mobile($white-color);
+  @include tablet {
+    @include headline1($white-color);
+    max-width: 529px;
+  }
+}
+
+.subtitle {
+  padding: 0;
+  margin: 0 0 32px 0;
+  @include headline4($white-color);
+  @include tablet {
+    max-width: 529px;
+  }
+}
+
+.btn {
+  max-width: 195px;
+  width: 195px;
+  height: 48px;
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include tablet {
+    max-width: 680px;
+    width: 100vw;
+    margin: 0 auto;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  @include desktop {
+    max-width: 1192px;
+  }
+}

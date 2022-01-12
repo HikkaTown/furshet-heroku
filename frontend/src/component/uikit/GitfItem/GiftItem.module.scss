@@ -1,16 +1,13 @@
 .card {
-  margin-left: 40px;
   box-sizing: border-box;
   max-width: 328px;
   width: 328px;
   height: 132px;
   display: flex;
   align-items: center;
-
   border-radius: 8px;
   background-color: $white-color;
   padding: 16px;
-
   @include tablet {
     max-width: 380px;
     width: 380px;
@@ -18,13 +15,35 @@
   }
 }
 
-.image {
+.image_wrapper {
   height: 100px;
   max-width: 100px;
   width: 100px;
   border-radius: 50%;
-  background-color: black;
-  margin-right: 24px;
+  display: block;
+  @include tablet {
+    height: 116px;
+    max-width: 116px;
+    width: 116px;
+  }
+}
+
+.image {
+  background-color: #fff;
+  height: 100px;
+  max-width: 100px;
+  width: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  @include tablet {
+    height: 116px;
+    max-width: 116px;
+    width: 116px;
+  }
+}
+
+.content {
+  margin-left: 20px;
 }
 
 .head {
@@ -35,15 +54,23 @@
   font-family: "Gilroy", sans-serif;
   margin: 0;
   padding: 0;
-  max-width: 208px;
-  width: 208px;
+  max-width: 172px;
+  width: 172px;
   margin-bottom: 8px;
+  @include tablet {
+    max-width: 208px;
+    width: 208px;
+  }
 }
 
 .title {
   margin: 0;
   padding: 0;
   @include body3-normal($primary-text);
-  max-width: 200px;
-  width: 200px;
+  max-width: 172px;
+  width: 172px;
+  @include tablet {
+    max-width: 170px;
+    width: 100%;
+  }
 }

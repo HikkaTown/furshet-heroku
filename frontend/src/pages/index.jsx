@@ -8,7 +8,7 @@ import GiftItem from "../component/uikit/GitfItem/GiftItem";
 import ItemCard from "../component/uikit/ItemCard/ItemCard";
 import NavigationButton from "../component/uikit/NavigationButton/NavigationButton";
 import { useEffect } from "react";
-import { URL_SERVER } from "../utils/const";
+import { bg_bar, bg_home, URL_SERVER } from "../utils/const";
 import { getBuffets } from "../pages/api/getBuffets";
 import MasterClassCard from "../component/uikit/MasterClassCard/MasterClassCard";
 import { getMasterClass } from "./api/getMasterClass";
@@ -26,6 +26,9 @@ import Question from "../component/uikit/Question/Question";
 import AskingBlock from "../component/AskingBlock/AskingBlock";
 import BufetsInfoSection from "../component/BufetsInfoSection/BufetsInfoSection";
 import StudyBlock from "../component/StudyBlock/StudyBlock";
+import FirstSection from "../component/FirstSection/FirstSection";
+import CompleteFushetSection from "../component/CompleteFushetSection/CompleteFushetSection";
+import Footer from "../component/Footer/Footer";
 
 export default function Home({
   allBufets,
@@ -57,15 +60,18 @@ export default function Home({
       {allExitBars.map((item) => (
         <GastroStationCard key={item.id} data={item} />
       ))} */}
+      <FirstSection startPos={0} bg={bg_home} />
       <SectionTwo />
       <StudyBlock />
-      <StationSliderSection />
+      <StationSliderSection secondBtn={true} />
+      <CompleteFushetSection />
       <MasterClassInfo />
-      <BufetsInfoSection />
+      {/* <BufetsInfoSection /> */}
       <BarInfoSection />
       <AskingBlock />
       <FeedbackSection />
       <SeoBlock />
+      <Footer />
     </>
   );
 }

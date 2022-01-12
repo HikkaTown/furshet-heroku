@@ -1,0 +1,172 @@
+.footer {
+  background-color: #070629;
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.container {
+  max-width: 328px;
+  width: 100vw;
+  margin: 0 auto;
+  @include tablet {
+    max-width: 680px;
+  }
+  @include desktop {
+    max-width: 1192px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 0.5px solid #18158e;
+    margin-bottom: 24px;
+    &:last-of-type {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.two_column {
+  @include tablet {
+    border-bottom: 0.5px solid #b4b4b4;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  @include desktop {
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: none;
+  }
+}
+
+.column {
+  border-bottom: 0.5px solid #b4b4b4;
+  margin-bottom: 24px;
+  @include tablet {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+  @include desktop {
+    max-width: 280px;
+    width: 100vw;
+    margin-right: 24px;
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}
+
+.logo_link {
+}
+
+.logo_wrapper {
+  max-width: 80px;
+  width: 80px;
+  height: 36px;
+  margin-bottom: 29px;
+}
+
+.logo {
+  max-width: 80px;
+  width: 80px;
+  height: 36px;
+  transition: 0.5s;
+  @include hover {
+    opacity: 0.5;
+  }
+}
+
+.copyright {
+  @include body3-normal($white-color);
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+
+.subtitle {
+  @include body4($white-color);
+  margin: 0;
+  max-width: 280px;
+  padding: 0 0 24px 0;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 24px 0;
+  max-width: 328px;
+  width: 100vw;
+  @include tablet {
+    max-width: 280px;
+    width: 100vw;
+  }
+}
+
+.link {
+  margin-bottom: 16px;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.text_link {
+  @include body3-normal($white-color);
+  padding: 0;
+  margin: 0 0 16px 0;
+  transition: 0.5s;
+  @include hover {
+    opacity: 0.5;
+  }
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.mail {
+  @include body3-normal($white-color);
+  transition: 0.5s;
+  @include hover {
+    opacity: 0.5;
+  }
+}
+
+.adress {
+  @include body3-normal($white-color);
+  padding: 0;
+  margin: 16px 0 16px 0;
+}
+
+.privacy_link {
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+}
+
+.social {
+  padding-bottom: 24px;
+}
+
+.privacy_text {
+  @include body4($white-color);
+  transition: 0.5s;
+  @include hover {
+    opacity: 0.5;
+  }
+}
+
+.last_column {
+  max-width: 328px;
+  width: 100vw;
+}
+
+.yandex_block {
+  max-width: 150px;
+  width: 150px;
+  height: 50px;
+  background-color: #fff;
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+
+.description {
+  @include body5($white-color);
+  padding: 0;
+  margin: 0;
+}
