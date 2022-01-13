@@ -1,21 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, ReactPortal, useState } from "react";
 import { createPortal } from "react-dom";
 
 const Portal = ({ children }) => {
   const [container, setContainer] = useState(null);
 
   useEffect(() => {
-    const createdDiv = document.createElement("div");
-
+    const createdDiv = document.body;
     setContainer(createdDiv);
-
-    document.body.appendChild(createdDiv);
-
-    return () => {
-      if (container) {
-        document.body.removeChild(container);
-      }
-    };
   }, []);
 
   return container ? createPortal(children, container) : null;

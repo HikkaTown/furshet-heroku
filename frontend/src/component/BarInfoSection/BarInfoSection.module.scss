@@ -3,6 +3,9 @@
   max-width: 100%;
   width: 100vw;
   height: 658px;
+  @include desktop {
+    height: 560px;
+  }
 }
 
 .overlay {

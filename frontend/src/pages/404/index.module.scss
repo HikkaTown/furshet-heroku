@@ -1,0 +1,72 @@
+.section {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("/uikit/completeFurshetSection/bg_mobile.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  @include tablet {
+    background-image: url("/uikit/completeFurshetSection/bg_tablet.jpg");
+  }
+  @include desktop {
+    background-image: url("/uikit/completeFurshetSection/bg_desktop.jpg");
+  }
+}
+
+.container {
+  max-width: 328px;
+  width: 100vw;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 120px;
+  @include tablet {
+    max-width: 664px;
+  }
+}
+
+.header {
+  @include headline1($primary-text);
+  font-size: 156px;
+  line-height: 164px;
+  padding: 0;
+  margin: 0 0 24px 0;
+  @include tablet {
+    font-size: 280px;
+    line-height: 288px;
+  }
+}
+
+.subtitle {
+  @include body2-normal($primary-text);
+  padding: 0;
+  margin: 0 0 24px 0;
+  text-align: center;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include tablet {
+    flex-direction: row;
+    max-width: 664px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.nav_btn {
+  margin-bottom: 16px;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  @include tablet {
+    margin-bottom: 0;
+    margin-right: 10px;
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}

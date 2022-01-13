@@ -2,11 +2,15 @@ import React from "react";
 import cs from "classnames";
 import s from "./FavoriteButton.module.scss";
 
-export default function FavoriteButton({ added, onClick }) {
+export default function FavoriteButton({ added, onClick, className }) {
   return (
     <button
       onClick={onClick}
-      className={added ? cs(s.button, s.button_added) : s.button}
+      className={
+        added
+          ? cs(s.button, s.button_added, className)
+          : cs(s.button, className)
+      }
     >
       <svg
         width="30"

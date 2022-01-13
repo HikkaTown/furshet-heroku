@@ -4,6 +4,9 @@
   width: 100vw;
   height: 658px;
   background-color: #f3efe9;
+  @include desktop {
+    height: 560px;
+  }
 }
 
 .overlay {

@@ -1,20 +1,25 @@
 .button {
   @include buttonDefault;
   @include body3-normal($primary-text);
-  max-width: 163px;
-  width: 163px;
-  height: 36px;
-  background-color: rgba(255, 255, 255, 0.5);
+  padding: 6px 24px;
+  background-color: #fff;
   border-radius: 30px;
   transition: 0.5s;
+  @include desktop {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
   @include hover {
     background-color: $white-color;
   }
 
   &_active {
-    background-color: $orange-brith;
-    @include hover {
-      background-color: $orange-primary;
+    background-color: #fab576;
+
+    @include desktop {
+      background-color: $orange-brith;
+      @include hover {
+        background-color: $orange-primary;
+      }
     }
   }
 }

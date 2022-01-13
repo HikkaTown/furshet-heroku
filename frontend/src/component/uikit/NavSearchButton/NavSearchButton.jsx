@@ -1,11 +1,11 @@
 import Link from "next/link";
 import React from "react";
 import s from "./NavSearchButton.module.scss";
-
-export default function NavSearchButton() {
+import cs from "classnames";
+export default function NavSearchButton({ className }) {
   return (
     <Link href={"/search"}>
-      <a className={s.button}>
+      <a className={cs(s.button, className)}>
         <svg
           width="20"
           height="20"

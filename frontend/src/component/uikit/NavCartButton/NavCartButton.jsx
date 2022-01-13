@@ -1,10 +1,12 @@
 import Link from "next/link";
 import React from "react";
 import s from "./NavCartButton.module.scss";
-export default function NavCartButton() {
+import cs from "classnames";
+export default function NavCartButton({ className }) {
   return (
     <Link href={"/cart"}>
-      <a className={s.button}>
+      <a className={cs(s.button, className)}>
+        <span className={s.count}>3</span>
         <svg
           width="20"
           height="20"

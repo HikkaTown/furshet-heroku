@@ -9,7 +9,7 @@ import s from "./BufetsInfoSection.module.scss";
 import SeparatorTop from "../uikit/SeparatorTop/SeparatorTop";
 import SeparatorBottom from "../uikit/SeparatorBottom/SeparatorBottom";
 // TODO: Добавить редирект на кнопку
-export default function BufetsInfoSection() {
+export default function BufetsInfoSection({ href }) {
   const router = useRouter();
   const size = useWindowSize();
   const [background, setBackground] = useState("");
@@ -36,11 +36,7 @@ export default function BufetsInfoSection() {
 
   return (
     <section className={s.section}>
-      {/* {router.pathname === "/masterclass" ? (
-        ""
-      ) : (
-        <SeparatorTop className={s.reverse} />
-      )} */}
+      {router.pathname === "/masterclass" ? "" : <SeparatorTop />}
       <LazyBackgroundImage
         className={
           router.pathname === "/masterclass"
@@ -68,11 +64,17 @@ export default function BufetsInfoSection() {
           >
             Готовые решения к вашему столу
           </p>
-          <AboutMoreButton />
+          <AboutMoreButton
+            onClick={() => {
+              router.push(href);
+            }}
+          />
         </div>
       </LazyBackgroundImage>
       {router.pathname === "/masterclass" ? (
         ""
+      ) : router.pathname === "/bar" ? (
+        <SeparatorBottom />
       ) : (
         <SeparatorBottom className={s.reverse} />
       )}

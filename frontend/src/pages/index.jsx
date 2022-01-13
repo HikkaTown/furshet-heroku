@@ -14,6 +14,8 @@ import {
   URL_SERVER,
   dataStationsSlider,
   dataStationsText,
+  dataFurshetText,
+  dataFurshetSlider,
 } from "../utils/const";
 import { getBuffets } from "../pages/api/getBuffets";
 import MasterClassCard from "../component/uikit/MasterClassCard/MasterClassCard";
@@ -28,14 +30,12 @@ import SeoBlock from "../component/SeoBlock/SeoBlock";
 import FeedbackSection from "../component/FeedbackSection/FeedbackSection";
 import MasterClassInfo from "../component/MasterClassInfo/MasterClassInfo";
 import BarInfoSection from "../component/BarInfoSection/BarInfoSection";
-import Question from "../component/uikit/Question/Question";
 import AskingBlock from "../component/AskingBlock/AskingBlock";
-import BufetsInfoSection from "../component/BufetsInfoSection/BufetsInfoSection";
 import StudyBlock from "../component/StudyBlock/StudyBlock";
 import FirstSection from "../component/FirstSection/FirstSection";
 import CompleteFushetSection from "../component/CompleteFushetSection/CompleteFushetSection";
-import Footer from "../component/Footer/Footer";
-import FeedbackModal from "../component/FeedbackModal/FeedbackModal";
+import Header from "../component/Header/Header";
+import Layout from "../component/Layout/Layout";
 
 export default function Home({
   allBufets,
@@ -49,7 +49,8 @@ export default function Home({
 }) {
   return (
     <>
-      {/* {barCounter.map((item) => (
+      <Layout>
+        {/* {barCounter.map((item) => (
         <ItemCard key={item.id} data={item} />
       ))}
 
@@ -67,22 +68,22 @@ export default function Home({
       {allExitBars.map((item) => (
         <GastroStationCard key={item.id} data={item} />
       ))} */}
-      <FirstSection startPos={0} bg={bg_home} />
-      <SectionTwo />
-      <StudyBlock />
-      <StationSliderSection
-        secondBtn={false}
-        dataImages={dataStationsSlider}
-        dataText={dataStationsText}
-      />
-      <CompleteFushetSection />
-      <MasterClassInfo />
-      {/* <BufetsInfoSection /> */}
-      <BarInfoSection />
-      <AskingBlock />
-      <FeedbackSection />
-      <SeoBlock />
-      <Footer />
+        <FirstSection startPos={0} bg={bg_home} />
+        <SectionTwo />
+        <StudyBlock />
+        <StationSliderSection
+          secondBtn={false}
+          dataImages={dataFurshetSlider}
+          dataText={dataFurshetText}
+        />
+        <CompleteFushetSection />
+        <MasterClassInfo />
+        {/* <BufetsInfoSection /> */}
+        <BarInfoSection />
+        <AskingBlock />
+        <FeedbackSection />
+        <SeoBlock />
+      </Layout>
     </>
   );
 }

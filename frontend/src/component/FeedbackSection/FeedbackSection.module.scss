@@ -9,6 +9,9 @@
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+  @include desktop {
+    height: 540px;
+  }
 }
 
 .separator {

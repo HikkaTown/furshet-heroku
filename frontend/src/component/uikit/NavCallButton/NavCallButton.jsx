@@ -1,10 +1,11 @@
 import React from "react";
+import cs from "classnames";
 import s from "./NavCallButton.module.scss";
 import { PHONE_NUMBER_LINK, PHONE_NUMBER_TEXT } from "../../../utils/const";
 
-export default function NavCallButton() {
+export default function NavCallButton({ className }) {
   return (
-    <a className={s.button} href={`tel:${PHONE_NUMBER_LINK}`}>
+    <a className={cs(s.button, className)} href={`tel:${PHONE_NUMBER_LINK}`}>
       <span className={s.icon_wrapper}>
         <svg
           width="20"

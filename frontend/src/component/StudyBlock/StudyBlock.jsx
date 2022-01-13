@@ -3,7 +3,7 @@ import s from "./StudyBlock.module.scss";
 import cs from "classnames";
 import StudyList from "../StudyList/StudyList";
 // TODO: Подвязать backend
-export default function StudyBlock({ data }) {
+export default function StudyBlock({ data, promotion }) {
   const dataList = {
     header: "Текст",
     select: "Селект",
@@ -39,15 +39,16 @@ export default function StudyBlock({ data }) {
           </h2>
           <p className={s.title}>{dataList.title}</p>
 
-          {dataList.promotion && (
-            <div className={s.offer}>
-              <p className={s.offer_text}>
-                Или <span className={s.select_offer}>в нашей</span> кулинарной{" "}
-                <span className={s.select_offer}>студии</span>
-              </p>
-              <p className={s.skidka}>со скидкой 15%</p>
-            </div>
-          )}
+          {dataList.promotion ||
+            (promotion && (
+              <div className={s.offer}>
+                <p className={s.offer_text}>
+                  Или <span className={s.select_offer}>в нашей</span> кулинарной{" "}
+                  <span className={s.select_offer}>студии</span>
+                </p>
+                <p className={s.skidka}>со скидкой 15%</p>
+              </div>
+            ))}
         </div>
         <StudyList data={dataList.listBlock} />
       </div>

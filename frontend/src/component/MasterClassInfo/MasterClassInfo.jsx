@@ -5,11 +5,12 @@ import SeparatorBottom from "../uikit/SeparatorBottom/SeparatorBottom";
 import { LazyBackgroundImage } from "../LazyBackgroundImage/LazyBackgroundImage";
 import AboutMoreButton from "../uikit/AboutMoreButton/AboutMoreButton";
 import useWindowSize from "../../hooks/useWindowSize";
+import { useRouter } from "next/router";
 // TODO: добавить редирект на страницу мастерклассов
 export default function MasterClassInfo() {
   const size = useWindowSize();
   const [background, setBackground] = useState("");
-
+  const router = useRouter();
   useEffect(() => {
     if (size.width >= 1175) {
       setBackground("/images/masterClassInfo/bg_desktop.png");
@@ -32,7 +33,7 @@ export default function MasterClassInfo() {
           <AboutMoreButton />
         </div>
       </LazyBackgroundImage>
-      <SeparatorBottom />
+      {router.pathname !== "/bar" && <SeparatorBottom />}
     </section>
   );
 }
