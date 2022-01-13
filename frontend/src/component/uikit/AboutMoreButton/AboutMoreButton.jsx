@@ -1,9 +1,9 @@
 import React from "react";
 import s from "./AboutMoreButton.module.scss";
 
-export default function AboutMoreButton() {
+export default function AboutMoreButton({ onClick }) {
   return (
-    <button className={s.button}>
+    <button onClick={onClick} className={s.button}>
       Подробнее{" "}
       <span className={s.icon_wrapper}>
         <svg

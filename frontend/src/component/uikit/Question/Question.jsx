@@ -3,7 +3,7 @@ import s from "./Question.module.scss";
 import cs from "classnames";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 // TODO:Добавить динамическую подругзку данных
-export default function Question({ setClose, ques, answer }) {
+export default function Question({ ques, answer }) {
   const [isOpen, setOpen] = useState(false);
   const block = useRef(null);
 

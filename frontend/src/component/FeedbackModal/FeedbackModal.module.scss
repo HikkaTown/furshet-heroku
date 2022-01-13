@@ -1,0 +1,97 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+
+  @include desktop {
+    max-width: 452px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.block {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  z-index: 20;
+  background-color: rgba($color: #fff, $alpha: 1);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  @include desktop {
+    top: 32px;
+    right: 85px;
+  }
+}
+
+.content {
+  max-width: 328px;
+  width: 100vw;
+  margin: 0 auto;
+  padding-top: 48px;
+
+  @include tablet {
+    max-width: 680px;
+  }
+  @include desktop {
+    max-width: 280px;
+    // margin-left: auto;
+    padding-top: 220px;
+  }
+}
+
+.head {
+  @include body1-normal($primary-text);
+  padding: 0;
+  margin: 0 0 24px 0;
+  @include tablet {
+    @include headline3-mobile($primary-text);
+  }
+}
+
+.fields {
+  @include tablet {
+    display: flex;
+  }
+  @include desktop {
+    flex-direction: column;
+  }
+}
+
+.input {
+  margin-bottom: 8px;
+  @include tablet {
+    margin-right: 24px;
+    max-width: 328px;
+  }
+}
+
+.dropdown {
+  z-index: 23;
+  margin-bottom: 24px;
+  @include tablet {
+    max-width: 328px;
+  }
+}
+
+.description {
+  z-index: 1;
+  @include body5($text-secondary);
+  padding: 0;
+  margin: 0 0 16px 0;
+}
+
+.text_link {
+  text-decoration: underline;
+}
+
+.btn {
+  max-width: 100%;
+  width: 100%;
+  @include tablet {
+    max-width: 328px;
+  }
+}

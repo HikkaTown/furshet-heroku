@@ -1,6 +1,7 @@
 .input {
   @include buttonDefault;
   cursor: text;
+  display: inline-block;
   @include body3-normal($primary-text);
   max-width: 328px;
   width: 328px;
@@ -29,7 +30,7 @@
     border: 0.5px solid #910c5c;
   }
 
-  @include tablet {
+  @include desktop {
     max-width: 280px;
     width: 280px;
   }

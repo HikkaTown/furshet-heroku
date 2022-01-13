@@ -16,7 +16,7 @@
     margin-left: 44px;
   }
   @include desktop {
-    margin-left: 124px;
+    margin: 0 auto;
     max-width: 1192px;
   }
 }
@@ -32,13 +32,14 @@
   @include tablet {
     max-width: 685px;
     height: 623px;
-    top: 0;
+    top: 70px;
     background-size: contain;
-    right: -100px;
+    right: -200px;
   }
-  @include tablet {
+  @include desktop {
     max-width: 685px;
     height: 623px;
+    top: 0;
     right: 0;
   }
 }

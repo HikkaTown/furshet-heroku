@@ -9,7 +9,7 @@
   border: 0.5px solid $cream-color;
   transition: border 0.5s;
   position: relative;
-  z-index: 2;
+  z-index: 10;
   @include hover {
     border-color: $text-secondary;
   }
@@ -58,7 +58,7 @@
 
   &_item {
     padding: 12px 24px;
-
+    background-color: #fff;
     @include body3-normal($primary-text);
     transition: 0.5s;
     @include hover {

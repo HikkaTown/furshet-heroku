@@ -17,7 +17,7 @@
   border-radius: 30px;
   padding: 11px 24px;
   display: flex;
-  transition: 0.5s;
+  transition: background 0.5s;
   align-items: center;
   @include hover {
     background-color: #fef3e9;

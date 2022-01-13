@@ -4,7 +4,11 @@ import { LazyBackgroundImage } from "../LazyBackgroundImage/LazyBackgroundImage"
 import s from "./StationSliderSection.module.scss";
 import StationSlider from "../StationSlider/StationSlider";
 
-export default function StationSliderSection({ data, secondBtn }) {
+export default function StationSliderSection({
+  dataImages,
+  dataText,
+  secondBtn,
+}) {
   return (
     <section className={s.section}>
       <LazyBackgroundImage
@@ -12,7 +16,11 @@ export default function StationSliderSection({ data, secondBtn }) {
         className={cs(s.separator, s.separator_top)}
         src={"/uikit/separator_top/desktop.svg"}
       ></LazyBackgroundImage>
-      <StationSlider secondBtn={secondBtn} />
+      <StationSlider
+        dataImages={dataImages}
+        dataText={dataText}
+        secondBtn={secondBtn}
+      />
       <LazyBackgroundImage
         className={cs(s.separator, s.separator_bottom)}
         src={"/uikit/separator_bottom/desktop.svg"}

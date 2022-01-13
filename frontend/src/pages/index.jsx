@@ -8,7 +8,13 @@ import GiftItem from "../component/uikit/GitfItem/GiftItem";
 import ItemCard from "../component/uikit/ItemCard/ItemCard";
 import NavigationButton from "../component/uikit/NavigationButton/NavigationButton";
 import { useEffect } from "react";
-import { bg_bar, bg_home, URL_SERVER } from "../utils/const";
+import {
+  bg_bar,
+  bg_home,
+  URL_SERVER,
+  dataStationsSlider,
+  dataStationsText,
+} from "../utils/const";
 import { getBuffets } from "../pages/api/getBuffets";
 import MasterClassCard from "../component/uikit/MasterClassCard/MasterClassCard";
 import { getMasterClass } from "./api/getMasterClass";
@@ -29,6 +35,7 @@ import StudyBlock from "../component/StudyBlock/StudyBlock";
 import FirstSection from "../component/FirstSection/FirstSection";
 import CompleteFushetSection from "../component/CompleteFushetSection/CompleteFushetSection";
 import Footer from "../component/Footer/Footer";
+import FeedbackModal from "../component/FeedbackModal/FeedbackModal";
 
 export default function Home({
   allBufets,
@@ -63,7 +70,11 @@ export default function Home({
       <FirstSection startPos={0} bg={bg_home} />
       <SectionTwo />
       <StudyBlock />
-      <StationSliderSection secondBtn={true} />
+      <StationSliderSection
+        secondBtn={false}
+        dataImages={dataStationsSlider}
+        dataText={dataStationsText}
+      />
       <CompleteFushetSection />
       <MasterClassInfo />
       {/* <BufetsInfoSection /> */}

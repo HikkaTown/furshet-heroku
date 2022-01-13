@@ -83,3 +83,62 @@ export const bg_bar = {
     jpg: "banners/bar/mobile_jpg.jpg",
   },
 };
+
+export const dataFurshetSlider = [
+  {
+    src: "furshet_slider/desktop/1.jpg",
+    srcTablet: "furshet_slider/tablet/1.jpg",
+    srcMobile: "furshet_slider/mobile/1.jpg",
+  },
+  {
+    src: "furshet_slider/desktop/2.jpg",
+    srcTablet: "furshet_slider/tablet/2.jpg",
+    srcMobile: "furshet_slider/mobile/2.jpg",
+  },
+  {
+    src: "furshet_slider/desktop/3.jpg",
+    srcTablet: "furshet_slider/tablet/3.jpg",
+    srcMobile: "furshet_slider/mobile/3.jpg",
+  },
+  {
+    src: "furshet_slider/desktop/4.jpg",
+    srcTablet: "furshet_slider/tablet/4.jpg",
+    srcMobile: "furshet_slider/mobile/4.jpg",
+  },
+];
+
+export const dataFurshetText = {
+  header: "Фуршет с обслуживанием",
+  title:
+    "Создаем фуршетную линию, полностью организуем ваше мероприятие с накрытием на стол, декором и официантами",
+  callback: () => {
+    console.log("open modal feedback");
+  },
+};
+
+export const dataStationsSlider = [
+  {
+    src: "stations_slider/desktop/1.jpg",
+    srcTablet: "stations_slider/tablet/1.jpg",
+    srcMobile: "stations_slider/mobile/1.jpg",
+  },
+  {
+    src: "stations_slider/desktop/2.jpg",
+    srcTablet: "stations_slider/tablet/2.jpg",
+    srcMobile: "stations_slider/mobile/2.jpg",
+  },
+  {
+    src: "stations_slider/desktop/3.jpg",
+    srcTablet: "stations_slider/tablet/3.jpg",
+    srcMobile: "stations_slider/mobile/3.jpg",
+  },
+];
+
+export const dataStationsText = {
+  header: "Гастрономические станциина ваше мероприятие",
+  title:
+    "Пирамида из шампанского, интерактивный велошейкер, раклет бар прямо у вас в офисе!",
+  callback: (router) => {
+    router.push("/stations");
+  },
+};

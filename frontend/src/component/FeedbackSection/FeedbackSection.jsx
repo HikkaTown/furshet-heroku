@@ -8,11 +8,20 @@ import PrimaryButton from "../uikit/PrimaryButton/PrimaryButton";
 import useWindowSize from "../../hooks/useWindowSize";
 import SeparatorTop from "../uikit/SeparatorTop/SeparatorTop";
 import SeparatorBottom from "../uikit/SeparatorBottom/SeparatorBottom";
-// TODO: Сделать модалку обратной связи
+import FeedbackModal from "../FeedbackModal/FeedbackModal";
+// TODO: Сделать полную заливку фона на мобилке и планшете
 export default function FeedbackSection() {
   const size = useWindowSize();
   const [background, setBackground] = useState("");
+  const [isOpen, setOpen] = useState(false);
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   useEffect(() => {
     if (size.width >= 1175) {
       setBackground("images/feedback/contact_desk.png");
@@ -37,10 +46,21 @@ export default function FeedbackSection() {
           <p className={s.subtitle}>
             Или укажите удобную форму общения для вас, и мы свяжемся
           </p>
-          <PrimaryButton text={"Свяжитесь со мной"} className={s.btn} />
+          <PrimaryButton
+            onClick={handleOpen}
+            text={"Свяжитесь со мной"}
+            className={s.btn}
+          />
         </div>
         <SeparatorBottom className={s.separator_bottom} />
       </LazyBackgroundImage>
+      {isOpen && (
+        <FeedbackModal
+          isButtonClose={true}
+          isOpened={isOpen}
+          onClose={handleClose}
+        />
+      )}
     </section>
   );
 }

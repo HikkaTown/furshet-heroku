@@ -3,7 +3,7 @@ import cs from "classnames";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import s from "./DropdownCallback.module.scss";
 
-export default function DropdownCallback() {
+export default function DropdownCallback({ className }) {
   const [isActive, setIsActive] = useState(false);
   const ref = useRef(null);
   const header = useRef(null);
@@ -27,7 +27,11 @@ export default function DropdownCallback() {
           setIsActive(true);
         }
       }}
-      className={isActive ? cs(s.dropdown, s.dropdown_active) : cs(s.dropdown)}
+      className={
+        isActive
+          ? cs(s.dropdown, s.dropdown_active, className)
+          : cs(s.dropdown, className)
+      }
       ref={ref}
     >
       <div className={s.dropdown_head}>
