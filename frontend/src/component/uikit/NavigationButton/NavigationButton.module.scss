@@ -16,9 +16,9 @@
     background-color: #fab576;
 
     @include desktop {
-      background-color: $orange-brith;
+      background-color: $white-color;
       @include hover {
-        background-color: $orange-primary;
+        background-color: #fab576;
       }
     }
   }
