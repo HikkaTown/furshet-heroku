@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import s from "./BufetsInfoSection.module.scss";
 import SeparatorTop from "../uikit/SeparatorTop/SeparatorTop";
 import SeparatorBottom from "../uikit/SeparatorBottom/SeparatorBottom";
-// TODO: Добавить редирект на кнопку
 export default function BufetsInfoSection({ href }) {
   const router = useRouter();
   const size = useWindowSize();

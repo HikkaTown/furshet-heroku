@@ -4,7 +4,7 @@ import { ADRESS, EMAIL, SITE_NAME, URL_HOME } from "../../utils/const";
 import { LazyImageWrapper } from "../LazyImage/LazyImage";
 import NavCallButton from "../uikit/NavCallButton/NavCallButton";
 import s from "./Footer.module.scss";
-// TODO: Добавить редиректы на нужные страницы и блоки
+// TODO: Добавить редиректы на нужные блоки
 export default function Footer() {
   return (
     <footer className={s.footer}>
@@ -30,19 +30,19 @@ export default function Footer() {
               <Link href="/" className={s.link}>
                 <a className={s.text_link}>Фуршет</a>
               </Link>
-              <Link href="/" className={s.link}>
+              <Link href="/stations" className={s.link}>
                 <a className={s.text_link}>Гастрономические станции</a>
               </Link>
-              <Link href="/" className={s.link}>
+              <Link href="/masterclass" className={s.link}>
                 <a className={s.text_link}>Мастер-классы</a>
               </Link>
-              <Link href="/" className={s.link}>
+              <Link href="/bar" className={s.link}>
                 <a className={s.text_link}>Выездные бары</a>
               </Link>
               <Link href="/" className={s.link}>
                 <a className={s.text_link}>Вопросы-ответы</a>
               </Link>
-              <Link href="/" className={s.link}>
+              <Link href="/news" className={s.link}>
                 <a className={s.text_link}>Наши кейсы</a>
               </Link>
             </nav>

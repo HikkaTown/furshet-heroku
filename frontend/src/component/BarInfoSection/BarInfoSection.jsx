@@ -5,11 +5,11 @@ import useWindowSize from "../../hooks/useWindowSize";
 import { LazyBackgroundImage } from "../LazyBackgroundImage/LazyBackgroundImage";
 import AboutMoreButton from "../uikit/AboutMoreButton/AboutMoreButton";
 import SeparatorBottom from "../uikit/SeparatorBottom/SeparatorBottom";
-// TODO: добавить редирект на страницу баров
+import { useRouter } from "next/router";
 export default function BarInfoSection() {
   const size = useWindowSize();
   const [background, setBackground] = useState("");
-
+  const router = useRouter();
   useEffect(() => {
     if (size.width >= 1175) {
       setBackground("/images/barInfoSection/bg_desktop.jpg");
@@ -28,7 +28,11 @@ export default function BarInfoSection() {
           <p className={s.subtitle}>
             Коктейли и напитки, барный кейтеринг от профессионалов барного дела
           </p>
-          <AboutMoreButton />
+          <AboutMoreButton
+            onClick={() => {
+              router.push("/bar");
+            }}
+          />
         </div>
       </LazyBackgroundImage>
       <SeparatorBottom />

@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import cs from "classnames";
 import s from "./StationSlider.module.scss";
 import { useKeenSlider } from "keen-slider/react";
-import { LazyBackgroundImage } from "../LazyBackgroundImage/LazyBackgroundImage";
 import { LazyImageWrapper } from "../LazyImage/LazyImage";
 import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
 import ArrowSectionButton from "../uikit/ArrowSectionButton/ArrowSectionButton";
 import AboutMoreButton from "../uikit/AboutMoreButton/AboutMoreButton";
 import FeedbackModal from "../FeedbackModal/FeedbackModal";
 import { useRouter } from "next/router";
-// TODO: Добавить динамическую загрузку в этот слайдер и сделать проверку на редирект
 export default function StationSlider({ dataImages, dataText, secondBtn }) {
   const router = useRouter();
   const [currentSlide, setCurrentSlide] = useState(0);

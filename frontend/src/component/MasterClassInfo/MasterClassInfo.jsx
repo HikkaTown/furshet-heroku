@@ -6,7 +6,6 @@ import { LazyBackgroundImage } from "../LazyBackgroundImage/LazyBackgroundImage"
 import AboutMoreButton from "../uikit/AboutMoreButton/AboutMoreButton";
 import useWindowSize from "../../hooks/useWindowSize";
 import { useRouter } from "next/router";
-// TODO: добавить редирект на страницу мастерклассов
 export default function MasterClassInfo() {
   const size = useWindowSize();
   const [background, setBackground] = useState("");
@@ -30,7 +29,11 @@ export default function MasterClassInfo() {
             Готовим кесадилью, бургеры, хот-доги, глинтвейн своими руками!
           </p>
 
-          <AboutMoreButton />
+          <AboutMoreButton
+            onClick={() => {
+              router.push("/masterclass");
+            }}
+          />
         </div>
       </LazyBackgroundImage>
       {router.pathname !== "/bar" && <SeparatorBottom />}

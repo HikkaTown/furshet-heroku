@@ -6,10 +6,8 @@ import FirstSectionSlider from "../FirstSectionSlider/FirstSectionSlider";
 import useWindowSize from "../../hooks/useWindowSize";
 import { LazyBackgroundImage } from "../LazyBackgroundImage/LazyBackgroundImage";
 import testWebp from "../../utils/testWebp";
-// TODO:ДОДЕЛАТЬ background для разных страниц
 export default function FirstSection({ data, startPos, bg }) {
   const size = useWindowSize();
-
   const [background, setBackground] = useState("");
 
   useEffect(() => {
