@@ -9,17 +9,6 @@
   transition: 0.5s;
 }
 
-.header_fixed {
-  position: fixed;
-  background-color: #f3efe9;
-  box-shadow: 0px 2px 8px rgba(153, 153, 153, 0.25);
-  @include desktop {
-    .container {
-      padding: 12px 0;
-    }
-  }
-}
-
 .container {
   padding: 14px 0;
   max-width: 328px;
@@ -128,5 +117,27 @@
 
   @include desktop {
     display: flex !important;
+  }
+}
+
+.header_fixed {
+  position: fixed;
+  background-color: #f3efe9;
+  box-shadow: 0px 2px 8px rgba(153, 153, 153, 0.25);
+  @include desktop {
+    .container {
+      padding: 12px 0;
+    }
+
+    .navigation_btn {
+      background-color: #fff;
+      @include hover {
+        background-color: #fab576;
+      }
+    }
+
+    .navigationActive {
+      background-color: #fab576;
+    }
   }
 }

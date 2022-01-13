@@ -16,9 +16,9 @@
     background-color: #fab576;
 
     @include desktop {
-      background-color: $white-color;
+      background-color: #fff;
       @include hover {
-        background-color: #fab576;
+        background-color: rgba($color: #fff, $alpha: 1);
       }
     }
   }

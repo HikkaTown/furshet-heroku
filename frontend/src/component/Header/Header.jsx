@@ -66,7 +66,11 @@ export default function Header() {
             <img className={s.logotip} src="uikit/logo.svg" alt="Главная" />
           </a>
         </Link>
-        <Navigation className={s.nav} classNameBtn={s.navigation_btn} />
+        <Navigation
+          className={s.nav}
+          classNameBtn={s.navigation_btn}
+          classNameActive={s.navigationActive}
+        />
         <div className={s.quick_btns}>
           <NavSearchButton className={s.search} />
           <FavoriteButton
