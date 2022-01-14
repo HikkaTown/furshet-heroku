@@ -1,22 +1,6 @@
 import Head from "next/head";
 import axios from "axios";
-
-import Checkbox from "../component/uikit/Checkbox/Checkbox";
-import DropdownPerson from "../component/uikit/DropdownPerson/DropdownPerson";
-import FurshetCard from "../component/uikit/FurshetCard/FurshetCard";
-import GiftItem from "../component/uikit/GitfItem/GiftItem";
-import ItemCard from "../component/uikit/ItemCard/ItemCard";
-import NavigationButton from "../component/uikit/NavigationButton/NavigationButton";
-import { useEffect } from "react";
-import {
-  bg_bar,
-  bg_home,
-  URL_SERVER,
-  dataStationsSlider,
-  dataStationsText,
-  dataFurshetText,
-  dataFurshetSlider,
-} from "../utils/const";
+import { bg_home, dataFurshetText, dataFurshetSlider } from "../utils/const";
 import { getBuffets } from "../pages/api/getBuffets";
 import MasterClassCard from "../component/uikit/MasterClassCard/MasterClassCard";
 import { getMasterClass } from "./api/getMasterClass";
@@ -36,6 +20,7 @@ import FirstSection from "../component/FirstSection/FirstSection";
 import CompleteFushetSection from "../component/CompleteFushetSection/CompleteFushetSection";
 import Header from "../component/Header/Header";
 import Layout from "../component/Layout/Layout";
+import { getIndexPage } from "./api/getPages";
 
 export default function Home({
   allBufets,
@@ -44,6 +29,7 @@ export default function Home({
   allExitBars,
   barCounter,
   preview,
+  index,
   data,
   error,
 }) {
@@ -68,9 +54,9 @@ export default function Home({
       {allExitBars.map((item) => (
         <GastroStationCard key={item.id} data={item} />
       ))} */}
-        <FirstSection startPos={0} bg={bg_home} />
-        <SectionTwo />
-        <StudyBlock />
+        <FirstSection data={index.textPage} startPos={0} bg={bg_home} />
+        <SectionTwo data={index.sectionTwo} />
+        {/* <StudyBlock /> */}
         <StationSliderSection
           secondBtn={false}
           dataImages={dataFurshetSlider}
@@ -82,7 +68,7 @@ export default function Home({
         <BarInfoSection />
         <AskingBlock />
         <FeedbackSection />
-        <SeoBlock />
+        <SeoBlock data={index.seoBlock} />
       </Layout>
     </>
   );
@@ -94,8 +80,10 @@ export async function getStaticProps({ preview = null }) {
   const allGastroStation = await getGastroStation();
   const allExitBars = await getExitBars();
   const barCounter = await getBarCounter();
+  const indexPage = await getIndexPage();
   return {
     props: {
+      index: indexPage,
       barCounter: JSON.parse(barCounter),
       allBufets: JSON.parse(allBufets),
       allExitBars: JSON.parse(allExitBars),

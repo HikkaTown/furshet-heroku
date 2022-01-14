@@ -1,11 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "indices",
+  "collectionName": "stations",
   "info": {
-    "singularName": "index",
-    "pluralName": "indices",
-    "displayName": "index",
-    "description": ""
+    "singularName": "station",
+    "pluralName": "stations",
+    "displayName": "station"
   },
   "options": {
     "draftAndPublish": true
@@ -13,13 +12,13 @@
   "pluginOptions": {},
   "attributes": {
     "metaHead": {
-      "type": "string"
+      "type": "text"
     },
     "metaTitle": {
-      "type": "string"
+      "type": "text"
     },
     "h1": {
-      "type": "string"
+      "type": "text"
     },
     "titleP": {
       "type": "text"
@@ -28,6 +27,11 @@
       "type": "component",
       "repeatable": false,
       "component": "seo-block.seo-block"
+    },
+    "studyBlock": {
+      "type": "component",
+      "repeatable": false,
+      "component": "study-block.study-block"
     },
     "sectionTwo": {
       "type": "component",

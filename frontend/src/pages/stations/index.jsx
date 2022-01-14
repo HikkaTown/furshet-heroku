@@ -36,17 +36,10 @@ import StudyBlock from "../../component/StudyBlock/StudyBlock";
 import FirstSection from "../../component/FirstSection/FirstSection";
 import CompleteFushetSection from "../../component/CompleteFushetSection/CompleteFushetSection";
 import Layout from "../../component/Layout/Layout";
+import { getStationsPage } from "../api/getPages";
 
-export default function Home({
-  allBufets,
-  allMasterClass,
-  allGastroStation,
-  allExitBars,
-  barCounter,
-  preview,
-  data,
-  error,
-}) {
+export default function Home({ allGastroStation, index, preview, error }) {
+  console.log(index);
   return (
     <>
       <Layout>
@@ -68,17 +61,30 @@ export default function Home({
       {allExitBars.map((item) => (
         <GastroStationCard key={item.id} data={item} />
       ))} */}
-        <FirstSection startPos={1} bg={bg_stations} />
-        <SectionTwo />
-        <StudyBlock />
+        <FirstSection data={index.textPage} startPos={1} bg={bg_stations} />
+        <SectionTwo data={index.sectionTwo} />
+        <StudyBlock data={index.studyBlock} />
         {/* katalog */}
         <BufetsInfoSection href={"/"} />
         <MasterClassInfo />
         <BarInfoSection />
         <AskingBlock />
         <FeedbackSection />
-        <SeoBlock />
+        <SeoBlock data={index.seoBlock} />
       </Layout>
     </>
   );
+}
+
+export async function getStaticProps({ preview = null }) {
+  // const allGastroStation = await getGastroStation();
+  const stationPage = await getStationsPage();
+
+  return {
+    props: {
+      index: stationPage,
+      // allGastroStation: JSON.parse(allGastroStation),
+      preview,
+    },
+  };
 }

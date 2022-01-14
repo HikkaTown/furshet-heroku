@@ -2,6 +2,7 @@ import React from "react";
 import cs from "classnames";
 import s from "./SeoBlock.module.scss";
 import { LazyImageWrapper } from "../LazyImage/LazyImage";
+import { PATH_IMAGES } from "../../utils/const";
 // TODO: Сделать динамическую загрузку данных
 export default function SeoBlock({ data }) {
   return (
@@ -10,45 +11,25 @@ export default function SeoBlock({ data }) {
         <h2 className={s.header}>Seo-block</h2>
         <div className={s.row}>
           <LazyImageWrapper
-            src={"/images/banner-min.jpg"}
+            src={`${PATH_IMAGES}${data.firstImages.pc}`}
+            srcTablet={`${PATH_IMAGES}${data.firstImages.tablet}`}
+            srcMobile={`${PATH_IMAGES}${data.firstImages.mobile}`}
             className={[s.image]}
             wrapperClass={s.image_wrapper}
-            alt={"altImage"}
+            alt={data.firstImageAlt}
           />
-          <p className={s.text}>
-            Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-            sint. Velit officia consequat duis enim velit mollit. Exercitation
-            veniam consequat sunt nostrud amet.Amet minim mollit non deserunt
-            ullamco est sit aliqua dolor do amet sint. Velit officia consequat
-            duis enim velit mollit. Exercitation veniam consequat sunt nostrud
-            amet.Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-            amet sint. Velit officia consequat duis enim velit mollit.
-            Exercitation veniam consequat sunt nostrud amet.Amet minim mollit
-            non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-            officia consequat duis enim velit mollit. Exercitation veniam
-            consequat sunt nostrud amet.Amet minim mollit non deserunt ullamco
-            est sit aliqua dolor do amet sint.
-          </p>
+          <p className={s.text}>{data.firstText}</p>
         </div>
         <div className={s.row}>
           <LazyImageWrapper
-            src={"/images/banner-min.jpg"}
+            src={`${PATH_IMAGES}${data.secondImages.pc}`}
+            srcTablet={`${PATH_IMAGES}${data.secondImages.tablet}`}
+            srcMobile={`${PATH_IMAGES}${data.secondImages.mobile}`}
             className={[s.image]}
             wrapperClass={cs(s.image_wrapper, s.image_last)}
-            alt={"altImage"}
+            alt={data.secondImageAlt}
           />
-          <p className={s.text}>
-            {" "}
-            Velit officia consequat duis enim velit mollit. Exercitation veniam
-            consequat sunt nostrud amet.Amet minim mollit non deserunt ullamco
-            est sit aliqua dolor do amet sint. Velit officia consequat duis enim
-            velit mollit. Exercitation veniam consequat sunt nostrud amet.Amet
-            minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.
-            Velit officia consequat duis enim velit mollit. Exercitation veniam
-            consequat sunt nostrud amet.Amet minim mollit non deserunt ullamco
-            est sit aliqua dolor do amet sint. Velit officia consequat duis enim
-            velit mollit. Exercitation veniam consequat sunt nostrud amet.
-          </p>
+          <p className={s.text}>{data.secondText}</p>
         </div>
       </div>
     </section>

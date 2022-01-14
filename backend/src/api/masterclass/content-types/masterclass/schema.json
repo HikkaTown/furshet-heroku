@@ -1,0 +1,42 @@
+{
+  "kind": "singleType",
+  "collectionName": "masterclasses",
+  "info": {
+    "singularName": "masterclass",
+    "pluralName": "masterclasses",
+    "displayName": "masterclass"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "metaHead": {
+      "type": "text"
+    },
+    "metaTitle": {
+      "type": "text"
+    },
+    "h1": {
+      "type": "text"
+    },
+    "titleP": {
+      "type": "text"
+    },
+    "sectionTwo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "section-two.section-two"
+    },
+    "studyBlock": {
+      "type": "component",
+      "repeatable": false,
+      "component": "study-block.study-block"
+    },
+    "seoBlock": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo-block.seo-block"
+    }
+  }
+}

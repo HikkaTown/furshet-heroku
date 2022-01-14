@@ -27,17 +27,9 @@ import BufetsInfoSection from "../../component/BufetsInfoSection/BufetsInfoSecti
 import StudyBlock from "../../component/StudyBlock/StudyBlock";
 import FirstSection from "../../component/FirstSection/FirstSection";
 import Layout from "../../component/Layout/Layout";
+import { getMasterClassPage } from "../api/getPages";
 
-export default function index({
-  allBufets,
-  allMasterClass,
-  allGastroStation,
-  allExitBars,
-  barCounter,
-  preview,
-  data,
-  error,
-}) {
+export default function index({ index, preview, error }) {
   return (
     <>
       <Layout>
@@ -59,9 +51,9 @@ export default function index({
       {allExitBars.map((item) => (
         <GastroStationCard key={item.id} data={item} />
       ))} */}
-        <FirstSection startPos={2} bg={bg_masterclass} />
-        <SectionTwo />
-        <StudyBlock promotion={true} />
+        <FirstSection data={index.textPage} startPos={2} bg={bg_masterclass} />
+        <SectionTwo data={index.sectionTwo} />
+        <StudyBlock data={index.studyBlock} />
         {/* catalog */}
         <StationSliderSection
           secondBtn={false}
@@ -72,25 +64,19 @@ export default function index({
         <BarInfoSection />
         <AskingBlock />
         <FeedbackSection />
-        <SeoBlock />
+        <SeoBlock data={index.seoBlock} />
       </Layout>
     </>
   );
 }
 
 export async function getStaticProps({ preview = null }) {
-  const allBufets = (await getBuffets(preview)) || [];
-  const allMasterClass = await getMasterClass();
-  const allGastroStation = await getGastroStation();
-  const allExitBars = await getExitBars();
-  const barCounter = await getBarCounter();
+  // const allMasterClass = await getMasterClass();
+  const indexPage = await getMasterClassPage();
   return {
     props: {
-      barCounter: JSON.parse(barCounter),
-      allBufets: JSON.parse(allBufets),
-      allExitBars: JSON.parse(allExitBars),
-      allGastroStation: JSON.parse(allGastroStation),
-      allMasterClass: JSON.parse(allMasterClass),
+      index: indexPage,
+      // allMasterClass: JSON.parse(allMasterClass),
       preview,
     },
   };

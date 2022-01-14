@@ -1,10 +1,13 @@
 .section {
   margin-top: 184px;
+  margin-bottom: 100px;
   @include tablet {
     margin-top: 80px;
+    margin-bottom: 80px;
   }
   @include desktop {
     margin-top: 100px;
+    margin-bottom: 124px;
   }
 }
 
@@ -87,6 +90,7 @@
   }
   @include desktop {
     align-self: end;
+    align-content: flex-start;
   }
 }
 
@@ -113,7 +117,7 @@
   }
   @include desktop {
     margin-bottom: 0;
-    justify-content: flex-end;
+    justify-content: flex-start;
     &:nth-child(1) {
       margin-bottom: 64px;
     }

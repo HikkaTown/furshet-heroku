@@ -36,12 +36,13 @@ export default function Navigation({
         classNameActive={classNameActive}
         className={classNameBtn}
       />
-      {router.pathname !== "/404" && (
-        <NavigationButton
-          className={cs(s.contact, classNameBtn)}
-          text={"Контакты"}
-        />
-      )}
+      {router.pathname !== "/404" ||
+        (router.pathname !== "/favorites" && (
+          <NavigationButton
+            className={cs(s.contact, classNameBtn)}
+            text={"Контакты"}
+          />
+        ))}
     </nav>
   );
 }

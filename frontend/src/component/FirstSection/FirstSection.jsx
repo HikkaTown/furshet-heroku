@@ -30,11 +30,8 @@ export default function FirstSection({ data, startPos, bg }) {
         src={background}
       >
         <div className={s.container}>
-          <h1 className={s.header}>Заказать фуршет</h1>
-          <p className={s.subtitle}>
-            Готовые фуршетные наборы, кулинарные станции для офиса, развлечения
-            и шоу
-          </p>
+          <h1 className={s.header}>{data.head}</h1>
+          <p className={s.subtitle}>{data.title}</p>
           <PrimaryButton text={"В каталог"} className={s.btn} />
         </div>
         <div className={s.slider}>

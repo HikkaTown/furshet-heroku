@@ -11,7 +11,7 @@ import NavCallButton from "../uikit/NavCallButton/NavCallButton";
 import { useRouter } from "next/router";
 import OpenNavigationButton from "../uikit/OpenNavigationButton/OpenNavigationButton";
 import NavigationModal from "../NavigationModal/NavigationModal";
-
+// TODO: появляется скролл в самом верху
 export default function Header() {
   const router = useRouter();
   const [scroll, setScroll] = useState(0);

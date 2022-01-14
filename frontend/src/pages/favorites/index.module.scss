@@ -1,0 +1,53 @@
+.container {
+  max-width: 328px;
+  width: 100vw;
+  margin: 0 auto;
+  @include tablet {
+    max-width: 680px;
+  }
+  @include desktop {
+    max-width: 1192px;
+  }
+}
+
+.header {
+  @include headline2-mobile($primary-text);
+  margin: 96px 0 24px 0;
+  padding: 0 0 0 0;
+  @include tablet {
+    @include headline2($primary-text);
+  }
+}
+
+.title {
+  padding: 0;
+  margin: 0 0 26px 0;
+  @include body2-normal($primary-text);
+  @include tablet {
+    @include body1-normal($primary-text);
+  }
+
+  @include desktop {
+    max-width: 685px;
+  }
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include tablet {
+    flex-direction: row;
+  }
+}
+
+.nav_btn {
+  margin-bottom: 26px;
+  @include tablet {
+    margin-bottom: 0;
+    margin-right: 16px;
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}
