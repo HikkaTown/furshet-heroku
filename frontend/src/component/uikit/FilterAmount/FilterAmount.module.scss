@@ -1,7 +1,6 @@
 .container {
   max-width: 328px;
   padding-bottom: 16px;
-  border-bottom: 0.5px solid #b4b4b4;
 }
 
 .head {
@@ -29,6 +28,7 @@
   @include body4($primary-text);
   border: 0.5px solid $white-color;
   transition: 0.5s;
+  text-align: center;
 
   @include hover {
     border: 0.5px solid #343434;

@@ -53,16 +53,16 @@
       "target": "api::tematic.tematic",
       "inversedBy": "gastro_stations"
     },
-    "gastro_station_types": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::gastro-station-type.gastro-station-type",
-      "inversedBy": "gastro_stations"
-    },
     "descriptionList": {
       "type": "component",
       "repeatable": true,
       "component": "furshet-card.desc-list"
+    },
+    "gastro_station_types": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::gastro-station-type.gastro-station-type",
+      "inversedBy": "count"
     }
   }
 }

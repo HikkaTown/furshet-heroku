@@ -30,6 +30,7 @@
     width: 100vw;
     // transform: translate(-50%, 0);
   }
+
   @include desktop {
     &Left {
       top: auto;

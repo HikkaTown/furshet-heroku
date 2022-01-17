@@ -3,7 +3,11 @@
   padding-bottom: 250px;
   overflow: hidden;
   position: relative;
-  max-height: 623px;
+  @include desktop {
+    max-height: 623px;
+  }
+
+
 }
 
 .container {

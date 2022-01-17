@@ -9,13 +9,13 @@ import {
   URL_FURNITURES,
   URL_SERVER,
   URL_STAFS,
-} from "../../utils/const";
+} from "../const";
 
 const parseAnswer = (data) => {
   var array = [];
   data.map((item) => {
     const id = item.id;
-    const { attributes } = item;
+    const {attributes} = item;
     const price = attributes.price;
     const imagePc = attributes.slidersPc.data.attributes.url;
     const imageMob = attributes.slidersMob.data.attributes.url;

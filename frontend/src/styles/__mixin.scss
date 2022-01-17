@@ -75,6 +75,7 @@
   color: $color;
   font-family: "Gilroy", sans-serif;
 }
+
 @mixin body2-medium($color) {
   font-size: 18px;
   line-height: 26px;
@@ -90,6 +91,7 @@
   color: $color;
   font-family: "Gilroy", sans-serif;
 }
+
 @mixin body3-medium($color) {
   font-size: 16px;
   line-height: 24px;
@@ -113,6 +115,7 @@
   color: $color;
   font-family: "Gilroy", sans-serif;
 }
+
 @mixin body5($color) {
   font-size: 12px;
   line-height: 16px;
@@ -122,8 +125,10 @@
 }
 
 @mixin headline1-mobile($color) {
-  font-size: 44px;
-  line-height: 52px;
+  //font-size: 44px;
+  //line-height: 52px;
+  font-size: 36px;
+  line-height: 44px;
   font-weight: 700;
   color: $color;
   font-family: "Gilroy", sans-serif;

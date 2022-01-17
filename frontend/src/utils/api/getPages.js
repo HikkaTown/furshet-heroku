@@ -1,6 +1,6 @@
 import axios from "axios";
-import { URL_SERVER } from "../../utils/const";
-import { getQuery } from "../../utils/query";
+import {URL_SERVER} from "../const";
+import {getQuery} from "../query";
 
 const parsePage = (data) => {
   const attributes = data.attributes;
@@ -110,6 +110,14 @@ const parsePageStudy = (data) => {
   textPage.head = attributes.h1;
   textPage.title = attributes.titleP;
 
+  let catalogBlock = {
+    name: '',
+    position: '',
+  }
+
+  catalogBlock.name = attributes.catalogName;
+  catalogBlock.position = attributes.catalogMenu;
+
   const studyBlock = {
     header: "",
     selectInHeader: "",
@@ -191,11 +199,11 @@ const parsePageStudy = (data) => {
   let totalData = {
     metaData,
     textPage,
+    catalogBlock,
     sectionTwo,
     seoBlock,
     studyBlock,
   };
-  console.log(totalData);
   return totalData;
 };
 

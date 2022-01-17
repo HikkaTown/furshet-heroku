@@ -1,12 +1,12 @@
 // /gastro-stations
 
 import axios from "axios";
-import { URL_SERVER } from "../../utils/const";
+import {URL_SERVER} from "../const";
 
 const parseObj = (data) => {
   var array = [];
   data.map((item) => {
-    const { attributes } = item;
+    const {attributes} = item;
     const id = item.id;
     const nameCard = attributes.name;
     const priceCard = attributes.price;
@@ -64,4 +64,4 @@ const getGastroStation = async () => {
   }
 };
 
-export { getGastroStation };
+export {getGastroStation};

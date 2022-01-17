@@ -4,7 +4,8 @@
   "info": {
     "singularName": "station",
     "pluralName": "stations",
-    "displayName": "station"
+    "displayName": "station",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -37,6 +38,16 @@
       "type": "component",
       "repeatable": false,
       "component": "section-two.section-two"
+    },
+    "catalogName": {
+      "type": "text",
+      "required": true,
+      "default": "Каталог гастрономических станций"
+    },
+    "catalogMenu": {
+      "type": "text",
+      "default": "Гастрономические станции",
+      "required": true
     }
   }
 }

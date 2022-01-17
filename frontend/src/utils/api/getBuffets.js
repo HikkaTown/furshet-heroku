@@ -1,10 +1,10 @@
 import axios from "axios";
-import { URL_SERVER } from "../../utils/const";
+import {URL_SERVER} from "../const";
 
 const parseObject = (data) => {
   var array = [];
   data.map((item) => {
-    const { attributes } = item;
+    const {attributes} = item;
     const id = item.id;
     const nameCard = attributes.name;
     const paramsCard = attributes.paramsBlock[0];
@@ -60,4 +60,4 @@ const getBuffets = async () => {
   }
 };
 
-export { getBuffets };
+export {getBuffets};

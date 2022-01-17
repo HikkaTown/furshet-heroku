@@ -1,0 +1,66 @@
+.section {
+  margin-top: 48px;
+  max-width: 328px;
+  width: 100vw;
+  margin: 0 auto;
+  @include tablet {
+    max-width: 680px;
+  }
+  @include desktop {
+    max-width: 1192px;
+  }
+}
+
+.head {
+  margin: 0 0 32px 0;
+  padding: 0;
+  @include headline2-mobile($primary-text);
+  @include tablet {
+    @include headline2($primary-text);
+  }
+}
+
+.content {
+
+}
+
+.row_buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  @include desktop {
+    display: none;
+  }
+}
+
+.filter_btn {
+  @include buttonDefault;
+  @include body3-normal($primary-text);
+  display: flex;
+  align-items: center;
+}
+
+.sort_btn {
+  @include buttonDefault;
+  @include body3-normal($primary-text);
+  display: flex;
+  align-items: center;
+}
+
+.btn_icon {
+  height: 24px;
+  max-width: 24px;
+  width: 24px;
+}
+
+.wrapper_icon {
+  height: 24px;
+  max-width: 24px;
+  width: 24px;
+  margin-right: 12px;
+}
+
+.overlay {
+  z-index: 11;
+}

@@ -10,13 +10,13 @@ import {
   dataStationsText,
   bg_masterclass,
 } from "../../utils/const";
-import { getBuffets } from "../api/getBuffets";
+import {getBuffets} from "../../utils/api/getBuffets";
 import MasterClassCard from "../../component/uikit/MasterClassCard/MasterClassCard";
-import { getMasterClass } from "../api/getMasterClass";
+import {getMasterClass} from "../../utils/api/getMasterClass";
 import GastroStationCard from "../../component/uikit/GastroStationCard/GastroStationCard";
-import { getGastroStation } from "../api/getGastroStations";
-import { getExitBars } from "../api/getExitBars";
-import { getBarCounter } from "../api/getAnotherItems";
+import {getGastroStation} from "../../utils/api/getGastroStations";
+import {getExitBars} from "../../utils/api/getExitBars";
+import {getBarCounter} from "../../utils/api/getAnotherItems";
 import StationSliderSection from "../../component/StationSliderSection/StationSliderSection";
 import SectionTwo from "../../component/SectionTwo/SectionTwo";
 import SeoBlock from "../../component/SeoBlock/SeoBlock";
@@ -27,11 +27,17 @@ import BufetsInfoSection from "../../component/BufetsInfoSection/BufetsInfoSecti
 import StudyBlock from "../../component/StudyBlock/StudyBlock";
 import FirstSection from "../../component/FirstSection/FirstSection";
 import Layout from "../../component/Layout/Layout";
-import { getMasterClassPage } from "../api/getPages";
+import {getMasterClassPage} from "../../utils/api/getPages";
 
-export default function index({ index, preview, error }) {
+export default function index({index, preview, error}) {
   return (
     <>
+      <Head>
+        <title>{index.metaData.head}</title>
+        <meta property="og:title" content={index.metaData.head}/>
+        <meta itemProp="description" name="description" content={index.metaData.title}/>
+        <meta property="og:description" content={index.metaData.title}/>
+      </Head>
       <Layout>
         {/* {barCounter.map((item) => (
         <ItemCard key={item.id} data={item} />
@@ -51,26 +57,26 @@ export default function index({ index, preview, error }) {
       {allExitBars.map((item) => (
         <GastroStationCard key={item.id} data={item} />
       ))} */}
-        <FirstSection data={index.textPage} startPos={2} bg={bg_masterclass} />
-        <SectionTwo data={index.sectionTwo} />
-        <StudyBlock data={index.studyBlock} />
+        <FirstSection data={index.textPage} startPos={2} bg={bg_masterclass}/>
+        <SectionTwo data={index.sectionTwo}/>
+        <StudyBlock data={index.studyBlock}/>
         {/* catalog */}
         <StationSliderSection
           secondBtn={false}
           dataImages={dataStationsSlider}
           dataText={dataStationsText}
         />
-        <BufetsInfoSection href={"/"} />
-        <BarInfoSection />
-        <AskingBlock />
-        <FeedbackSection />
-        <SeoBlock data={index.seoBlock} />
+        <BufetsInfoSection href={"/"}/>
+        <BarInfoSection/>
+        <AskingBlock/>
+        <FeedbackSection/>
+        <SeoBlock data={index.seoBlock}/>
       </Layout>
     </>
   );
 }
 
-export async function getStaticProps({ preview = null }) {
+export async function getStaticProps({preview = null}) {
   // const allMasterClass = await getMasterClass();
   const indexPage = await getMasterClassPage();
   return {

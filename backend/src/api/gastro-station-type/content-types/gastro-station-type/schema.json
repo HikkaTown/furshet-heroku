@@ -15,11 +15,11 @@
     "name_type": {
       "type": "string"
     },
-    "gastro_stations": {
+    "count": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::gastro-station.gastro-station",
-      "mappedBy": "gastro_station_types"
+      "inversedBy": "gastro_station_types"
     }
   }
 }

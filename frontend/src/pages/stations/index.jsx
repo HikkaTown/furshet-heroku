@@ -1,4 +1,3 @@
-import Head from "next/head";
 import axios from "axios";
 
 import Checkbox from "../../component/uikit/Checkbox/Checkbox";
@@ -7,7 +6,7 @@ import FurshetCard from "../../component/uikit/FurshetCard/FurshetCard";
 import GiftItem from "../../component/uikit/GitfItem/GiftItem";
 import ItemCard from "../../component/uikit/ItemCard/ItemCard";
 import NavigationButton from "../../component/uikit/NavigationButton/NavigationButton";
-import { useEffect } from "react";
+import {useEffect} from "react";
 import {
   bg_bar,
   bg_home,
@@ -16,13 +15,13 @@ import {
   dataStationsText,
   bg_stations,
 } from "../../utils/const";
-import { getBuffets } from "../api/getBuffets";
+import {getBuffets} from "../../utils/api/getBuffets";
 import MasterClassCard from "../../component/uikit/MasterClassCard/MasterClassCard";
-import { getMasterClass } from "../api/getMasterClass";
+import {getMasterClass} from "../../utils/api/getMasterClass";
 import GastroStationCard from "../../component/uikit/GastroStationCard/GastroStationCard";
-import { getGastroStation } from "../api/getGastroStations";
-import { getExitBars } from "../api/getExitBars";
-import { getBarCounter } from "../api/getAnotherItems";
+import {getGastroStation} from "../../utils/api/getGastroStations";
+import {getExitBars} from "../../utils/api/getExitBars";
+import {getBarCounter} from "../../utils/api/getAnotherItems";
 import StationSliderSection from "../../component/StationSliderSection/StationSliderSection";
 import SectionTwo from "../../component/SectionTwo/SectionTwo";
 import SeoBlock from "../../component/SeoBlock/SeoBlock";
@@ -36,12 +35,20 @@ import StudyBlock from "../../component/StudyBlock/StudyBlock";
 import FirstSection from "../../component/FirstSection/FirstSection";
 import CompleteFushetSection from "../../component/CompleteFushetSection/CompleteFushetSection";
 import Layout from "../../component/Layout/Layout";
-import { getStationsPage } from "../api/getPages";
+import {getStationsPage} from "../../utils/api/getPages";
+import Head from "next/head";
+import CatalogBlock from "../../component/CatalogBlock/CatalogBlock";
 
-export default function Home({ allGastroStation, index, preview, error }) {
-  console.log(index);
+export default function Stations({allGastroStation, typeCatalog, index, preview, error}) {
+  console.log(index)
   return (
     <>
+      <Head>
+        <title>{index.metaData.head}</title>
+        <meta property="og:title" content={index.metaData.head}/>
+        <meta itemProp="description" name="description" content={index.metaData.title}/>
+        <meta property="og:description" content={index.metaData.title}/>
+      </Head>
       <Layout>
         {/* {barCounter.map((item) => (
         <ItemCard key={item.id} data={item} />
@@ -61,28 +68,34 @@ export default function Home({ allGastroStation, index, preview, error }) {
       {allExitBars.map((item) => (
         <GastroStationCard key={item.id} data={item} />
       ))} */}
-        <FirstSection data={index.textPage} startPos={1} bg={bg_stations} />
-        <SectionTwo data={index.sectionTwo} />
-        <StudyBlock data={index.studyBlock} />
+        <FirstSection data={index.textPage} startPos={1} bg={bg_stations}/>
+        <SectionTwo data={index.sectionTwo}/>
+        <StudyBlock data={index.studyBlock}/>
         {/* katalog */}
-        <BufetsInfoSection href={"/"} />
-        <MasterClassInfo />
-        <BarInfoSection />
-        <AskingBlock />
-        <FeedbackSection />
-        <SeoBlock data={index.seoBlock} />
+        <CatalogBlock catalogData={index.catalogBlock} types={typeCatalog}/>
+        <BufetsInfoSection href={"/"}/>
+        <MasterClassInfo/>
+        <BarInfoSection/>
+        <AskingBlock/>
+        <FeedbackSection/>
+        <SeoBlock data={index.seoBlock}/>
       </Layout>
     </>
   );
 }
 
-export async function getStaticProps({ preview = null }) {
+export async function getStaticProps({preview = null}) {
   // const allGastroStation = await getGastroStation();
   const stationPage = await getStationsPage();
-
+  const stationType = await fetch('http://localhost:3000/api/getTypeStations').then((res) => {
+    const data = res.json()
+    return data
+  });
+  console.log(stationType)
   return {
     props: {
       index: stationPage,
+      typeCatalog: stationType.data,
       // allGastroStation: JSON.parse(allGastroStation),
       preview,
     },

@@ -9,15 +9,14 @@ import SliderCloseButton from "../uikit/SliderCloseButton/SliderCloseButton";
 import useLockBodyScroll from "../../hooks/useLockBodyScroll";
 
 const OverlayingPopup = (props) => {
-  const { children, isOpened, onClose, isButtonClose, isBottom, isLeft } =
+  const {children, isOpened, onClose, isButtonClose, isBottom, isLeft, overlayClass} =
     props;
 
   useLockBodyScroll();
-
   return (
     <Portal>
-      <div className={clsx(s.container, isOpened && s.opened)} role="dialog">
-        <Overlay onClose={onClose} isLeft={isLeft} />
+      <div className={clsx(s.container, overlayClass, isOpened && s.opened)} role="dialog">
+        <Overlay onClose={onClose} isLeft={isLeft}/>
         <div
           className={clsx(
             s.childrenWrapper,
@@ -26,7 +25,7 @@ const OverlayingPopup = (props) => {
           )}
         >
           {children}
-          {isButtonClose && <SliderCloseButton />}
+          {isButtonClose && <SliderCloseButton/>}
         </div>
       </div>
     </Portal>
