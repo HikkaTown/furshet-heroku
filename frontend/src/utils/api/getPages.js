@@ -16,6 +16,14 @@ const parsePage = (data) => {
   metaData.head = attributes.metaHead;
   metaData.title = attributes.metaTitle;
 
+  let catalogBlock = {
+    name: '',
+    position: '',
+  }
+
+  catalogBlock.name = attributes.catalogName;
+  catalogBlock.position = attributes.catalogMenu;
+
   let textPage = {
     head: "",
     title: "",
@@ -75,6 +83,7 @@ const parsePage = (data) => {
 
   let totalData = {
     metaData,
+    catalogBlock,
     textPage,
     sectionTwo,
     seoBlock,

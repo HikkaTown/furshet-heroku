@@ -31,6 +31,7 @@ export default function Home({
                                barCounter,
                                preview,
                                index,
+                               catalogType,
                                data,
                                error,
                              }) {
@@ -70,7 +71,7 @@ export default function Home({
           dataText={dataFurshetText}
         />
         <CompleteFushetSection/>
-        <CatalogBlock/>
+        <CatalogBlock catalogData={index.catalogBlock} catalogType={catalogType} cards={allBufets}/>
         <MasterClassInfo/>
         {/* <BufetsInfoSection /> */}
         <BarInfoSection/>
@@ -89,9 +90,12 @@ export async function getStaticProps({preview = null}) {
   const allExitBars = await getExitBars();
   const barCounter = await getBarCounter();
   const indexPage = await getIndexPage();
+  const catalogType = await axios('http://localhost:3000/api/getTypeBufets');
+
   return {
     props: {
       index: indexPage,
+      catalogType: catalogType.data.data,
       barCounter: JSON.parse(barCounter),
       allBufets: JSON.parse(allBufets),
       allExitBars: JSON.parse(allExitBars),

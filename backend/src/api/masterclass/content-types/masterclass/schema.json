@@ -4,7 +4,8 @@
   "info": {
     "singularName": "masterclass",
     "pluralName": "masterclasses",
-    "displayName": "masterclass"
+    "displayName": "masterclass",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -37,6 +38,12 @@
       "type": "component",
       "repeatable": false,
       "component": "seo-block.seo-block"
+    },
+    "catalogName": {
+      "type": "text"
+    },
+    "catalogMenu": {
+      "type": "text"
     }
   }
 }

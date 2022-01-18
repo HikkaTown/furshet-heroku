@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import cs from "classnames";
 import s from "./CompleteFushetSection.module.scss";
-import { LazyBackgroundImage } from "../LazyBackgroundImage/LazyBackgroundImage";
+import {LazyBackgroundImage} from "../LazyBackgroundImage/LazyBackgroundImage";
 import useWindowSize from "../../hooks/useWindowSize";
 import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
 
@@ -34,9 +34,12 @@ export default function CompleteFushetSection() {
           <div className={s.content}>
             <h2 className={s.header}>Готовые фуршетные наборы</h2>
             <p className={s.title}>Доставка фуршетных наборов к вашему столу</p>
-            <SecondaryButton text="В каталог" className={s.btn} />
+            <SecondaryButton onClick={() => {
+              const catalog = document.querySelector('#catalog');
+              catalog.scrollIntoView({block: "start", behavior: "smooth"});
+            }} text="В каталог" className={s.btn}/>
           </div>
-          <LazyBackgroundImage src={item} className={s.food} lazy={true} />
+          <LazyBackgroundImage src={item} className={s.food} lazy={true}/>
         </div>
       </LazyBackgroundImage>
     </section>

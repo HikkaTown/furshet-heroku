@@ -6,6 +6,7 @@
   max-width: 100%;
   width: 100vw;
   overflow: auto;
+  z-index: 11;
 }
 
 .content {
@@ -66,49 +67,18 @@
   font-weight: 500;
 }
 
-.clear {
-  @include buttonDefault;
-  @include body4($text-secondary);
-  text-decoration-line: underline;
-}
-
 .btn {
-  padding: 6px 16px;
-  @include body3-normal($primary-text);
-  margin-right: 8px;
+  position: absolute;
+  bottom: 0;
+  margin-top: auto;
+}
+
+.sort_btn {
+  display: inline-block;
   margin-bottom: 8px;
-}
 
-.category {
 
-}
-
-.button {
-  @include buttonDefault;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 16px;
-
-  &_name {
-    @include body2-normal($primary-text);
-  }
-
-  &_active {
-    .button_name {
-      @include body2-medium($wine-color);
-    }
-  }
-
-  &_name {
-    padding: 0;
-    margin: 0;
-  }
-
-  &_number {
-    @include body3-normal(#B4B4B4);
-    padding: 0;
-    margin: 0;
+  &:first-of-type {
+    margin-left: 0;
   }
 }

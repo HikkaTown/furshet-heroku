@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import cs from "classnames";
 import s from "./FirstSection.module.scss";
 import PrimaryButton from "../uikit/PrimaryButton/PrimaryButton";
 import FirstSectionSlider from "../FirstSectionSlider/FirstSectionSlider";
 import useWindowSize from "../../hooks/useWindowSize";
-import { LazyBackgroundImage } from "../LazyBackgroundImage/LazyBackgroundImage";
+import {LazyBackgroundImage} from "../LazyBackgroundImage/LazyBackgroundImage";
 import testWebp from "../../utils/testWebp";
-export default function FirstSection({ data, startPos, bg }) {
+
+export default function FirstSection({data, startPos, bg}) {
   const size = useWindowSize();
   const [background, setBackground] = useState("");
 
@@ -32,10 +33,13 @@ export default function FirstSection({ data, startPos, bg }) {
         <div className={s.container}>
           <h1 className={s.header}>{data.head}</h1>
           <p className={s.subtitle}>{data.title}</p>
-          <PrimaryButton text={"В каталог"} className={s.btn} />
+          <PrimaryButton text={"В каталог"} onClick={() => {
+            const catalog = document.querySelector('#catalog');
+            catalog.scrollIntoView({block: "start", behavior: "smooth"});
+          }} className={s.btn}/>
         </div>
         <div className={s.slider}>
-          <FirstSectionSlider startPos={startPos} />
+          <FirstSectionSlider startPos={startPos}/>
         </div>
       </LazyBackgroundImage>
     </section>

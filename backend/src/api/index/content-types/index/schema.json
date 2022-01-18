@@ -33,6 +33,12 @@
       "type": "component",
       "repeatable": false,
       "component": "section-two.section-two"
+    },
+    "catalogName": {
+      "type": "text"
+    },
+    "catalogMenu": {
+      "type": "text"
     }
   }
 }

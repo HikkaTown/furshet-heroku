@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import CounterLight from "../CounterLight/CounterLight";
 import s from "./FurshetCard.module.scss";
@@ -11,7 +11,7 @@ import converterNumber from "../../../utils/converterNumber";
 import OpacityButton from "../OpacityButton/OpacityButton";
 import SliderCloseButton from "../SliderCloseButton/SliderCloseButton";
 
-export default function FurshetCard({ data }) {
+export default function FurshetCard({data, className}) {
   const size = useWindowSize();
   const [isEdit, setEdit] = useState(false);
   const [added, setAdded] = useState(false);
@@ -56,16 +56,16 @@ export default function FurshetCard({ data }) {
         />
       )}
       <div className={s.favorite}>
-        <FavoriteButton added={added} onClick={handleAddedFavorites} />
+        <FavoriteButton added={added} onClick={handleAddedFavorites}/>
       </div>
       <div className={s.slider_block}>
-        <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc} />
+        <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc}/>
         <DescriptionInCard
           descriptionVision={descriptionVision}
           content={data.descriptionList}
         />
         {data.vegan && (
-          <PrimaryButton className={s.vegan_btn} text="Вегетарианский" />
+          <PrimaryButton className={s.vegan_btn} text="Вегетарианский"/>
         )}
       </div>
       <div
@@ -84,7 +84,7 @@ export default function FurshetCard({ data }) {
             <span className={s.currency}> &#8381;</span>
           </p>
           {isEdit ? (
-            <CounterLight />
+            <CounterLight/>
           ) : (
             <PrimaryButton
               className={s.pay_button}

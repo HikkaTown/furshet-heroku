@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import clsx from "classnames";
 
 import Portal from "../Portal/Portal";
@@ -11,7 +11,9 @@ import useLockBodyScroll from "../../hooks/useLockBodyScroll";
 const OverlayingPopup = (props) => {
   const {children, isOpened, onClose, isButtonClose, isBottom, isLeft, overlayClass} =
     props;
-
+  useEffect(() => {
+    isOpened ? document.getElementById('__next').style.overflow = 'hidden' : document.getElementById('__next').style.overflow = 'auto'
+  }, [])
   useLockBodyScroll();
   return (
     <Portal>
