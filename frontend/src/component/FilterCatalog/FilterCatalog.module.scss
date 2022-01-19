@@ -6,6 +6,13 @@
   max-width: 100%;
   width: 100vw;
   overflow: auto;
+  @include desktop {
+    max-width: 280px;
+    width: 280px;
+    margin-left: 0;
+    margin-right: 24px;
+    overflow: visible;
+  }
 }
 
 .content {
@@ -13,6 +20,12 @@
   max-width: 328px;
   width: 100vw;
   margin: 0 auto;
+  @include desktop {
+    max-width: 280px;
+    width: 280px;
+    padding-top: 0;
+    margin: 0;
+  }
 }
 
 .close {
@@ -38,6 +51,10 @@
       transform: translateX(-5px) rotate(-45deg);
     }
   }
+
+  @include desktop {
+    display: none;
+  }
 }
 
 .row {
@@ -52,6 +69,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @include desktop {
+      display: none;
+    }
   }
 
   &:nth-child(2) {
@@ -64,12 +84,18 @@
   margin: 0;
   @include headline4($primary-text);
   font-weight: 500;
+  @include desktop {
+    display: none;
+  }
 }
 
 .clear {
   @include buttonDefault;
   @include body4($text-secondary);
   text-decoration-line: underline;
+  @include desktop {
+    display: none;
+  }
 }
 
 .btn {

@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import cs from "classnames";
 import s from "./FirstSectionSlider.module.scss";
-import { useKeenSlider } from "keen-slider/react";
+import {useKeenSlider} from "keen-slider/react";
 
 import ArrowSectionButton from "../uikit/ArrowSectionButton/ArrowSectionButton";
-import { LazyImageWrapper } from "../LazyImage/LazyImage";
+import {LazyImageWrapper} from "../LazyImage/LazyImage";
 import GiftItem from "../uikit/GitfItem/GiftItem";
 
-export default function FirstSectionSlider({ startPos }) {
+export default function FirstSectionSlider({startPos}) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -17,7 +17,7 @@ export default function FirstSectionSlider({ startPos }) {
       spacing: 15,
     },
     defaultAnimation: {
-      duration: 1200,
+      duration: 0,
     },
     slideChanged(slider) {
       setCurrentSlide(slider.track.details.rel);
@@ -90,7 +90,7 @@ function Arrow(props) {
           position={true}
         />
       )}
-      {!props.left && <ArrowSectionButton onClick={props.onClick} />}
+      {!props.left && <ArrowSectionButton onClick={props.onClick}/>}
     </>
   );
 }

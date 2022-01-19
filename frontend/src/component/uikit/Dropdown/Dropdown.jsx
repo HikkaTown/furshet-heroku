@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, {useRef, useState} from "react";
 import cs from "classnames";
 import s from "./Dropdown.module.scss";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 
-export default function Dropdown() {
+export default function Dropdown({setSortTypeName}) {
   const [isActive, setIsActive] = useState(false);
   const ref = useRef(null);
   const header = useRef(null);
@@ -15,6 +15,7 @@ export default function Dropdown() {
   const handlerSelectItem = (e) => {
     const SelectItem = e.target.textContent;
     header.current.textContent = SelectItem;
+    setSortTypeName(SelectItem)
   };
 
   return (
@@ -26,6 +27,9 @@ export default function Dropdown() {
         } else {
           setIsActive(true);
         }
+      }}
+      onPointerLeave={() => {
+        setIsActive(false)
       }}
       className={isActive ? cs(s.dropdown, s.dropdown_active) : cs(s.dropdown)}
       ref={ref}
@@ -58,7 +62,9 @@ export default function Dropdown() {
             ? cs(s.dropdown_list, s.dropdown_list_active)
             : cs(s.dropdown_list)
         }
-        onClick={handlerSelectItem}
+        onClick={(e) => {
+          handlerSelectItem(e)
+        }}
       >
         {header.current ? (
           header.current.textContent !== "По умолчанию" ? (
@@ -69,8 +75,12 @@ export default function Dropdown() {
         ) : (
           ""
         )}
-        <div className={s.dropdown_item}>По возрастанию</div>
-        <div className={s.dropdown_item}>По убыванию</div>
+        <div onClick={() => {
+        }} className={s.dropdown_item}>По возрастанию
+        </div>
+        <div onClick={() => {
+        }} className={s.dropdown_item}>По убыванию
+        </div>
       </div>
     </div>
   );

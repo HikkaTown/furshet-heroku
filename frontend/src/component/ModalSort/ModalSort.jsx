@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Portal from "../Portal/Portal";
 import OverlayingPopup from "../OverlayingPopup/OverlayingPopup";
 import s from './ModalSort.module.scss'
+import cs from 'classnames'
 import PrimaryButton from "../uikit/PrimaryButton/PrimaryButton";
 import ConfirmFilter from "../uikit/ConfirmFilter/ConfirmFilter";
 import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
 
-function ModalSort({setAttribute, isOpened, overlayClass, onClose}) {
+const textBtn = ['По умолчанию', 'По возрастанию', 'По убыванию'];
+
+function ModalSort({setAttribute, sortToDown, sortDefault, sortToUp, isOpened, overlayClass, onClose}) {
+  const [active, setActive] = useState(0);
   return (
     <Portal>
       <OverlayingPopup overlayClass={overlayClass} onClose={onClose} isOpened={isOpened}>
@@ -20,9 +24,20 @@ function ModalSort({setAttribute, isOpened, overlayClass, onClose}) {
               <h3 className={s.head}>Сортировка</h3>
             </div>
             <div className={s.row}>
-              <SecondaryButton className={s.sort_btn} text={'По умолчанию'}/>
-              <SecondaryButton className={s.sort_btn} text={'По возрастанию'}/>
-              <SecondaryButton className={s.sort_btn} text={'По убыванию'}/>
+              {textBtn.map((item, index) => {
+                return <SecondaryButton onClick={() => {
+                  if (index === 0) {
+                    sortDefault();
+                  } else if (index === 1) {
+                    sortToUp();
+                  } else {
+                    sortToDown();
+                  }
+                  setActive(index);
+                }
+                } key={index} className={cs(s.sort_btn, active === index && s.btn_active)}
+                                        text={item}/>
+              })}
             </div>
           </div>
           <ConfirmFilter className={s.btn}/>

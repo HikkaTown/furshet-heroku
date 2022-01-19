@@ -22,6 +22,7 @@ import Header from "../component/Header/Header";
 import Layout from "../component/Layout/Layout";
 import {getIndexPage} from "../utils/api/getPages";
 import CatalogBlock from "../component/CatalogBlock/CatalogBlock";
+import CatalogBuffets from "../component/CatalogBuffets/CatalogBuffets";
 
 export default function Home({
                                allBufets,
@@ -32,8 +33,7 @@ export default function Home({
                                preview,
                                index,
                                catalogType,
-                               data,
-                               error,
+                               thematics,
                              }) {
   return (
     <>
@@ -71,7 +71,9 @@ export default function Home({
           dataText={dataFurshetText}
         />
         <CompleteFushetSection/>
-        <CatalogBlock catalogData={index.catalogBlock} catalogType={catalogType} cards={allBufets}/>
+        {/*<CatalogBlock catalogData={index.catalogBlock} catalogType={catalogType} cards={allBufets}/>*/}
+        <CatalogBuffets catalogData={index.catalogBlock} catalogType={catalogType} cards={allBufets}
+                        thematics={thematics}/>
         <MasterClassInfo/>
         {/* <BufetsInfoSection /> */}
         <BarInfoSection/>
@@ -85,22 +87,23 @@ export default function Home({
 
 export async function getStaticProps({preview = null}) {
   const allBufets = (await getBuffets(preview)) || [];
-  const allMasterClass = await getMasterClass();
-  const allGastroStation = await getGastroStation();
-  const allExitBars = await getExitBars();
-  const barCounter = await getBarCounter();
+  // const allMasterClass = await getMasterClass();
+  // const allGastroStation = await getGastroStation();
+  // const allExitBars = await getExitBars();
+  // const barCounter = await getBarCounter();
   const indexPage = await getIndexPage();
   const catalogType = await axios('http://localhost:3000/api/getTypeBufets');
-
+  const catalogThematics = await axios('http://localhost:3000/api/getThematicsData')
   return {
     props: {
       index: indexPage,
       catalogType: catalogType.data.data,
-      barCounter: JSON.parse(barCounter),
+      thematics: catalogThematics.data.data,
+      // barCounter: JSON.parse(barCounter),
       allBufets: JSON.parse(allBufets),
-      allExitBars: JSON.parse(allExitBars),
-      allGastroStation: JSON.parse(allGastroStation),
-      allMasterClass: JSON.parse(allMasterClass),
+      // allExitBars: JSON.parse(allExitBars),
+      // allGastroStation: JSON.parse(allGastroStation),
+      // allMasterClass: JSON.parse(allMasterClass),
       preview,
     },
   };

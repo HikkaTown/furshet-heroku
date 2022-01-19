@@ -41,7 +41,7 @@ export default function FurshetCard({data, className}) {
   };
 
   return (
-    <div className={s.card} onPointerLeave={hiddenDescription}>
+    <div className={cs(s.card, className)} onPointerLeave={hiddenDescription}>
       {size.width < 1175 && !descriptionVision && (
         <OpacityButton
           text={"Описание"}

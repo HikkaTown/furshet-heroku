@@ -1,6 +1,9 @@
 .container {
   max-width: 328px;
   padding-bottom: 16px;
+  @include desktop {
+    max-width: 280px;
+  }
 }
 
 .head {
@@ -47,4 +50,16 @@
     color: $gray-color;
     text-align: center;
   }
+
+  @include desktop {
+    max-width: 136px;
+    width: 136px;
+  }
+}
+
+.amount::-webkit-outer-spin-button,
+.amount::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }

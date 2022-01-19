@@ -33,6 +33,14 @@
 
 }
 
+.dropdown_thematic {
+  display: none;
+  @include desktop {
+    display: block;
+    margin-right: auto;
+  }
+}
+
 .dropdown_person {
   display: none;
   @include desktop {
@@ -54,6 +62,7 @@
   margin-bottom: 24px;
   @include desktop {
     justify-content: flex-end;
+    margin-left: calc(280px + 24px);
   }
 }
 
@@ -101,4 +110,11 @@
 
 .catalog_content {
   display: flex;
+}
+
+.filter_catalog {
+  display: none;
+  @include desktop {
+    display: block;
+  }
 }

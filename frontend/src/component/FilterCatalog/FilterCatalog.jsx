@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import cs from 'classnames';
 import s from './FilterCatalog.module.scss'
 import FilterAmount from "../uikit/FilterAmount/FilterAmount";
@@ -6,22 +6,32 @@ import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
 import CatalogTabButton from "../uikit/CatalogTabButton/CatalogTabButton";
 import ConfirmFilter from "../uikit/ConfirmFilter/ConfirmFilter";
 
-function FilterCatalog({types, sortType, catalogData, sortAmount, onClose, setStart, setEnd}) {
-  const [activeCategory, setActiveCategory] = useState(0);
+function FilterCatalog({
+                         types,
+                         sortType,
+                         catalogData,
+                         typeId,
+                         setTypeId,
+                         handlerReset,
+                         sortAmount,
+                         onClose,
+                         setStart,
+                         setEnd
+                       }) {
+  const [activeCategory, setActiveCategory] = useState(types.length - 1);
 
   const handleActiveCategory = (e) => {
     e.preventDefault();
     setActiveCategory(true);
   }
 
-  const handleSearchCards = (id) => {
-
-  }
-
   const handleResetForm = () => {
-    setActiveCategory(false);
+    handlerReset();
+    onClose();
 
   }
+
+
   return (
     <div className={s.block}>
       <button onClick={onClose} className={s.close}>
@@ -34,7 +44,7 @@ function FilterCatalog({types, sortType, catalogData, sortAmount, onClose, setSt
           <button onClick={handleResetForm} className={s.clear}>Сбросить фильтр</button>
         </div>
         <div className={s.row}>
-          <FilterAmount setStart={setStart} setEnd={setEnd}/>
+          <FilterAmount sortAmount={sortAmount} setStart={setStart} setEnd={setEnd}/>
         </div>
         <div className={s.row}>
           {types && types.map((item, index) => {
@@ -43,9 +53,10 @@ function FilterCatalog({types, sortType, catalogData, sortAmount, onClose, setSt
             return (
               <button key={id} onClick={(e) => {
                 handleActiveCategory(e)
-                setActiveCategory(index)
-                sortType(id)
-              }} className={cs(s.button, activeCategory === index && s.button_active)}>
+                // setActiveCategory(index)
+                setTypeId(id)
+                sortType(item.id)
+              }} className={cs(s.button, typeId === id && s.button_active)}>
                 <span className={s.button_name}>{nameType}</span>
                 <span className={s.button_number}>{buffets.data.length}</span>
               </button>

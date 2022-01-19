@@ -2,5 +2,41 @@
   display: flex;
   flex-wrap: wrap;
   max-width: 328px;
+  align-items: baseline;
   width: 100vw;
+  @include tablet {
+    max-width: 680px;
+  }
+  @include desktop {
+    max-width: 100%;
+    width: 100%;
+  }
+
+}
+
+.card {
+  margin-bottom: 16px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  @include tablet {
+    margin-right: 24px;
+    margin-bottom: 24px;
+    &:nth-child(even) {
+      margin-right: 0;
+    }
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+  @include desktop {
+    margin: 0;
+    margin-left: 24px;
+    &:nth-child(4n+4) {
+      margin-left: 0;
+    }
+
+  }
 }

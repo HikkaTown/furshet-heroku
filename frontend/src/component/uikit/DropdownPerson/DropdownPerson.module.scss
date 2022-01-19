@@ -6,10 +6,10 @@
   border-radius: 18px;
   cursor: pointer;
   background-color: $white-color;
-  border: 0.5px solid $white-color;
+  border: 0.5px solid $text-secondary;
   transition: border 0.5s;
   position: relative;
-  z-index: 2;
+  z-index: 5;
   @include hover {
     border-color: $text-secondary;
     background-color: $cream-color;
@@ -18,7 +18,7 @@
   &_active {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    border-bottom: none;
+    border-bottom-color: #ffffff;
     background-color: $white-color;
     border-color: $text-secondary;
     @include hover {
@@ -42,6 +42,7 @@
     display: none;
     left: -1px;
     overflow: hidden;
+    background-color: #fff;
   }
 
   &_list_active {
@@ -63,7 +64,7 @@
     @include body3-normal($primary-text);
     transition: 0.5s;
     @include hover {
-      color: $wine-color;
+      background-color: $cream-color;
     }
 
     &:last-of-type {

@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, {useRef, useState} from "react";
 import cs from "classnames";
 import s from "./DropdownTematic.module.scss";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 
-export default function DropdownTematic() {
+function DropdownTematic({list, setThematics}) {
   const [isActive, setIsActive] = useState(false);
   const ref = useRef(null);
   const header = useRef(null);
@@ -16,10 +16,18 @@ export default function DropdownTematic() {
     if (e.target.textContent === "Без тематикик") {
       const SelectItem = "Тематика";
       header.current.textContent = SelectItem;
+      setThematics(null);
     }
 
     const SelectItem = e.target.textContent;
     header.current.textContent = SelectItem;
+    let res;
+    list.map((item) => {
+      if (item.name === SelectItem) {
+        res = item.id;
+      }
+    })
+    setThematics(res)
   };
 
   return (
@@ -31,6 +39,9 @@ export default function DropdownTematic() {
         } else {
           setIsActive(true);
         }
+      }}
+      onPointerLeave={() => {
+        setIsActive(false)
       }}
       className={isActive ? cs(s.dropdown, s.dropdown_active) : cs(s.dropdown)}
       ref={ref}
@@ -75,8 +86,8 @@ export default function DropdownTematic() {
           ""
         )}
         {header.current ? (
-          header.current.textContent !== "23 Февраля" ? (
-            <div className={s.dropdown_item}>23 Февраля</div>
+          header.current.textContent !== list[0].name ? (
+            <div className={s.dropdown_item}>{list[0].name}</div>
           ) : (
             ""
           )
@@ -84,8 +95,8 @@ export default function DropdownTematic() {
           ""
         )}
         {header.current ? (
-          header.current.textContent !== "Масленница" ? (
-            <div className={s.dropdown_item}>Масленница</div>
+          header.current.textContent !== list[1].name ? (
+            <div className={s.dropdown_item}>{list[1].name}</div>
           ) : (
             ""
           )
@@ -93,8 +104,8 @@ export default function DropdownTematic() {
           ""
         )}
         {header.current ? (
-          header.current.textContent !== "8 Марта" ? (
-            <div className={s.dropdown_item}>8 Марта</div>
+          header.current.textContent !== list[2].name ? (
+            <div className={s.dropdown_item}>{list[2].name}</div>
           ) : (
             ""
           )
@@ -102,8 +113,8 @@ export default function DropdownTematic() {
           ""
         )}
         {header.current ? (
-          header.current.textContent !== "Новый Год" ? (
-            <div className={s.dropdown_item}>Новый Год</div>
+          header.current.textContent !== list[3].name ? (
+            <div className={s.dropdown_item}>{list[3].name}</div>
           ) : (
             ""
           )
@@ -111,8 +122,8 @@ export default function DropdownTematic() {
           ""
         )}
         {header.current ? (
-          header.current.textContent !== "В стиле СССР" ? (
-            <div className={s.dropdown_item}>В стиле СССР</div>
+          header.current.textContent !== list[4].name ? (
+            <div className={s.dropdown_item}>{list[4].name}</div>
           ) : (
             ""
           )
@@ -123,3 +134,5 @@ export default function DropdownTematic() {
     </div>
   );
 }
+
+export default React.memo(DropdownTematic)

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, {useRef, useState} from "react";
 import cs from "classnames";
 import {
   handlerDecrement,
@@ -8,6 +8,7 @@ import {
   onClickIncrement,
 } from "../../../utils/counterFunction";
 import s from "./CounterLight.module.scss";
+
 export default function CounterLight() {
   const [count, setCount] = useState(1);
   const timer = useRef();
@@ -39,7 +40,7 @@ export default function CounterLight() {
   };
 
   const handlerOnClickDecrement = () => {
-    onClickDecrement(count, setCount);
+    onClickDecrement(count, setCount, 1);
   };
 
   return (
@@ -49,7 +50,7 @@ export default function CounterLight() {
         onUp={handlerClearTimeout}
         onClick={handlerOnClickDecrement}
       />
-      <InputValue onChange={cb} initState={count} />
+      <InputValue onChange={cb} initState={count}/>
       <ButtonIncrement
         onIncrement={handlerAddValue}
         onUp={handlerClearTimeout}
@@ -59,7 +60,7 @@ export default function CounterLight() {
   );
 }
 
-const ButtonDecrement = ({ onDown, onUp, onClick }) => {
+const ButtonDecrement = ({onDown, onUp, onClick}) => {
   return (
     <button
       className={cs(s.button, s.decrement)}
@@ -87,7 +88,7 @@ const ButtonDecrement = ({ onDown, onUp, onClick }) => {
     </button>
   );
 };
-const ButtonIncrement = ({ onIncrement, onUp, onClick }) => {
+const ButtonIncrement = ({onIncrement, onUp, onClick}) => {
   return (
     <button
       onClick={onClick}
@@ -123,7 +124,7 @@ const ButtonIncrement = ({ onIncrement, onUp, onClick }) => {
   );
 };
 
-const InputValue = ({ onChange, initState }) => {
+const InputValue = ({onChange, initState}) => {
   const [counter, setCount] = useState(initState);
 
   const handlerChange = (e) => {

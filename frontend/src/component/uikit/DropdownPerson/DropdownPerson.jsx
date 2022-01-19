@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, {useRef, useState} from "react";
 import cs from "classnames";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import s from "./DropdownPerson.module.scss";
@@ -11,6 +11,7 @@ export default function DropdownPerson() {
   useOnClickOutside(ref, () => {
     setIsActive(false);
   });
+
 
   const handlerSelectItem = (e) => {
     const SelectItem = e.target.textContent;
@@ -26,6 +27,9 @@ export default function DropdownPerson() {
         } else {
           setIsActive(true);
         }
+      }}
+      onPointerLeave={() => {
+        setIsActive(false)
       }}
       className={isActive ? cs(s.dropdown, s.dropdown_active) : cs(s.dropdown)}
       ref={ref}
