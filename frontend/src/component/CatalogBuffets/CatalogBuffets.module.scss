@@ -44,7 +44,19 @@
 .dropdown_person {
   display: none;
   @include desktop {
+    display: flex;
+    align-items: center;
+    margin-right: 32px;
+  }
+}
+
+.text {
+  display: none;
+  @include desktop {
     display: block;
+    margin: 0 16px 0 0;
+    padding: 0;
+    @include body3-normal($text-secondary)
   }
 }
 
@@ -62,7 +74,6 @@
   margin-bottom: 24px;
   @include desktop {
     justify-content: flex-end;
-    margin-left: calc(280px + 24px);
   }
 }
 
@@ -116,5 +127,13 @@
   display: none;
   @include desktop {
     display: block;
+    margin-top: 60px;
   }
+}
+
+.interactive_block {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  width: 100vw;
 }

@@ -7,37 +7,64 @@ import FilterCatalog from "../FilterCatalog/FilterCatalog";
 import BlockCards from "../BlockCards/BlockCards";
 import ModalFilter from "../ModalFilter/ModalFilter";
 import ModalSort from "../ModalSort/ModalSort";
-import {sortAmountHelp, sortToDownHelp, sortToUpHelp, sortTypeHelp, thematicsHelp} from "./sort";
+import {peopleSortHelp, sortAmountHelp, sortToDownHelp, sortToUpHelp, sortTypeHelp, thematicsHelp} from "./sort";
 import DropdownTematic from "../uikit/DropdownTematic/DropdownTematic";
+import {useRouter} from "next/router";
 
-function CatalogBuffets({catalogData, catalogType, cards, thematics}) {
+function CatalogBuffets({catalogData, catalogType, cards, thematics, additionals}) {
+  const router = useRouter();
   // const [isOpened, setOpen] = useState(false)
   // const [isOpenedSort, setOpenSort] = useState(false);
   //amount input
-  const [start, setStart] = useState(130);
-  const [end, setEnd] = useState(30000);
+  const [start, setStart] = useState('');
+  const [end, setEnd] = useState('');
   //cards 
   const [stateCards, setStateCards] = useState(null);
   const [visibleCards, setVisibleCards] = useState(null);
   //type id 
-  const [typeId, setTypeId] = useState(1);
+  const [typeId, setTypeId] = useState(13);
   //сортировка по умолчанию или другое
   const [sortTypeName, setSortTypeName] = useState(''); // 0 - default, 1 - toUp, 2 - toDown
   //Тематика
   const [thematicID, setThematics] = useState(null)
+  //Люди
+  const [peopleNumber, setPeopleNumber] = useState(25);
 
-  const sortThematics = (id) => {
-    const res = thematicsHelp(stateCards, id);
-    setVisibleCards(res);
+
+  const checkTypePrice = () => {
+    if (sortTypeName === 'По умолчанию') {
+      sortDefault()
+    } else if (sortTypeName === 'По возрастанию') {
+      sortToUp()
+    } else if (sortTypeName === 'По убыванию') {
+      sortToDown()
+    }
+  }
+
+  const changeTypeReset = () => {
+    setStart('');
+    setEnd('');
+    if (stateCards) {
+      setThematics(null);
+      sortThematics(thematicID)
+    }
+    setSortTypeName(sortTypeName)
+    checkTypePrice();
+
   }
 
   const sortType = (id) => {
-    const data = sortTypeHelp(id, cards, setStateCards);
+    const data = sortTypeHelp(id, cards, additionals, setStateCards);
     setStateCards(data)
     setVisibleCards(data)
-    setStart(30000);
-    setEnd(30000);
   }
+
+  const sortThematics = (id) => {
+    const data = visibleCards.length === 0 ? stateCards : visibleCards;
+    const res = thematicsHelp(data, id);
+    setVisibleCards(res);
+  }
+
   const sortAmount = () => {
     if (+start > 0 && +end > 0) {
       const data = sortAmountHelp(start, end, stateCards);
@@ -48,25 +75,30 @@ function CatalogBuffets({catalogData, catalogType, cards, thematics}) {
     setVisibleCards(stateCards);
   }
   const sortToDown = () => {
-    const data = sortToDownHelp(visibleCards);
-    setVisibleCards(data);
-  }
-  const sortToUp = () => {
     const data = sortToUpHelp(visibleCards);
     setVisibleCards(data);
   }
-  const handlerReset = (id) => {
-    sortType(typeId);
+  const sortToUp = () => {
+    const data = sortToDownHelp(visibleCards);
+    setVisibleCards(data);
+  }
+
+  const sortPeople = () => {
+    let data = visibleCards.length === 0 ? stateCards : visibleCards;
+    const res = peopleSortHelp(data, peopleNumber);
+    setVisibleCards(res);
   }
 
 
+  const handlerReset = (id) => {
+    sortType(typeId);
+  }
   const handleOpenFilter = () => {
     setOpen(true);
   }
   const handleCloseFilter = () => {
     setOpen(false);
   }
-
   const handleOpenSort = () => {
     setOpenSort(true)
   }
@@ -75,32 +107,25 @@ function CatalogBuffets({catalogData, catalogType, cards, thematics}) {
   }
 
   useEffect(() => {
-    sortType(10);
-    if (thematicID === null) {
-      setVisibleCards(stateCards)
-    }
-  }, [])
+    sortType(typeId);
+    changeTypeReset();
+  }, [typeId])
 
   useEffect(() => {
-    if (sortTypeName === 'По умолчанию') {
-      sortDefault()
-    } else if (sortTypeName === 'По возрастанию') {
-      sortToUp()
-    } else if (sortTypeName === 'По убыванию') {
-      sortToDown()
-    }
+    sortAmount();
+  }, [start, end])
+
+  useEffect(() => {
+    checkTypePrice();
   }, [sortTypeName]);
 
   useEffect(() => {
-
-    if (thematicID !== null) {
-      console.log('!= null')
-      stateCards && sortThematics(thematicID);
-    } else {
-      console.log("= null")
-      setVisibleCards(stateCards);
-    }
+    stateCards && sortThematics(thematicID);
   }, [thematicID])
+
+  useEffect(() => {
+    stateCards && sortPeople();
+  }, [peopleNumber])
 
 
   return (
@@ -109,9 +134,6 @@ function CatalogBuffets({catalogData, catalogType, cards, thematics}) {
       <h2 className={s.head}>{catalogData.name}</h2>
       <div className={s.content}>
         <div className={s.row_buttons}>
-          <div className={s.dropdown_thematic}>< DropdownTematic setThematics={setThematics} list={thematics}/></div>
-          <div className={s.dropdown_person}><DropdownPerson/></div>
-          <div className={s.dropdown_amount}><Dropdown setSortTypeName={setSortTypeName}/></div>
           <button onClick={handleOpenFilter} className={s.filter_btn}>
             <LazyImageWrapper
               src={'/uikit/catalog/icon_filter.svg'}
@@ -134,14 +156,39 @@ function CatalogBuffets({catalogData, catalogType, cards, thematics}) {
             <FilterCatalog types={catalogType}
                            setStart={setStart}
                            setEnd={setEnd}
+                           start={start}
+                           end={end}
                            sortAmount={sortAmount}
                            typeId={typeId}
                            setTypeId={setTypeId}
                            sortType={sortType}
                            handlerReset={handlerReset}
+                           additionals={additionals}
             />
           </div>
-          <BlockCards cards={visibleCards}/>
+          <div className={s.interactive_block}>
+            <div className={s.row_buttons}>
+              <div className={s.dropdown_thematic}>
+                <DropdownTematic
+                  thematicID={thematicID}
+                  setThematics={setThematics}
+                  list={thematics}/>
+              </div>
+              {(router.asPath.slice(2) === 'furshetnye-nabory' || typeId === 13) && (<div className={s.dropdown_person}>
+                <p className={s.text}>
+                  Кол-во, чел
+                </p>
+                <DropdownPerson setPeopleNumber={setPeopleNumber}/></div>)}
+              <div className={s.dropdown_amount}>
+                <Dropdown
+                  sortTypeName={sortTypeName}
+                  setSortTypeName={setSortTypeName}
+                />
+              </div>
+            </div>
+            <BlockCards cards={visibleCards}/>
+            {/*  pagination*/}
+          </div>
         </div>
         {/*{isOpened &&*/}
         {/*  <ModalFilter sortType={sortType}*/}

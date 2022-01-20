@@ -1,5 +1,5 @@
 //Сортируем по типу категории
-export const sortTypeHelp = (id, allCards, setCards) => {
+export const sortTypeHelp = (id, allCards, additionalList, setCards) => {
   let data = [];
   const newCards = allCards.map((item) => {
     item.type.map((itemType) => {
@@ -8,9 +8,16 @@ export const sortTypeHelp = (id, allCards, setCards) => {
       }
     })
   });
+  const Additionals = additionalList.map((item) => {
+    if (id === item.name) {
+      item.data.map((itemI) => {
+        data.push(itemI.attributes)
+      })
+    }
+  });
   return data;
 }
-
+//Сортировка по заданной цене
 export const sortAmountHelp = (start, end, visibleCards, setVisibleCards) => {
   let data = [];
   const newCards = visibleCards.map((item) => {
@@ -20,7 +27,7 @@ export const sortAmountHelp = (start, end, visibleCards, setVisibleCards) => {
   })
   return data;
 }
-
+//Сортировка убыванию 
 export const sortToDownHelp = (visibleCards, setVisibleCards) => {
   let data = [];
 
@@ -30,7 +37,7 @@ export const sortToDownHelp = (visibleCards, setVisibleCards) => {
   })
   return newCards;
 }
-
+//Сортировка по возрастанию
 export const sortToUpHelp = (visibleCards) => {
   let data = [];
   const newCards = visibleCards.slice();
@@ -39,16 +46,30 @@ export const sortToUpHelp = (visibleCards) => {
   })
   return newCards;
 }
-
-export const thematicsHelp = (visibleCards, currentId) => {
+//Сортировка по тематике
+export const thematicsHelp = (stateCards, currentId) => {
   let data = [];
-  const newCards = visibleCards.map((item) => {
-    item.tematic.map((itemType) => {
-      if (itemType.id === currentId) {
-        console.log(item)
-        data.push(item);
-      }
-    })
+  stateCards.map((item) => {
+    if (currentId === undefined || currentId === null) {
+      data.push(item)
+    } else if (item.tematic) {
+      item.tematic.map((itemType) => {
+        if (itemType.id === currentId) {
+          data.push(item);
+        }
+      })
+    }
   });
+  return data;
+}
+
+//Сортировка по кол-ву людей
+export const peopleSortHelp = (stateCards, peopleNumber) => {
+  let data = [];
+  stateCards.map((item) => {
+    if (item.params.peopleNumber && item.params.peopleNumber <= Number(peopleNumber)) {
+      data.push(item);
+    }
+  })
   return data;
 }

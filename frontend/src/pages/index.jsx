@@ -26,15 +26,12 @@ import CatalogBuffets from "../component/CatalogBuffets/CatalogBuffets";
 
 export default function Home({
                                allBufets,
-                               allMasterClass,
-                               allGastroStation,
-                               allExitBars,
-                               barCounter,
-                               preview,
                                index,
                                catalogType,
                                thematics,
+                               additionalsData,
                              }) {
+  console.log(additionalsData)
   return (
     <>
       <Head>
@@ -72,8 +69,12 @@ export default function Home({
         />
         <CompleteFushetSection/>
         {/*<CatalogBlock catalogData={index.catalogBlock} catalogType={catalogType} cards={allBufets}/>*/}
-        <CatalogBuffets catalogData={index.catalogBlock} catalogType={catalogType} cards={allBufets}
-                        thematics={thematics}/>
+        <CatalogBuffets
+          catalogData={index.catalogBlock}
+          catalogType={catalogType}
+          cards={allBufets}
+          additionals={additionalsData}
+          thematics={thematics}/>
         <MasterClassInfo/>
         {/* <BufetsInfoSection /> */}
         <BarInfoSection/>
@@ -87,23 +88,38 @@ export default function Home({
 
 export async function getStaticProps({preview = null}) {
   const allBufets = (await getBuffets(preview)) || [];
-  // const allMasterClass = await getMasterClass();
-  // const allGastroStation = await getGastroStation();
-  // const allExitBars = await getExitBars();
-  // const barCounter = await getBarCounter();
   const indexPage = await getIndexPage();
   const catalogType = await axios('http://localhost:3000/api/getTypeBufets');
   const catalogThematics = await axios('http://localhost:3000/api/getThematicsData')
+  const furniture = await axios('http://localhost:3000/api/getMebel');
+  const decor = await axios('http://localhost:3000/api/getDecorData');
+  const staf = await axios('http://localhost:3000/api/getStafData');
+  const disinfection = await axios('http://localhost:3000/api/getDisinfectionData');
+  const additionalsData = [
+    {
+      name: 'Мебель',
+      data: furniture.data.data
+    },
+    {
+      name: 'Декор',
+      data: decor.data.data
+    },
+    {
+      name: 'Персонал',
+      data: staf.data.data
+    },
+    {
+      name: 'Дезинфекция',
+      data: disinfection.data.data
+    },
+  ];
   return {
     props: {
       index: indexPage,
       catalogType: catalogType.data.data,
       thematics: catalogThematics.data.data,
-      // barCounter: JSON.parse(barCounter),
       allBufets: JSON.parse(allBufets),
-      // allExitBars: JSON.parse(allExitBars),
-      // allGastroStation: JSON.parse(allGastroStation),
-      // allMasterClass: JSON.parse(allMasterClass),
+      additionalsData: additionalsData,
       preview,
     },
   };

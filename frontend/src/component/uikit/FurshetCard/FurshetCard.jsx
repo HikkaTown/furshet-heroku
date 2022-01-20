@@ -75,7 +75,7 @@ export default function FurshetCard({data, className}) {
       >
         <h3 className={s.name}>{data.name}</h3>
         <p className={s.params}>
-          <span className={s.select}>{data.params.peopleNumber} чел</span>/
+          {data.params.peopleNumber && <span className={s.select}>{data.params.peopleNumber} чел/</span>}
           {data.params.CountNumber} шт/{data.params.countVesInGramm} гр
         </p>
         <div className={s.pay}>

@@ -1,9 +1,9 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import cs from "classnames";
 import s from "./DropdownTematic.module.scss";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 
-function DropdownTematic({list, setThematics}) {
+function DropdownTematic({list, setThematics, thematicID}) {
   const [isActive, setIsActive] = useState(false);
   const ref = useRef(null);
   const header = useRef(null);
@@ -13,8 +13,9 @@ function DropdownTematic({list, setThematics}) {
   });
 
   const handlerSelectItem = (e) => {
-    if (e.target.textContent === "Без тематикик") {
+    if (e.target.textContent === "Без тематики") {
       const SelectItem = "Тематика";
+      e.target.textContent = SelectItem;
       header.current.textContent = SelectItem;
       setThematics(null);
     }
@@ -29,6 +30,14 @@ function DropdownTematic({list, setThematics}) {
     })
     setThematics(res)
   };
+
+  useEffect(() => {
+    if (thematicID === null) {
+      header.current.textContent = 'Тематика'
+      setThematics(null);
+    }
+    ;
+  }, [thematicID])
 
   return (
     <div

@@ -3,7 +3,7 @@ import cs from "classnames";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import s from "./DropdownPerson.module.scss";
 
-export default function DropdownPerson() {
+export default function DropdownPerson({setPeopleNumber}) {
   const [isActive, setIsActive] = useState(false);
   const ref = useRef(null);
   const header = useRef(null);
@@ -14,8 +14,10 @@ export default function DropdownPerson() {
 
 
   const handlerSelectItem = (e) => {
+    const regExp = /-?\d+(\.\d+)?/g;
     const SelectItem = e.target.textContent;
     header.current.textContent = SelectItem;
+    setPeopleNumber(+(header.current.textContent.match(regExp)));
   };
 
   return (
