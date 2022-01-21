@@ -6,7 +6,7 @@ import ItemCard from "../uikit/ItemCard/ItemCard";
 function BlockCards({cards}) {
   return (
     <div className={s.content}>
-      {cards && cards.map((item) => {
+      {cards && cards.length > 0 ? cards.map((item) => {
         console.log(item)
         if (typeof item.params === 'object') {
           return (<FurshetCard className={s.card} key={item.id} data={item}/>)
@@ -14,7 +14,7 @@ function BlockCards({cards}) {
           return <ItemCard className={s.card} key={item.id} data={item}/>
         }
 
-      })}
+      }) : 'Ничего нет'}
     </div>
   );
 }

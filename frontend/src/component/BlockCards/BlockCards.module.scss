@@ -34,6 +34,7 @@
   @include desktop {
     margin: 0;
     margin-left: 24px;
+    margin-bottom: 24px;
     &:nth-child(4n+4) {
       margin-left: 0;
     }

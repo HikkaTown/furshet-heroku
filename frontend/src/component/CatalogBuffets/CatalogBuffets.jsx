@@ -10,6 +10,7 @@ import ModalSort from "../ModalSort/ModalSort";
 import {peopleSortHelp, sortAmountHelp, sortToDownHelp, sortToUpHelp, sortTypeHelp, thematicsHelp} from "./sort";
 import DropdownTematic from "../uikit/DropdownTematic/DropdownTematic";
 import {useRouter} from "next/router";
+import qs from "qs";
 
 function CatalogBuffets({catalogData, catalogType, cards, thematics, additionals}) {
   const router = useRouter();
@@ -31,6 +32,39 @@ function CatalogBuffets({catalogData, catalogType, cards, thematics, additionals
   const [peopleNumber, setPeopleNumber] = useState(25);
 
 
+  // const newCards = cards.filter(cardFilter);
+  //
+  const cardFilter = (card) => {
+    // const isCurrentCategory = card.type.includes() typeId
+  }
+
+  console.log(qs.stringify({
+    filters: {
+      buffets_types: {
+        id: {
+          $eq: 13,
+        }
+      },
+      tematics: {
+        id: {
+          $eq: 2
+        }
+      },
+      price: {
+        $gte: '4000',
+        $lte: '40000',
+      },
+      paramsBlock: {
+        peopleNumber: {
+          $lte: 10
+        }
+      },
+    },
+    // sort: ['price'],
+    populate: '*',
+  }, {
+    encodeValuesOnly: true,
+  }))
   const checkTypePrice = () => {
     if (sortTypeName === 'По умолчанию') {
       sortDefault()
@@ -38,6 +72,29 @@ function CatalogBuffets({catalogData, catalogType, cards, thematics, additionals
       sortToUp()
     } else if (sortTypeName === 'По убыванию') {
       sortToDown()
+    }
+  }
+
+
+  const startSorting = () => {
+    let result = []
+    if (checkCategory) {
+      let data = sortType(typeId);
+      setVisibleCards(data);
+    }
+    if (checkThematick) {
+      let data = sortThematics(thematicID);
+      setVisibleCards(data);
+    }
+    if (checkPrice) {
+      let data = sortAmountHelp(+start, +end, visibleCards);
+      setVisibleCards(data);
+    }
+    if (checkSelectAmount) {
+      checkTypePrice();
+    }
+    if (checkPeople) {
+      peopleSortHelp();
     }
   }
 
@@ -84,8 +141,7 @@ function CatalogBuffets({catalogData, catalogType, cards, thematics, additionals
   }
 
   const sortPeople = () => {
-    let data = visibleCards.length === 0 ? stateCards : visibleCards;
-    const res = peopleSortHelp(data, peopleNumber);
+    const res = peopleSortHelp(visibleCards, peopleNumber);
     setVisibleCards(res);
   }
 
