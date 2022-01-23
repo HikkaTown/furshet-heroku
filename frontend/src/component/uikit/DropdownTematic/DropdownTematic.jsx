@@ -1,9 +1,9 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import cs from "classnames";
 import s from "./DropdownTematic.module.scss";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 
-function DropdownTematic({list, setThematics, thematicID}) {
+function DropdownTematic({ list, setThematics, thematicID }) {
   const [isActive, setIsActive] = useState(false);
   const ref = useRef(null);
   const header = useRef(null);
@@ -27,17 +27,16 @@ function DropdownTematic({list, setThematics, thematicID}) {
       if (item.name === SelectItem) {
         res = item.id;
       }
-    })
-    setThematics(res)
+    });
+    setThematics(res);
   };
 
   useEffect(() => {
     if (thematicID === null) {
-      header.current.textContent = 'Тематика'
+      header.current.textContent = "Тематика";
       setThematics(null);
     }
-    ;
-  }, [thematicID])
+  }, [thematicID]);
 
   return (
     <div
@@ -50,7 +49,7 @@ function DropdownTematic({list, setThematics, thematicID}) {
         }
       }}
       onPointerLeave={() => {
-        setIsActive(false)
+        setIsActive(false);
       }}
       className={isActive ? cs(s.dropdown, s.dropdown_active) : cs(s.dropdown)}
       ref={ref}
@@ -144,4 +143,4 @@ function DropdownTematic({list, setThematics, thematicID}) {
   );
 }
 
-export default React.memo(DropdownTematic)
+export default DropdownTematic;
