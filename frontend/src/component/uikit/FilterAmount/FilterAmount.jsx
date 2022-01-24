@@ -54,10 +54,10 @@ export default function FilterAmount({setStart, setEnd, start, end, min, max, ch
   //   }
   // }, []);
 
-  useEffect(() => {
-    setMaxInput(max);
-    setMinInput(min);
-  }, [max, min])
+  // useEffect(() => {
+  //   setMaxInput(max);
+  //   setMinInput(min);
+  // }, [max, min])
 
   return (
     <div className={s.container}>
