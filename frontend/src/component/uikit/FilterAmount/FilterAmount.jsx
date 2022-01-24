@@ -1,44 +1,79 @@
-import React from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import s from "./FilterAmount.module.scss";
+import debounce from "../../../utils/debounce";
+import throttle from "../../../utils/throttle";
+import spaceDigits from "../../../utils/converterNumber";
 
-export default function FilterAmount({setStart, setEnd, start, end, sortAmount}) {
+export default function FilterAmount({setStart, setEnd, start, end, min, max, changeAmount, sortAmount}) {
+  const [minInput, setMinInput] = useState(min === null ? '' : min);
+  const [maxInput, setMaxInput] = useState(max === null ? '' : max);
 
-  const handlerFind = (e) => {
-    if (e.target.code === 'Enter') {
-      sortAmount();
-    }
+  // const onChangeHandlerMin = useCallback(() => {
+  //   return (e) => {
+  //     setMinInput(e.target.value);
+  //     changeAmount(minInput, maxInput);
+  //     return throttle((e) => {
+  //       if (Number(e.target.value) < 0) {
+  //         setStart(0)
+  //         setEnd(minInput.current.value)
+  //       } else if (Number(e.target.value) > max) {
+  //         setStart(Number(e.target.value))
+  //         setEnd(minInput.current.value)
+  //       } else {
+  //         setStart(Number(e.target.value))
+  //         setEnd(minInput.current.value)
+  //         changeAmount(minInput, maxInput)
+  //       }
+  //     }, 500);
+  //   }
+  // }, []);
+  const onChangeHandlerMin = (e) => {
+    setMinInput(Number(e.target.value));
+    setStart(Number(e.target.value))
   }
+
+  const onChangeHandlerMax = (e) => {
+    setMaxInput(Number(e.target.value))
+    setEnd(Number(e.target.value))
+  }
+
+  // const onChangeHandlerMax = useCallback(() => {
+  //   return (e) => {
+  //     setMaxInput(e.target.value);
+  //     changeAmount(minInput, maxInput)
+  //     return throttle((e) => {
+  //       if (Number(e.target.value) < 0) {
+  //         setStart(maxInput.current.value)
+  //         setEnd(max)
+  //       } else {
+  //         setStart(maxInput.current.value)
+  //         setEnd(Number(e.target.value))
+  //         changeAmount(minInput, maxInput)
+  //       }
+  //     }, 500);
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    setMaxInput(max);
+    setMinInput(min);
+  }, [max, min])
 
   return (
     <div className={s.container}>
       <p className={s.head}>Цена, ₽</p>
-      <div onKeyDown={handlerFind} className={s.wrapper}>
-        <input type="number" value={start} onBlur={(e) => {
-          if (+e.target.value < 130) {
-            e.target.value = '130';
-            setStart(130)
-          } else if (+e.target.value > 30000) {
-            e.target.value = '30000';
-            setStart(30000)
-          }
-        }} placeholder="от 130" onChange={(e) => {
-          let value = e.target.value;
-          setStart(+value)
-        }} className={s.amount}/>
-        <input type="number" value={end} placeholder="до 30 000" className={s.amount}
-               onBlur={(e) => {
-                 if (+e.target.value > 30000) {
-                   e.target.value = '30000';
-                   setEnd(30000)
-                 } else if (+e.target.value <= 0) {
-                   e.target.value = '30000';
-                   setEnd(30000);
-                 }
-               }}
-               onChange={(e) => {
-                 let value = e.target.value;
-                 setEnd(+value)
-               }}/>
+      <div className={s.wrapper}>
+        <input type="number" name='min'
+               placeholder={`от ${min && spaceDigits(min)}`}
+               onChange={onChangeHandlerMin}
+               value={minInput}
+               className={s.amount}/>
+        <input type="number" name='max'
+               value={maxInput}
+               placeholder={`до ${max && spaceDigits(max)}`}
+               className={s.amount}
+               onChange={onChangeHandlerMax}
+        />
       </div>
     </div>
   );

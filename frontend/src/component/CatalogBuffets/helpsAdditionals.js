@@ -1,30 +1,25 @@
 import axios from "axios";
 
-const checkTypeId = (typeId) => {
-  var response;
-  if (typeId === "Мебель") {
-    let obj = fetch("http://localhost:3000/api/getMebel")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-      });
-  } else if (typeId === "Персонал") {
-    axios("http://localhost:3000/api/getStafData").then((res) => {
-      response = res.data;
-    });
-  } else if (typeId === "Декор") {
-    axios("http://localhost:3000/api/getDecorData").then((res) => {
-      response = res.data;
-    });
-  } else if (typeId === "Дезинфекция") {
-    axios("http://localhost:3000/api/getDisinfectionData").then((res) => {
-      response = res.data;
-    });
+const checkTypeId = async (typeId, start, end) => {
+  let res;
+  if (typeId === "Мебель" || typeId === "mebel") {
+    const data = await axios(`http://localhost:3000/api/getMebel?start=${start}&end=${end}`);
+    const result = await data.data;
+    res = result;
+  } else if (typeId === "Персонал" || typeId === "personal") {
+    const data = await axios(`http://localhost:3000/api/getStafData?start=${start}&end=${end}`)
+    const result = await data.data;
+    res = result;
+  } else if (typeId === "Декор" || typeId === "decor") {
+    const data = await axios(`http://localhost:3000/api/getDecorData?start=${start}&end=${end}`)
+    const result = await data.data;
+    res = result;
+  } else if (typeId === "Дезинфекция" || typeId === 'dezinfekciya') {
+    const data = await axios(`http://localhost:3000/api/getDisinfectionData?start=${start}&end=${end}`);
+    const result = await data.data;
+    res = result;
   }
-
-  return response;
+  return res;
 };
 
 export default checkTypeId;

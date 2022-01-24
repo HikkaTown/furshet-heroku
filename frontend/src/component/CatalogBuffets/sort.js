@@ -20,7 +20,7 @@ export const sortTypeHelp = (id, allCards, additionalList, setCards) => {
 //Сортировка по заданной цене
 export const sortAmountHelp = (start, end, visibleCards, setVisibleCards) => {
   let data = [];
-  const newCards = visibleCards.map((item) => {
+  visibleCards.map((item) => {
     if (+item.price >= start && +item.price <= end) {
       data.push(item)
     }
@@ -28,10 +28,8 @@ export const sortAmountHelp = (start, end, visibleCards, setVisibleCards) => {
   return data;
 }
 //Сортировка убыванию 
-export const sortToDownHelp = (visibleCards, setVisibleCards) => {
-  let data = [];
-
-  const newCards = visibleCards.slice();
+export const sortToDownHelp = (visibleCards) => {
+  const newCards = [...visibleCards]
   newCards.sort((cardOne, cardSecond) => {
     return Number(cardOne.price) - Number(cardSecond.price)
   })
@@ -39,8 +37,7 @@ export const sortToDownHelp = (visibleCards, setVisibleCards) => {
 }
 //Сортировка по возрастанию
 export const sortToUpHelp = (visibleCards) => {
-  let data = [];
-  const newCards = visibleCards.slice();
+  const newCards = [...visibleCards];
   newCards.sort((cardOne, cardSecond) => {
     return Number(cardSecond.price) - Number(cardOne.price)
   })

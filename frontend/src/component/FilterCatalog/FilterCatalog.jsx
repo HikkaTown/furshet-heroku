@@ -1,27 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import cs from "classnames";
 import s from "./FilterCatalog.module.scss";
 import FilterAmount from "../uikit/FilterAmount/FilterAmount";
 import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
 import CatalogTabButton from "../uikit/CatalogTabButton/CatalogTabButton";
 import ConfirmFilter from "../uikit/ConfirmFilter/ConfirmFilter";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 import translit from "../../utils/translit";
 
 function FilterCatalog({
-  types,
-  catalogData,
-  start,
-  end,
-  typeId,
-  setTypeId,
-  handlerReset,
-  sortAmount,
-  onClose,
-  setStart,
-  setEnd,
-  additionals,
-}) {
+                         types,
+                         catalogData,
+                         start,
+                         end,
+                         typeId,
+                         setTypeId,
+                         handlerReset,
+                         sortAmount,
+                         onClose,
+                         setStart,
+                         setEnd,
+                         additionals,
+                         min,
+                         changeAmount,
+                         max,
+                         //-----
+                         handlerAdditionals,
+                         handlerClickType
+                       }) {
   const router = useRouter();
   const [path, setPath] = useState("");
   const handleActiveCategory = (e) => {
@@ -38,20 +44,20 @@ function FilterCatalog({
       setPath(router.asPath.slice(2));
       let data;
       types &&
-        types.map((item) => {
-          const text = translit(item.attributes.nameType);
-          if (text === router.asPath.slice(2)) {
-            data = item.id;
-          }
-        });
+      types.map((item) => {
+        const text = translit(item.attributes.nameType);
+        if (text === router.asPath.slice(2)) {
+          data = item.id;
+        }
+      });
       types &&
-        additionals.map((item) => {
-          const text = translit(item.name);
-          if (text === router.asPath.slice(2)) {
-            data = translit(item.name);
-          }
-        });
-      setTypeId(data);
+      additionals.map((item) => {
+        const text = translit(item.name);
+        if (text === router.asPath.slice(2)) {
+          data = translit(item.name);
+        }
+      });
+      // setTypeId(data);
     }
   }, [router]);
 
@@ -70,30 +76,34 @@ function FilterCatalog({
         </div>
         <div className={s.row}>
           <FilterAmount
+            min={min}
+            max={max}
             start={start}
             end={end}
             sortAmount={sortAmount}
             setStart={setStart}
             setEnd={setEnd}
+            changeAmount={changeAmount}
           />
         </div>
         <div className={s.row}>
           {!!types &&
             types.map((item, index) => {
-              const { attributes, id } = item;
-              const { buffets, nameType } = attributes;
+              const {attributes, id} = item;
+              const {buffets, nameType} = attributes;
               if (path && path === translit(nameType)) {
                 const catalog = document.querySelector("#catalog");
-                catalog.scrollIntoView({ block: "start", behavior: "smooth" });
-                // setTypeId(id);
+                catalog.scrollIntoView({block: "start", behavior: "smooth"});
+                setTypeId(id);
               }
               return (
                 <button
                   key={id}
                   onClick={(e) => {
                     handleActiveCategory(e);
-                    setTypeId(id);
+                    // setTypeId(id);
                     router.push(`#${translit(nameType)}`);
+                    handlerClickType(id)
                   }}
                   className={cs(s.button, typeId === id && s.button_active)}
                 >
@@ -130,7 +140,7 @@ function FilterCatalog({
             additionals.map((item) => {
               if (path && path === translit(item.name)) {
                 const catalog = document.querySelector("#catalog");
-                catalog.scrollIntoView({ block: "start", behavior: "smooth" });
+                catalog.scrollIntoView({block: "start", behavior: "smooth"});
                 // setTypeId(item.name);
               }
               return (
@@ -138,7 +148,7 @@ function FilterCatalog({
                   key={item.name + "dsds"}
                   onClick={(e) => {
                     handleActiveCategory(e);
-                    setTypeId(item.name);
+                    handlerAdditionals(item.name);
                     router.push(`#${translit(item.name)}`);
                   }}
                   className={cs(

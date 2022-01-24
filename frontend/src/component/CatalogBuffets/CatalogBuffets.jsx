@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import s from "./CatalogBuffets.module.scss";
 import DropdownPerson from "../uikit/DropdownPerson/DropdownPerson";
 import Dropdown from "../uikit/Dropdown/Dropdown";
-import { LazyImageWrapper } from "../LazyImage";
+import {LazyImageWrapper} from "../LazyImage";
 import FilterCatalog from "../FilterCatalog/FilterCatalog";
 import BlockCards from "../BlockCards/BlockCards";
 import ModalFilter from "../ModalFilter/ModalFilter";
@@ -16,37 +16,45 @@ import {
   thematicsHelp,
 } from "./sort";
 import DropdownTematic from "../uikit/DropdownTematic/DropdownTematic";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 import qs from "qs";
 import axios from "axios";
 import checkTypeId from "./helpsAdditionals";
+import debounce from "../../utils/debounce";
+import filterApiBuffets from "../../utils/api/filterApiBuffets";
+import sortAmount from "../../utils/sortAmount";
+import translit from "../../utils/translit";
 
 function CatalogBuffets({
-  catalogData,
-  catalogType,
-  cards,
-  thematics,
-  additionals,
-}) {
+                          catalogData,
+                          catalogType,
+                          thematics,
+                          cards,
+                          additionals,
+                        }) {
   const router = useRouter();
   // const [isOpened, setOpen] = useState(false)
   // const [isOpenedSort, setOpenSort] = useState(false);
-  //amount input
-  const [start, setStart] = useState(0);
-  const [end, setEnd] = useState(30000);
-  //cards
-  const [stateCards, setStateCards] = useState(null);
-  const [visibleCards, setVisibleCards] = useState(null);
-  //type id
-  const [typeId, setTypeId] = useState(13);
-  //сортировка по умолчанию или другое
-  const [sortTypeName, setSortTypeName] = useState(""); // 0 - default, 1 - toUp, 2 - toDown
+  //миимальная и максимальная стоимость карточки
+  const [min, setMin] = useState(null)
+  const [max, setMax] = useState(null)
+  //Значение из input
+  const [start, setStart] = useState(null);
+  const [end, setEnd] = useState(null);
+
+
+  //------------------------
+  const [filteredCards, setFilteredCards] = useState(null);
   //Тематика
   const [thematicID, setThematics] = useState(null);
+  const [typeId, setTypeId] = useState(catalogType[0].id);
   //Люди
   const [visiblePeople, setVisiblePeople] = useState(false);
   const [peopleNumber, setPeopleNumber] = useState(25);
+  //сортировка по умолчанию или другое
+  const [sortTypeName, setSortTypeName] = useState("");
 
+  //Сортировка вверх вниз
   const checkTypePrice = () => {
     if (sortTypeName === "По умолчанию") {
       sortDefault();
@@ -56,24 +64,18 @@ function CatalogBuffets({
       sortToDown();
     }
   };
-
   const sortDefault = () => {
-    setVisibleCards(visibleCards);
+    setFilteredCards(filteredCards);
   };
   const sortToDown = () => {
-    const data = sortToUpHelp(visibleCards);
-    setVisibleCards(data);
+    const data = sortToUpHelp(filteredCards);
+    setFilteredCards(data);
   };
   const sortToUp = () => {
-    const data = sortToDownHelp(visibleCards);
-    setVisibleCards(data);
+    const data = sortToDownHelp(filteredCards);
+    setFilteredCards(data);
   };
-
-  // const sortPeople = () => {
-  //   const res = peopleSortHelp(visibleCards, peopleNumber);
-  //   setVisibleCards(res);
-  // };
-
+  //работа с модальным окном
   const handlerReset = (id) => {
     sortType(typeId);
   };
@@ -90,34 +92,82 @@ function CatalogBuffets({
     setOpenSort(false);
   };
 
-  useEffect(() => {
-    let visibility =
-      router.asPath.slice(2) === "furshetnye-nabory" && typeId === 13
-        ? true
-        : false;
-    if (router.asPath.slice(2) === "furshetnye-nabory" && typeId === 13) {
-      setVisiblePeople(true);
-    } else {
-      setVisiblePeople(false);
-    }
-    if (typeof typeId === "number") {
-      axios(
-        `http://localhost:3000/api/filterBuffets?typeId=${typeId}&thematicID=${thematicID}&start=${start}&end=${end}&peopleNumber=${
-          !!visibility ? peopleNumber : visibility
-        }`
-      ).then((res) => {
-        setVisibleCards(res.data);
-      });
-    } else {
-      let data = checkTypeId(typeId);
-      console.log(data);
-      setVisibleCards(data);
-    }
-  }, [typeId, thematicID, start, end, peopleNumber]);
+  const setVisualAmount = (data) => {
+    const minMax = data && sortAmount(data);
+    data && setMin(minMax[0]);
+    data && setMax(minMax[1]);
+  }
 
   useEffect(() => {
     checkTypePrice();
   }, [sortTypeName]);
+
+  // -------------------
+
+  const handlerClickType = async (id) => {
+    setTypeId(id);
+    let data = null;
+    if (id === 13) {
+      data = await filterApiBuffets(id, thematicID, null, null, true, 25);
+      setVisiblePeople(true);
+    } else {
+      data = await filterApiBuffets(id, thematicID, null, null, false, 25);
+      setVisiblePeople(false)
+    }
+    setFilteredCards(data);
+  }
+
+  const changeThematics = async (id) => {
+    setThematics(id)
+    let data = null;
+    if (id === 13) {
+      data = await filterApiBuffets(typeId, id, null, null, true, 25);
+      setVisiblePeople(true)
+    } else {
+      data = await filterApiBuffets(typeId, id, null, null, false, 25);
+      setVisiblePeople(false)
+    }
+    setFilteredCards(data)
+    setVisualAmount(data);
+  }
+
+  const changeAmount = async (startAmount, endAmount) => {
+    console.log(startAmount, endAmount)
+    let data = null;
+    if (typeId === 13) {
+      data = await filterApiBuffets(typeId, thematicID, +startAmount, +endAmount, true, 25);
+      setVisiblePeople(true)
+    } else {
+      data = await filterApiBuffets(typeId, thematicID, +startAmount, +endAmount, false, 25);
+      setVisiblePeople(false)
+    }
+    setFilteredCards(data)
+    setVisualAmount(data);
+  }
+
+  const handlerAdditionals = async (id) => {
+    setTypeId(translit(id));
+    let data = await checkTypeId(id, null, null);
+    setFilteredCards(data);
+    // setVisualAmount(data);
+  }
+
+  useEffect(async () => {
+    await changeAmount(start, end);
+  }, [start, end])
+
+  useEffect(async () => {
+    console.log(typeId)
+
+
+    const data = await filterApiBuffets(catalogType[0].id, null, null, null, true, 25);
+    setVisiblePeople(true)
+    setFilteredCards(data);
+    setVisualAmount(data);
+  }, [])
+
+
+  //-------------------
 
   return (
     <section className={s.section}>
@@ -147,32 +197,39 @@ function CatalogBuffets({
         <div className={s.catalog_content}>
           <div className={s.filter_catalog}>
             <FilterCatalog
+              setCards={setFilteredCards}
               types={catalogType}
               setStart={setStart}
               setEnd={setEnd}
+              min={min}
+              max={max}
               start={start}
               end={end}
-              // sortAmount={sortAmount}
               typeId={typeId}
               setTypeId={setTypeId}
-              // sortType={sortType}
               handlerReset={handlerReset}
               additionals={additionals}
+              changeAmount={changeAmount}
+              // ---
+              handlerAdditionals={handlerAdditionals}
+              handlerClickType={handlerClickType}
             />
           </div>
           <div className={s.interactive_block}>
             <div className={s.row_buttons}>
-              <div className={s.dropdown_thematic}>
-                <DropdownTematic
-                  thematicID={thematicID}
-                  setThematics={setThematics}
-                  list={thematics}
-                />
-              </div>
+              {typeof typeId === 'number' && (
+                <div className={s.dropdown_thematic}>
+                  <DropdownTematic
+                    thematicID={thematicID}
+                    setThematics={changeThematics}
+                    list={thematics}
+                  />
+                </div>
+              )}
               {visiblePeople && (
                 <div className={s.dropdown_person}>
                   <p className={s.text}>Кол-во, чел</p>
-                  <DropdownPerson setPeopleNumber={setPeopleNumber} />
+                  <DropdownPerson setPeopleNumber={setPeopleNumber}/>
                 </div>
               )}
               <div className={s.dropdown_amount}>
@@ -182,7 +239,7 @@ function CatalogBuffets({
                 />
               </div>
             </div>
-            <BlockCards cards={visibleCards} />
+            <BlockCards cards={filteredCards || cards}/>
             {/*  pagination*/}
           </div>
         </div>

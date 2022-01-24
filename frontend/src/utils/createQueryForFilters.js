@@ -1,4 +1,5 @@
 import qs from "qs";
+
 const createQueryForFilters = async (
   typeId,
   thematicID,
@@ -27,7 +28,7 @@ const createQueryForFilters = async (
       },
     };
   }
-  if (start && end) {
+  if (start !== 'null' && end !== 'null') {
     object.filters.price = {
       $gte: start,
       $lte: end,
