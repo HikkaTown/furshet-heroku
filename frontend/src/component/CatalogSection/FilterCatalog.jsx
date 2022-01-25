@@ -21,13 +21,16 @@ function FilterCatalog({
                          additionals,
                          min,
                          max,
+                         catalogData,
                          //-----
                          handlerAdditionals,
                          handlerClickType,
                          thematicID,
                          setThematics,
+                         length,
                        }) {
   const router = useRouter();
+  console.log(types)
   const [path, setPath] = useState("");
   const handleActiveCategory = (e) => {
     e.preventDefault();
@@ -46,7 +49,7 @@ function FilterCatalog({
       let data;
       types &&
       types.map((item) => {
-        const text = translit(item.attributes.nameType);
+        const text = translit(item.attributes.name_type);
         if (text === router.asPath.slice(2)) {
           data = item.id;
         }
@@ -61,7 +64,6 @@ function FilterCatalog({
       setTypeId(data);
     }
   }, [router]);
-
   return (
     <div className={s.block}>
       <button onClick={onClose} className={s.close}>
@@ -99,29 +101,35 @@ function FilterCatalog({
           })}
         </div>}
         <div className={s.row}>
+          <p>{catalogData.position} <span>{length}</span></p>
           {!!types &&
             types.map((item, index) => {
               const {attributes, id} = item;
-              const {buffets, nameType} = attributes;
-              if (path && path === translit(nameType)) {
+              const {buffets, name_type} = attributes;
+              if (path && path === translit(name_type)) {
                 const catalog = document.querySelector("#catalog");
                 catalog.scrollIntoView({block: "start", behavior: "smooth"});
                 // setTypeId(id);
               }
               return (
-                <button
-                  key={id}
-                  onClick={(e) => {
-                    handleActiveCategory(e);
-                    // setTypeId(id);
-                    router.push(`#${translit(nameType)}`);
-                    handlerClickType(id)
-                  }}
-                  className={cs(s.button, typeId === id && s.button_active)}
-                >
-                  <span className={s.button_name}>{nameType}</span>
-                  <span className={s.button_number}>{buffets.data.length}</span>
-                </button>
+                // <button
+                //   key={id}
+                //   onClick={(e) => {
+                //     handleActiveCategory(e);
+                //     // setTypeId(id);
+                //     router.push(`#${translit(name_type)}`);
+                //     handlerClickType(id)
+                //   }}
+                //   className={cs(s.button, typeId === id && s.button_active)}
+                // >
+                //   <span className={s.button_name}>{name_type}</span>
+                // </button>
+                <CatalogTabButton key={item.id} text={name_type} onClick={() => {
+                  handleActiveCategory(e);
+                  // setTypeId(id);
+                  router.push(`#${translit(name_type)}`);
+                  handlerClickType(id)
+                }}/>
               );
             })}
           {/*<SecondaryButton className={s.btn} text={'Без тематикик'}/>*/}

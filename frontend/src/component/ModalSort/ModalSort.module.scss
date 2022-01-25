@@ -14,6 +14,9 @@
   max-width: 328px;
   width: 100vw;
   margin: 0 auto;
+  @include tablet {
+    max-width: 680px;
+  }
 }
 
 .close {
@@ -58,6 +61,12 @@
   &:nth-child(2) {
     border-top: none;
   }
+
+  @include tablet {
+    &:nth-child(2) {
+      max-width: 500px;
+    }
+  }
 }
 
 .head {
@@ -80,6 +89,12 @@
 
   &:first-of-type {
     margin-left: 0;
+  }
+
+  @include tablet {
+    &:first-of-type {
+      margin-right: 8px;
+    }
   }
 }
 

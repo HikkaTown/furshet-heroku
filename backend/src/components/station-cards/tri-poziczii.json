@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_station_cards_tri_poziczii",
+  "info": {
+    "displayName": "три_позиции",
+    "icon": "ankh"
+  },
+  "options": {},
+  "attributes": {
+    "firstPeople": {
+      "type": "string"
+    },
+    "secondPeople": {
+      "type": "string"
+    },
+    "threePeople": {
+      "type": "string"
+    },
+    "first_count": {
+      "type": "biginteger"
+    },
+    "second_count": {
+      "type": "biginteger"
+    },
+    "three_count": {
+      "type": "biginteger"
+    }
+  }
+}

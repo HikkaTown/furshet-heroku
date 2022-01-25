@@ -14,3 +14,12 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.rc-pagination-item-active {
+  color: $wine-color !important;
+}
+
+.rc-pagination-disabled {
+  opacity: 0.5;
+  cursor: none;
+}

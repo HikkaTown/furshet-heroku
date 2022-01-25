@@ -1,6 +1,3 @@
-import axios from "axios";
-import {URL_SERVER} from "../const";
-
 const parseObject = (data) => {
   var array = [];
   data.map((item) => {
@@ -12,10 +9,15 @@ const parseObject = (data) => {
     const sliderMobData = attributes.slidersMob.data;
     const sliderPcData = attributes.slidersPc.data;
     const descriptionList = attributes.descriptionList.map((item) => item.Text);
+    const threeValueData = attributes.threeValue ? attributes.threeValue : false;
+
     const vegan = attributes.vegan;
+
     const sliderMob = Array.from(sliderMobData).map(
       (item) => item.attributes.url
     );
+
+
     const sliderPc = Array.from(sliderPcData).map(
       (item) => item.attributes.url
     );
@@ -38,26 +40,34 @@ const parseObject = (data) => {
       tematic: tematicsCard,
       type: typeCard,
       vegan: vegan,
+      threeValue: attributes.threeValue ? [
+        {
+          count: attributes.threeValue.firstPeople,
+          amount: attributes.threeValue.first_count,
+        },
+        {
+          count: attributes.threeValue.secondPeople,
+          amount: attributes.threeValue.second_count,
+        },
+        {
+          count: attributes.threeValue.threePeople,
+          amount: attributes.threeValue.three_count,
+        }
+      ] : false,
     };
     array.push(object);
   });
-  return JSON.stringify(array);
+  return array;
 };
 
-const getBuffets = async () => {
+export default async function handler(req, res) {
+  const response = await fetch(`http://localhost:1337/api/buffets?populate=*`);
   try {
-    const res = await axios.get(`${URL_SERVER}/buffets`, {
-      params: {
-        populate: "*",
-      },
-    });
-    const data = res.data.data;
-    const newData = parseObject(data);
-    return newData;
-    // return JSON.stringify(data);
+    const data = await response.json();
+    const newData = parseObject(data.data)
+    res.send(newData);
   } catch (error) {
-    return error;
+    console.log(error)
   }
-};
+}
 
-export {getBuffets};

@@ -6,10 +6,12 @@
   position: relative;
   @include tablet {
     padding-top: 80px;
+    padding-bottom: 80px;
     max-width: 680px;
   }
   @include desktop {
     padding-top: 123px;
+    padding-bottom: 123px;
     max-width: 1192px;
   }
 }
@@ -33,10 +35,30 @@
 
 }
 
-.dropdown_person {
+.dropdown_thematic {
   display: none;
   @include desktop {
     display: block;
+    margin-right: auto;
+  }
+}
+
+.dropdown_person {
+  display: none;
+  @include desktop {
+    display: flex;
+    align-items: center;
+    margin-right: 32px;
+  }
+}
+
+.text {
+  display: none;
+  @include desktop {
+    display: block;
+    margin: 0 16px 0 0;
+    padding: 0;
+    @include body3-normal($text-secondary)
   }
 }
 
@@ -103,3 +125,60 @@
   display: flex;
 }
 
+.filter_catalog {
+  display: none;
+  @include desktop {
+    display: block;
+    margin-top: 60px;
+  }
+}
+
+.interactive_block {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  width: 100vw;
+}
+
+.pagination {
+  list-style-type: none;
+  margin: 24px auto 0 auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+
+  li {
+    @include body1-normal($primary-text);
+    margin-right: 24px;
+    cursor: pointer;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+}
+
+.active {
+  color: green;
+}
+
+.pagination_arrow {
+  height: 32px;
+  width: 32px;
+
+  &_left {
+    transform: rotate(-180deg);
+  }
+
+  &_right {
+
+  }
+}
+
+.show_more {
+  width: 154px;
+  height: 44px;
+  @include body3-normal($primary-text);
+  padding: 10px 24px;
+  margin: 16px auto 0 auto;
+}

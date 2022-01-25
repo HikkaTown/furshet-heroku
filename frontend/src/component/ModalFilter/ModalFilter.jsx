@@ -5,24 +5,48 @@ import OverlayingPopup from "../OverlayingPopup/OverlayingPopup";
 import FilterCatalog from "../FilterCatalog/FilterCatalog";
 
 function ModalFilter({
-                       catalogData,
+                       isOpened,
+                       overlayClass,
+                       types,
+                       typeId,
+                       setTypeId,
                        handlerReset,
-                       sortAmount,
+                       thematics,
+                       onClose,
                        setStart,
                        setEnd,
-                       sortType,
-                       isOpened,
-                       onClose,
-                       overlayClass,
-                       types
+                       additionals,
+                       min,
+                       visiblePeople,
+                       max,
+                       //-----
+                       handlerAdditionals,
+                       handlerClickType,
+                       thematicID,
+                       setThematics
                      }) {
   return (
     <Portal>
       <OverlayingPopup overlayClass={overlayClass} isOpened={isOpened} onClose={onClose}>
-        <FilterCatalog sortType={sortType} handlerReset={handlerReset} sortAmount={sortAmount} onClose={onClose}
-                       catalogData={catalogData}
-                       types={types}
-                       setStart={setStart} setEnd={setEnd}/>
+        <FilterCatalog
+          onClose={onClose}
+          types={types}
+          setStart={setStart}
+          setEnd={setEnd}
+          min={min}
+          thematics={thematics}
+          max={max}
+          typeId={typeId}
+          setTypeId={setTypeId}
+          handlerReset={handlerReset}
+          additionals={additionals}
+          thematicID={thematicID}
+          setThematics={setThematics}
+          // ---
+          handlerAdditionals={handlerAdditionals}
+          handlerClickType={handlerClickType}
+          visiblePeople={visiblePeople}
+        />
       </OverlayingPopup>
     </Portal>
   );

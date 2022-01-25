@@ -4,7 +4,7 @@ import debounce from "../../../utils/debounce";
 import throttle from "../../../utils/throttle";
 import spaceDigits from "../../../utils/converterNumber";
 
-export default function FilterAmount({setStart, setEnd, start, end, min, max, changeAmount, sortAmount}) {
+export default function FilterAmount({setStart, setEnd, min, max}) {
   const [minInput, setMinInput] = useState(min === null ? '' : min);
   const [maxInput, setMaxInput] = useState(max === null ? '' : max);
 

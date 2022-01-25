@@ -1,20 +1,20 @@
 import React, {useEffect, useState} from "react";
-import s from "./CatalogBuffets.module.scss";
+import s from "./CatalogSection.module.scss";
 import cs from 'classnames';
 import DropdownPerson from "../uikit/DropdownPerson/DropdownPerson";
 import Dropdown from "../uikit/Dropdown/Dropdown";
 import {LazyImageWrapper} from "../LazyImage";
-import FilterCatalog from "../FilterCatalog/FilterCatalog";
+import FilterCatalog from "./FilterCatalog";
 import BlockCards from "../BlockCards/BlockCards";
 import ModalFilter from "../ModalFilter/ModalFilter";
 import ModalSort from "../ModalSort/ModalSort";
 import {
   sortToDownHelp,
   sortToUpHelp,
-} from "./sort";
+} from "../CatalogBuffets/sort";
 import DropdownTematic from "../uikit/DropdownTematic/DropdownTematic";
 import {useRouter} from "next/router";
-import checkTypeId from "./helpsAdditionals";
+import checkTypeId from "../CatalogBuffets/helpsAdditionals";
 import filterApiBuffets from "../../utils/api/filterApiBuffets";
 import sortAmount from "../../utils/sortAmount";
 import translit from "../../utils/translit";
@@ -22,7 +22,7 @@ import Pagination from "rc-pagination";
 import ArrowSectionButton from "../uikit/ArrowSectionButton/ArrowSectionButton";
 import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
 
-function CatalogBuffets({
+function CatalogSection({
                           catalogData,
                           catalogType,
                           thematics,
@@ -30,6 +30,7 @@ function CatalogBuffets({
                           additionals,
                         }) {
   const router = useRouter();
+  console.log(cards)
   const [isOpened, setOpen] = useState(false)
   const [isOpenedSort, setOpenSort] = useState(false);
   //миимальная и максимальная стоимость карточки
@@ -150,7 +151,7 @@ function CatalogBuffets({
   }
 
   const handlerAdditionals = async (id) => {
-    setTypeId(translit(id));
+    // setTypeId(translit(id));
     let data = await checkTypeId(id, null, null);
     setFilteredCards(data);
     data.length > 0 && setVisualAmount(data);
@@ -167,7 +168,7 @@ function CatalogBuffets({
       // path = router.asPath.slice(2);
       catalogType &&
       catalogType.map((item) => {
-        const text = translit(item.attributes.nameType);
+        const text = translit(item.attributes.name_type);
         if (text === router.asPath.slice(2)) {
           data = item.id;
         }
@@ -224,6 +225,8 @@ function CatalogBuffets({
           <div className={s.filter_catalog}>
             <FilterCatalog
               types={catalogType}
+              length={cards && cards.length}
+              catalogData={catalogData}
               setStart={setStart}
               setEnd={setEnd}
               min={min}
@@ -261,7 +264,7 @@ function CatalogBuffets({
                 />
               </div>
             </div>
-            <BlockCards cards={filteredCards || cards} pageSize={pageSize} currentPage={currentPage}/>
+            {/*<BlockCards cards={filteredCards || cards} pageSize={pageSize} currentPage={currentPage}/>*/}
             {/*  pagination*/}
             <Pagination
               current={currentPage}
@@ -320,4 +323,4 @@ function CatalogBuffets({
   );
 }
 
-export default CatalogBuffets;
+export default CatalogSection;

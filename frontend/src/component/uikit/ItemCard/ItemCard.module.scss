@@ -15,7 +15,7 @@
     border: 0.5px solid #343434;
   }
 
-  @include tablet {
+  @include desktop {
     max-width: 280px;
     width: 280px;
     height: 404px;
@@ -28,7 +28,7 @@
   right: 21.5px;
   z-index: 2;
 
-  @include tablet {
+  @include desktop {
     top: 20px;
     right: 20px;
   }
@@ -41,7 +41,7 @@
   border-radius: 8px;
   margin-bottom: 8px;
 
-  @include tablet {
+  @include desktop {
     border-radius: 8px;
     max-width: 256px;
     width: 256px;
@@ -55,7 +55,7 @@
   width: 304px;
   height: 304px;
   object-fit: cover;
-  @include tablet {
+  @include desktop {
     border-radius: 8px;
     max-width: 256px;
     width: 256px;

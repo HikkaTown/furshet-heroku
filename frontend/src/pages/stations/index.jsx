@@ -15,14 +15,7 @@ import {
   dataStationsText,
   bg_stations,
 } from "../../utils/const";
-import {getBuffets} from "../../utils/api/getBuffets";
-import MasterClassCard from "../../component/uikit/MasterClassCard/MasterClassCard";
-import {getMasterClass} from "../../utils/api/getMasterClass";
-import GastroStationCard from "../../component/uikit/GastroStationCard/GastroStationCard";
-import {getGastroStation} from "../../utils/api/getGastroStations";
-import {getExitBars} from "../../utils/api/getExitBars";
-import {getBarCounter} from "../../utils/api/getAnotherItems";
-import StationSliderSection from "../../component/StationSliderSection/StationSliderSection";
+
 import SectionTwo from "../../component/SectionTwo/SectionTwo";
 import SeoBlock from "../../component/SeoBlock/SeoBlock";
 import FeedbackSection from "../../component/FeedbackSection/FeedbackSection";
@@ -37,9 +30,10 @@ import CompleteFushetSection from "../../component/CompleteFushetSection/Complet
 import Layout from "../../component/Layout/Layout";
 import {getStationsPage} from "../../utils/api/getPages";
 import Head from "next/head";
-import CatalogBlock from "../../component/CatalogBlock/CatalogBlock";
+import CatalogSection from "../../component/CatalogSection/CatalogSection";
+import {getGastroStation} from "../../utils/api/getGastroStations";
 
-export default function Stations({allGastroStation, typeCatalog, index, preview, error}) {
+export default function Stations({cards, typeCatalog, thematics, additionalsData, index, preview, error}) {
   console.log(index)
   return (
     <>
@@ -72,7 +66,8 @@ export default function Stations({allGastroStation, typeCatalog, index, preview,
         <SectionTwo data={index.sectionTwo}/>
         <StudyBlock data={index.studyBlock}/>
         {/* katalog */}
-        <CatalogBlock catalogData={index.catalogBlock} types={typeCatalog}/>
+        <CatalogSection catalogData={index.catalogBlock} additionals={additionalsData} thematics={thematics}
+                        cards={cards} catalogType={typeCatalog}/>
         <BufetsInfoSection href={"/"}/>
         <MasterClassInfo/>
         <BarInfoSection/>
@@ -85,19 +80,47 @@ export default function Stations({allGastroStation, typeCatalog, index, preview,
 }
 
 export async function getStaticProps({preview = null}) {
-  // const allGastroStation = await getGastroStation();
+  const allGastroStation = await getGastroStation();
   const stationPage = await getStationsPage();
   const stationType = await fetch('http://localhost:3000/api/getTypeStations').then((res) => {
     const data = res.json()
     return data
   });
-  console.log(stationType)
+  const catalogThematics = await axios(
+    "http://localhost:3000/api/getThematicsData"
+  );
+  const furniture = await axios("http://localhost:3000/api/getMebel");
+  const decor = await axios("http://localhost:3000/api/getDecorData");
+  const staf = await axios("http://localhost:3000/api/getStafData");
+  const disinfection = await axios(
+    "http://localhost:3000/api/getDisinfectionData"
+  );
+  const additionalsData = [
+    {
+      name: "Мебель",
+      data: furniture.data,
+    },
+    {
+      name: "Декор",
+      data: decor.data,
+    },
+    {
+      name: "Персонал",
+      data: staf.data,
+    },
+    {
+      name: "Дезинфекция",
+      data: disinfection.data,
+    },
+  ];
+  console.log(stationType.data)
   return {
     props: {
       index: stationPage,
       typeCatalog: stationType.data,
-      // allGastroStation: JSON.parse(allGastroStation),
-      preview,
+      thematics: catalogThematics.data.data,
+      additionalsData: additionalsData,
+      cards: JSON.parse(allGastroStation),
     },
   };
 }
