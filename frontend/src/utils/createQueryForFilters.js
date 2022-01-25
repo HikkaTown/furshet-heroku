@@ -1,6 +1,7 @@
 import qs from "qs";
 
 const createQueryForFilters = async (
+  nameType,
   typeId,
   thematicID,
   start,
@@ -14,7 +15,7 @@ const createQueryForFilters = async (
   object.populate = "*";
   if (typeId) {
     object.filters = {
-      buffets_types: {
+      nameType: {
         id: {
           $eq: typeId,
         },
@@ -28,7 +29,7 @@ const createQueryForFilters = async (
       },
     };
   }
-  if (start !== 'null' && end !== 'null') {
+  if (start !== "null" && end !== "null") {
     object.filters.price = {
       $gte: start,
       $lte: end,

@@ -4,7 +4,7 @@ import createQueryForFilters from "../../utils/createQueryForFilters";
 const parseObject = (data) => {
   var array = [];
   data.map((item) => {
-    const {attributes} = item;
+    const { attributes } = item;
     const id = item.id;
     const nameCard = attributes.name;
     const paramsCard = attributes.paramsBlock[0];
@@ -12,7 +12,9 @@ const parseObject = (data) => {
     const sliderMobData = attributes.slidersMob.data;
     const sliderPcData = attributes.slidersPc.data;
     const descriptionList = attributes.descriptionList.map((item) => item.Text);
-    const threeValueData = attributes.threeValue ? attributes.threeValue : false;
+    const threeValueData = attributes.threeValue
+      ? attributes.threeValue
+      : false;
     const vegan = attributes.vegan;
     const sliderMob = Array.from(sliderMobData).map(
       (item) => item.attributes.url
@@ -39,20 +41,22 @@ const parseObject = (data) => {
       tematic: tematicsCard,
       type: typeCard,
       vegan: vegan,
-      threeValue: attributes.threeValue ? [
-        {
-          count: attributes.threeValue.firstPeople,
-          amount: attributes.threeValue.first_count,
-        },
-        {
-          count: attributes.threeValue.secondPeople,
-          amount: attributes.threeValue.second_count,
-        },
-        {
-          count: attributes.threeValue.threePeople,
-          amount: attributes.threeValue.three_count,
-        }
-      ] : false,
+      threeValue: attributes.threeValue
+        ? [
+            {
+              count: attributes.threeValue.firstPeople,
+              amount: attributes.threeValue.first_count,
+            },
+            {
+              count: attributes.threeValue.secondPeople,
+              amount: attributes.threeValue.second_count,
+            },
+            {
+              count: attributes.threeValue.threePeople,
+              amount: attributes.threeValue.three_count,
+            },
+          ]
+        : false,
     };
     array.push(object);
   });
@@ -60,8 +64,9 @@ const parseObject = (data) => {
 };
 
 export default async function handler(req, res) {
-  const {typeId, thematicID, start, end, peopleNumber} = req.query;
+  const { typeId, thematicID, start, end, peopleNumber } = req.query;
   const string = await createQueryForFilters(
+    "buffets_types",
     typeId,
     thematicID,
     start,
