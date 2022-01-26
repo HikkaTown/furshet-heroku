@@ -10,12 +10,6 @@
   transition: 0.5s;
   display: inline-block;
   border: none;
-  margin-left: 10px;
-  margin-bottom: 10px;
-
-  &:first-of-type {
-    margin-left: 0px;
-  }
 
   @include desktop {
     max-width: 280px;
@@ -156,6 +150,13 @@
 
   @include body3-medium($primary-text);
 
+  @include desktop {
+    height: 36px;
+  }
+}
+
+.delete_button {
+  height: 44px;
   @include desktop {
     height: 36px;
   }

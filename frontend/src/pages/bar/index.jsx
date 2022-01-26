@@ -26,25 +26,23 @@ import CatalogSection from "../../component/CatalogSection/CatalogSection";
 import axios from "axios";
 import filterBarCards from "../../utils/api/filterBarCards";
 
-export default function index({
-                                index,
-                                cards,
-                                types,
-                                thematics,
-                                additionals,
-                              }) {
+export default function index({ index, cards, types, thematics, additionals }) {
   return (
     <>
       <Head>
         <title>{index.metaData.head}</title>
-        <meta property="og:title" content={index.metaData.head}/>
-        <meta itemProp="description" name="description" content={index.metaData.title}/>
-        <meta property="og:description" content={index.metaData.title}/>
+        <meta property="og:title" content={index.metaData.head} />
+        <meta
+          itemProp="description"
+          name="description"
+          content={index.metaData.title}
+        />
+        <meta property="og:description" content={index.metaData.title} />
       </Head>
       <Layout>
-        <FirstSection data={index.textPage} startPos={0} bg={bg_bar}/>
-        <SectionTwo data={index.sectionTwo}/>
-        <StudyBlock data={index.studyBlock}/>
+        <FirstSection data={index.textPage} startPos={0} bg={bg_bar} />
+        <SectionTwo data={index.sectionTwo} />
+        <StudyBlock data={index.studyBlock} />
         <CatalogSection
           catalogData={index.catalogBlock}
           catalogType={types}
@@ -59,29 +57,35 @@ export default function index({
           dataText={dataStationsText}
         />
         {/* <CompleteFushetSection /> */}
-        <MasterClassInfo/>
-        <BufetsInfoSection href={"/"}/>
-        <AskingBlock/>
-        <FeedbackSection/>
-        <SeoBlock data={index.seoBlock}/>
+        <MasterClassInfo />
+        <BufetsInfoSection href={"/"} />
+        <AskingBlock />
+        <FeedbackSection />
+        <SeoBlock data={index.seoBlock} />
       </Layout>
     </>
   );
 }
 
-export async function getStaticProps({preview = null}) {
-  const index = await fetch('http://localhost:3000/api/getBarPage').then((res) => {
-    const data = res.json();
-    return data;
-  });
-  const cards = await fetch('http://localhost:3000/api/getBarCards').then((res) => {
-    const data = res.json();
-    return data;
-  });
-  const types = await fetch('http://localhost:3000/api/getBarTypes').then((res) => {
-    const data = res.json();
-    return data;
-  });
+export async function getStaticProps({ preview = null }) {
+  const index = await fetch("http://localhost:3000/api/getBarPage").then(
+    (res) => {
+      const data = res.json();
+      return data;
+    }
+  );
+  const cards = await fetch("http://localhost:3000/api/getBarCards").then(
+    (res) => {
+      const data = res.json();
+      return data;
+    }
+  );
+  const types = await fetch("http://localhost:3000/api/getBarTypes").then(
+    (res) => {
+      const data = res.json();
+      return data;
+    }
+  );
   const catalogThematics = await axios(
     "http://localhost:3000/api/getThematicsData"
   );

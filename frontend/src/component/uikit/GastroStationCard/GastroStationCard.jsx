@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import s from "./GastroStationCard.module.scss";
 import cs from "classnames";
 import useWindowSize from "../../../hooks/useWindowSize";
@@ -12,7 +12,7 @@ import SliderCloseButton from "../SliderCloseButton/SliderCloseButton";
 import SliderForCard from "../SliderForCard/SliderForCard";
 import converterNumber from "../../../utils/converterNumber";
 
-export default function GastroStationCard({data, className}) {
+export default function GastroStationCard({ data, className }) {
   const size = useWindowSize();
   const [isEdit, setEdit] = useState(false);
   const [added, setAdded] = useState(false);
@@ -39,7 +39,7 @@ export default function GastroStationCard({data, className}) {
   const handleAddInCart = (e) => {
     e.preventDefault();
     setEdit(isEdit ? false : true);
-    setCount(count)
+    setCount(count);
     setPrice(price || startPrice);
   };
 
@@ -55,13 +55,13 @@ export default function GastroStationCard({data, className}) {
 
   useEffect(() => {
     if (count > minPosition) {
-      let arg = ((count - minPosition) * positionPrice) + startPrice;
-      setPrice(arg)
+      let arg = (count - minPosition) * positionPrice + startPrice;
+      setPrice(arg);
     } else if (count === minPosition) {
       setPrice(startPrice);
       setCount(minPosition);
     }
-  }, [count])
+  }, [count]);
 
   return (
     <div className={cs(s.card, className)}>
@@ -79,10 +79,10 @@ export default function GastroStationCard({data, className}) {
         />
       )}
       <div className={s.favorite}>
-        <FavoriteButton added={added} onClick={handleAddedFavorites}/>
+        <FavoriteButton added={added} onClick={handleAddedFavorites} />
       </div>
       <div className={s.slider_block}>
-        <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc}/>
+        <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc} />
         <DescriptionInCard
           descriptionVision={descriptionVision}
           content={data.descriptionList}
@@ -98,22 +98,31 @@ export default function GastroStationCard({data, className}) {
         <div className={s.counter_block}>
           <p className={s.people}>{data.nameFood}</p>
           <div className={s.counter}>
-            <Counter count={count} setCount={setCount} minValue={+data.minPosition}/>
+            <Counter
+              count={count}
+              setCount={setCount}
+              minValue={+data.minPosition}
+            />
           </div>
         </div>
         <p className={s.nextPeople}>
           Доп порция{" "}
           <span className={s.amount_nextPerson}>
-            {data.dopPositionPrice} &#8381;
+            +{data.dopPositionPrice} &#8381;
           </span>
         </p>
         <div className={s.pay}>
           <p className={s.price}>
-            <span className={s.amount}>{converterNumber(price || startPrice)}</span>
+            <span className={s.amount}>
+              {converterNumber(price || startPrice)}
+            </span>
             <span className={s.currency}> &#8381;</span>
           </p>
           {isEdit ? (
-            <DeleteButton onClick={handleDeletFromCart}/>
+            <DeleteButton
+              className={s.delete_button}
+              onClick={handleDeletFromCart}
+            />
           ) : (
             <PrimaryButton
               className={s.pay_button}

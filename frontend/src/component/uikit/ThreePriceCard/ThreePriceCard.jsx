@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import s from "./ThreePriceCard.module.scss";
 import cs from "classnames";
 import useWindowSize from "../../../hooks/useWindowSize";
@@ -13,14 +13,14 @@ import SliderForCard from "../SliderForCard/SliderForCard";
 import converterNumber from "../../../utils/converterNumber";
 import CatalogTabButton from "../CatalogTabButton/CatalogTabButton";
 
-export default function ThreePriceCard({data, className}) {
+export default function ThreePriceCard({ data, className }) {
   const size = useWindowSize();
 
   const [isEdit, setEdit] = useState(false);
   const [added, setAdded] = useState(false);
   const [descriptionVision, setDescription] = useState(false);
-  const [active, setActive] = useState(data && data.threeValue[0].count)
-  const [price, setPrice] = useState(data && data.threeValue[0].amount)
+  const [active, setActive] = useState(data && data.threeValue[0].count);
+  const [price, setPrice] = useState(data && data.threeValue[0].amount);
 
   const visibleDescription = (e) => {
     e.preventDefault();
@@ -65,10 +65,10 @@ export default function ThreePriceCard({data, className}) {
         />
       )}
       <div className={s.favorite}>
-        <FavoriteButton a dded={added} onClick={handleAddedFavorites}/>
+        <FavoriteButton a dded={added} onClick={handleAddedFavorites} />
       </div>
       <div className={s.slider_block}>
-        <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc}/>
+        <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc} />
         <DescriptionInCard
           descriptionVision={descriptionVision}
           content={data.descriptionList}
@@ -84,15 +84,24 @@ export default function ThreePriceCard({data, className}) {
         <div className={s.counter_block}>
           <p className={s.people}>Порции</p>
           <div className={s.counter}>
-            {data && data.threeValue && data.threeValue.map((item, index) => {
-
-              return (
-                <CatalogTabButton text={item.count} key={index} onClick={() => {
-                  setActive(item.count)
-                  setPrice(item.amount);
-                }
-                } className={cs(s.count_btn, item.count === active && s.active)}/>)
-            })}
+            {data &&
+              data.threeValue &&
+              data.threeValue.map((item, index) => {
+                return (
+                  <CatalogTabButton
+                    text={item.count}
+                    key={index}
+                    onClick={() => {
+                      setActive(item.count);
+                      setPrice(item.amount);
+                    }}
+                    className={cs(
+                      s.count_btn,
+                      item.count === active && s.active
+                    )}
+                  />
+                );
+              })}
           </div>
         </div>
         <div className={s.pay}>
@@ -101,7 +110,10 @@ export default function ThreePriceCard({data, className}) {
             <span className={s.currency}> &#8381;</span>
           </p>
           {isEdit ? (
-            <DeleteButton onClick={handleDeletFromCart}/>
+            <DeleteButton
+              className={s.delete_button}
+              onClick={handleDeletFromCart}
+            />
           ) : (
             <PrimaryButton
               className={s.pay_button}

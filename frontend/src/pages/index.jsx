@@ -1,6 +1,6 @@
 import Head from "next/head";
 import axios from "axios";
-import {bg_home, dataFurshetText, dataFurshetSlider} from "../utils/const";
+import { bg_home, dataFurshetText, dataFurshetSlider } from "../utils/const";
 import StationSliderSection from "../component/StationSliderSection/StationSliderSection";
 import SectionTwo from "../component/SectionTwo/SectionTwo";
 import SeoBlock from "../component/SeoBlock/SeoBlock";
@@ -11,27 +11,27 @@ import AskingBlock from "../component/AskingBlock/AskingBlock";
 import FirstSection from "../component/FirstSection/FirstSection";
 import CompleteFushetSection from "../component/CompleteFushetSection/CompleteFushetSection";
 import Layout from "../component/Layout/Layout";
-import {getIndexPage} from "../utils/api/getPages";
+import { getIndexPage } from "../utils/api/getPages";
 import CatalogBuffets from "../component/CatalogBuffets/CatalogBuffets";
 
 export default function Home({
-                               allBufets,
-                               index,
-                               catalogType,
-                               thematics,
-                               additionalsData,
-                             }) {
+  allBufets,
+  index,
+  catalogType,
+  thematics,
+  additionalsData,
+}) {
   return (
     <>
       <Head>
         <title>{index.metaData.head}</title>
-        <meta property="og:title" content={index.metaData.head}/>
+        <meta property="og:title" content={index.metaData.head} />
         <meta
           itemProp="description"
           name="description"
           content={index.metaData.title}
         />
-        <meta property="og:description" content={index.metaData.title}/>
+        <meta property="og:description" content={index.metaData.title} />
       </Head>
       <Layout>
         {/* {barCounter.map((item) => (
@@ -52,15 +52,15 @@ export default function Home({
       {allExitBars.map((item) => (
         <GastroStationCard key={item.id} data={item} />
       ))} */}
-        <FirstSection data={index.textPage} startPos={0} bg={bg_home}/>
-        <SectionTwo data={index.sectionTwo}/>
+        <FirstSection data={index.textPage} startPos={0} bg={bg_home} />
+        <SectionTwo data={index.sectionTwo} />
         {/* <StudyBlock /> */}
         <StationSliderSection
           secondBtn={false}
           dataImages={dataFurshetSlider}
           dataText={dataFurshetText}
         />
-        <CompleteFushetSection/>
+        <CompleteFushetSection />
         <CatalogBuffets
           catalogData={index.catalogBlock}
           catalogType={catalogType}
@@ -68,19 +68,19 @@ export default function Home({
           additionals={additionalsData}
           thematics={thematics}
         />
-        <MasterClassInfo/>
+        <MasterClassInfo />
         {/* <BufetsInfoSection /> */}
-        <BarInfoSection/>
-        <AskingBlock/>
-        <FeedbackSection/>
-        <SeoBlock data={index.seoBlock}/>
+        <BarInfoSection />
+        <AskingBlock />
+        <FeedbackSection />
+        <SeoBlock data={index.seoBlock} />
       </Layout>
     </>
   );
 }
 
-export async function getStaticProps({preview = null}) {
-  const allBufets = await axios('http://localhost:3000/api/getBufets')
+export async function getStaticProps({ preview = null }) {
+  const allBufets = await axios("http://localhost:3000/api/getBufets");
   const indexPage = await getIndexPage();
   const catalogType = await axios("http://localhost:3000/api/getTypeBufets");
   const catalogThematics = await axios(

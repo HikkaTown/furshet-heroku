@@ -14,24 +14,28 @@ import BufetsInfoSection from "../../component/BufetsInfoSection/BufetsInfoSecti
 import StudyBlock from "../../component/StudyBlock/StudyBlock";
 import FirstSection from "../../component/FirstSection/FirstSection";
 import Layout from "../../component/Layout/Layout";
-import {getMasterClassPage} from "../../utils/api/getPages";
+import { getMasterClassPage } from "../../utils/api/getPages";
 import CatalogSection from "../../component/CatalogSection/CatalogSection";
 import axios from "axios";
 import filterMasterClass from "../../utils/api/filterMasterClass";
 
-export default function index({index, cards, additionals, types, thematics}) {
+export default function index({ index, cards, additionals, types, thematics }) {
   return (
     <>
       <Head>
         <title>{index.metaData.head}</title>
-        <meta property="og:title" content={index.metaData.head}/>
-        <meta itemProp="description" name="description" content={index.metaData.title}/>
-        <meta property="og:description" content={index.metaData.title}/>
+        <meta property="og:title" content={index.metaData.head} />
+        <meta
+          itemProp="description"
+          name="description"
+          content={index.metaData.title}
+        />
+        <meta property="og:description" content={index.metaData.title} />
       </Head>
       <Layout>
-        <FirstSection data={index.textPage} startPos={2} bg={bg_masterclass}/>
-        <SectionTwo data={index.sectionTwo}/>
-        <StudyBlock data={index.studyBlock}/>
+        <FirstSection data={index.textPage} startPos={2} bg={bg_masterclass} />
+        <SectionTwo data={index.sectionTwo} />
+        <StudyBlock data={index.studyBlock} />
         <CatalogSection
           catalogData={index.catalogBlock}
           catalogType={types}
@@ -45,22 +49,24 @@ export default function index({index, cards, additionals, types, thematics}) {
           dataImages={dataStationsSlider}
           dataText={dataStationsText}
         />
-        <BufetsInfoSection href={"/"}/>
-        <BarInfoSection/>
-        <AskingBlock/>
-        <FeedbackSection/>
-        <SeoBlock data={index.seoBlock}/>
+        <BufetsInfoSection href={"/"} />
+        <BarInfoSection />
+        <AskingBlock />
+        <FeedbackSection />
+        <SeoBlock data={index.seoBlock} />
       </Layout>
     </>
   );
 }
 
-export async function getStaticProps({preview = null}) {
+export async function getStaticProps({ preview = null }) {
   const indexPage = await getMasterClassPage();
-  const cards = await fetch('http://localhost:3000/api/getMasterClass').then((res) => {
-    const data = res.json()
-    return data;
-  })
+  const cards = await fetch("http://localhost:3000/api/getMasterClass").then(
+    (res) => {
+      const data = res.json();
+      return data;
+    }
+  );
   const types = await fetch(
     "http://localhost:3000/api/getTypeMasterClass"
   ).then((res) => {

@@ -3,7 +3,7 @@ import s from "./Question.module.scss";
 import cs from "classnames";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 // TODO:Добавить динамическую подругзку данных
-export default function Question({ ques, answer }) {
+export default function Question({ quest, answer }) {
   const [isOpen, setOpen] = useState(false);
   const block = useRef(null);
 
@@ -27,10 +27,7 @@ export default function Question({ ques, answer }) {
         onClick={handleOpen}
         className={isOpen ? cs(s.block, s.block_active) : s.block}
       >
-        <p className={s.quest}>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore,
-          aspernatur?
-        </p>
+        <p className={s.quest}>{quest}</p>
         <span className={s.arrow}>
           <svg
             width="24"
@@ -50,11 +47,7 @@ export default function Question({ ques, answer }) {
         </span>
       </div>
       <div className={isOpen ? cs(s.answer, s.answer_visible) : s.answer}>
-        <p className={s.answer_text}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
-          incidunt eligendi veritatis et, aut voluptatibus nemo minima
-          reiciendis tempora accusantium.
-        </p>
+        <p className={s.answer_text}>{answer}</p>
       </div>
     </div>
   );

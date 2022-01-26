@@ -57,7 +57,7 @@
     display: block;
     margin: 0 16px 0 0;
     padding: 0;
-    @include body3-normal($text-secondary)
+    @include body3-normal($text-secondary);
   }
 }
 
@@ -170,7 +170,6 @@
   }
 
   &_right {
-
   }
 }
 

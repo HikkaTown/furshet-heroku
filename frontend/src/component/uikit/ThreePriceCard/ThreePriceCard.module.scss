@@ -10,8 +10,6 @@
   transition: 0.5s;
   display: inline-block;
   border: none;
-  margin-left: 10px;
-  margin-bottom: 10px;
 
   &:first-of-type {
     margin-left: 0px;
@@ -161,6 +159,9 @@
   }
 }
 
+.delete_button {
+  height: 44px;
+}
 
 .count_btn {
   margin-right: 8px;
