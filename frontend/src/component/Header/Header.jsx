@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Link from "next/link";
 import s from "./Header.module.scss";
 import cs from "classnames";
@@ -8,7 +8,7 @@ import NavSearchButton from "../uikit/NavSearchButton/NavSearchButton";
 import NavCartButton from "../uikit/NavCartButton/NavCartButton";
 import Navigation from "../Navigation/Navigation";
 import NavCallButton from "../uikit/NavCallButton/NavCallButton";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 import OpenNavigationButton from "../uikit/OpenNavigationButton/OpenNavigationButton";
 import NavigationModal from "../NavigationModal/NavigationModal";
 // TODO: появляется скролл в самом верху
@@ -63,7 +63,7 @@ export default function Header() {
       <div className={s.container}>
         <Link className={s.logo_link} href="/">
           <a className={s.link}>
-            <img className={s.logotip} src="uikit/logo.svg" alt="Главная" />
+            <img className={s.logotip} src="uikit/logo.svg" alt="Главная"/>
           </a>
         </Link>
         <Navigation
@@ -72,21 +72,21 @@ export default function Header() {
           classNameActive={s.navigationActive}
         />
         <div className={s.quick_btns}>
-          <NavSearchButton className={s.search} />
+          <NavSearchButton className={s.search}/>
           <FavoriteButton
             onClick={handleOpenFavorites}
             className={s.favorite}
           />
-          <NavCartButton className={s.cart} />
+          <NavCartButton className={s.cart}/>
         </div>
-        <NavCallButton className={s.call_btn} />
+        <NavCallButton className={s.call_btn}/>
         <OpenNavigationButton
           onClose={handleClose}
           onClick={handleOpen}
           className={s.navigation_mobile}
         />
         {isOpened && (
-          <NavigationModal isOpened={isOpened} onClose={handleClose} />
+          <NavigationModal isOpened={isOpened} overlayClass={s.overlay_class} onClose={handleClose}/>
         )}
       </div>
     </header>

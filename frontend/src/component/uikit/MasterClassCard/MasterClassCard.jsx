@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import s from "./MasterClassCard.module.scss";
 import cs from "classnames";
 import SliderForCard from "../SliderForCard/SliderForCard";
@@ -13,11 +13,17 @@ import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import DescriptionInCard from "../DescriptionInCard/DescriptionInCard";
 import DeleteButton from "../DeleteButton/DeleteButton";
 
-export default function MasterClassCard({ data }) {
+export default function MasterClassCard({data, className}) {
   const size = useWindowSize();
   const [isEdit, setEdit] = useState(false);
   const [added, setAdded] = useState(false);
   const [descriptionVision, setDescription] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const startPrice = +data.price;
+  const minPosition = +data.minPerson;
+  const positionPrice = +data.nextPersonPrice;
+  const [count, setCount] = useState(minPosition);
+  const [price, setPrice] = useState(null);
 
   const visibleDescription = (e) => {
     e.preventDefault();
@@ -34,6 +40,7 @@ export default function MasterClassCard({ data }) {
 
   const handleAddInCart = (e) => {
     e.preventDefault();
+    setPrice(price || startPrice);
     setEdit(isEdit ? false : true);
   };
 
@@ -46,9 +53,28 @@ export default function MasterClassCard({ data }) {
     e.preventDefault();
     setAdded(added ? false : true);
   };
+  useEffect(() => {
+    if (isActive) {
+      if (count > minPosition) {
+        let arg = ((count - minPosition) * positionPrice) + startPrice;
+        setPrice(arg * 0.85)
+      } else if (count === minPosition) {
+        setPrice(startPrice * 0.85);
+        setCount(minPosition);
+      }
+    } else {
+      if (count > minPosition) {
+        let arg = ((count - minPosition) * positionPrice) + startPrice;
+        setPrice(arg)
+      } else if (count === minPosition) {
+        setPrice(startPrice);
+        setCount(minPosition);
+      }
+    }
+  }, [count, isActive]);
 
   return (
-    <div className={s.card}>
+    <div className={cs(s.card, className, isActive && s.card_active)}>
       {size.width < 1175 && !descriptionVision && (
         <OpacityButton
           text={"Описание"}
@@ -63,10 +89,10 @@ export default function MasterClassCard({ data }) {
         />
       )}
       <div className={s.favorite}>
-        <FavoriteButton added={added} onClick={handleAddedFavorites} />
+        <FavoriteButton added={added} onClick={handleAddedFavorites}/>
       </div>
       <div className={s.slider_block}>
-        <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc} />
+        <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc}/>
         <DescriptionInCard
           descriptionVision={descriptionVision}
           content={data.descriptionList}
@@ -81,7 +107,7 @@ export default function MasterClassCard({ data }) {
         <div className={s.counter_block}>
           <p className={s.people}>Люди</p>
           <div className={s.counter}>
-            <Counter minValue={+data.minPerson} />
+            <Counter count={count} setCount={setCount} minValue={+data.minPerson}/>
           </div>
         </div>
         <p className={s.nextPeople}>
@@ -92,7 +118,7 @@ export default function MasterClassCard({ data }) {
         </p>
         <div className={s.settings}>
           <div className={s.checkbox}>
-            <Checkbox />
+            <Checkbox isActive={isActive} setIsActive={setIsActive}/>
           </div>
           <p className={s.checkbox_text}>
             В нашей студии <span className={s.select}>-15%</span>
@@ -100,11 +126,11 @@ export default function MasterClassCard({ data }) {
         </div>
         <div className={s.pay}>
           <p className={s.price}>
-            <span className={s.amount}>{converterNumber(data.price)}</span>
+            <span className={s.amount}>{converterNumber(price || startPrice)}</span>
             <span className={s.currency}> &#8381;</span>
           </p>
           {isEdit ? (
-            <DeleteButton onClick={handleDeletFromCart} />
+            <DeleteButton onClick={handleDeletFromCart}/>
           ) : (
             <PrimaryButton
               className={s.pay_button}

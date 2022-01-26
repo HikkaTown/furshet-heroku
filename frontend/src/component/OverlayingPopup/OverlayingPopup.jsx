@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import clsx from "classnames";
+import cs from "classnames";
 
 import Portal from "../Portal/Portal";
 import Overlay from "../Overlay/Overlay";
@@ -17,10 +17,10 @@ const OverlayingPopup = (props) => {
   useLockBodyScroll();
   return (
     <Portal>
-      <div className={clsx(s.container, overlayClass, isOpened && s.opened)} role="dialog">
+      <div className={cs(overlayClass, s.container, isOpened && s.opened)} role="dialog">
         <Overlay onClose={onClose} isLeft={isLeft}/>
         <div
-          className={clsx(
+          className={cs(
             s.childrenWrapper,
             isBottom && s.childrenWrapperBottom,
             isLeft && s.childrenWrapperLeft

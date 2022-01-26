@@ -6,6 +6,7 @@
   border: 1px solid $orange-color;
   display: flex;
   align-items: center;
+  background-color: #fff;
 }
 
 .button {
@@ -34,6 +35,7 @@
     stroke: $gray-color;
     transition: 0.5s;
   }
+
   @include hover {
     .decrement_line {
       stroke: $primary-text;
@@ -54,6 +56,7 @@
   width: 37px;
   height: 22px;
   @include body4($text-secondary);
+
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */

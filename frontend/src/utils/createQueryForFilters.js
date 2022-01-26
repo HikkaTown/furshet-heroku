@@ -11,11 +11,12 @@ const createQueryForFilters = async (
   let first = thematicID !== "null";
   let second = thematicID !== "undefined";
   let object = new Object();
+  let typeName = nameType;
   object.filters = new Object();
   object.populate = "*";
   if (typeId) {
     object.filters = {
-      nameType: {
+      [`${typeName}`]: {
         id: {
           $eq: typeId,
         },

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import CounterLight from "../CounterLight/CounterLight";
 import s from "./FurshetCard.module.scss";
@@ -16,7 +16,9 @@ export default function FurshetCard({data, className}) {
   const [isEdit, setEdit] = useState(false);
   const [added, setAdded] = useState(false);
   const [descriptionVision, setDescription] = useState(false);
-
+  const startPrice = +data.price
+  const [price, setPrice] = useState(null);
+  const [count, setCount] = useState(null);
   const visibleDescription = (e) => {
     e.preventDefault();
     if (size.width >= 1175 || e._reactName === "onClick") {
@@ -35,10 +37,15 @@ export default function FurshetCard({data, className}) {
     setEdit(isEdit ? false : true);
   };
 
+
   const handleAddedFavorites = (e) => {
     e.preventDefault();
     setAdded(added ? false : true);
   };
+
+  useEffect(() => {
+    setPrice(startPrice * count);
+  }, [count])
 
   return (
     <div className={cs(s.card, className)} onPointerLeave={hiddenDescription}>
@@ -80,16 +87,20 @@ export default function FurshetCard({data, className}) {
         </p>
         <div className={s.pay}>
           <p className={s.price}>
-            <span className={s.amount}>{converterNumber(data.price)}</span>
+            <span className={s.amount}>{converterNumber(price || startPrice)}</span>
             <span className={s.currency}> &#8381;</span>
           </p>
           {isEdit ? (
-            <CounterLight/>
+            <CounterLight count={count} setCount={setCount}/>
           ) : (
             <PrimaryButton
               className={s.pay_button}
               text={"В корзину"}
-              onClick={handleAddInCart}
+              onClick={(e) => {
+                handleAddInCart(e);
+                setPrice(startPrice)
+                setCount(1);
+              }}
             />
           )}
         </div>

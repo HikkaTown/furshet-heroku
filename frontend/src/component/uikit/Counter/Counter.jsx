@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import cs from "classnames";
 import s from "./Counter.module.scss";
 import {
@@ -9,8 +9,7 @@ import {
   onClickIncrement,
 } from "../../../utils/counterFunction";
 
-export default function Counter({ minValue }) {
-  const [count, setCount] = useState(1);
+export default function Counter({minValue, count, setCount}) {
   const timer = useRef();
 
   const cb = (value) => {
@@ -40,12 +39,12 @@ export default function Counter({ minValue }) {
   };
 
   const handlerOnClickDecrement = () => {
-    onClickDecrement(count, setCount);
+    onClickDecrement(count, setCount, minValue);
   };
 
-  useEffect(() => {
-    setCount(+minValue);
-  }, [minValue]);
+  // useEffect(() => {
+  //   setCount(+minValue);
+  // }, [minValue]);
 
   return (
     <div className={s.container}>
@@ -54,7 +53,7 @@ export default function Counter({ minValue }) {
         onUp={handlerClearTimeout}
         onClick={handlerOnClickDecrement}
       />
-      <InputValue onChange={cb} initState={count} />
+      <InputValue onChange={cb} initState={count}/>
       <ButtonIncrement
         onIncrement={handlerAddValue}
         onUp={handlerClearTimeout}
@@ -63,7 +62,7 @@ export default function Counter({ minValue }) {
     </div>
   );
 }
-const ButtonDecrement = ({ onDown, onUp, onClick }) => {
+const ButtonDecrement = ({onDown, onUp, onClick}) => {
   return (
     <button
       className={cs(s.button, s.decrement)}
@@ -91,7 +90,7 @@ const ButtonDecrement = ({ onDown, onUp, onClick }) => {
     </button>
   );
 };
-const ButtonIncrement = ({ onIncrement, onUp, onClick }) => {
+const ButtonIncrement = ({onIncrement, onUp, onClick}) => {
   return (
     <button
       onClick={onClick}
@@ -127,7 +126,7 @@ const ButtonIncrement = ({ onIncrement, onUp, onClick }) => {
   );
 };
 
-const InputValue = ({ onChange, initState }) => {
+const InputValue = ({onChange, initState}) => {
   const [counter, setCount] = useState(initState);
 
   const handlerChange = (e) => {

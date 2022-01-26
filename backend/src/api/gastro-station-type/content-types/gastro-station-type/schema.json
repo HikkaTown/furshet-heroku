@@ -19,7 +19,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::gastro-station.gastro-station",
-      "inversedBy": "gastro_station_types"
+      "mappedBy": "gastro_station_types"
     }
   }
 }

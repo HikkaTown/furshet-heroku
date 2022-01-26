@@ -1,37 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import cs from "classnames";
 import s from "./FilterCatalog.module.scss";
 import FilterAmount from "../uikit/FilterAmount/FilterAmount";
 import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
 import CatalogTabButton from "../uikit/CatalogTabButton/CatalogTabButton";
 import ConfirmFilter from "../uikit/ConfirmFilter/ConfirmFilter";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 import translit from "../../utils/translit";
 
 function FilterCatalog({
-  types,
-  visiblePeople,
-  typeId,
-  setTypeId,
-  handlerReset,
-  thematics,
-  onClose,
-  setStart,
-  setEnd,
-  additionals,
-  min,
-  max,
-  catalogData,
-  //-----
-  handlerAdditionals,
-  handlerClickType,
-  thematicID,
-  setThematics,
-  length,
-}) {
+                         types,
+                         typeId,
+                         setTypeId,
+                         handlerReset,
+                         thematics,
+                         onClose,
+                         setStart,
+                         setEnd,
+                         additionals,
+                         min,
+                         max,
+                         catalogData,
+                         //-----
+                         handlerAdditionals,
+                         handlerClickType,
+                         thematicID,
+                         setThematics,
+                         length,
+                       }) {
   const router = useRouter();
-  console.log(types);
   const [path, setPath] = useState("");
+  const [visibleCategory, setVisibleCategory] = useState(true);
   const handleActiveCategory = (e) => {
     e.preventDefault();
   };
@@ -45,30 +44,30 @@ function FilterCatalog({
     let path = null;
     if (!!router.asPath.slice(2)) {
       setPath(router.asPath.slice(router.asPath.indexOf("#") + 1));
-      // path = router.asPath.slice(2);
+      const paths = router.asPath.slice(router.asPath.indexOf("#") + 1);
       let data;
       types &&
-        types.map((item) => {
-          const text = translit(item.attributes.name_type);
-          if (text === router.asPath.slice(router.asPath.indexOf("#") + 1)) {
-            data = item.id;
-          }
-        });
+      types.map((item) => {
+        const text = translit(item.attributes.name_type);
+        if (text === paths) {
+          data = item.id;
+        }
+      });
       types &&
-        additionals.map((item) => {
-          const text = translit(item.name);
-          if (text === router.asPath.slice(router.asPath.indexOf("#") + 1)) {
-            data = translit(item.name);
-          }
-        });
+      additionals.map((item) => {
+        const text = translit(item.name);
+        if (text === paths) {
+          data = translit(item.name);
+        }
+      });
       setTypeId(data);
     }
   }, [router]);
   return (
     <div className={s.block}>
       <button onClick={onClose} className={s.close}>
-        <span className={s.close__line} />
-        <span className={s.close__line} />
+        <span className={s.close__line}/>
+        <span className={s.close__line}/>
       </button>
       <div className={s.content}>
         <div className={s.row}>
@@ -116,17 +115,32 @@ function FilterCatalog({
           </div>
         )}
         <div className={s.row}>
-          <p>
-            {catalogData.position} <span>{length}</span>
+          <p onClick={() => {
+            setVisibleCategory(true);
+            if (typeof typeId !== 'number') {
+              handlerClickType(null)
+              router.push('#catalog')
+            }
+          }} className={cs(s.catalogName, visibleCategory && s.catalogName_active)}>
+            {catalogData.position} <span className={s.button_number}>{length}</span>
           </p>
-          {!!types &&
+          {visibleCategory && <CatalogTabButton
+            key={0}
+            text={'Всё'}
+            onClick={(e) => {
+              handleActiveCategory(e);
+              router.push(`#catalog`);
+              handlerClickType(null);
+            }}
+            className={cs(s.btn_tab, typeId === null || typeId === undefined && s.btn_tab_active)}
+          />}
+          {visibleCategory && !!types &&
             types.map((item, index) => {
-              const { attributes, id } = item;
-              const { buffets, name_type } = attributes;
+              const {attributes, id} = item;
+              const {buffets, name_type} = attributes;
               if (path && path === translit(name_type)) {
                 const catalog = document.querySelector("#catalog");
-                catalog.scrollIntoView({ block: "start", behavior: "smooth" });
-                // setTypeId(id);
+                catalog.scrollIntoView({block: "start", behavior: "smooth"});
               }
               return (
                 <CatalogTabButton
@@ -138,8 +152,7 @@ function FilterCatalog({
                     router.push(`#${translit(name_type)}`);
                     handlerClickType(id);
                   }}
-                  className={cs(s.btn_tab)}
-                  active={typeId === id}
+                  className={cs(s.btn_tab, typeId === item.id && s.btn_tab_active)}
                 />
               );
             })}
@@ -171,7 +184,7 @@ function FilterCatalog({
             additionals.map((item) => {
               if (path && path === translit(item.name)) {
                 const catalog = document.querySelector("#catalog");
-                catalog.scrollIntoView({ block: "start", behavior: "smooth" });
+                catalog.scrollIntoView({block: "start", behavior: "smooth"});
                 // setTypeId(item.name);
               }
               return (
@@ -181,6 +194,7 @@ function FilterCatalog({
                     handleActiveCategory(e);
                     handlerAdditionals(item.name);
                     router.push(`#${translit(item.name)}`);
+                    setVisibleCategory(false)
                   }}
                   className={cs(
                     s.button,

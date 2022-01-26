@@ -13,7 +13,7 @@ import SliderForCard from "../SliderForCard/SliderForCard";
 import converterNumber from "../../../utils/converterNumber";
 import CatalogTabButton from "../CatalogTabButton/CatalogTabButton";
 
-export default function ThreePriceCard({data}) {
+export default function ThreePriceCard({data, className}) {
   const size = useWindowSize();
 
   const [isEdit, setEdit] = useState(false);
@@ -50,7 +50,7 @@ export default function ThreePriceCard({data}) {
     setAdded(added ? false : true);
   };
   return (
-    <div className={s.card}>
+    <div className={cs(s.card, className)}>
       {size.width < 1175 && !descriptionVision && (
         <OpacityButton
           text={"Описание"}
@@ -84,10 +84,10 @@ export default function ThreePriceCard({data}) {
         <div className={s.counter_block}>
           <p className={s.people}>Порции</p>
           <div className={s.counter}>
-            {data && data.threeValue && data.threeValue.map((item) => {
+            {data && data.threeValue && data.threeValue.map((item, index) => {
 
               return (
-                <CatalogTabButton text={item.count} onClick={() => {
+                <CatalogTabButton text={item.count} key={index} onClick={() => {
                   setActive(item.count)
                   setPrice(item.amount);
                 }
@@ -95,12 +95,6 @@ export default function ThreePriceCard({data}) {
             })}
           </div>
         </div>
-        {/*<p className={s.nextPeople}>*/}
-        {/*  Доп порция{" "}*/}
-        {/*  {data && data.threeValue.map((item, index) => {*/}
-        {/*    return (<button key={index}>{item.count}</button>)*/}
-        {/*  })}*/}
-        {/*</p>*/}
         <div className={s.pay}>
           <p className={s.price}>
             <span className={s.amount}>{converterNumber(price)}</span>

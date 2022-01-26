@@ -17,14 +17,11 @@
     margin-left: 0px;
   }
 
-  @include tablet {
+  @include desktop {
     max-width: 280px;
     width: 280px;
     height: 450px;
-  }
-
-  @include desktop {
-    border: 0.5px solid #fff;
+    border: 0.5px solid transparent;
   }
   @include hover {
     border: 0.5px solid #343434;
@@ -71,7 +68,7 @@
   border-top-right-radius: 8px;
   background-color: rgba(255, 255, 255, 0.5);
   position: relative;
-  @include tablet {
+  @include desktop {
     max-width: 100%;
     width: 100vw;
     height: 280px;
@@ -84,7 +81,7 @@
   flex-direction: column;
   max-height: 178px;
   height: 100vh;
-  @include tablet {
+  @include desktop {
     max-height: 170px;
     height: 100vh;
   }
@@ -159,7 +156,7 @@
 
   @include body3-medium($primary-text);
 
-  @include tablet {
+  @include desktop {
     height: 36px;
   }
 }
@@ -176,4 +173,8 @@
 .active {
   background-color: $wine-color;
   color: #ffffff;
+
+  &:hover {
+    background-color: $wine-color;
+  }
 }

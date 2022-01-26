@@ -9,8 +9,7 @@ import {
 } from "../../../utils/counterFunction";
 import s from "./CounterLight.module.scss";
 
-export default function CounterLight() {
-  const [count, setCount] = useState(1);
+export default function CounterLight({count, setCount}) {
   const timer = useRef();
 
   const cb = (value) => {

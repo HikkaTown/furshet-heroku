@@ -1,22 +1,9 @@
 import Head from "next/head";
-import axios from "axios";
-
-import Checkbox from "../../component/uikit/Checkbox/Checkbox";
-import FurshetCard from "../../component/uikit/FurshetCard/FurshetCard";
-import GiftItem from "../../component/uikit/GitfItem/GiftItem";
-import ItemCard from "../../component/uikit/ItemCard/ItemCard";
 import {
   dataStationsSlider,
   dataStationsText,
   bg_masterclass,
 } from "../../utils/const";
-import {getBuffets} from "../../utils/api/getBuffets";
-import MasterClassCard from "../../component/uikit/MasterClassCard/MasterClassCard";
-import {getMasterClass} from "../../utils/api/getMasterClass";
-import GastroStationCard from "../../component/uikit/GastroStationCard/GastroStationCard";
-import {getGastroStation} from "../../utils/api/getGastroStations";
-import {getExitBars} from "../../utils/api/getExitBars";
-import {getBarCounter} from "../../utils/api/getAnotherItems";
 import StationSliderSection from "../../component/StationSliderSection/StationSliderSection";
 import SectionTwo from "../../component/SectionTwo/SectionTwo";
 import SeoBlock from "../../component/SeoBlock/SeoBlock";
@@ -28,8 +15,11 @@ import StudyBlock from "../../component/StudyBlock/StudyBlock";
 import FirstSection from "../../component/FirstSection/FirstSection";
 import Layout from "../../component/Layout/Layout";
 import {getMasterClassPage} from "../../utils/api/getPages";
+import CatalogSection from "../../component/CatalogSection/CatalogSection";
+import axios from "axios";
+import filterMasterClass from "../../utils/api/filterMasterClass";
 
-export default function index({index, preview, error}) {
+export default function index({index, cards, additionals, types, thematics}) {
   return (
     <>
       <Head>
@@ -39,28 +29,17 @@ export default function index({index, preview, error}) {
         <meta property="og:description" content={index.metaData.title}/>
       </Head>
       <Layout>
-        {/* {barCounter.map((item) => (
-        <ItemCard key={item.id} data={item} />
-      ))}
-
-      {allBufets.map((item) => (
-        <FurshetCard key={item.id} data={item} />
-      ))}
-
-      {allMasterClass.map((item) => (
-        <MasterClassCard key={item.id} data={item} />
-      ))}
-
-      {allGastroStation.map((item) => (
-        <GastroStationCard key={item.id} data={item} />
-      ))}
-      {allExitBars.map((item) => (
-        <GastroStationCard key={item.id} data={item} />
-      ))} */}
         <FirstSection data={index.textPage} startPos={2} bg={bg_masterclass}/>
         <SectionTwo data={index.sectionTwo}/>
         <StudyBlock data={index.studyBlock}/>
-        {/* catalog */}
+        <CatalogSection
+          catalogData={index.catalogBlock}
+          catalogType={types}
+          thematics={thematics}
+          cards={cards}
+          additionals={additionals}
+          filterFunction={filterMasterClass}
+        />
         <StationSliderSection
           secondBtn={false}
           dataImages={dataStationsSlider}
@@ -77,12 +56,47 @@ export default function index({index, preview, error}) {
 }
 
 export async function getStaticProps({preview = null}) {
-  // const allMasterClass = await getMasterClass();
   const indexPage = await getMasterClassPage();
+  const cards = await fetch('http://localhost:3000/api/getMasterClass').then((res) => {
+    const data = res.json()
+    return data;
+  })
+  const types = await fetch(
+    "http://localhost:3000/api/getTypeMasterClass"
+  ).then((res) => {
+    const data = res.json();
+    return data;
+  });
+  const catalogThematics = await axios(
+    "http://localhost:3000/api/getThematicsData"
+  );
+  const furniture = await axios("http://localhost:3000/api/getMebel");
+  const staf = await axios("http://localhost:3000/api/getStafData");
+  const disinfection = await axios(
+    "http://localhost:3000/api/getDisinfectionData"
+  );
+
+  const additionalsData = [
+    {
+      name: "Мебель",
+      data: furniture.data,
+    },
+    {
+      name: "Персонал",
+      data: staf.data,
+    },
+    {
+      name: "Дезинфекция",
+      data: disinfection.data,
+    },
+  ];
   return {
     props: {
       index: indexPage,
-      // allMasterClass: JSON.parse(allMasterClass),
+      types: types.data,
+      cards: cards,
+      additionals: additionalsData,
+      thematics: catalogThematics.data.data,
       preview,
     },
   };

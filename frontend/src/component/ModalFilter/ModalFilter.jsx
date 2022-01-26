@@ -24,6 +24,7 @@ function ModalFilter({
                        handlerClickType,
                        thematicID,
                        setThematics
+
                      }) {
   return (
     <Portal>
@@ -46,6 +47,7 @@ function ModalFilter({
           handlerAdditionals={handlerAdditionals}
           handlerClickType={handlerClickType}
           visiblePeople={visiblePeople}
+
         />
       </OverlayingPopup>
     </Portal>

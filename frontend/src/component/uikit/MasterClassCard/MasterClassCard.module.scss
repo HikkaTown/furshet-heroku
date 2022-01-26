@@ -10,13 +10,8 @@
   transition: 0.5s;
   display: inline-block;
   border: none;
-  margin-left: 10px;
-  margin-bottom: 10px;
-  &:first-of-type {
-    margin-left: 0px;
-  }
 
-  @include tablet {
+  @include desktop {
     max-width: 280px;
     width: 280px;
     height: 490px;
@@ -29,6 +24,10 @@
     border: 0.5px solid #343434;
     border-radius: 8px;
   }
+}
+
+.card_active {
+  background-color: #EFFCF6;
 }
 
 .favorite {
@@ -66,7 +65,7 @@
   border-top-right-radius: 8px;
   background-color: rgba(255, 255, 255, 0.5);
   position: relative;
-  @include tablet {
+  @include desktop {
     max-width: 100%;
     width: 100vw;
     height: 280px;
@@ -175,7 +174,7 @@
 
   @include body3-medium($primary-text);
 
-  @include tablet {
+  @include desktop {
     height: 36px;
   }
 }

@@ -8,7 +8,7 @@ import NavCallButton from "../uikit/NavCallButton/NavCallButton";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
 import useLockBodyScroll from "../../hooks/useLockBodyScroll";
 
-export default function NavigationModal({isOpened, onClose}) {
+export default function NavigationModal({isOpened, onClose, overlayClass}) {
   const ref = useRef(null);
   useOnClickOutside(ref, () => {
     onClose();
@@ -19,7 +19,7 @@ export default function NavigationModal({isOpened, onClose}) {
   return (
     <>
       <Portal>
-        <OverlayingPopup isOpened={isOpened} onClose={onClose}>
+        <OverlayingPopup overlayClass={overlayClass} isOpened={isOpened} onClose={onClose}>
           <div ref={ref} className={s.container}>
             <div className={s.content}>
               <Navigation className={s.nav} classNameBtn={s.nav_btn}/>

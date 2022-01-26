@@ -4,7 +4,7 @@ import createQueryForFilters from "../../utils/createQueryForFilters";
 const parseObject = (data) => {
   var array = [];
   data.map((item) => {
-    const { attributes } = item;
+    const {attributes} = item;
     const id = item.id;
     const nameCard = attributes.name;
     const priceCard = attributes.price;
@@ -40,6 +40,22 @@ const parseObject = (data) => {
       nameFood: nameFood,
       tematics: tematicsCard,
       type: typeCard,
+      threeValue: attributes.threeValue
+        ? [
+          {
+            count: attributes.threeValue.firstPeople,
+            amount: attributes.threeValue.first_count,
+          },
+          {
+            count: attributes.threeValue.secondPeople,
+            amount: attributes.threeValue.second_count,
+          },
+          {
+            count: attributes.threeValue.threePeople,
+            amount: attributes.threeValue.three_count,
+          },
+        ]
+        : false,
     };
     array.push(object);
   });
@@ -47,15 +63,19 @@ const parseObject = (data) => {
 };
 
 export default async function handler(req, res) {
-  const { typeId, thematicID, start, end } = req.query;
-  const string = await createQueryForFilters(
-    "gastro_station_types",
-    typeId,
-    thematicID,
-    start,
-    end
-  );
-  console.log(string);
+  const {typeId, thematicID, start, end} = req.query;
+  let string;
+  if (typeId === 'null' || typeId === 'undefined') {
+    string = 'populate=*'
+  } else {
+    string = await createQueryForFilters(
+      "gastro_station_types",
+      typeId,
+      thematicID,
+      start,
+      end
+    );
+  }
   const response = await fetch(
     `http://localhost:1337/api/gastro-stations?${string}`
   );

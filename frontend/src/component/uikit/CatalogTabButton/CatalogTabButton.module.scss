@@ -9,10 +9,14 @@
   @include hover {
     background-color: $white-color;
   }
+}
 
-  &_active {
-    background-color: $wine-color;
-    border-color: $wine-color;
-    color: $white-color;
+.button_active {
+  background-color: $wine-color !important;
+  border-color: $wine-color !important;
+  color: $white-color !important;
+
+  &:hover {
+    background-color: $wine-color !important;
   }
 }

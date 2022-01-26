@@ -1,33 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import s from "./CatalogSection.module.scss";
 import cs from "classnames";
 import DropdownPerson from "../uikit/DropdownPerson/DropdownPerson";
 import Dropdown from "../uikit/Dropdown/Dropdown";
-import { LazyImageWrapper } from "../LazyImage";
+import {LazyImageWrapper} from "../LazyImage";
 import FilterCatalog from "./FilterCatalog";
 import BlockCards from "../BlockCards/BlockCards";
-import ModalFilter from "../ModalFilter/ModalFilter";
+import ModalFilter from "./ModalFilter";
 import ModalSort from "../ModalSort/ModalSort";
-import { sortToDownHelp, sortToUpHelp } from "../CatalogBuffets/sort";
+import {sortToDownHelp, sortToUpHelp} from "../CatalogBuffets/sort";
 import DropdownTematic from "../uikit/DropdownTematic/DropdownTematic";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 import checkTypeId from "../CatalogBuffets/helpsAdditionals";
-import filterApiBuffets from "../../utils/api/filterApiBuffets";
 import sortAmount from "../../utils/sortAmount";
 import translit from "../../utils/translit";
 import Pagination from "rc-pagination";
 import ArrowSectionButton from "../uikit/ArrowSectionButton/ArrowSectionButton";
 import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
-import filterStations from "../../utils/api/filterStations";
 
 function CatalogSection({
-  catalogData,
-  catalogType,
-  thematics,
-  cards,
-  additionals,
-  filterFunction,
-}) {
+                          catalogData,
+                          catalogType,
+                          thematics,
+                          cards,
+                          additionals,
+                          filterFunction,
+                        }) {
   const router = useRouter();
   const [isOpened, setOpen] = useState(false);
   const [isOpenedSort, setOpenSort] = useState(false);
@@ -41,7 +39,7 @@ function CatalogSection({
   const [filteredCards, setFilteredCards] = useState(0);
   //Тематика
   const [thematicID, setThematics] = useState(null);
-  const [typeId, setTypeId] = useState(catalogType[0].id);
+  const [typeId, setTypeId] = useState(null);
   //Люди
   const [visiblePeople, setVisiblePeople] = useState(false);
   const [peopleNumber, setPeopleNumber] = useState(25);
@@ -56,8 +54,6 @@ function CatalogSection({
   const handleChangePage = (index) => {
     setCurrentPage(index);
   };
-
-  console.log(catalogData);
 
   //Сортировка вверх вниз
   const checkTypePrice = () => {
@@ -79,7 +75,7 @@ function CatalogSection({
     setVisiblePeople(false);
     setStart(null);
     setEnd(null);
-    data = await filterFunction(catalogType[0].id, null, null, null, false);
+    data = await filterFunction(null, null, null, null, false);
     setFilteredCards(data);
   };
   const handleOpenFilter = () => {
@@ -108,26 +104,33 @@ function CatalogSection({
   // -------------------
 
   const handlerClickType = async (id) => {
-    setTypeId(id);
-    let data = null;
-
-    data = await filterFunction(id, thematicID, null, null, false);
-    setVisiblePeople(false);
-    setFilteredCards(data);
-    data.length > 0 && setVisualAmount(data);
+    if (id === null) {
+      setTypeId(id);
+      let data = null;
+      data = await filterFunction(id, thematicID, null, null, false);
+      setVisiblePeople(false);
+      setFilteredCards(data);
+      data.length > 0 && setVisualAmount(data);
+    } else {
+      setTypeId(id);
+      let data = null;
+      data = await filterFunction(id, thematicID, null, null, false);
+      setVisiblePeople(false);
+      setFilteredCards(data);
+      data.length > 0 && setVisualAmount(data);
+    }
   };
 
   const changeThematics = async (id) => {
     setThematics(id);
     let data = null;
-    data = await filterFunction(typeId, id, null, null, false, 25);
+    data = await filterFunction(typeId, id, null, null, false);
     setVisiblePeople(false);
     setFilteredCards(data);
     data.length > 0 && setVisualAmount(data);
   };
 
   const changeAmount = async (startAmount, endAmount) => {
-    console.log(startAmount, endAmount);
     let data = null;
     data = await filterFunction(
       typeId,
@@ -155,22 +158,22 @@ function CatalogSection({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     let data;
-    if (!!router.asPath.slice(2)) {
+    if (!!router.asPath.slice(router.asPath.indexOf("#") + 1)) {
       // path = router.asPath.slice(2);
       catalogType &&
-        catalogType.map((item) => {
-          const text = translit(item.attributes.name_type);
-          if (text === router.asPath.slice(2)) {
-            data = item.id;
-          }
-        });
+      catalogType.map((item) => {
+        const text = translit(item.attributes.name_type);
+        if (text === router.asPath.slice(2)) {
+          data = item.id;
+        }
+      });
       catalogType &&
-        additionals.map((item) => {
-          const text = translit(item.name);
-          if (text === router.asPath.slice(2)) {
-            data = translit(item.name);
-          }
-        });
+      additionals.map((item) => {
+        const text = translit(item.name);
+        if (text === router.asPath.slice(router.asPath.indexOf("#") + 1)) {
+          data = translit(item.name);
+        }
+      });
       if (typeof data === "string") {
         await handlerAdditionals(data);
       } else {
@@ -178,7 +181,7 @@ function CatalogSection({
       }
     } else {
       const data = await filterFunction(
-        catalogType[0].id,
+        typeId,
         null,
         null,
         null,
@@ -194,7 +197,7 @@ function CatalogSection({
 
   return (
     <section className={s.section}>
-      <div className={s.hash} id="catalog" />
+      <div className={s.hash} id="catalog"/>
       <h2 className={s.head}>{catalogData.name}</h2>
       <div className={s.content}>
         <div className={s.row_buttons}>
@@ -231,7 +234,6 @@ function CatalogSection({
               setTypeId={setTypeId}
               handlerReset={handlerReset}
               additionals={additionals}
-              // ---
               handlerAdditionals={handlerAdditionals}
               handlerClickType={handlerClickType}
             />
@@ -250,7 +252,7 @@ function CatalogSection({
               {visiblePeople && (
                 <div className={s.dropdown_person}>
                   <p className={s.text}>Кол-во, чел</p>
-                  <DropdownPerson setPeopleNumber={setPeopleNumber} />
+                  <DropdownPerson setPeopleNumber={setPeopleNumber}/>
                 </div>
               )}
               <div className={s.dropdown_amount}>
@@ -303,25 +305,22 @@ function CatalogSection({
         </div>
         {isOpened && (
           <ModalFilter
-            handlerReset={handlerReset}
-            overlayClass={s.overlay}
-            isOpened={isOpened}
-            onClose={handleCloseFilter}
+            ovelayClass={s.overlay}
             types={catalogType}
+            length={cards && cards.length}
+            catalogData={catalogData}
             setStart={setStart}
             setEnd={setEnd}
             min={min}
             max={max}
             typeId={typeId}
             setTypeId={setTypeId}
+            handlerReset={handlerReset}
             additionals={additionals}
-            thematicID={thematicID}
-            setThematics={changeThematics}
-            // ---
             handlerAdditionals={handlerAdditionals}
             handlerClickType={handlerClickType}
-            visiblePeople={visiblePeople}
-            thematics={thematics}
+            isOpened={isOpened}
+            onClose={handleCloseFilter}
           />
         )}
         {isOpenedSort && (

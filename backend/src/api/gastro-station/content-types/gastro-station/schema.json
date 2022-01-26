@@ -63,6 +63,11 @@
       "relation": "manyToMany",
       "target": "api::gastro-station-type.gastro-station-type",
       "inversedBy": "count"
+    },
+    "threeValue": {
+      "type": "component",
+      "repeatable": false,
+      "component": "station-cards.tri-poziczii"
     }
   }
 }

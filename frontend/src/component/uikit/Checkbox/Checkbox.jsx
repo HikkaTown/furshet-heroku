@@ -1,8 +1,8 @@
 import cs from "classnames";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import s from "./Checkbox.module.scss";
-export default function Checkbox() {
-  const [isActive, setIsActive] = useState(false);
+
+export default function Checkbox({isActive, setIsActive}) {
   const handleClick = () => {
     if (isActive) {
       setIsActive(false);
