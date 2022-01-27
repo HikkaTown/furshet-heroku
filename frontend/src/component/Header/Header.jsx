@@ -11,6 +11,7 @@ import NavCallButton from "../uikit/NavCallButton/NavCallButton";
 import {useRouter} from "next/router";
 import OpenNavigationButton from "../uikit/OpenNavigationButton/OpenNavigationButton";
 import NavigationModal from "../NavigationModal/NavigationModal";
+import FavoriteButtonNav from "../uikit/FavoriteButtonNav/FavoriteButtonNav";
 // TODO: появляется скролл в самом верху
 export default function Header() {
   const router = useRouter();
@@ -46,11 +47,14 @@ export default function Header() {
     } else {
       setPath(false);
     }
+  }, [router.pathname]);
+
+  useEffect(() => {
     if (typeof window !== "undefined") {
       window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
     }
-  }, []);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [])
 
   return (
     <header
@@ -73,7 +77,7 @@ export default function Header() {
         />
         <div className={s.quick_btns}>
           <NavSearchButton className={s.search}/>
-          <FavoriteButton
+          <FavoriteButtonNav
             onClick={handleOpenFavorites}
             className={s.favorite}
           />

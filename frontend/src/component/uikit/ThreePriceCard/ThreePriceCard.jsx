@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import s from "./ThreePriceCard.module.scss";
 import cs from "classnames";
 import useWindowSize from "../../../hooks/useWindowSize";
@@ -12,12 +12,14 @@ import SliderCloseButton from "../SliderCloseButton/SliderCloseButton";
 import SliderForCard from "../SliderForCard/SliderForCard";
 import converterNumber from "../../../utils/converterNumber";
 import CatalogTabButton from "../CatalogTabButton/CatalogTabButton";
+import {addFavoriteItemToStore, deleteFavoriteFromStore} from "../../../redux/actions/favoriteActions";
+import {useDispatch} from "react-redux";
 
-export default function ThreePriceCard({ data, className }) {
+export default function ThreePriceCard({data, className, categoryName}) {
   const size = useWindowSize();
-
+  const dispatch = useDispatch();
   const [isEdit, setEdit] = useState(false);
-  const [added, setAdded] = useState(false);
+  const [added, setAdded] = useState(data.isAdded);
   const [descriptionVision, setDescription] = useState(false);
   const [active, setActive] = useState(data && data.threeValue[0].count);
   const [price, setPrice] = useState(data && data.threeValue[0].amount);
@@ -44,11 +46,7 @@ export default function ThreePriceCard({ data, className }) {
     e.preventDefault();
     setEdit(false);
   };
-
-  const handleAddedFavorites = (e) => {
-    e.preventDefault();
-    setAdded(added ? false : true);
-  };
+  
   return (
     <div className={cs(s.card, className)}>
       {size.width < 1175 && !descriptionVision && (
@@ -65,10 +63,10 @@ export default function ThreePriceCard({ data, className }) {
         />
       )}
       <div className={s.favorite}>
-        <FavoriteButton a dded={added} onClick={handleAddedFavorites} />
+        <FavoriteButton id={data.id} categoryName={categoryName}/>
       </div>
       <div className={s.slider_block}>
-        <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc} />
+        <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc}/>
         <DescriptionInCard
           descriptionVision={descriptionVision}
           content={data.descriptionList}

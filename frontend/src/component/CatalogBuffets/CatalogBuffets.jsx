@@ -23,6 +23,7 @@ import ArrowSectionButton from "../uikit/ArrowSectionButton/ArrowSectionButton";
 import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
 
 function CatalogBuffets({
+                          categoryName,
                           catalogData,
                           catalogType,
                           thematics,
@@ -261,7 +262,8 @@ function CatalogBuffets({
                 />
               </div>
             </div>
-            <BlockCards cards={filteredCards || cards} pageSize={pageSize} currentPage={currentPage}/>
+            <BlockCards cards={filteredCards || cards} pageSize={pageSize} currentPage={currentPage}
+                        categoryName={categoryName}/>
             {/*  pagination*/}
             <Pagination
               current={currentPage}

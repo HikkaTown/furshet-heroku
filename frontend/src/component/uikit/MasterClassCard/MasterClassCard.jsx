@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import s from "./MasterClassCard.module.scss";
 import cs from "classnames";
 import SliderForCard from "../SliderForCard/SliderForCard";
@@ -12,17 +12,20 @@ import converterNumber from "../../../utils/converterNumber";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import DescriptionInCard from "../DescriptionInCard/DescriptionInCard";
 import DeleteButton from "../DeleteButton/DeleteButton";
+import {addFavoriteItemToStore, deleteFavoriteFromStore} from "../../../redux/actions/favoriteActions";
+import {useDispatch} from "react-redux";
 
-export default function MasterClassCard({ data, className }) {
+export default function MasterClassCard({data, className, categoryName}) {
+  const dispatch = useDispatch()
   const size = useWindowSize();
   const [isEdit, setEdit] = useState(false);
-  const [added, setAdded] = useState(false);
+  const [added, setAdded] = useState(data.isAdded);
   const [descriptionVision, setDescription] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const startPrice = +data.price;
   const minPosition = +data.minPerson;
   const positionPrice = +data.nextPersonPrice;
-  const [count, setCount] = useState(minPosition);
+  const [count, setCount] = useState(data.count ? data.count : minPosition);
   const [price, setPrice] = useState(null);
 
   const visibleDescription = (e) => {
@@ -49,10 +52,6 @@ export default function MasterClassCard({ data, className }) {
     setEdit(false);
   };
 
-  const handleAddedFavorites = (e) => {
-    e.preventDefault();
-    setAdded(added ? false : true);
-  };
   useEffect(() => {
     if (isActive) {
       if (count > minPosition) {
@@ -89,10 +88,10 @@ export default function MasterClassCard({ data, className }) {
         />
       )}
       <div className={s.favorite}>
-        <FavoriteButton added={added} onClick={handleAddedFavorites} />
+        <FavoriteButton id={data.id} categoryName={categoryName}/>
       </div>
       <div className={s.slider_block}>
-        <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc} />
+        <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc}/>
         <DescriptionInCard
           descriptionVision={descriptionVision}
           content={data.descriptionList}
@@ -122,7 +121,7 @@ export default function MasterClassCard({ data, className }) {
         </p>
         <div className={s.settings}>
           <div className={s.checkbox}>
-            <Checkbox isActive={isActive} setIsActive={setIsActive} />
+            <Checkbox isActive={isActive} setIsActive={setIsActive}/>
           </div>
           <p className={s.checkbox_text}>
             В нашей студии <span className={s.select}>-15%</span>
@@ -136,7 +135,7 @@ export default function MasterClassCard({ data, className }) {
             <span className={s.currency}> &#8381;</span>
           </p>
           {isEdit ? (
-            <DeleteButton onClick={handleDeletFromCart} />
+            <DeleteButton onClick={handleDeletFromCart}/>
           ) : (
             <PrimaryButton
               className={s.pay_button}

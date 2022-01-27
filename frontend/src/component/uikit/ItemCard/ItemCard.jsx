@@ -7,14 +7,18 @@ import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import CounterLight from "../CounterLight/CounterLight";
 import {PATH_IMAGES} from "../../../utils/const";
 import converterNumber from "../../../utils/converterNumber";
-
+import {
+  addFavoriteItemToStore,
+  deleteFavoriteFromStore
+} from "../../../redux/actions/favoriteActions";
+import {useDispatch} from "react-redux";
 // карточка для обычных продуктов или стаффа
 
 export default function ItemCard({data, className}) {
   const [isEdit, setIsEdit] = useState(false);
-  const [added, setAdded] = useState(false);
+  const [added, setAdded] = useState(data.isAdded);
   const [price, setPrice] = useState(null);
-  const [count, setCount] = useState(null)
+  const [count, setCount] = useState(data.count ? data.count : null)
   const startPrice = +data.price;
   const handleAddInCart = (e) => {
     e.preventDefault();
@@ -23,10 +27,6 @@ export default function ItemCard({data, className}) {
     setCount(1);
   };
 
-  const handleAddedFavorites = (e) => {
-    e.preventDefault();
-    setAdded(added ? false : true);
-  };
 
   useEffect(() => {
     setPrice(startPrice * count);
@@ -35,7 +35,7 @@ export default function ItemCard({data, className}) {
   return (
     <div className={cs(s.block, className)}>
       <div className={s.favorite}>
-        <FavoriteButton added={added} onClick={handleAddedFavorites}/>
+        <FavoriteButton id={data.id}/>
       </div>
       <LazyImageWrapper
         wrapperClass={s.wrapper}

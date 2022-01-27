@@ -1,17 +1,16 @@
-import React from "react";
-import s from "./BlockCards.module.scss";
-import FurshetCard from "../uikit/FurshetCard/FurshetCard";
-import ItemCard from "../uikit/ItemCard/ItemCard";
-import ThreePriceCard from "../uikit/ThreePriceCard/ThreePriceCard";
-import GastroStationCard from "../uikit/GastroStationCard/GastroStationCard";
+import React from 'react';
+import s from './CardsBlockFavorites.module.scss'
 import MasterClassCard from "../uikit/MasterClassCard/MasterClassCard";
+import GastroStationCard from "../uikit/GastroStationCard/GastroStationCard";
+import FurshetCard from "../uikit/FurshetCard/FurshetCard";
+import ThreePriceCard from "../uikit/ThreePriceCard/ThreePriceCard";
+import ItemCard from "../uikit/ItemCard/ItemCard";
 
-function BlockCards({cards, pageSize, currentPage, categoryName}) {
+function CardsBlockFavorites({data, categoryName}) {
   return (
-    <div className={s.content}>
-      {cards && cards.length > 0
-        ? cards.slice(pageSize * (currentPage - 1), (pageSize * currentPage)).map((item) => {
-
+    <div className={s.container}>
+      {data && data.length > 0
+        ? data.map((item) => {
           if (item.nextPersonPrice) {
             return (
               <MasterClassCard className={s.card} key={item.id} data={item} categoryName={categoryName}/>
@@ -37,4 +36,4 @@ function BlockCards({cards, pageSize, currentPage, categoryName}) {
   );
 }
 
-export default React.memo(BlockCards);
+export default CardsBlockFavorites; 

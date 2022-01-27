@@ -6,7 +6,7 @@ import FurshetCard from "../../component/uikit/FurshetCard/FurshetCard";
 import GiftItem from "../../component/uikit/GitfItem/GiftItem";
 import ItemCard from "../../component/uikit/ItemCard/ItemCard";
 import NavigationButton from "../../component/uikit/NavigationButton/NavigationButton";
-import { useEffect } from "react";
+import {useEffect} from "react";
 import {
   bg_bar,
   bg_home,
@@ -28,38 +28,39 @@ import StudyBlock from "../../component/StudyBlock/StudyBlock";
 import FirstSection from "../../component/FirstSection/FirstSection";
 import CompleteFushetSection from "../../component/CompleteFushetSection/CompleteFushetSection";
 import Layout from "../../component/Layout/Layout";
-import { getStationsPage } from "../../utils/api/getPages";
+import {getStationsPage} from "../../utils/api/getPages";
 import Head from "next/head";
 import CatalogSection from "../../component/CatalogSection/CatalogSection";
 import filterStations from "../../utils/api/filterStations";
 
 export default function Stations({
-  cards,
-  typeCatalog,
-  thematics,
-  additionalsData,
-  index,
-  preview,
-  error,
-}) {
+                                   cards,
+                                   typeCatalog,
+                                   thematics,
+                                   additionalsData,
+                                   index,
+                                   preview,
+                                   error,
+                                 }) {
   return (
     <>
       <Head>
         <title>{index.metaData.head}</title>
-        <meta property="og:title" content={index.metaData.head} />
+        <meta property="og:title" content={index.metaData.head}/>
         <meta
           itemProp="description"
           name="description"
           content={index.metaData.title}
         />
-        <meta property="og:description" content={index.metaData.title} />
+        <meta property="og:description" content={index.metaData.title}/>
       </Head>
       <Layout>
-        <FirstSection data={index.textPage} startPos={1} bg={bg_stations} />
-        <SectionTwo data={index.sectionTwo} />
-        <StudyBlock data={index.studyBlock} />
+        <FirstSection data={index.textPage} startPos={1} bg={bg_stations}/>
+        <SectionTwo data={index.sectionTwo}/>
+        <StudyBlock data={index.studyBlock}/>
         {/* katalog */}
         <CatalogSection
+          categoryName={'Гастро-станции'}
           catalogData={index.catalogBlock}
           additionals={additionalsData}
           thematics={thematics}
@@ -67,18 +68,18 @@ export default function Stations({
           catalogType={typeCatalog}
           filterFunction={filterStations}
         />
-        <BufetsInfoSection href={"/"} />
-        <MasterClassInfo />
-        <BarInfoSection />
-        <AskingBlock />
-        <FeedbackSection />
-        <SeoBlock data={index.seoBlock} />
+        <BufetsInfoSection href={"/"}/>
+        <MasterClassInfo/>
+        <BarInfoSection/>
+        <AskingBlock/>
+        <FeedbackSection/>
+        <SeoBlock data={index.seoBlock}/>
       </Layout>
     </>
   );
 }
 
-export async function getStaticProps({ preview = null }) {
+export async function getStaticProps({preview = null}) {
   const allGastroStation = await fetch(
     "http://localhost:3000/api/getStations"
   ).then((res) => {

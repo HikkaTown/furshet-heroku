@@ -11,14 +11,14 @@ import converterNumber from "../../../utils/converterNumber";
 import OpacityButton from "../OpacityButton/OpacityButton";
 import SliderCloseButton from "../SliderCloseButton/SliderCloseButton";
 
-export default function FurshetCard({data, className}) {
+export default function FurshetCard({data, className, categoryName}) {
   const size = useWindowSize();
   const [isEdit, setEdit] = useState(false);
-  const [added, setAdded] = useState(false);
+  const [added, setAdded] = useState(data.isAdded);
   const [descriptionVision, setDescription] = useState(false);
   const startPrice = +data.price
   const [price, setPrice] = useState(null);
-  const [count, setCount] = useState(null);
+  const [count, setCount] = useState(data.count ? data.count : null);
   const visibleDescription = (e) => {
     e.preventDefault();
     if (size.width >= 1175 || e._reactName === "onClick") {
@@ -35,12 +35,6 @@ export default function FurshetCard({data, className}) {
   const handleAddInCart = (e) => {
     e.preventDefault();
     setEdit(isEdit ? false : true);
-  };
-
-
-  const handleAddedFavorites = (e) => {
-    e.preventDefault();
-    setAdded(added ? false : true);
   };
 
   useEffect(() => {
@@ -63,7 +57,7 @@ export default function FurshetCard({data, className}) {
         />
       )}
       <div className={s.favorite}>
-        <FavoriteButton added={added} onClick={handleAddedFavorites}/>
+        <FavoriteButton id={data.id} categoryName={categoryName}/>
       </div>
       <div className={s.slider_block}>
         <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc}/>
@@ -90,7 +84,7 @@ export default function FurshetCard({data, className}) {
             <span className={s.amount}>{converterNumber(price || startPrice)}</span>
             <span className={s.currency}> &#8381;</span>
           </p>
-          {isEdit ? (
+          {isEdit || count ? (
             <CounterLight count={count} setCount={setCount}/>
           ) : (
             <PrimaryButton

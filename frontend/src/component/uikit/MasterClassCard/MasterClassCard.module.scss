@@ -26,6 +26,20 @@
   }
 }
 
+.pay_button {
+  max-width: 123px;
+  width: 123px;
+  height: 44px;
+
+  @include body3-medium($primary-text);
+
+  @include desktop {
+    height: 36px;
+    max-width: 123px;
+    width: 123px;
+  }
+}
+
 .card_active {
   background-color: #EFFCF6;
 }
@@ -78,7 +92,7 @@
   flex-direction: column;
   max-height: 178px;
   height: 100vh;
-  @include tablet {
+  @include desktop {
     max-height: 210px;
     height: 100vh;
   }
@@ -165,16 +179,4 @@
   @include body1-medium($primary-text);
   padding: 0;
   margin: 0;
-}
-
-.pay_button {
-  max-width: 123px;
-  width: 123px;
-  height: 44px;
-
-  @include body3-medium($primary-text);
-
-  @include desktop {
-    height: 36px;
-  }
 }

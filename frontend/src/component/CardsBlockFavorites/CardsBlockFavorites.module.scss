@@ -1,0 +1,21 @@
+.container {
+  @include desktop {
+    max-width: 1192px;
+    width: 100vw;
+    margin: 24px auto 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.card {
+  @include desktop {
+    margin-left: 24px;
+    &:first-child {
+      margin-left: 0;
+    }
+    &:nth-child(5n+5) {
+      margin-left: 0;
+    }
+  }
+}
