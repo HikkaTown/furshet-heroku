@@ -9,7 +9,7 @@ import {
 } from "../../../utils/counterFunction";
 import s from "./CounterLight.module.scss";
 
-export default function CounterLight({count, setCount}) {
+export default function CounterLight({count, setCount, id, categoryName}) {
   const timer = useRef();
 
   const cb = (value) => {
@@ -29,14 +29,15 @@ export default function CounterLight({count, setCount}) {
     handlerUp(timer);
   };
 
+  const handlerOnClickIncrement = () => {
+    onClickIncrement(count, setCount);
+  };
+
   const handlerDecrementValue = (e) => {
     e.preventDefault();
     handlerDecrement(timer, setCount, count);
   };
 
-  const handlerOnClickIncrement = () => {
-    onClickIncrement(count, setCount);
-  };
 
   const handlerOnClickDecrement = () => {
     onClickDecrement(count, setCount, 1);
@@ -135,7 +136,7 @@ const InputValue = ({onChange, initState}) => {
       setCount(value);
       onChange(value);
     } else if (value < 1) {
-      setCount(1);
+      setCount(0);
       onChange(value);
     }
   };

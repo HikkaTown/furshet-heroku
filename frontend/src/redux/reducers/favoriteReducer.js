@@ -23,13 +23,13 @@ const reducer = (state = initialState, action) => {
         favorites: savedFavorites
       }
     case TOGGLE_FAVORITE_BUFFETS:
-      console.log(state)
       updateFavorites(state.favoritesBuffets, action.payload.item);
       return {
         ...state,
         favoritesBuffets: [...state.favoritesBuffets]
       }
     case TOGGLE_FAVORITE_GASTRO:
+      console.log(action.payload.item)
       updateFavorites(state.favoritesGastro, action.payload.item);
       return {
         ...state,

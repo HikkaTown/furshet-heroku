@@ -8,12 +8,12 @@ import {
 import {useDispatch} from "react-redux";
 import {useSelector} from "react-redux";
 import {
-  favoriteSelector, favoriteSelectorBar,
+  favoriteSelectorBar,
   favoriteSelectorBuffets,
   favoriteSelectorGastro, favoriteSelectorMasterclass
 } from "../../../redux/selectors/favoriteSelector";
 
-export default function FavoriteButton({onClick, className, id, categoryName}) {
+export default function FavoriteButton({className, id, categoryName}) {
   const [added, setAdded] = useState(false)
   const dispatch = useDispatch();
   const favoritesBuffets = useSelector(favoriteSelectorBuffets());
@@ -52,11 +52,11 @@ export default function FavoriteButton({onClick, className, id, categoryName}) {
   useEffect(() => {
     if (categoryName === 'Фуршет') {
       setAdded(favoritesBuffets.find((item) => item.id === id && categoryName === item.categoryName));
-    } else if (categoryName === 'Станции') {
+    } else if (categoryName === 'Гастро-станции') {
       setAdded(favoritesGastro.find((item) => item.id === id && categoryName === item.categoryName));
-    } else if (categoryName === 'Мастеркласс') {
+    } else if (categoryName === 'Мастер-классы') {
       setAdded(favoritesMasterClass.find((item) => item.id === id && categoryName === item.categoryName));
-    } else if (categoryName === 'Бар') {
+    } else if (categoryName === 'Выездные бары') {
       setAdded(favoritesBar.find((item) => item.id === id && categoryName === item.categoryName));
     }
   }, [favoritesBuffets, favoritesGastro, favoritesMasterClass, favoritesBar, id, categoryName]);

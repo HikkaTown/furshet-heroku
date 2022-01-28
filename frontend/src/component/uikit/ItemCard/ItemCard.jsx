@@ -11,10 +11,14 @@ import {
   addFavoriteItemToStore,
   deleteFavoriteFromStore
 } from "../../../redux/actions/favoriteActions";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {cartSelector} from "../../../redux/selectors/cartSelector";
 // карточка для обычных продуктов или стаффа
 
-export default function ItemCard({data, className}) {
+export default function ItemCard({data, className, categoryName}) {
+  const dispatch = useDispatch();
+  const cartData = useSelector(cartSelector());
+  const cartFromBasket = cartData.find(item => item.id)
   const [isEdit, setIsEdit] = useState(false);
   const [added, setAdded] = useState(data.isAdded);
   const [price, setPrice] = useState(null);
@@ -35,7 +39,7 @@ export default function ItemCard({data, className}) {
   return (
     <div className={cs(s.block, className)}>
       <div className={s.favorite}>
-        <FavoriteButton id={data.id}/>
+        <FavoriteButton id={data.id} categoryName={categoryName}/>
       </div>
       <LazyImageWrapper
         wrapperClass={s.wrapper}

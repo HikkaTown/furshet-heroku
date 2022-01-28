@@ -12,19 +12,18 @@ import SliderCloseButton from "../SliderCloseButton/SliderCloseButton";
 import SliderForCard from "../SliderForCard/SliderForCard";
 import converterNumber from "../../../utils/converterNumber";
 import {addFavoriteItemToStore, deleteFavoriteFromStore} from "../../../redux/actions/favoriteActions";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {cartSelector} from "../../../redux/selectors/cartSelector";
+import {changeInCart, toggleToCart} from "../../../redux/actions/cartActions";
 
 export default function GastroStationCard({data, className, categoryName}) {
+  const cardData = useSelector(cartSelector());
   const dispatch = useDispatch();
   const size = useWindowSize();
-  const [isEdit, setEdit] = useState(false);
-  const [added, setAdded] = useState(data.isAdded);
+  const cartFromBasket = cardData.find(item => item.id === data.id && item.categoryName === categoryName);
+  const hasInBasket = cartFromBasket !== undefined;
+  const [value, setValue] = useState(+data.minPosition)
   const [descriptionVision, setDescription] = useState(false);
-  const [count, setCount] = useState(data.count ? data.count : +data.minPosition);
-  const [price, setPrice] = useState(null);
-  const positionPrice = data.dopPositionPrice;
-  const minPosition = +data.minPosition;
-  const startPrice = +data.price;
 
   const visibleDescription = (e) => {
     e.preventDefault();
@@ -39,28 +38,42 @@ export default function GastroStationCard({data, className, categoryName}) {
     }
   };
 
-  const handleAddInCart = (e) => {
-    e.preventDefault();
-    setEdit(isEdit ? false : true);
-    setCount(count);
-    setPrice(price || startPrice);
+  const handleAddInCart = () => {
+    dispatch(toggleToCart({
+      ...data,
+      categoryName: categoryName,
+      count: value,
+    }))
   };
 
-  const handleDeletFromCart = (e) => {
-    e.preventDefault();
-    setEdit(false);
+  const handleDeleteFromCart = () => {
+    dispatch(toggleToCart({
+      ...cartFromBasket,
+    }))
   };
 
 
-  useEffect(() => {
-    if (count > minPosition) {
-      let arg = (count - minPosition) * positionPrice + startPrice;
-      setPrice(arg);
-    } else if (count === minPosition) {
-      setPrice(startPrice);
-      setCount(minPosition);
+  const setCount = (count) => {
+    if (hasInBasket) {
+      if (count >= data.minPosition) {
+        dispatch(changeInCart({
+          ...cartFromBasket,
+          count: count,
+        }))
+      } else {
+        dispatch(toggleToCart({
+          ...cartFromBasket,
+        }))
+        setValue(data.minPosition)
+      }
+    } else {
+      if (count >= data.minPosition) {
+        setValue(count);
+      } else {
+        setValue(data.minPosition)
+      }
     }
-  }, [count]);
+  }
 
   return (
     <div className={cs(s.card, className)}>
@@ -98,7 +111,7 @@ export default function GastroStationCard({data, className, categoryName}) {
           <p className={s.people}>{data.nameFood}</p>
           <div className={s.counter}>
             <Counter
-              count={count}
+              count={hasInBasket ? cartFromBasket.count : value}
               setCount={setCount}
               minValue={+data.minPosition}
             />
@@ -113,14 +126,15 @@ export default function GastroStationCard({data, className, categoryName}) {
         <div className={s.pay}>
           <p className={s.price}>
             <span className={s.amount}>
-              {converterNumber(price || startPrice)}
+              {/*+data.dopPositionPrice * cartFromBasket.count*/}
+              {converterNumber(hasInBasket ? ((cartFromBasket.count - data.minPosition) * data.dopPositionPrice) + +data.price : ((value - +data.minPosition) * data.dopPositionPrice) + +data.price)}
             </span>
             <span className={s.currency}> &#8381;</span>
           </p>
-          {isEdit ? (
+          {hasInBasket ? (
             <DeleteButton
               className={s.delete_button}
-              onClick={handleDeletFromCart}
+              onClick={handleDeleteFromCart}
             />
           ) : (
             <PrimaryButton

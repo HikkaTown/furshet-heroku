@@ -29,7 +29,7 @@ function BlockCards({cards, pageSize, currentPage, categoryName}) {
           } else if (item.threeValue) {
             return (<ThreePriceCard key={item.id} data={item} className={s.card} categoryName={categoryName}/>);
           } else if (typeof item.params === 'string' || item.params === undefined) {
-            return <ItemCard className={s.card} key={item.id} data={item}/>;
+            return <ItemCard className={s.card} key={item.id} data={item} categoryName={'Дополнительно'}/>;
           }
         })
         : "Ничего нет"}

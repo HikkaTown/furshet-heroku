@@ -5,7 +5,7 @@ import s from "./index.module.scss";
 import Navigation from "../../component/Navigation/Navigation";
 import {useSelector} from "react-redux";
 import {
-  favoriteSelectorAll, favoriteSelectorBar,
+  favoriteSelectorBar,
   favoriteSelectorBuffets,
   favoriteSelectorGastro, favoriteSelectorMasterclass
 } from "../../redux/selectors/favoriteSelector";
@@ -26,6 +26,7 @@ export default function Index({data}) {
   const checkCategoryFavorites = async (category) => {
     let data = null;
     let cards = [];
+
     if (category === 'Фуршет') {
       data = await fetch('http://localhost:3000/api/getBufets').then((res) => {
         return res.json()
@@ -68,7 +69,6 @@ export default function Index({data}) {
 
   useEffect(async () => {
     const newData = await checkCategoryFavorites(category);
-    console.log(newData)
     setVisibleCards(newData);
   }, [category])
 

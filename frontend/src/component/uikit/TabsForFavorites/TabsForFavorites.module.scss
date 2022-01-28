@@ -1,5 +1,14 @@
+.container {
+  margin-bottom: 24px;
+}
+
 .btn {
-  margin-right: 16px !important;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  @include tablet {
+    margin-bottom: 16px !important;
+    margin-right: 16px !important;
+  }
   background-color: #fff !important;
   height: 36px !important;
   @include hover {
@@ -13,4 +22,9 @@
   &_active {
     background-color: #FAB576 !important;
   }
+
+  @include desktop {
+    margin-bottom: 0 !important;
+  }
+
 }

@@ -10,15 +10,17 @@ import useWindowSize from "../../../hooks/useWindowSize";
 import converterNumber from "../../../utils/converterNumber";
 import OpacityButton from "../OpacityButton/OpacityButton";
 import SliderCloseButton from "../SliderCloseButton/SliderCloseButton";
+import {useDispatch, useSelector} from "react-redux";
+import {changeInCart, toggleToCart} from "../../../redux/actions/cartActions";
+import {cartSelector} from "../../../redux/selectors/cartSelector";
 
 export default function FurshetCard({data, className, categoryName}) {
+  const cartData = useSelector(cartSelector());
+  const dispatch = useDispatch();
+  const cardFromBasket = cartData.find(item => item.id === data.id && item.categoryName === categoryName);
+  const hasInBasket = cardFromBasket !== undefined;
   const size = useWindowSize();
-  const [isEdit, setEdit] = useState(false);
-  const [added, setAdded] = useState(data.isAdded);
   const [descriptionVision, setDescription] = useState(false);
-  const startPrice = +data.price
-  const [price, setPrice] = useState(null);
-  const [count, setCount] = useState(data.count ? data.count : null);
   const visibleDescription = (e) => {
     e.preventDefault();
     if (size.width >= 1175 || e._reactName === "onClick") {
@@ -32,14 +34,28 @@ export default function FurshetCard({data, className, categoryName}) {
     }
   };
 
-  const handleAddInCart = (e) => {
-    e.preventDefault();
-    setEdit(isEdit ? false : true);
-  };
 
-  useEffect(() => {
-    setPrice(startPrice * count);
-  }, [count])
+  const handleAddInCart = () => {
+    dispatch(toggleToCart({
+      ...data,
+      categoryName: categoryName,
+      count: 1
+    }));
+  };
+  const setCount = (value) => {
+    console.log(value)
+    if (value !== 0) {
+      dispatch(changeInCart({
+        ...cardFromBasket,
+        count: value,
+      }))
+    } else if (value === 0) {
+      console.log(value)
+      dispatch(toggleToCart({
+        ...cardFromBasket,
+      }))
+    }
+  }
 
   return (
     <div className={cs(s.card, className)} onPointerLeave={hiddenDescription}>
@@ -81,19 +97,20 @@ export default function FurshetCard({data, className, categoryName}) {
         </p>
         <div className={s.pay}>
           <p className={s.price}>
-            <span className={s.amount}>{converterNumber(price || startPrice)}</span>
+            <span
+              className={s.amount}>{converterNumber(hasInBasket ? cardFromBasket.price * cardFromBasket.count : data.price)}</span>
             <span className={s.currency}> &#8381;</span>
           </p>
-          {isEdit || count ? (
-            <CounterLight count={count} setCount={setCount}/>
+          {hasInBasket ? (
+            <CounterLight count={hasInBasket ? cardFromBasket.count : 1} setCount={setCount}/>
           ) : (
             <PrimaryButton
+              id={data.id}
+              categoryName={categoryName}
               className={s.pay_button}
               text={"В корзину"}
               onClick={(e) => {
-                handleAddInCart(e);
-                setPrice(startPrice)
-                setCount(1);
+                handleAddInCart();
               }}
             />
           )}

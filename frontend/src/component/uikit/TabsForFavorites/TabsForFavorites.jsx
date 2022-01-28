@@ -29,7 +29,12 @@ function TabsForFavorites({onClick, buffetsLength, gastroLength, masterclassLeng
         onClick('Выездные бары')
       }} text={'Выездные бары'} length={barLength}
                         className={cs(s.btn, category === 'Выездные бары' && s.btn_active)}/>
+      <NavigationButton onClick={() => {
+        onClick('Дополнительно')
+      }} text={'Дополнительно'} length={barLength}
+                        className={cs(s.btn, category === 'Дополнительно' && s.btn_active)}/>
     </div>
+
   );
 }
 

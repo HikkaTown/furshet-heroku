@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import s from './CardsBlockFavorites.module.scss'
 import MasterClassCard from "../uikit/MasterClassCard/MasterClassCard";
 import GastroStationCard from "../uikit/GastroStationCard/GastroStationCard";

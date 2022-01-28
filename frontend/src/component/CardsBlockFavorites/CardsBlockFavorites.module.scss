@@ -1,4 +1,12 @@
 .container {
+  max-width: 328px;
+  width: 100vw;
+  margin: 0 auto;
+  @include tablet {
+    max-width: 680px;
+    width: 100vw;
+    margin: 0 auto;
+  }
   @include desktop {
     max-width: 1192px;
     width: 100vw;
@@ -9,13 +17,27 @@
 }
 
 .card {
-  @include desktop {
-    margin-left: 24px;
+  margin-bottom: 16px;
+  @include tablet {
+    margin-left: 16px;
+    margin-bottom: 16px;
     &:first-child {
       margin-left: 0;
     }
-    &:nth-child(5n+5) {
+    &:nth-child(odd) {
       margin-left: 0;
+    }
+
+  }
+
+  @include desktop {
+    margin-left: 24px !important;
+    margin-bottom: 24px !important;
+    &:first-child {
+      margin-left: 0 !important;
+    }
+    &:nth-child(5n+5) {
+      margin-left: 0 !important;
     }
   }
 }

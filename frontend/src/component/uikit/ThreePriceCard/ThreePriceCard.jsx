@@ -13,16 +13,21 @@ import SliderForCard from "../SliderForCard/SliderForCard";
 import converterNumber from "../../../utils/converterNumber";
 import CatalogTabButton from "../CatalogTabButton/CatalogTabButton";
 import {addFavoriteItemToStore, deleteFavoriteFromStore} from "../../../redux/actions/favoriteActions";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {cartSelector} from "../../../redux/selectors/cartSelector";
+import {changeInCart, toggleToCart} from "../../../redux/actions/cartActions";
 
 export default function ThreePriceCard({data, className, categoryName}) {
   const size = useWindowSize();
+  const cartData = useSelector(cartSelector());
   const dispatch = useDispatch();
-  const [isEdit, setEdit] = useState(false);
-  const [added, setAdded] = useState(data.isAdded);
+
   const [descriptionVision, setDescription] = useState(false);
-  const [active, setActive] = useState(data && data.threeValue[0].count);
-  const [price, setPrice] = useState(data && data.threeValue[0].amount);
+  const [active, setActive] = useState(hasInCart ? cartFromBasket.count : data.threeValue[0].count);
+  const [price, setPrice] = useState(hasInCart ? cartFromBasket.price : data.threeValue[0].amount);
+
+  const cartFromBasket = cartData.find((item) => item.id === data.id && item.categoryName === categoryName);
+  const hasInCart = cartFromBasket !== undefined;
 
   const visibleDescription = (e) => {
     e.preventDefault();
@@ -37,16 +42,36 @@ export default function ThreePriceCard({data, className, categoryName}) {
     }
   };
 
+  const handleChangeAmount = (itemCount, itemAmount) => {
+    if (hasInCart) {
+      dispatch(changeInCart({
+        ...cartFromBasket,
+        count: itemCount,
+        price: itemAmount,
+      }))
+      setPrice(itemAmount);
+      setActive(itemCount);
+    } else {
+      setPrice(itemAmount);
+      setActive(itemCount);
+    }
+  }
+
   const handleAddInCart = (e) => {
-    e.preventDefault();
-    setEdit(isEdit ? false : true);
+    dispatch(toggleToCart({
+      ...data,
+      count: active,
+      price: price,
+      categoryName: categoryName
+    }))
   };
 
-  const handleDeletFromCart = (e) => {
-    e.preventDefault();
-    setEdit(false);
+  const handleDeleteFromCart = (e) => {
+    dispatch(toggleToCart({
+      ...cartFromBasket,
+    }))
   };
-  
+
   return (
     <div className={cs(s.card, className)}>
       {size.width < 1175 && !descriptionVision && (
@@ -90,8 +115,7 @@ export default function ThreePriceCard({data, className, categoryName}) {
                     text={item.count}
                     key={index}
                     onClick={() => {
-                      setActive(item.count);
-                      setPrice(item.amount);
+                      handleChangeAmount(item.count, item.amount)
                     }}
                     className={cs(
                       s.count_btn,
@@ -107,10 +131,10 @@ export default function ThreePriceCard({data, className, categoryName}) {
             <span className={s.amount}>{converterNumber(price)}</span>
             <span className={s.currency}> &#8381;</span>
           </p>
-          {isEdit ? (
+          {hasInCart ? (
             <DeleteButton
               className={s.delete_button}
-              onClick={handleDeletFromCart}
+              onClick={handleDeleteFromCart}
             />
           ) : (
             <PrimaryButton

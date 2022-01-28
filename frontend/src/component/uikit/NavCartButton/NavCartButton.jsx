@@ -2,11 +2,15 @@ import Link from "next/link";
 import React from "react";
 import s from "./NavCartButton.module.scss";
 import cs from "classnames";
-export default function NavCartButton({ className }) {
+import {useSelector} from "react-redux";
+import {cartSelector} from "../../../redux/selectors/cartSelector";
+
+export default function NavCartButton({className}) {
+  const cartLength = useSelector(cartSelector()).length;
   return (
     <Link href={"/cart"}>
       <a className={cs(s.button, className)}>
-        <span className={s.count}>3</span>
+        {cartLength !== 0 && <span className={s.count}>{cartLength}</span>}
         <svg
           width="20"
           height="20"

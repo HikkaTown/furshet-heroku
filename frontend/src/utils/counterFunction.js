@@ -11,7 +11,7 @@ export const handlerIncrement = (timer, setCount, count) => {
 };
 export const handlerDecrement = (timer, setCount, count, minValue) => {
   timer.current = setTimeout(function decremetTick() {
-    if (count > minValue) {
+    if (count > 1) {
       setCount(--count);
       timer.current = setTimeout(decremetTick, 150);
     }
@@ -29,5 +29,7 @@ export const onClickIncrement = (count, setCount) => {
 export const onClickDecrement = (count, setCount, minValue) => {
   if (count > minValue) {
     setCount(--count);
+  } else {
+    setCount(0)
   }
 };

@@ -17,7 +17,7 @@ import {useRouter} from "next/router";
 import checkTypeId from "./helpsAdditionals";
 import filterApiBuffets from "../../utils/api/filterApiBuffets";
 import sortAmount from "../../utils/sortAmount";
-import translit from "../../utils/translit";
+import translit from "../../../../../arenda-kazino-4/utils/translit";
 import Pagination from "rc-pagination";
 import ArrowSectionButton from "../uikit/ArrowSectionButton/ArrowSectionButton";
 import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
@@ -81,7 +81,7 @@ function CatalogBuffets({
     setEnd(null)
     data = await filterApiBuffets(13, null, null, null, true, 25);
     setFilteredCards(data);
-
+    setCurrentPage(1);
   };
   const handleOpenFilter = () => {
     setOpen(true);
@@ -109,6 +109,7 @@ function CatalogBuffets({
   // -------------------
 
   const handlerClickType = async (id) => {
+    setCurrentPage(1);
     setTypeId(id);
     let data = null;
     if (id === 13) {
