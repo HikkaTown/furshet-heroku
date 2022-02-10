@@ -5,10 +5,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #F3EFE9;
+  background-color: #f3efe9;
 
   &_active {
-    background-color: #F3EFE9;
+    background-color: #f3efe9;
     box-shadow: 0px -2px 4px rgba(166, 166, 166, 0.25);
   }
 
@@ -22,7 +22,7 @@
   max-width: 328px;
   width: 328px;
   height: 44px;
-  background-color: #FAB576;
+  background-color: #fab576;
   border-radius: 30px;
   @include body3-medium($primary-text);
 }

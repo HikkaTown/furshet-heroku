@@ -4,7 +4,8 @@
   "info": {
     "singularName": "bar",
     "pluralName": "bars",
-    "displayName": "бар"
+    "displayName": "бар",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -43,6 +44,16 @@
     },
     "catalogMenu": {
       "type": "text"
+    },
+    "kategoriya": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::kategoriya.kategoriya"
+    },
+    "kategoriya_dopovs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::kategoriya-dopov.kategoriya-dopov"
     }
   }
 }

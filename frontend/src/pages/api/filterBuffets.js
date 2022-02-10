@@ -4,7 +4,7 @@ import createQueryForFilters from "../../utils/createQueryForFilters";
 const parseObject = (data) => {
   var array = [];
   data.map((item) => {
-    const {attributes} = item;
+    const { attributes } = item;
     const id = item.id;
     const nameCard = attributes.name;
     const paramsCard = attributes.paramsBlock[0];
@@ -43,19 +43,19 @@ const parseObject = (data) => {
       vegan: vegan,
       threeValue: attributes.threeValue
         ? [
-          {
-            count: attributes.threeValue.firstPeople,
-            amount: attributes.threeValue.first_count,
-          },
-          {
-            count: attributes.threeValue.secondPeople,
-            amount: attributes.threeValue.second_count,
-          },
-          {
-            count: attributes.threeValue.threePeople,
-            amount: attributes.threeValue.three_count,
-          },
-        ]
+            {
+              count: attributes.threeValue.firstPeople,
+              amount: attributes.threeValue.first_count,
+            },
+            {
+              count: attributes.threeValue.secondPeople,
+              amount: attributes.threeValue.second_count,
+            },
+            {
+              count: attributes.threeValue.threePeople,
+              amount: attributes.threeValue.three_count,
+            },
+          ]
         : false,
     };
     array.push(object);
@@ -64,7 +64,7 @@ const parseObject = (data) => {
 };
 
 export default async function handler(req, res) {
-  const {typeId, thematicID, start, end, peopleNumber} = req.query;
+  const { typeId, thematicID, start, end, peopleNumber } = req.query;
   const string = await createQueryForFilters(
     "buffets_types",
     typeId,
@@ -73,6 +73,7 @@ export default async function handler(req, res) {
     end,
     peopleNumber
   );
+  console.log(string);
   const response = await fetch(`http://localhost:1337/api/buffets?${string}`);
   try {
     const data = await response.json();

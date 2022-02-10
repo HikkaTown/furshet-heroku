@@ -4,7 +4,7 @@
   "info": {
     "singularName": "station",
     "pluralName": "stations",
-    "displayName": "station",
+    "displayName": "Гастро-станции",
     "description": ""
   },
   "options": {
@@ -48,6 +48,16 @@
       "type": "text",
       "default": "Гастрономические станции",
       "required": true
+    },
+    "kategoriya": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::kategoriya.kategoriya"
+    },
+    "kategoriya_dopovs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::kategoriya-dopov.kategoriya-dopov"
     }
   }
 }

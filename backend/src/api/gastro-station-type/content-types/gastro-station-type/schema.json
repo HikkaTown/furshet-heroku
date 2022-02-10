@@ -12,13 +12,13 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name_type": {
+    "nameType": {
       "type": "string"
     },
-    "count": {
+    "katalogs": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::gastro-station.gastro-station",
+      "target": "api::catalog.catalog",
       "mappedBy": "gastro_station_types"
     }
   }

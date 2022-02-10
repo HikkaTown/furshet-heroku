@@ -4,7 +4,7 @@
   "info": {
     "singularName": "masterclass",
     "pluralName": "masterclasses",
-    "displayName": "masterclass",
+    "displayName": "мастер-класс",
     "description": ""
   },
   "options": {
@@ -44,6 +44,16 @@
     },
     "catalogMenu": {
       "type": "text"
+    },
+    "kategoriya": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::kategoriya.kategoriya"
+    },
+    "kategoriya_dopovs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::kategoriya-dopov.kategoriya-dopov"
     }
   }
 }

@@ -1,9 +1,9 @@
 import axios from "axios";
-import {URL_SERVER} from "../const";
-import {getQuery} from "../query";
+import { URL_SERVER } from "../const";
+import { getQuery } from "../query";
 
 const parsePage = (data) => {
-  const attributes = data.attributes;
+  const { attributes } = data;
   const sectionTwoData = attributes.sectionTwo;
   const seoBlockData = attributes.seoBlock;
   const sectionTwoImagePc = attributes.sectionTwo.imagePc.data.attributes.url;
@@ -17,9 +17,9 @@ const parsePage = (data) => {
   metaData.title = attributes.metaTitle;
 
   let catalogBlock = {
-    name: '',
-    position: '',
-  }
+    name: "",
+    position: "",
+  };
 
   catalogBlock.name = attributes.catalogName;
   catalogBlock.position = attributes.catalogMenu;
@@ -87,6 +87,10 @@ const parsePage = (data) => {
     textPage,
     sectionTwo,
     seoBlock,
+    kategoriya: {
+      id: attributes.kategoriya.data.id,
+      categoryName: attributes.kategoriya.data.attributes.categoryName,
+    },
   };
 
   return totalData;
@@ -120,9 +124,9 @@ const parsePageStudy = (data) => {
   textPage.title = attributes.titleP;
 
   let catalogBlock = {
-    name: '',
-    position: '',
-  }
+    name: "",
+    position: "",
+  };
 
   catalogBlock.name = attributes.catalogName;
   catalogBlock.position = attributes.catalogMenu;
@@ -212,6 +216,10 @@ const parsePageStudy = (data) => {
     sectionTwo,
     seoBlock,
     studyBlock,
+    kategoriya: {
+      id: attributes.kategoriya.data.id,
+      categoryName: attributes.kategoriya.data.attributes.categoryName,
+    },
   };
   return totalData;
 };
@@ -220,6 +228,7 @@ export const getIndexPage = async () => {
   const path = {
     seoBlock: null,
     sectionTwo: null,
+    kategoriya: null,
   };
   try {
     const res = await axios.get(`${URL_SERVER}/index/?${getQuery(path)}`);
@@ -236,6 +245,7 @@ export const getStationsPage = async () => {
     seoBlock: null,
     sectionTwo: null,
     studyBlock: null,
+    kategoriya: null,
   };
   try {
     const res = await axios.get(`${URL_SERVER}/station/?${getQuery(path)}`);
@@ -252,6 +262,7 @@ export const getMasterClassPage = async () => {
     seoBlock: null,
     sectionTwo: null,
     studyBlock: null,
+    kategoriya: null,
   };
   try {
     const res = await axios.get(`${URL_SERVER}/masterclass/?${getQuery(path)}`);

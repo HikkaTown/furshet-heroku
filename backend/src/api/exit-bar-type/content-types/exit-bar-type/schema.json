@@ -12,14 +12,14 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name_type": {
+    "nameType": {
       "type": "string"
     },
-    "exit_bars": {
+    "katalogs": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::exit-bar.exit-bar",
-      "inversedBy": "exit_bar_types"
+      "target": "api::catalog.catalog",
+      "mappedBy": "exit_bar_types"
     }
   }
 }

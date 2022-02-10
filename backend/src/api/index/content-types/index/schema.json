@@ -4,7 +4,7 @@
   "info": {
     "singularName": "index",
     "pluralName": "indices",
-    "displayName": "index",
+    "displayName": "Фуршет-Главная",
     "description": ""
   },
   "options": {
@@ -39,6 +39,16 @@
     },
     "catalogMenu": {
       "type": "text"
+    },
+    "kategoriya": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::kategoriya.kategoriya"
+    },
+    "kategoriya_dopovs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::kategoriya-dopov.kategoriya-dopov"
     }
   }
 }

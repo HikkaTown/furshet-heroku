@@ -14,10 +14,10 @@
     "nameType": {
       "type": "string"
     },
-    "buffets": {
+    "katalogs": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::buffet.buffet",
+      "target": "api::catalog.catalog",
       "mappedBy": "buffets_types"
     }
   }

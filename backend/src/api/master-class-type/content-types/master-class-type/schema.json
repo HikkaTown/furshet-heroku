@@ -12,14 +12,14 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "name_type": {
+    "nameType": {
       "type": "string"
     },
-    "master_class": {
+    "katalogs": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::master-class.master-class",
-      "inversedBy": "master_class_types"
+      "relation": "manyToMany",
+      "target": "api::catalog.catalog",
+      "mappedBy": "master_class_types"
     }
   }
 }
