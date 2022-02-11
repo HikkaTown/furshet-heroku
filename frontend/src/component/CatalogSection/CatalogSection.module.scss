@@ -31,9 +31,6 @@
   }
 }
 
-.content {
-}
-
 .dropdown_thematic {
   display: none;
   @include desktop {
@@ -169,8 +166,8 @@
     transform: rotate(-180deg);
   }
 
-  &_right {
-  }
+  // &_right {
+  // }
 }
 
 .show_more {

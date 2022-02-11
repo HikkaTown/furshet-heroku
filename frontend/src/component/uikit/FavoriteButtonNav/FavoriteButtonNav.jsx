@@ -1,34 +1,41 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from "react";
 import cs from "classnames";
-import s from './FavoriteButtonNav.module.scss';
-import {useSelector} from "react-redux";
+import s from "./FavoriteButtonNav.module.scss";
+import { useSelector } from "react-redux";
 import {
   favoriteSelectorBar,
   favoriteSelectorBuffets,
+  favoriteSelectorDop,
   favoriteSelectorGastro,
-  favoriteSelectorMasterclass
+  favoriteSelectorMasterclass,
 } from "../../../redux/selectors/favoriteSelector";
 
-function FavoriteButtonNav({className, onClick}) {
+function FavoriteButtonNav({ className, onClick }) {
   const favoritesBuffets = useSelector(favoriteSelectorBuffets());
   const favoritesGastro = useSelector(favoriteSelectorGastro());
   const favoritesMasterClass = useSelector(favoriteSelectorMasterclass());
   const favoritesBar = useSelector(favoriteSelectorBar());
-  // const length = favoritesMasterClass.length + favoritesGastro.length + favoritesBuffets.length + favoritesBar.length
+  const favoritesDops = useSelector(favoriteSelectorDop());
   const [lenght, setLenght] = useState(0);
   useEffect(() => {
-    let a = favoritesMasterClass.length + favoritesGastro.length + favoritesBuffets.length + favoritesBar.length;
+    let a =
+      favoritesMasterClass.length +
+      favoritesGastro.length +
+      favoritesBuffets.length +
+      favoritesBar.length +
+      favoritesDops.length;
     setLenght(a);
-  }, [favoritesBuffets, favoritesGastro, favoritesMasterClass, favoritesBar])
+  }, [
+    favoritesBuffets,
+    favoritesGastro,
+    favoritesMasterClass,
+    favoritesBar,
+    favoritesDops,
+  ]);
 
   return (
-    <button
-      onClick={onClick}
-      className={
-        cs(s.button, className)
-      }
-    >
-      {lenght === 0 ? '' : <span className={s.count}>{lenght}</span>}
+    <button onClick={onClick} className={cs(s.button, className)}>
+      {lenght === 0 ? "" : <span className={s.count}>{lenght}</span>}
       <svg
         width="30"
         height="28"
@@ -44,8 +51,8 @@ function FavoriteButtonNav({className, onClick}) {
           strokeLinejoin="round"
         />
       </svg>
-    </button>)
-
+    </button>
+  );
 }
 
 export default FavoriteButtonNav;

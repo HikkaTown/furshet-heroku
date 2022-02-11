@@ -1,28 +1,28 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import cs from "classnames";
 import s from "./ItemCard.module.scss";
-import {LazyImageWrapper} from "../../LazyImage/LazyImage";
+import { LazyImageWrapper } from "../../LazyImage/LazyImage";
 import AddBasketButton from "../AddBasketButton/AddBasketButton";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import CounterLight from "../CounterLight/CounterLight";
-import {PATH_IMAGES} from "../../../utils/const";
+import { PATH_IMAGES } from "../../../utils/const";
 import converterNumber from "../../../utils/converterNumber";
 import {
   addFavoriteItemToStore,
-  deleteFavoriteFromStore
+  deleteFavoriteFromStore,
 } from "../../../redux/actions/favoriteActions";
-import {useDispatch, useSelector} from "react-redux";
-import {cartSelector} from "../../../redux/selectors/cartSelector";
+import { useDispatch, useSelector } from "react-redux";
+import { cartSelector } from "../../../redux/selectors/cartSelector";
 // карточка для обычных продуктов или стаффа
 
-export default function ItemCard({data, className, categoryName}) {
+export default function ItemCard({ data, className, categoryName }) {
   const dispatch = useDispatch();
   const cartData = useSelector(cartSelector());
-  const cartFromBasket = cartData.find(item => item.id)
+  const cartFromBasket = cartData.find((item) => item.id);
   const [isEdit, setIsEdit] = useState(false);
   const [added, setAdded] = useState(data.isAdded);
   const [price, setPrice] = useState(null);
-  const [count, setCount] = useState(data.count ? data.count : null)
+  const [count, setCount] = useState(data.count ? data.count : null);
   const startPrice = +data.price;
   const handleAddInCart = (e) => {
     e.preventDefault();
@@ -31,15 +31,14 @@ export default function ItemCard({data, className, categoryName}) {
     setCount(1);
   };
 
-
   useEffect(() => {
     setPrice(startPrice * count);
-  }, [count])
+  }, [count]);
 
   return (
     <div className={cs(s.block, className)}>
       <div className={s.favorite}>
-        <FavoriteButton id={data.id} categoryName={categoryName}/>
+        <FavoriteButton id={data.id} categoryName={categoryName} />
       </div>
       <LazyImageWrapper
         wrapperClass={s.wrapper}
@@ -54,13 +53,15 @@ export default function ItemCard({data, className, categoryName}) {
       </div>
       <div className={s.pay}>
         <p className={s.price}>
-          <span className={s.amount}>{converterNumber(price || startPrice)}</span>
+          <span className={s.amount}>
+            {converterNumber(price || startPrice)}
+          </span>
           <span className={s.currency}> &#8381;</span>/шт
         </p>
         {isEdit ? (
-          <CounterLight count={count} setCount={setCount}/>
+          <CounterLight count={count} setCount={setCount} />
         ) : (
-          <AddBasketButton handleAddInCart={handleAddInCart}/>
+          <AddBasketButton handleAddInCart={handleAddInCart} />
         )}
       </div>
     </div>

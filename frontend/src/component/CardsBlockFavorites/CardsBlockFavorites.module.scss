@@ -27,7 +27,6 @@
     &:nth-child(odd) {
       margin-left: 0;
     }
-
   }
 
   @include desktop {
@@ -36,7 +35,7 @@
     &:first-child {
       margin-left: 0 !important;
     }
-    &:nth-child(5n+5) {
+    &:nth-child(5n + 5) {
       margin-left: 0 !important;
     }
   }

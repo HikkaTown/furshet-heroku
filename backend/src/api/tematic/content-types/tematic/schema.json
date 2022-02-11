@@ -4,7 +4,7 @@
   "info": {
     "singularName": "tematic",
     "pluralName": "tematics",
-    "displayName": "tematic",
+    "displayName": "Тематики",
     "description": ""
   },
   "options": {
@@ -12,31 +12,13 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "exit_bars": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::exit-bar.exit-bar",
-      "mappedBy": "tematics"
-    },
     "Name_Category": {
       "type": "string"
     },
-    "gastro_stations": {
+    "katalogs": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::gastro-station.gastro-station",
-      "mappedBy": "tematics"
-    },
-    "master_classes": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::master-class.master-class",
-      "mappedBy": "tematics"
-    },
-    "buffets": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::buffet.buffet",
+      "target": "api::catalog.catalog",
       "mappedBy": "tematics"
     }
   }

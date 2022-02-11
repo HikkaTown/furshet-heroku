@@ -4,7 +4,7 @@ import s from "./NavSearchButton.module.scss";
 import cs from "classnames";
 export default function NavSearchButton({ className }) {
   return (
-    <Link href={"/search"}>
+    <Link prefetch={false} href={"/search"}>
       <a className={cs(s.button, className)}>
         <svg
           width="20"

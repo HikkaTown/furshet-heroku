@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import s from "./CatalogSection.module.scss";
 import cs from "classnames";
 import DropdownPerson from "../uikit/DropdownPerson/DropdownPerson";
 import Dropdown from "../uikit/Dropdown/Dropdown";
-import {LazyImageWrapper} from "../LazyImage";
+import { LazyImageWrapper } from "../LazyImage";
 import FilterCatalog from "./FilterCatalog";
 import BlockCards from "../BlockCards/BlockCards";
 import ModalFilter from "./ModalFilter";
 import ModalSort from "../ModalSort/ModalSort";
-import {sortToDownHelp, sortToUpHelp} from "../CatalogBuffets/sort";
+import { sortToDownHelp, sortToUpHelp } from "../CatalogBuffets/sort";
 import DropdownTematic from "../uikit/DropdownTematic/DropdownTematic";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import checkTypeId from "../CatalogBuffets/helpsAdditionals";
 import sortAmount from "../../utils/sortAmount";
 import translit from "../../../../../arenda-kazino-4/utils/translit";
@@ -19,14 +19,14 @@ import ArrowSectionButton from "../uikit/ArrowSectionButton/ArrowSectionButton";
 import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
 
 function CatalogSection({
-                          categoryName,
-                          catalogData,
-                          catalogType,
-                          thematics,
-                          cards,
-                          additionals,
-                          filterFunction,
-                        }) {
+  categoryName,
+  catalogData,
+  catalogType,
+  thematics,
+  cards,
+  additionals,
+  filterFunction,
+}) {
   const router = useRouter();
   const [isOpened, setOpen] = useState(false);
   const [isOpenedSort, setOpenSort] = useState(false);
@@ -162,32 +162,26 @@ function CatalogSection({
     if (!!router.asPath.slice(router.asPath.indexOf("#") + 1)) {
       // path = router.asPath.slice(2);
       catalogType &&
-      catalogType.map((item) => {
-        const text = translit(item.attributes.name_type);
-        if (text === router.asPath.slice(2)) {
-          data = item.id;
-        }
-      });
+        catalogType.map((item) => {
+          const text = translit(item.attributes.name_type);
+          if (text === router.asPath.slice(2)) {
+            data = item.id;
+          }
+        });
       catalogType &&
-      additionals.map((item) => {
-        const text = translit(item.name);
-        if (text === router.asPath.slice(router.asPath.indexOf("#") + 1)) {
-          data = translit(item.name);
-        }
-      });
+        additionals.map((item) => {
+          const text = translit(item.name);
+          if (text === router.asPath.slice(router.asPath.indexOf("#") + 1)) {
+            data = translit(item.name);
+          }
+        });
       if (typeof data === "string") {
         await handlerAdditionals(data);
       } else {
         await handlerClickType(data);
       }
     } else {
-      const data = await filterFunction(
-        typeId,
-        null,
-        null,
-        null,
-        false
-      );
+      const data = await filterFunction(typeId, null, null, null, false);
       setVisiblePeople(false);
       setFilteredCards(data);
       data.length > 0 && setVisualAmount(data);
@@ -198,7 +192,7 @@ function CatalogSection({
 
   return (
     <section className={s.section}>
-      <div className={s.hash} id="catalog"/>
+      <div className={s.hash} id="catalog" />
       <h2 className={s.head}>{catalogData.name}</h2>
       <div className={s.content}>
         <div className={s.row_buttons}>
@@ -253,7 +247,7 @@ function CatalogSection({
               {visiblePeople && (
                 <div className={s.dropdown_person}>
                   <p className={s.text}>Кол-во, чел</p>
-                  <DropdownPerson setPeopleNumber={setPeopleNumber}/>
+                  <DropdownPerson setPeopleNumber={setPeopleNumber} />
                 </div>
               )}
               <div className={s.dropdown_amount}>
@@ -264,6 +258,7 @@ function CatalogSection({
               </div>
             </div>
             <BlockCards
+              typeId={typeId}
               categoryName={categoryName}
               cards={filteredCards || cards}
               pageSize={pageSize}

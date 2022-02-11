@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import s from "./ThreePriceCard.module.scss";
 import cs from "classnames";
 import useWindowSize from "../../../hooks/useWindowSize";
@@ -12,22 +12,30 @@ import SliderCloseButton from "../SliderCloseButton/SliderCloseButton";
 import SliderForCard from "../SliderForCard/SliderForCard";
 import converterNumber from "../../../utils/converterNumber";
 import CatalogTabButton from "../CatalogTabButton/CatalogTabButton";
-import {addFavoriteItemToStore, deleteFavoriteFromStore} from "../../../redux/actions/favoriteActions";
-import {useDispatch, useSelector} from "react-redux";
-import {cartSelector} from "../../../redux/selectors/cartSelector";
-import {changeInCart, toggleToCart} from "../../../redux/actions/cartActions";
+import {
+  addFavoriteItemToStore,
+  deleteFavoriteFromStore,
+} from "../../../redux/actions/favoriteActions";
+import { useDispatch, useSelector } from "react-redux";
+import { cartSelector } from "../../../redux/selectors/cartSelector";
+import { changeInCart, toggleToCart } from "../../../redux/actions/cartActions";
 
-export default function ThreePriceCard({data, className, categoryName}) {
+export default function ThreePriceCard({ data, className, categoryName }) {
   const size = useWindowSize();
   const cartData = useSelector(cartSelector());
   const dispatch = useDispatch();
+  const cartFromBasket = cartData.find(
+    (item) => item.id === data.id && item.categoryName === categoryName
+  );
+  const hasInCart = cartFromBasket !== undefined;
 
   const [descriptionVision, setDescription] = useState(false);
-  const [active, setActive] = useState(hasInCart ? cartFromBasket.count : data.threeValue[0].count);
-  const [price, setPrice] = useState(hasInCart ? cartFromBasket.price : data.threeValue[0].amount);
-
-  const cartFromBasket = cartData.find((item) => item.id === data.id && item.categoryName === categoryName);
-  const hasInCart = cartFromBasket !== undefined;
+  const [active, setActive] = useState(
+    hasInCart ? cartFromBasket.count : data.threeValue[0].count
+  );
+  const [price, setPrice] = useState(
+    hasInCart ? cartFromBasket.price : data.threeValue[0].amount
+  );
 
   const visibleDescription = (e) => {
     e.preventDefault();
@@ -44,32 +52,38 @@ export default function ThreePriceCard({data, className, categoryName}) {
 
   const handleChangeAmount = (itemCount, itemAmount) => {
     if (hasInCart) {
-      dispatch(changeInCart({
-        ...cartFromBasket,
-        count: itemCount,
-        price: itemAmount,
-      }))
+      dispatch(
+        changeInCart({
+          ...cartFromBasket,
+          count: itemCount,
+          price: itemAmount,
+        })
+      );
       setPrice(itemAmount);
       setActive(itemCount);
     } else {
       setPrice(itemAmount);
       setActive(itemCount);
     }
-  }
+  };
 
   const handleAddInCart = (e) => {
-    dispatch(toggleToCart({
-      ...data,
-      count: active,
-      price: price,
-      categoryName: categoryName
-    }))
+    dispatch(
+      toggleToCart({
+        ...data,
+        count: active,
+        price: price,
+        categoryName: categoryName,
+      })
+    );
   };
 
   const handleDeleteFromCart = (e) => {
-    dispatch(toggleToCart({
-      ...cartFromBasket,
-    }))
+    dispatch(
+      toggleToCart({
+        ...cartFromBasket,
+      })
+    );
   };
 
   return (
@@ -88,10 +102,10 @@ export default function ThreePriceCard({data, className, categoryName}) {
         />
       )}
       <div className={s.favorite}>
-        <FavoriteButton id={data.id} categoryName={categoryName}/>
+        <FavoriteButton id={data.id} categoryName={categoryName} />
       </div>
       <div className={s.slider_block}>
-        <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc}/>
+        <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc} />
         <DescriptionInCard
           descriptionVision={descriptionVision}
           content={data.descriptionList}
@@ -115,7 +129,7 @@ export default function ThreePriceCard({data, className, categoryName}) {
                     text={item.count}
                     key={index}
                     onClick={() => {
-                      handleChangeAmount(item.count, item.amount)
+                      handleChangeAmount(item.count, item.amount);
                     }}
                     className={cs(
                       s.count_btn,

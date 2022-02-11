@@ -1,17 +1,17 @@
 import Link from "next/link";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import cs from "classnames";
 import s from "./NavigationButton.module.scss";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 
 export default function NavigationButton({
-                                           href,
-                                           text,
-                                           onClick,
-                                           className,
-                                           classNameActive,
-                                           length
-                                         }) {
+  href,
+  text,
+  onClick,
+  className,
+  classNameActive,
+  length,
+}) {
   const router = useRouter();
   const [active, setActive] = useState(false);
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function NavigationButton({
   return (
     <>
       {href ? (
-        <Link href={href} passHref>
+        <Link prefetch={false} href={href} passHref>
           <button
             className={
               active
@@ -44,7 +44,7 @@ export default function NavigationButton({
               : cs(s.button, className)
           }
           onClick={() => {
-            onClick(text)
+            onClick(text);
           }}
         >
           {!!length && <span className={s.count}>{length}</span>}

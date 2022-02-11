@@ -79,7 +79,7 @@
     }
     @include desktop {
       padding-top: 0;
-      display: none;
+      // display: none;
     }
   }
 
@@ -125,45 +125,10 @@
 .category {
 }
 
-.button {
-  @include buttonDefault;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 16px;
-
-  &_name {
-    @include body2-normal($primary-text);
-  }
-
-  &_active {
-    .button_name {
-      @include body2-medium($wine-color);
-    }
-  }
-
-  &_name {
-    padding: 0;
-    margin: 0;
-  }
-
-  &_number {
-    @include body3-normal(#b4b4b4);
-    padding: 0;
-    margin: 0;
-  }
-}
-
 .thematics {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  @include tablet {
-  }
-  @include desktop {
-    display: none;
-  }
 }
 
 .thematics_btn {
@@ -175,4 +140,38 @@
 
 .thematics_btn_active {
   background-color: #fab576;
+}
+
+.catalogName {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include body2-normal($primary-text);
+  cursor: pointer;
+
+  &_active {
+    margin: 0 0 20px 0;
+    @include body2-medium($wine-color);
+  }
+}
+
+.btn_tab {
+  margin-right: 8px;
+  margin-bottom: 8px;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  &_active {
+    background-color: $wine-color !important;
+    border-color: $wine-color !important;
+    color: #fff !important;
+
+    &:hover {
+      background-color: $wine-color !important;
+    }
+  }
 }

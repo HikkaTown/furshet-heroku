@@ -3,7 +3,7 @@ import qs from "qs";
 const parse = (data) => {
   let arr = [];
   data.map((item) => {
-    const {attributes, id} = item;
+    const { attributes, id } = item;
     let res = {
       id: id,
       name: attributes.name,
@@ -18,25 +18,29 @@ const parse = (data) => {
 };
 
 export default async function handler(req, res) {
-  const {start, end} = req.query;
-  console.log(typeof start, typeof end)
+  const { start, end } = req.query;
   let queryString;
-  if (start !== 'null' && end !== 'null') {
-    queryString = qs.stringify({
-      filters: {
-        price: {
-          $gte: start,
-          $lte: end,
-        }
+  if (start !== "null" && end !== "null") {
+    queryString = qs.stringify(
+      {
+        filters: {
+          price: {
+            $gte: start,
+            $lte: end,
+          },
+        },
+        populate: "*",
       },
-      populate: '*'
-    }, {
-      encodeValuesOnly: true,
-    });
+      {
+        encodeValuesOnly: true,
+      }
+    );
   } else {
-    queryString = 'populate=*'
+    queryString = "populate=*";
   }
-  const response = await fetch(`http://localhost:1337/api/decors/?${queryString}`);
+  const response = await fetch(
+    `http://localhost:1337/api/decors/?${queryString}`
+  );
   try {
     const data = await response.json();
     const newData = parse(data.data);

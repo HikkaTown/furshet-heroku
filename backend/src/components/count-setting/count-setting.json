@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_count_setting_count_settings",
+  "info": {
+    "displayName": "countSetting",
+    "icon": "archive"
+  },
+  "options": {},
+  "attributes": {
+    "minCount": {
+      "type": "biginteger"
+    },
+    "minPrice": {
+      "type": "biginteger"
+    }
+  }
+}

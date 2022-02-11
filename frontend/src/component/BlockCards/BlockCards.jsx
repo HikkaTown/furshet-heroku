@@ -6,33 +6,70 @@ import ThreePriceCard from "../uikit/ThreePriceCard/ThreePriceCard";
 import GastroStationCard from "../uikit/GastroStationCard/GastroStationCard";
 import MasterClassCard from "../uikit/MasterClassCard/MasterClassCard";
 
-function BlockCards({cards, pageSize, currentPage, categoryName}) {
+function BlockCards({ cards, pageSize, currentPage, categoryName, typeId }) {
+  console.log(cards);
   return (
     <div className={s.content}>
       {cards && cards.length > 0
-        ? cards.slice(pageSize * (currentPage - 1), (pageSize * currentPage)).map((item) => {
-
-          if (item.nextPersonPrice) {
-            return (
-              <MasterClassCard className={s.card} key={item.id} data={item} categoryName={categoryName}/>
-            )
-          }
-          if (item.dopPositionPrice) {
-            return (
-              <GastroStationCard className={s.card} key={item.id} data={item} categoryName={categoryName}/>
-            )
-          }
-          if (typeof item.params === "object" && item.threeValue === false) {
-            return (
-              <FurshetCard className={s.card} key={item.id} data={item} categoryName={categoryName}/>
-            );
-          } else if (item.threeValue) {
-            return (<ThreePriceCard key={item.id} data={item} className={s.card} categoryName={categoryName}/>);
-          } else if (typeof item.params === 'string' || item.params === undefined) {
-            return <ItemCard className={s.card} key={item.id} data={item} categoryName={'Дополнительно'}/>;
-          }
-        })
-        : "Ничего нет"}
+        ? // ? cards
+          //     .slice(pageSize * (currentPage - 1), pageSize * currentPage)
+          cards.map((item) => {
+            if (item.category.categoryName === "Мастер-класс") {
+              return (
+                <MasterClassCard
+                  className={s.card}
+                  key={item.id}
+                  data={item}
+                  categoryName={categoryName}
+                />
+              );
+            }
+            if (item.category.categoryName === "Гастро-станции") {
+              return (
+                <GastroStationCard
+                  className={s.card}
+                  key={item.id}
+                  data={item}
+                  categoryName={categoryName}
+                />
+              );
+            }
+            if (
+              item.category.categoryName === "Фуршет" &&
+              item.threeValue === false
+            ) {
+              return (
+                <FurshetCard
+                  className={s.card}
+                  key={item.id}
+                  data={item}
+                  categoryName={categoryName}
+                />
+              );
+            } else if (item.threeValue) {
+              return (
+                <ThreePriceCard
+                  key={item.id}
+                  data={item}
+                  className={s.card}
+                  categoryName={categoryName}
+                />
+              );
+            } else if (
+              typeof item.params === "string" ||
+              item.params === undefined
+            ) {
+              return (
+                <ItemCard
+                  className={s.card}
+                  key={item.id}
+                  data={item}
+                  categoryName={typeId}
+                />
+              );
+            }
+          })
+        : "Оуу щит, тут пусто"}
     </div>
   );
 }

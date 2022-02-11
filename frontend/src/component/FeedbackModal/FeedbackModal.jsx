@@ -25,7 +25,7 @@ export default function FeedbackModal({ onClose, isOpened }) {
                 </div>
                 <p className={s.description}>
                   Нажимая на кнопку «Оформить заказ», вы даете согласие{" "}
-                  <Link href="/">
+                  <Link prefetch={false} href="/">
                     <a className={s.text_link}>
                       на обработку своих персональных данных
                     </a>

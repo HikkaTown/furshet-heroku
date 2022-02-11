@@ -11,12 +11,13 @@ export default function Footer() {
       <div className={s.container}>
         <div className={s.two_column}>
           <div className={s.column}>
-            <Link className={s.logo_link} href="/">
+            <Link prefetch={false} className={s.logo_link} href="/">
               <a>
                 <LazyImageWrapper
                   src={"uikit/logo.svg"}
                   className={[s.logo]}
                   wrapperClass={s.logo_wrapper}
+                  alt="Логотип"
                 />
               </a>
             </Link>
@@ -27,22 +28,22 @@ export default function Footer() {
           </div>
           <div className={s.column}>
             <nav className={s.nav}>
-              <Link href="/" className={s.link}>
+              <Link prefetch={false} href="/" className={s.link}>
                 <a className={s.text_link}>Фуршет</a>
               </Link>
-              <Link href="/stations" className={s.link}>
+              <Link prefetch={false} href="/stations" className={s.link}>
                 <a className={s.text_link}>Гастрономические станции</a>
               </Link>
-              <Link href="/masterclass" className={s.link}>
+              <Link prefetch={false} href="/masterclass" className={s.link}>
                 <a className={s.text_link}>Мастер-классы</a>
               </Link>
-              <Link href="/bar" className={s.link}>
+              <Link prefetch={false} href="/bar" className={s.link}>
                 <a className={s.text_link}>Выездные бары</a>
               </Link>
-              <Link href="/" className={s.link}>
+              <Link prefetch={false} href="/" className={s.link}>
                 <a className={s.text_link}>Вопросы-ответы</a>
               </Link>
-              <Link href="/news" className={s.link}>
+              <Link prefetch={false} href="/news" className={s.link}>
                 <a className={s.text_link}>Наши кейсы</a>
               </Link>
             </nav>
@@ -54,7 +55,7 @@ export default function Footer() {
               {EMAIL}
             </a>
             <p className={s.adress}>{ADRESS}</p>
-            <Link className={s.privacy_link} href="/privacy">
+            <Link prefetch={false} className={s.privacy_link} href="/privacy">
               <a className={s.privacy_text}>Политика конфиденциальности </a>
             </Link>
             <div className={s.social}></div>
