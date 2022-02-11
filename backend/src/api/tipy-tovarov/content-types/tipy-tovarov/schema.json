@@ -1,10 +1,11 @@
 {
   "kind": "collectionType",
-  "collectionName": "buffets_types",
+  "collectionName": "tipy_tovarovs",
   "info": {
-    "singularName": "buffets-type",
-    "pluralName": "buffets-types",
-    "displayName": "buffetsType"
+    "singularName": "tipy-tovarov",
+    "pluralName": "tipy-tovarovs",
+    "displayName": "типы товаров",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,7 +19,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::catalog.catalog",
-      "mappedBy": "buffets_types"
+      "inversedBy": "tipy_tovarovs"
     }
   }
 }

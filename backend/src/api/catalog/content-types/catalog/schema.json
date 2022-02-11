@@ -64,30 +64,6 @@
       "repeatable": false,
       "component": "count-setting.count-setting"
     },
-    "master_class_types": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::master-class-type.master-class-type",
-      "inversedBy": "katalogs"
-    },
-    "buffets_types": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::buffets-type.buffets-type",
-      "inversedBy": "katalogs"
-    },
-    "gastro_station_types": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::gastro-station-type.gastro-station-type",
-      "inversedBy": "katalogs"
-    },
-    "exit_bar_types": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::exit-bar-type.exit-bar-type",
-      "inversedBy": "katalogs"
-    },
     "kategoriya": {
       "type": "relation",
       "relation": "manyToOne",
@@ -96,6 +72,12 @@
     },
     "foodName": {
       "type": "text"
+    },
+    "tipy_tovarovs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tipy-tovarov.tipy-tovarov",
+      "mappedBy": "katalogs"
     }
   }
 }

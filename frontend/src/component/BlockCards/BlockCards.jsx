@@ -10,70 +10,66 @@ function BlockCards({ cards, pageSize, currentPage, categoryName, typeId }) {
   console.log(cards);
   return (
     <div className={s.content}>
-      {cards &&
-        cards.length > 0 &&
-        // ? cards
-        //     .slice(pageSize * (currentPage - 1), pageSize * currentPage)
-        cards.map((item) => {
-          if (item.category.categoryName === "Мастер-класс") {
-            console.log("может сюда попал");
-            return (
-              <MasterClassCard
-                className={s.card}
-                key={item.id}
-                data={item}
-                categoryName={categoryName}
-              />
-            );
-          }
-          if (item.category.categoryName === "Гастро-станции") {
-            console.log("может сюда попал");
-            return (
-              <GastroStationCard
-                className={s.card}
-                key={item.id}
-                data={item}
-                categoryName={categoryName}
-              />
-            );
-          }
-          if (
-            item.category.categoryName === "Фуршет" &&
-            item.threeValue === false
-          ) {
-            console.log("попал в фуршет");
-            return (
-              <FurshetCard
-                className={s.card}
-                key={item.id}
-                data={item}
-                categoryName={categoryName}
-              />
-            );
-          } else if (item.threeValue) {
-            console.log("может сюда попал");
-            return (
-              <ThreePriceCard
-                key={item.id}
-                data={item}
-                className={s.card}
-                categoryName={categoryName}
-              />
-            );
-          } else if (
-            typeof item.params === "string" ||
-            item.params === undefined
-          ) {
-            return (
-              <ItemCard
-                className={s.card}
-                key={item.id}
-                data={item}
-                categoryName={typeId}
-              />
-            );
-          }
-        })}
+      {cards && cards.length > 0
+        ? // ? cards
+          //     .slice(pageSize * (currentPage - 1), pageSize * currentPage)
+          cards.map((item) => {
+            if (item.category.categoryName === "Мастер-класс") {
+              return (
+                <MasterClassCard
+                  className={s.card}
+                  key={item.id}
+                  data={item}
+                  categoryName={categoryName}
+                />
+              );
+            }
+            if (item.category.categoryName === "Гастро-станции") {
+              return (
+                <GastroStationCard
+                  className={s.card}
+                  key={item.id}
+                  data={item}
+                  categoryName={categoryName}
+                />
+              );
+            }
+            if (
+              item.category.categoryName === "Фуршет" &&
+              item.threeValue === false
+            ) {
+              return (
+                <FurshetCard
+                  className={s.card}
+                  key={item.id}
+                  data={item}
+                  categoryName={categoryName}
+                />
+              );
+            } else if (item.threeValue) {
+              return (
+                <ThreePriceCard
+                  key={item.id}
+                  data={item}
+                  className={s.card}
+                  categoryName={categoryName}
+                />
+              );
+            } else if (
+              typeof item.params === "string" ||
+              item.params === undefined
+            ) {
+              return (
+                <ItemCard
+                  className={s.card}
+                  key={item.id}
+                  data={item}
+                  categoryName={typeId}
+                />
+              );
+            }
+          })
+        : "Оуу щит, тут пусто"}
     </div>
   );
 }

@@ -17,13 +17,12 @@ import FullCatalog from "../component/FullCatalog/FullCatalog";
 
 export default function Home({
   index,
-  fullCatalog,
+  filteredCatalog,
   allBufets,
   catalogType,
   thematics,
   additionalsData,
 }) {
-  console.log(fullCatalog);
   return (
     <>
       <Head>
@@ -47,9 +46,10 @@ export default function Home({
         <CompleteFushetSection />
         <FullCatalog
           catalogData={index.catalogBlock}
-          cards={fullCatalog}
-          catalogType={catalogType}
-          categoryName={index.kategoriya.id}
+          cards={filteredCatalog}
+          catalogType={index.type}
+          categoryId={index.kategoriya.id}
+          thematics={thematics}
         />
         {/* <CatalogBuffets
           categoryName={index.kategoriya.categoryName}
@@ -71,9 +71,29 @@ export default function Home({
 }
 
 export async function getStaticProps({ preview = null }) {
-  // const allBufets = await axios("http://localhost:3000/api/getBufets");
   const indexPage = await getIndexPage();
-  const catalogType = await axios("http://localhost:3000/api/getTypeBufets");
+  const catalogData = await axios(
+    `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${indexPage.kategoriya.id}`
+  );
+  let filteredCatalog = [];
+  indexPage.type.map((typeItem, index) => {
+    catalogData.data.find((itemCard) => {
+      if (itemCard.type.includes(typeItem.id)) {
+        // console.log(filteredCatalog, "[itemcard id]");
+        const findRes = filteredCatalog.find(
+          (filterCard) => filterCard.id === itemCard.id
+        );
+        if (!findRes) {
+          filteredCatalog.push(itemCard);
+          indexPage.type[index] = {
+            ...typeItem,
+            count: indexPage.type[index].count + 1,
+          };
+        }
+      }
+    });
+  });
+
   const catalogThematics = await axios(
     "http://localhost:3000/api/getThematicsData"
   );
@@ -102,17 +122,12 @@ export async function getStaticProps({ preview = null }) {
   //   },
   // ];
 
-  const catalogData = await axios(
-    `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${indexPage.kategoriya.id}`
-  );
-
   return {
     props: {
       index: indexPage,
-      catalogType: catalogType.data.data,
-      // thematics: catalogThematics.data.data,
+      filteredCatalog: filteredCatalog,
+      thematics: catalogThematics.data.data,
       // additionalsData: additionalsData,
-      fullCatalog: catalogData.data,
     },
   };
 }

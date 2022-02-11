@@ -20,7 +20,7 @@ import DropdownTematic from "../uikit/DropdownTematic/DropdownTematic";
 // import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
 
 function FullCatalog({
-  categoryName,
+  categoryId,
   cards,
   catalogData,
   catalogType,
@@ -28,16 +28,20 @@ function FullCatalog({
   additionals,
 }) {
   //-------------------
+  const [requestCards, setRequestCards] = useState(null);
   const [typeId, setTypeId] = useState(null);
-
+  const [thematicId, setThematicId] = useState(null);
   useEffect(async () => {
     let data = [];
     const res = await fetch(
-      `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${categoryName}?typeId=${typeId}`
+      `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${categoryId}&typeId=${typeId}`
     );
-    const result = await res.json();
-    console.log(result);
-  });
+    try {
+      const result = await res.json();
+      data.push(result);
+    } catch {}
+    setRequestCards(data[0]);
+  }, [typeId]);
 
   return (
     <section className={s.section}>
@@ -68,28 +72,24 @@ function FullCatalog({
           <div className={s.filter_catalog}>
             <FilterCatalog
               types={catalogType}
+              thematics={thematics}
+              setThematicId={setThematicId}
+              thematicId={thematicId}
+              typeId={typeId}
+              setTypeId={setTypeId}
+              // --------
               // setStart={setStart}
               // setEnd={setEnd}
               // min={min}
               // max={max}
-              typeId={typeId}
-              setTypeId={setTypeId}
               // handlerReset={handlerReset}
               // additionals={additionals}
-              // // ---
               // handlerAdditionals={handlerAdditionals}
               // handlerClickType={handlerClickType}
             />
           </div>
           <div className={s.interactive_block}>
             <div className={s.row_buttons}>
-              <div className={s.dropdown_thematic}>
-                {/* <DropdownTematic
-                thematicID={thematicID}
-                setThematics={changeThematics}
-                list={thematics}
-                /> */}
-              </div>
               <div className={s.dropdown_person}>
                 <p className={s.text}>Кол-во, чел</p>
                 <DropdownPerson
@@ -104,7 +104,7 @@ function FullCatalog({
               </div>
             </div>
             <BlockCards
-              cards={cards}
+              cards={requestCards || cards}
               // pageSize={pageSize}
               // typeId={typeId}
               // currentPage={currentPage}

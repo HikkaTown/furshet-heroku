@@ -17,6 +17,7 @@ export default function Footer() {
                   src={"uikit/logo.svg"}
                   className={[s.logo]}
                   wrapperClass={s.logo_wrapper}
+                  alt="Логотип"
                 />
               </a>
             </Link>

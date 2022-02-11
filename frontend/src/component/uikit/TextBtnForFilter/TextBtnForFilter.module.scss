@@ -1,0 +1,29 @@
+.button {
+  @include buttonDefault;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 16px;
+
+  &_name {
+    @include body2-normal($primary-text);
+  }
+
+  &_active {
+    .button_name {
+      @include body2-medium($wine-color);
+    }
+  }
+
+  &_name {
+    padding: 0;
+    margin: 0;
+  }
+
+  &_number {
+    @include body3-normal(#b4b4b4);
+    padding: 0;
+    margin: 0;
+  }
+}

@@ -58,6 +58,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::kategoriya-dopov.kategoriya-dopov"
+    },
+    "tipy_tovarovs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tipy-tovarov.tipy-tovarov"
     }
   }
 }

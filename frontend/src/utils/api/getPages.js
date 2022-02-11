@@ -2,6 +2,18 @@ import axios from "axios";
 import { URL_SERVER } from "../const";
 import { getQuery } from "../query";
 
+const parseType = (listType) => {
+  const data = [];
+  listType.map((item) => {
+    data.push({
+      id: item.id,
+      name: item.attributes.nameType,
+      count: 0,
+    });
+  });
+  return data;
+};
+
 const parsePage = (data) => {
   const { attributes } = data;
   const sectionTwoData = attributes.sectionTwo;
@@ -91,6 +103,7 @@ const parsePage = (data) => {
       id: attributes.kategoriya.data.id,
       categoryName: attributes.kategoriya.data.attributes.categoryName,
     },
+    type: parseType(attributes.tipy_tovarovs.data),
   };
 
   return totalData;
@@ -229,6 +242,7 @@ export const getIndexPage = async () => {
     seoBlock: null,
     sectionTwo: null,
     kategoriya: null,
+    tipy_tovarovs: null,
   };
   try {
     const res = await axios.get(`${URL_SERVER}/index/?${getQuery(path)}`);

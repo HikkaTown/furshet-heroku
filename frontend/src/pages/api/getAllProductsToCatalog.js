@@ -5,38 +5,10 @@ import createQueryForFilters from "../../utils/createQueryForFilters";
 function checkType(item) {
   let result = [];
 
-  if (item.master_class_types.data.length > 0) {
-    item.master_class_types.data.map((types) => {
-      result.push({
-        id: types.id,
-        name: types.attributes.nameType,
-      });
-    });
-  }
-  if (item.exit_bar_types.data.length > 0) {
-    item.exit_bar_types.data.map((types) => {
-      result.push({
-        id: types.id,
-        name: types.attributes.nameType,
-      });
-    });
-  }
-  if (item.buffets_types.data.length > 0) {
-    item.buffets_types.data.map((types) => {
-      result.push({
-        id: types.id,
-        name: types.attributes.nameType,
-      });
-    });
-  }
-  if (item.gastro_station_types.data.length > 0) {
-    item.gastro_station_types.data.map((types) => {
-      result.push({
-        id: types.id,
-        name: types.attributes.nameType,
-      });
-    });
-  }
+  item.map((typeItem) => {
+    result.push(typeItem.id);
+  });
+
   return result;
 }
 
@@ -50,7 +22,7 @@ const parseObj = (data) => {
     const descriptionList = attributes.descriptionList.map((item) => item.Text);
     const sliderMobData = attributes.slidersMob.data;
     const sliderPcData = attributes.slidersPc.data;
-    const typeCard = checkType(attributes);
+    const typeCard = checkType(attributes.tipy_tovarovs.data);
     const category = {
       id: attributes.kategoriya.data.id,
       categoryName: attributes.kategoriya.data.attributes.categoryName,
@@ -117,7 +89,6 @@ export default async function handler(req, res) {
     end,
     peopleNumber
   );
-  console.log(string);
   const result = await axios.get(`${URL_SERVER}/catalogs?${string}`);
   try {
     const data = await result.data.data;
