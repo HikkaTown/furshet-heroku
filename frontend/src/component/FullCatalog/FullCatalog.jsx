@@ -31,7 +31,7 @@ function FullCatalog({
   const [requestCards, setRequestCards] = useState(null);
   const [thematicId, setThematicId] = useState(null);
   const [typeId, setTypeId] = useState(catalogType[0].id);
-
+  console.log(additionals);
   useEffect(async () => {
     let data = [];
     console.log(thematicId, "[тематика]");
@@ -100,25 +100,29 @@ function FullCatalog({
               thematicId={thematicId}
               typeId={typeId}
               setTypeId={setTypeId}
+              additionals={additionals}
               // --------
               // setStart={setStart}
               // setEnd={setEnd}
               // min={min}
               // max={max}
               // handlerReset={handlerReset}
-              // additionals={additionals}
               // handlerAdditionals={handlerAdditionals}
               // handlerClickType={handlerClickType}
             />
           </div>
           <div className={s.interactive_block}>
             <div className={s.row_buttons}>
-              <div className={s.dropdown_person}>
-                <p className={s.text}>Кол-во, чел</p>
-                <DropdownPerson
-                // setPeopleNumber={setPeopleNumber}
-                />
-              </div>
+              {requestCards &&
+                requestCards?.length > 0 &&
+                requestCards[0].params?.peopleNumber && (
+                  <div className={s.dropdown_person}>
+                    <p className={s.text}>Кол-во, чел</p>
+                    <DropdownPerson
+                    // setPeopleNumber={setPeopleNumber}
+                    />
+                  </div>
+                )}
               <div className={s.dropdown_amount}>
                 <Dropdown
                 // sortTypeName={sortTypeName}

@@ -16,6 +16,7 @@ function FilterCatalog({
   thematics,
   thematicId,
   setThematicId,
+  additionals,
   // ---
 
   handlerReset,
@@ -23,7 +24,6 @@ function FilterCatalog({
   onClose,
   setStart,
   setEnd,
-  additionals,
   min,
   max,
   //-----
@@ -140,8 +140,8 @@ function FilterCatalog({
         </div>
         <div className={cs(s.row, s.additionals)}>
           {/* TODO: ЭТО ДОПЫ */}
-          {types &&
-            types.slice(0, 3).map((item) => {
+          {additionals &&
+            additionals.map((item) => {
               const { id, name, count } = item;
               return (
                 <TextBtnForFilter

@@ -93,6 +93,16 @@ const parsePage = (data) => {
     mobile: seoBlockData.secondImageMobile.data.attributes.url,
   };
 
+  const additionals = [];
+  attributes.kategoriya_dopovs.data.map((item) => {
+    let result = {
+      id: item.id,
+      name: item.attributes.name_category,
+      count: 0,
+    };
+    additionals.push(result);
+  });
+
   let totalData = {
     metaData,
     catalogBlock,
@@ -104,6 +114,7 @@ const parsePage = (data) => {
       categoryName: attributes.kategoriya.data.attributes.categoryName,
     },
     type: parseType(attributes.tipy_tovarovs.data),
+    additionals,
   };
 
   return totalData;
@@ -243,6 +254,7 @@ export const getIndexPage = async () => {
     sectionTwo: null,
     kategoriya: null,
     tipy_tovarovs: null,
+    kategoriya_dopovs: null,
   };
   try {
     const res = await axios.get(`${URL_SERVER}/index/?${getQuery(path)}`);

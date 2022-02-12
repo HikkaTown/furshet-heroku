@@ -50,6 +50,7 @@ export default function Home({
           catalogType={index.type}
           categoryId={index.kategoriya.id}
           thematics={thematics}
+          additionals={index.additionals}
         />
         {/* <CatalogBuffets
           categoryName={index.kategoriya.categoryName}
@@ -79,17 +80,16 @@ export async function getStaticProps({ preview = null }) {
   indexPage.type.map((typeItem, index) => {
     catalogData.data.find((itemCard) => {
       if (itemCard.type.includes(typeItem.id)) {
-        // console.log(filteredCatalog, "[itemcard id]");
-        const findRes = filteredCatalog.find(
-          (filterCard) => filterCard.id === itemCard.id
-        );
-        if (!findRes) {
-          filteredCatalog.push(itemCard);
-          indexPage.type[index] = {
-            ...typeItem,
-            count: indexPage.type[index].count + 1,
-          };
-        }
+        // const findRes = filteredCatalog.find(
+        //   (filterCard) => filterCard.id === itemCard.id
+        // );
+        // if (!findRes) {
+        filteredCatalog.push(itemCard);
+        indexPage.type[index] = {
+          ...typeItem,
+          count: indexPage.type[index].count + 1,
+        };
+        // }
       }
     });
   });
