@@ -31,6 +31,23 @@ function FullCatalog({
   const [requestCards, setRequestCards] = useState(null);
   const [typeId, setTypeId] = useState(null);
   const [thematicId, setThematicId] = useState(null);
+
+  useEffect(async () => {
+    let data = [];
+    console.log(thematicId);
+    if (thematicId) {
+      const res = await fetch(
+        `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${categoryId}&thematicID=${thematicId}`
+      );
+      try {
+        const result = await res.json();
+        data.push(result);
+      } catch {}
+      setRequestCards(data[0]);
+      setTypeId(null);
+    }
+  }, [thematicId]);
+
   useEffect(async () => {
     let data = [];
     const res = await fetch(

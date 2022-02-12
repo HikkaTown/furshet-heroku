@@ -9,6 +9,7 @@ const createQueryForFilters = async (
   end,
   peopleNumber
 ) => {
+  console.log(typeId);
   let first = thematicID !== "null";
   let second = thematicID !== "undefined";
   let object = new Object();
