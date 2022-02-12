@@ -29,12 +29,12 @@ function FullCatalog({
 }) {
   //-------------------
   const [requestCards, setRequestCards] = useState(null);
-  const [typeId, setTypeId] = useState(null);
   const [thematicId, setThematicId] = useState(null);
+  const [typeId, setTypeId] = useState(catalogType[0].id);
 
   useEffect(async () => {
     let data = [];
-    console.log(thematicId);
+    console.log(thematicId, "[тематика]");
     if (thematicId) {
       const res = await fetch(
         `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${categoryId}&thematicID=${thematicId}`
@@ -42,22 +42,28 @@ function FullCatalog({
       try {
         const result = await res.json();
         data.push(result);
+        console.log(result);
       } catch {}
-      setRequestCards(data[0]);
       setTypeId(null);
+      setRequestCards(data[0]);
+    } else {
+      console.log("попал в тематику 0 ");
+      setTypeId(catalogType[0].id);
     }
   }, [thematicId]);
 
   useEffect(async () => {
     let data = [];
-    const res = await fetch(
-      `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${categoryId}&typeId=${typeId}`
-    );
-    try {
-      const result = await res.json();
-      data.push(result);
-    } catch {}
-    setRequestCards(data[0]);
+    if (typeId) {
+      const res = await fetch(
+        `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${categoryId}&typeId=${typeId}`
+      );
+      try {
+        const result = await res.json();
+        data.push(result);
+      } catch {}
+      setRequestCards(data[0]);
+    }
   }, [typeId]);
 
   return (

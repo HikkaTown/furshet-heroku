@@ -6,7 +6,7 @@ import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
 import CatalogTabButton from "../uikit/CatalogTabButton/CatalogTabButton";
 import ConfirmFilter from "../uikit/ConfirmFilter/ConfirmFilter";
 import { useRouter } from "next/router";
-import translit from "../../../../../arenda-kazino-4/utils/translit";
+import translit from "../../utils/translit";
 import TextBtnForFilter from "../uikit/TextBtnForFilter/TextBtnForFilter";
 
 function FilterCatalog({

@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import checkTypeId from "./helpsAdditionals";
 import filterApiBuffets from "../../utils/api/filterApiBuffets";
 import sortAmount from "../../utils/sortAmount";
-import translit from "../../../../../arenda-kazino-4/utils/translit";
+import translit from "../../utils/translit";
 import Pagination from "rc-pagination";
 import ArrowSectionButton from "../uikit/ArrowSectionButton/ArrowSectionButton";
 import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";

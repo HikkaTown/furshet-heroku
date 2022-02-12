@@ -30,12 +30,14 @@ const createQueryForFilters = async (
       },
     };
   }
-  if (thematicID !== null && thematicID !== undefined && thematicID === "") {
+  if (thematicID !== null && thematicID !== undefined && thematicID !== "") {
     object.filters.tematics = {
       id: {
         $eq: thematicID,
       },
     };
+  } else {
+    console.log("[попал в тематики]", typeof thematicID);
   }
   if (
     start !== "null" &&
