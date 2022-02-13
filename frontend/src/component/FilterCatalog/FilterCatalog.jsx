@@ -121,21 +121,23 @@ function FilterCatalog({
           {!!types &&
             types.map((item, index) => {
               const { id, name, count } = item;
-              return (
-                <TextBtnForFilter
-                  key={id}
-                  onClick={(e) => {
-                    // handleActiveCategory(e);
-                    setTypeId(id);
-                    router.push(`#${translit(name)}`);
-                    // handlerClickType(id);
-                  }}
-                  typeId={typeId}
-                  id={id}
-                  name={name}
-                  count={count}
-                />
-              );
+              if (count) {
+                return (
+                  <TextBtnForFilter
+                    key={id}
+                    onClick={(e) => {
+                      // handleActiveCategory(e);
+                      setTypeId(id);
+                      router.push(`#${translit(name)}`);
+                      // handlerClickType(id);
+                    }}
+                    typeId={typeId}
+                    id={id}
+                    name={name}
+                    count={count}
+                  />
+                );
+              }
             })}
         </div>
         <div className={cs(s.row, s.additionals)}>
