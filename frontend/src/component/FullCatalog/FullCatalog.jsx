@@ -31,10 +31,11 @@ function FullCatalog({
   const [requestCards, setRequestCards] = useState(null);
   const [thematicId, setThematicId] = useState(null);
   const [typeId, setTypeId] = useState(catalogType[0].id);
-  console.log(additionals);
+  const [min, setMin] = useState(0);
+  const [max, setMax] = useState(30000);
+
   useEffect(async () => {
     let data = [];
-    console.log(thematicId, "[тематика]");
     if (thematicId) {
       const res = await fetch(
         `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${categoryId}&thematicID=${thematicId}`
@@ -42,12 +43,10 @@ function FullCatalog({
       try {
         const result = await res.json();
         data.push(result);
-        console.log(result);
       } catch {}
       setTypeId(null);
       setRequestCards(data[0]);
     } else {
-      console.log("попал в тематику 0 ");
       setTypeId(catalogType[0].id);
     }
   }, [thematicId]);
@@ -65,6 +64,25 @@ function FullCatalog({
       setRequestCards(data[0]);
     }
   }, [typeId]);
+
+  // проверка минимального и максимального значения
+  useEffect(async () => {
+    let maxNumber = (a, b) => {
+        return +a.price > +b.price ? +a.price : +b.price;
+      },
+      minNumber = (a, b) => {
+        return +a.price < +b.price ? +a.price : +b.price;
+      };
+
+    if (requestCards && requestCards.length > 0) {
+      setMax(requestCards.reduce(maxNumber));
+      setMin(requestCards.reduce(minNumber));
+    } else if (!requestCards && cards.length > 0) {
+      setMax(cards.reduce(maxNumber));
+      setMin(cards.reduce(minNumber));
+    }
+    console.log(min, max);
+  }, [cards, requestCards]);
 
   return (
     <section className={s.section}>
@@ -104,8 +122,8 @@ function FullCatalog({
               // --------
               // setStart={setStart}
               // setEnd={setEnd}
-              // min={min}
-              // max={max}
+              min={min}
+              max={max}
               // handlerReset={handlerReset}
               // handlerAdditionals={handlerAdditionals}
               // handlerClickType={handlerClickType}
