@@ -20,6 +20,12 @@
       "relation": "manyToMany",
       "target": "api::catalog.catalog",
       "mappedBy": "tematics"
+    },
+    "dopolnitelnye_tovaries": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::dopolnitelnye-tovary.dopolnitelnye-tovary",
+      "inversedBy": "tematikis"
     }
   }
 }

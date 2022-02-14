@@ -40,7 +40,9 @@ const parseObj = (data) => {
     let object = {
       id: id,
       name: nameCard,
-      price: priceCard,
+      price: attributes.threeValue
+        ? attributes.threeValue.first_count
+        : priceCard,
       category: category,
       tematics: tematicsCard,
       type: typeCard,

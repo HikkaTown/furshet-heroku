@@ -1,12 +1,12 @@
-import React, {useCallback, useEffect, useRef, useState} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import s from "./FilterAmount.module.scss";
 import debounce from "../../../utils/debounce";
 import throttle from "../../../utils/throttle";
 import spaceDigits from "../../../utils/converterNumber";
 
-export default function FilterAmount({setStart, setEnd, min, max}) {
-  const [minInput, setMinInput] = useState(min === null ? '' : min);
-  const [maxInput, setMaxInput] = useState(max === null ? '' : max);
+export default function FilterAmount({ setStartValue, setEndValue, min, max }) {
+  const [minInput, setMinInput] = useState(null);
+  const [maxInput, setMaxInput] = useState(null);
 
   // const onChangeHandlerMin = useCallback(() => {
   //   return (e) => {
@@ -14,65 +14,70 @@ export default function FilterAmount({setStart, setEnd, min, max}) {
   //     changeAmount(minInput, maxInput);
   //     return throttle((e) => {
   //       if (Number(e.target.value) < 0) {
-  //         setStart(0)
-  //         setEnd(minInput.current.value)
+  //         setStartValue(0);
+  //         setEndValue(minInput.current.value);
   //       } else if (Number(e.target.value) > max) {
-  //         setStart(Number(e.target.value))
-  //         setEnd(minInput.current.value)
+  //         setStartValue(Number(e.target.value));
+  //         setEndValue(minInput.current.value);
   //       } else {
-  //         setStart(Number(e.target.value))
-  //         setEnd(minInput.current.value)
-  //         changeAmount(minInput, maxInput)
+  //         setStartValue(Number(e.target.value));
+  //         setEndValue(minInput.current.value);
+  //         changeAmount(minInput, maxInput);
   //       }
   //     }, 500);
-  //   }
+  //   };
   // }, []);
   const onChangeHandlerMin = (e) => {
     setMinInput(Number(e.target.value));
-    setStart(Number(e.target.value))
-  }
+    setStartValue(Number(e.target.value));
+  };
 
   const onChangeHandlerMax = (e) => {
-    setMaxInput(Number(e.target.value))
-    setEnd(Number(e.target.value))
-  }
+    setMaxInput(Number(e.target.value));
+    setEndValue(Number(e.target.value));
+  };
 
   // const onChangeHandlerMax = useCallback(() => {
   //   return (e) => {
   //     setMaxInput(e.target.value);
-  //     changeAmount(minInput, maxInput)
+  //     changeAmount(minInput, maxInput);
   //     return throttle((e) => {
   //       if (Number(e.target.value) < 0) {
-  //         setStart(maxInput.current.value)
-  //         setEnd(max)
+  //         setStart(maxInput.current.value);
+  //         setEnd(max);
   //       } else {
-  //         setStart(maxInput.current.value)
-  //         setEnd(Number(e.target.value))
-  //         changeAmount(minInput, maxInput)
+  //         setStart(maxInput.current.value);
+  //         setEnd(Number(e.target.value));
+  //         changeAmount(minInput, maxInput);
   //       }
   //     }, 500);
-  //   }
+  //   };
   // }, []);
 
-  // useEffect(() => {
-  //   setMaxInput(max);
-  //   setMinInput(min);
-  // }, [max, min])
+  useEffect(() => {
+    setMaxInput(max);
+    setMinInput(min);
+  }, [max, min]);
 
   return (
     <div className={s.container}>
       <p className={s.head}>Цена, ₽</p>
       <div className={s.wrapper}>
-        <input type="number" name='min'
-               placeholder={`от ${min && spaceDigits(min)}`}
-               onChange={onChangeHandlerMin}
-               value={minInput}
-               className={s.amount}/>
-        <input type="number" name='max'
-               value={maxInput}
-               placeholder={`до ${max && spaceDigits(max)}`}
-               className={s.amount}
-               onChange={onChangeHandlerMax}
+        <input
+          type="number"
+          name="min"
+          placeholder={`от ${min && spaceDigits(min)}`}
+          onChange={onChangeHandlerMin}
+          value={minInput}
+          className={s.amount}
+        />
+        <input
+          type="number"
+          name="max"
+          value={maxInput}
+          placeholder={`до ${max && spaceDigits(max)}`}
+          className={s.amount}
+          onChange={onChangeHandlerMax}
         />
       </div>
     </div>

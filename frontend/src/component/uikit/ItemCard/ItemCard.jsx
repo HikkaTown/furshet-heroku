@@ -38,7 +38,10 @@ export default function ItemCard({ data, className, categoryName }) {
   return (
     <div className={cs(s.block, className)}>
       <div className={s.favorite}>
-        <FavoriteButton id={data.id} categoryName={categoryName} />
+        <FavoriteButton
+          id={data.id}
+          categoryName={data.kategoriya_dopov.categoryName}
+        />
       </div>
       <LazyImageWrapper
         wrapperClass={s.wrapper}
@@ -48,7 +51,7 @@ export default function ItemCard({ data, className, categoryName }) {
         alt={data.name}
       />
       <div className={s.info}>
-        <h3 className={s.name}>data.name</h3>
+        <h3 className={s.name}>{data.name}</h3>
         {data.params && <p className={s.params}>{data.params}</p>}
       </div>
       <div className={s.pay}>

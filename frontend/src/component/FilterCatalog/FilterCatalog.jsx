@@ -17,18 +17,20 @@ function FilterCatalog({
   thematicId,
   setThematicId,
   additionals,
+  isDop,
+  setIsDop,
+  handlerAdditionals,
+  setStartValue,
+  setEndValue,
+  min,
+  max,
   // ---
 
   handlerReset,
 
   onClose,
-  setStart,
-  setEnd,
-  min,
-  max,
   //-----
   visiblePeople,
-  handlerAdditionals,
   handlerClickType,
 }) {
   const router = useRouter();
@@ -59,7 +61,7 @@ function FilterCatalog({
         additionals.map((item) => {
           const text = translit(item.name);
           if (text === router.asPath.slice(2)) {
-            data = translit(item.name);
+            data = item.name;
           }
         });
       setTypeId(data);
@@ -83,11 +85,11 @@ function FilterCatalog({
           <FilterAmount
             min={min}
             max={max}
-            setStart={setStart}
-            setEnd={setEnd}
+            setStartValue={setStartValue}
+            setEndValue={setEndValue}
           />
         </div>
-        {thematics && (
+        {!isDop && thematics && (
           <div className={cs(s.row, s.thematics)}>
             <SecondaryButton
               onClick={() => {
@@ -126,10 +128,9 @@ function FilterCatalog({
                   <TextBtnForFilter
                     key={id}
                     onClick={(e) => {
-                      // handleActiveCategory(e);
                       setTypeId(id);
                       router.push(`#${translit(name)}`);
-                      // handlerClickType(id);
+                      setIsDop(false);
                     }}
                     typeId={typeId}
                     id={id}
@@ -149,11 +150,11 @@ function FilterCatalog({
                 <TextBtnForFilter
                   key={id}
                   onClick={(e) => {
-                    // handleActiveCategory(e);
-                    // handlerAdditionals(item.name);
                     router.push(`#${translit(name)}`);
+                    handlerAdditionals(name);
+                    setTypeId(name);
                   }}
-                  id={id}
+                  id={id + "ds"}
                   typeId={typeId}
                   count={count}
                   name={name}

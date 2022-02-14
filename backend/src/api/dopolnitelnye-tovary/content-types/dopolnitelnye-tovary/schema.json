@@ -52,6 +52,12 @@
       "relation": "oneToMany",
       "target": "api::kategoriya.kategoriya",
       "mappedBy": "dopolnitelnye_tovary"
+    },
+    "tematikis": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tematic.tematic",
+      "inversedBy": "dopolnitelnye_tovaries"
     }
   }
 }

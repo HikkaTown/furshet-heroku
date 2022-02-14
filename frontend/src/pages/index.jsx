@@ -14,15 +14,15 @@ import Layout from "../component/Layout/Layout";
 import { getIndexPage } from "../utils/api/getPages";
 import CatalogBuffets from "../component/CatalogBuffets/CatalogBuffets";
 import FullCatalog from "../component/FullCatalog/FullCatalog";
+import qs from "qs";
 
 export default function Home({
   index,
   filteredCatalog,
-  allBufets,
-  catalogType,
   thematics,
-  additionalsData,
+  additionalsCards,
 }) {
+  console.log(additionalsCards);
   return (
     <>
       <Head>
@@ -51,6 +51,7 @@ export default function Home({
           categoryId={index.kategoriya.id}
           thematics={thematics}
           additionals={index.additionals}
+          additionalsCards={additionalsCards}
         />
         {/* <CatalogBuffets
           categoryName={index.kategoriya.categoryName}
@@ -76,58 +77,47 @@ export async function getStaticProps({ preview = null }) {
   const catalogData = await axios(
     `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${indexPage.kategoriya.id}`
   );
+  const catalogThematics = await axios(
+    "http://localhost:3000/api/getThematicsData"
+  );
+  let aditList = ([] = indexPage.additionals.map((item, index) => {
+    return item.id;
+  }));
+  const additionalList = await axios(
+    `http://localhost:3000/api/additionals?list=${JSON.stringify(aditList)}`
+  );
+
+  let filterAdditionals = [];
+  indexPage.additionals.map((typeAdditionals, index) => {
+    additionalList.data.map((item) => {
+      if (item.kategoriya_dopov.id === typeAdditionals.id) {
+        filterAdditionals.push(item);
+        indexPage.additionals[index] = {
+          ...typeAdditionals,
+          count: indexPage.additionals[index].count + 1,
+        };
+      }
+    });
+  });
+
   let filteredCatalog = [];
   indexPage.type.map((typeItem, index) => {
     catalogData.data.find((itemCard) => {
       if (itemCard.type.includes(typeItem.id)) {
-        // const findRes = filteredCatalog.find(
-        //   (filterCard) => filterCard.id === itemCard.id
-        // );
-        // if (!findRes) {
         filteredCatalog.push(itemCard);
         indexPage.type[index] = {
           ...typeItem,
           count: indexPage.type[index].count + 1,
         };
-        // }
       }
     });
   });
-
-  const catalogThematics = await axios(
-    "http://localhost:3000/api/getThematicsData"
-  );
-  // // const furniture = await axios("http://localhost:3000/api/getMebel");
-  // const decor = await axios("http://localhost:3000/api/getDecorData");
-  // const staf = await axios("http://localhost:3000/api/getStafData");
-  // const disinfection = await axios(
-  //   "http://localhost:3000/api/getDisinfectionData"
-  // );
-  // const additionalsData = [
-  //   {
-  //     name: "Мебель",
-  //     data: furniture.data,
-  //   },
-  //   {
-  //     name: "Декор",
-  //     data: decor.data,
-  //   },
-  //   {
-  //     name: "Персонал",
-  //     data: staf.data,
-  //   },
-  //   {
-  //     name: "Дезинфекция",
-  //     data: disinfection.data,
-  //   },
-  // ];
-
   return {
     props: {
       index: indexPage,
       filteredCatalog: filteredCatalog,
       thematics: catalogThematics.data.data,
-      // additionalsData: additionalsData,
+      additionalsCards: filterAdditionals,
     },
   };
 }

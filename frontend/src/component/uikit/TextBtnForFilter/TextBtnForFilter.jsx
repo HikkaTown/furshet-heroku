@@ -7,9 +7,16 @@ import { useState } from "react";
 export default function TextBtnForFilter({ typeId, id, count, name, onClick }) {
   const [isActive, setIsActive] = useState(false);
   useEffect(() => {
-    if (typeId === id) {
+    if (typeof typeId === "number" && typeId === id) {
+      console.log("попал в число", typeId);
       setIsActive(true);
-    } else {
+    } else if (typeof typeId === "number" && typeId !== id) {
+      setIsActive(false);
+    }
+    if (typeof typeId === "string" && typeId === name) {
+      console.log("попал в строку");
+      setIsActive(true);
+    } else if (typeof typeId === "string" && typeId !== name) {
       setIsActive(false);
     }
   }, [typeId]);

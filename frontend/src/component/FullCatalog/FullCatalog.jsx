@@ -10,6 +10,7 @@ import BlockCards from "../BlockCards/BlockCards";
 // import ModalSort from "../ModalSort/ModalSort";
 // import { sortToDownHelp, sortToUpHelp } from "./sort";
 import DropdownTematic from "../uikit/DropdownTematic/DropdownTematic";
+import { minMax } from "./findMinMax";
 // import { useRouter } from "next/router";
 // import checkTypeId from "./helpsAdditionals";
 // import filterApiBuffets from "../../utils/api/filterApiBuffets";
@@ -26,6 +27,7 @@ function FullCatalog({
   catalogType,
   thematics,
   additionals,
+  additionalsCards,
 }) {
   //-------------------
   const [requestCards, setRequestCards] = useState(null);
@@ -33,12 +35,21 @@ function FullCatalog({
   const [typeId, setTypeId] = useState(catalogType[0].id);
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(30000);
+  const [isDop, setIsDop] = useState(false);
+  const [name, setName] = useState(null);
+  const [startValue, setStartValue] = useState(null);
+  const [endValue, setEndValue] = useState(null);
+
+  const handlerAdditionals = (name) => {
+    setName(name);
+    setIsDop(true);
+  };
 
   useEffect(async () => {
     let data = [];
     if (thematicId) {
       const res = await fetch(
-        `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${categoryId}&thematicID=${thematicId}`
+        `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${categoryId}&thematicID=${thematicId}&start=${startValue}&end=${endValue}`
       );
       try {
         const result = await res.json();
@@ -49,13 +60,13 @@ function FullCatalog({
     } else {
       setTypeId(catalogType[0].id);
     }
-  }, [thematicId]);
+  }, [thematicId, startValue, endValue]);
 
   useEffect(async () => {
     let data = [];
-    if (typeId) {
+    if (typeof typeId === "number") {
       const res = await fetch(
-        `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${categoryId}&typeId=${typeId}`
+        `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${categoryId}&typeId=${typeId}&start=${startValue}&end=${endValue}`
       );
       try {
         const result = await res.json();
@@ -63,26 +74,42 @@ function FullCatalog({
       } catch {}
       setRequestCards(data[0]);
     }
-  }, [typeId]);
+  }, [typeId, startValue, endValue]);
+
+  // useEffect(() => {
+  //   if (requestCards && requestCards.length > 0) {
+  //     const array = [...requestCards];
+  //     const data = array.filter(
+  //       (item) => +item.price >= +startValue && +item.price <= +endValue
+  //     );
+  //     setRequestCards(data);
+  //   } else if (cards && cards.length > 0) {
+  //     const array = [...cards];
+  //     const data = array.filter(
+  //       (item) => +item.price >= +startValue && +item.price <= +startValue
+  //     );
+  //     setRequestCards(data);
+  //   }
+  // }, [startValue, endValue]);
 
   // проверка минимального и максимального значения
   useEffect(async () => {
-    let maxNumber = (a, b) => {
-        return +a.price > +b.price ? +a.price : +b.price;
-      },
-      minNumber = (a, b) => {
-        return +a.price < +b.price ? +a.price : +b.price;
-      };
-
-    if (requestCards && requestCards.length > 0) {
-      setMax(requestCards.reduce(maxNumber));
-      setMin(requestCards.reduce(minNumber));
-    } else if (!requestCards && cards.length > 0) {
-      setMax(cards.reduce(maxNumber));
-      setMin(cards.reduce(minNumber));
-    }
-    console.log(min, max);
+    const { min, max } = minMax(cards, requestCards);
+    setMax(max);
+    setMin(min);
+    setStartValue(min);
+    setEndValue(max);
   }, [cards, requestCards]);
+
+  useEffect(() => {
+    if (isDop) {
+      const data = additionalsCards.filter(
+        (item) => item.kategoriya_dopov.categoryName === name
+      );
+      console.log(data, "[data]");
+      setRequestCards(data);
+    }
+  }, [name]);
 
   return (
     <section className={s.section}>
@@ -119,13 +146,15 @@ function FullCatalog({
               typeId={typeId}
               setTypeId={setTypeId}
               additionals={additionals}
-              // --------
-              // setStart={setStart}
-              // setEnd={setEnd}
               min={min}
               max={max}
+              isDop={isDop}
+              setIsDop={setIsDop}
+              handlerAdditionals={handlerAdditionals}
+              // --------
+              setStartValue={setStartValue}
+              setEndValue={setEndValue}
               // handlerReset={handlerReset}
-              // handlerAdditionals={handlerAdditionals}
               // handlerClickType={handlerClickType}
             />
           </div>
