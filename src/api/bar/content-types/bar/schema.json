@@ -1,0 +1,64 @@
+{
+  "kind": "singleType",
+  "collectionName": "bars",
+  "info": {
+    "singularName": "bar",
+    "pluralName": "bars",
+    "displayName": "бар",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "metaHead": {
+      "type": "text"
+    },
+    "metaTitle": {
+      "type": "text"
+    },
+    "h1": {
+      "type": "text"
+    },
+    "titleP": {
+      "type": "text"
+    },
+    "sectionTwo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "section-two.section-two"
+    },
+    "studyBlock": {
+      "type": "component",
+      "repeatable": false,
+      "component": "study-block.study-block"
+    },
+    "seoBlock": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo-block.seo-block"
+    },
+    "catalogName": {
+      "type": "text"
+    },
+    "catalogMenu": {
+      "type": "text"
+    },
+    "kategoriya": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::kategoriya.kategoriya"
+    },
+    "kategoriya_dopovs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::kategoriya-dopov.kategoriya-dopov"
+    },
+    "tipy_tovarovs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tipy-tovarov.tipy-tovarov"
+    }
+  }
+}

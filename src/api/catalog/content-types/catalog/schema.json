@@ -1,0 +1,83 @@
+{
+  "kind": "collectionType",
+  "collectionName": "catalogs",
+  "info": {
+    "singularName": "catalog",
+    "pluralName": "catalogs",
+    "displayName": "каталог",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "text"
+    },
+    "price": {
+      "type": "biginteger"
+    },
+    "descriptionList": {
+      "type": "component",
+      "repeatable": true,
+      "component": "furshet-card.desc-list"
+    },
+    "params": {
+      "type": "component",
+      "repeatable": false,
+      "component": "furshet-card.params-buffet"
+    },
+    "vegan": {
+      "type": "boolean",
+      "default": false
+    },
+    "slidersPc": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "slidersMob": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "threeValue": {
+      "type": "component",
+      "repeatable": false,
+      "component": "unical-card.unical-position"
+    },
+    "tematics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tematic.tematic",
+      "inversedBy": "katalogs"
+    },
+    "countSetting": {
+      "type": "component",
+      "repeatable": false,
+      "component": "count-setting.count-setting"
+    },
+    "kategoriya": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::kategoriya.kategoriya",
+      "inversedBy": "katalogs"
+    },
+    "foodName": {
+      "type": "text"
+    },
+    "tipy_tovarovs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tipy-tovarov.tipy-tovarov",
+      "mappedBy": "katalogs"
+    }
+  }
+}

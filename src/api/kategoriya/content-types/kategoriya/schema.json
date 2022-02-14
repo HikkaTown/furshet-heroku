@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "kategoriyas",
+  "info": {
+    "singularName": "kategoriya",
+    "pluralName": "kategoriyas",
+    "displayName": "категория",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "categoryName": {
+      "type": "string"
+    },
+    "katalogs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::catalog.catalog",
+      "mappedBy": "kategoriya"
+    },
+    "dopolnitelnye_tovary": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::dopolnitelnye-tovary.dopolnitelnye-tovary",
+      "inversedBy": "kategoriyas"
+    }
+  }
+}

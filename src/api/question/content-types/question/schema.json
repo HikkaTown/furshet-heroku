@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "questions",
+  "info": {
+    "singularName": "question",
+    "pluralName": "questions",
+    "displayName": "Вопросы",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "question_item": {
+      "displayName": "question",
+      "type": "component",
+      "repeatable": true,
+      "component": "question.question"
+    }
+  }
+}

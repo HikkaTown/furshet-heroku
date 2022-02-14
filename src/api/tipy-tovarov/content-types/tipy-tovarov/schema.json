@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tipy_tovarovs",
+  "info": {
+    "singularName": "tipy-tovarov",
+    "pluralName": "tipy-tovarovs",
+    "displayName": "типы товаров",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nameType": {
+      "type": "string"
+    },
+    "katalogs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::catalog.catalog",
+      "inversedBy": "tipy_tovarovs"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "kind": "singleType",
+  "collectionName": "indices",
+  "info": {
+    "singularName": "index",
+    "pluralName": "indices",
+    "displayName": "Фуршет-Главная",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "metaHead": {
+      "type": "string"
+    },
+    "metaTitle": {
+      "type": "string"
+    },
+    "h1": {
+      "type": "string"
+    },
+    "titleP": {
+      "type": "text"
+    },
+    "seoBlock": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo-block.seo-block"
+    },
+    "sectionTwo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "section-two.section-two"
+    },
+    "catalogName": {
+      "type": "text"
+    },
+    "catalogMenu": {
+      "type": "text"
+    },
+    "kategoriya": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::kategoriya.kategoriya"
+    },
+    "kategoriya_dopovs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::kategoriya-dopov.kategoriya-dopov"
+    },
+    "tipy_tovarovs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tipy-tovarov.tipy-tovarov"
+    }
+  }
+}

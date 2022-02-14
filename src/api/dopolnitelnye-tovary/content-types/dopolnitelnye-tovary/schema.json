@@ -1,0 +1,63 @@
+{
+  "kind": "collectionType",
+  "collectionName": "dopolnitelnye_tovaries",
+  "info": {
+    "singularName": "dopolnitelnye-tovary",
+    "pluralName": "dopolnitelnye-tovaries",
+    "displayName": "дополнительныеТовары",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "text"
+    },
+    "price": {
+      "type": "integer"
+    },
+    "params": {
+      "type": "richtext"
+    },
+    "slidersPc": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "slidersMob": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
+    },
+    "kategoriya_dopov": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::kategoriya-dopov.kategoriya-dopov",
+      "inversedBy": "dopolnitelnye_tovaries"
+    },
+    "kategoriyas": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::kategoriya.kategoriya",
+      "mappedBy": "dopolnitelnye_tovary"
+    },
+    "tematikis": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tematic.tematic",
+      "inversedBy": "dopolnitelnye_tovaries"
+    }
+  }
+}

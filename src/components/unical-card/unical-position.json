@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_unical_card_unical_positions",
+  "info": {
+    "displayName": "unicalPosition",
+    "icon": "apple-alt"
+  },
+  "options": {},
+  "attributes": {
+    "firstPeople": {
+      "type": "biginteger"
+    },
+    "secondPeople": {
+      "type": "biginteger"
+    },
+    "threePeople": {
+      "type": "biginteger"
+    },
+    "first_count": {
+      "type": "biginteger"
+    },
+    "second_count": {
+      "type": "biginteger"
+    },
+    "three_count": {
+      "type": "biginteger"
+    }
+  }
+}
