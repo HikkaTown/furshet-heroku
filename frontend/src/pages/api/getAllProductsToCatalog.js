@@ -41,8 +41,8 @@ const parseObj = (data) => {
       id: id,
       name: nameCard,
       price: attributes.threeValue
-        ? attributes.threeValue.first_count
-        : priceCard,
+        ? +attributes.threeValue.first_count
+        : +priceCard,
       category: category,
       tematics: tematicsCard,
       type: typeCard,
@@ -72,7 +72,7 @@ const parseObj = (data) => {
         : false,
       slidersMob: sliderMob,
       slidersPc: sliderPc,
-      nameFood: attributes?.nameFood,
+      nameFood: attributes?.foodName,
       vegan: attributes.vegan,
     };
     array.push(object);
