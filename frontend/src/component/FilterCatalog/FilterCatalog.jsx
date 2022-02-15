@@ -19,11 +19,15 @@ function FilterCatalog({
   additionals,
   isDop,
   setIsDop,
+  setName,
   handlerAdditionals,
   setStartValue,
   setEndValue,
+  startValue,
+  endValue,
   min,
   max,
+  catalogData,
   // ---
 
   handlerReset,
@@ -46,25 +50,26 @@ function FilterCatalog({
 
   useEffect(() => {
     let path = null;
-    if (!!router.asPath.slice(2)) {
-      setPath(router.asPath.slice(2));
-      // path = router.asPath.slice(2);
+    if (!!router.asPath.slice(router.asPath.indexOf("#") + 1)) {
+      setPath(router.asPath.slice(router.asPath.indexOf("#") + 1));
       let data;
       types &&
         types.map((item) => {
           const text = translit(item.name);
-          if (text === router.asPath.slice(2)) {
+          if (text === router.asPath.slice(router.asPath.indexOf("#") + 1)) {
             data = item.id;
+            setTypeId(data);
           }
         });
       additionals &&
         additionals.map((item) => {
           const text = translit(item.name);
-          if (text === router.asPath.slice(2)) {
+          if (text === router.asPath.slice(router.asPath.indexOf("#") + 1)) {
             data = item.name;
+            setTypeId(item.name);
+            handlerAdditionals(item.name);
           }
         });
-      setTypeId(data);
     }
   }, [router]);
 
@@ -85,6 +90,8 @@ function FilterCatalog({
           <FilterAmount
             min={min}
             max={max}
+            startValue={startValue}
+            endValue={endValue}
             setStartValue={setStartValue}
             setEndValue={setEndValue}
           />
@@ -94,6 +101,8 @@ function FilterCatalog({
             <SecondaryButton
               onClick={() => {
                 setThematicId(null);
+                setStartValue(null);
+                setEndValue(null);
               }}
               className={cs(
                 s.thematics_btn,
@@ -108,6 +117,8 @@ function FilterCatalog({
                     key={item.id}
                     onClick={() => {
                       setThematicId(item.id);
+                      setStartValue(null);
+                      setEndValue(null);
                     }}
                     className={cs(
                       s.thematics_btn,
@@ -123,14 +134,25 @@ function FilterCatalog({
           {!!types &&
             types.map((item, index) => {
               const { id, name, count } = item;
-              if (count) {
+              if (
+                router.asPath.slice(router.asPath.indexOf("#") + 1) ===
+                translit(name)
+              ) {
+                document
+                  .querySelector("#catalog")
+                  .scrollIntoView({ block: "start", behavior: "smooth" });
+              }
+              if (catalogData.position === "Фуршетные наборы") {
                 return (
                   <TextBtnForFilter
                     key={id}
                     onClick={(e) => {
                       setTypeId(id);
                       router.push(`#${translit(name)}`);
+                      setThematicId(null);
                       setIsDop(false);
+                      setStartValue(null);
+                      setEndValue(null);
                     }}
                     typeId={typeId}
                     id={id}
@@ -138,7 +160,46 @@ function FilterCatalog({
                     count={count}
                   />
                 );
+              } else {
               }
+            })}
+          {true && (
+            <CatalogTabButton
+              key={5585}
+              text={"Всё"}
+              typeId={typeId}
+              id={null}
+              onClick={(e) => {
+                router.push(`#catalog`);
+                setTypeId(null);
+              }}
+              className={s.btn_tab}
+              classNameActive={s.btn_tab_active}
+            />
+          )}
+
+          {catalogData.position !== "Фуршетные наборы" &&
+            !!types &&
+            types.map((item, index) => {
+              const { id, name, count } = item;
+              return (
+                <CatalogTabButton
+                  key={id}
+                  className={s.btn_tab}
+                  classNameActive={s.btn_tab_active}
+                  typeId={typeId}
+                  onClick={(e) => {
+                    setTypeId(id);
+                    router.push(`#${translit(name)}`);
+                    setThematicId(null);
+                    setIsDop(false);
+                    setStartValue(null);
+                    setEndValue(null);
+                  }}
+                  text={name}
+                  id={id}
+                />
+              );
             })}
         </div>
         <div className={cs(s.row, s.additionals)}>
@@ -146,6 +207,14 @@ function FilterCatalog({
           {additionals &&
             additionals.map((item) => {
               const { id, name, count } = item;
+              if (
+                router.asPath.slice(router.asPath.indexOf("#") + 1) ===
+                translit(name)
+              ) {
+                document
+                  .querySelector("#catalog")
+                  .scrollIntoView({ block: "start", behavior: "smooth" });
+              }
               return (
                 <TextBtnForFilter
                   key={id}

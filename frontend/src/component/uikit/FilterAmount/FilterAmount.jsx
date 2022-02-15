@@ -4,9 +4,16 @@ import debounce from "../../../utils/debounce";
 import throttle from "../../../utils/throttle";
 import spaceDigits from "../../../utils/converterNumber";
 
-export default function FilterAmount({ setStartValue, setEndValue, min, max }) {
-  const [minInput, setMinInput] = useState(null);
-  const [maxInput, setMaxInput] = useState(null);
+export default function FilterAmount({
+  setStartValue,
+  setEndValue,
+  min,
+  max,
+  startValue,
+  endValue,
+}) {
+  const [minInput, setMinInput] = useState(startValue ? minInput : null);
+  const [maxInput, setMaxInput] = useState(endValue ? maxInput : null);
 
   // const onChangeHandlerMin = useCallback(() => {
   //   return (e) => {
@@ -55,9 +62,9 @@ export default function FilterAmount({ setStartValue, setEndValue, min, max }) {
   // }, []);
 
   useEffect(() => {
-    setMaxInput(max);
-    setMinInput(min);
-  }, [max, min]);
+    setMaxInput(endValue);
+    setMinInput(startValue);
+  }, [startValue, endValue]);
 
   return (
     <div className={s.container}>
@@ -68,13 +75,13 @@ export default function FilterAmount({ setStartValue, setEndValue, min, max }) {
           name="min"
           placeholder={`от ${min && spaceDigits(min)}`}
           onChange={onChangeHandlerMin}
-          value={minInput}
+          value={minInput ? minInput : ""}
           className={s.amount}
         />
         <input
           type="number"
           name="max"
-          value={maxInput}
+          value={maxInput ? maxInput : ""}
           placeholder={`до ${max && spaceDigits(max)}`}
           className={s.amount}
           onChange={onChangeHandlerMax}

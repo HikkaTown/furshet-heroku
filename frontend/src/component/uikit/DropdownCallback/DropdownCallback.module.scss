@@ -62,7 +62,7 @@
     @include body3-normal($primary-text);
     transition: 0.5s;
     @include hover {
-      color: $wine-color;
+      background-color: $cream-color;
     }
 
     &:last-of-type {

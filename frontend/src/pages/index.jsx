@@ -22,7 +22,6 @@ export default function Home({
   thematics,
   additionalsCards,
 }) {
-  console.log(additionalsCards);
   return (
     <>
       <Head>
@@ -115,7 +114,7 @@ export async function getStaticProps({ preview = null }) {
   return {
     props: {
       index: indexPage,
-      filteredCatalog: filteredCatalog,
+      filteredCatalog: catalogData.data,
       thematics: catalogThematics.data.data,
       additionalsCards: filterAdditionals,
     },

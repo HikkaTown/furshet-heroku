@@ -7,7 +7,6 @@ import GastroStationCard from "../uikit/GastroStationCard/GastroStationCard";
 import MasterClassCard from "../uikit/MasterClassCard/MasterClassCard";
 
 function BlockCards({ cards, pageSize, currentPage, categoryName, typeId }) {
-  console.log(cards);
   return (
     <div className={s.content}>
       {cards && cards.length > 0

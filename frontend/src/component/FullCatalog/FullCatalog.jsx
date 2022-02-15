@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import s from "../CatalogBuffets/CatalogBuffets.module.scss";
+import s from "./FullCatalog.module.scss";
 import cs from "classnames";
 import DropdownPerson from "../uikit/DropdownPerson/DropdownPerson";
 import Dropdown from "../uikit/Dropdown/Dropdown";
@@ -11,7 +11,7 @@ import BlockCards from "../BlockCards/BlockCards";
 // import { sortToDownHelp, sortToUpHelp } from "./sort";
 import DropdownTematic from "../uikit/DropdownTematic/DropdownTematic";
 import { minMax } from "./findMinMax";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 // import checkTypeId from "./helpsAdditionals";
 // import filterApiBuffets from "../../utils/api/filterApiBuffets";
 // import sortAmount from "../../utils/sortAmount";
@@ -30,75 +30,69 @@ function FullCatalog({
   additionalsCards,
 }) {
   //-------------------
+
+  const router = useRouter();
   const [requestCards, setRequestCards] = useState(null);
   const [thematicId, setThematicId] = useState(null);
-  const [typeId, setTypeId] = useState(catalogType[0].id);
+  const [typeId, setTypeId] = useState("");
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(30000);
   const [isDop, setIsDop] = useState(false);
   const [name, setName] = useState(null);
   const [startValue, setStartValue] = useState(null);
   const [endValue, setEndValue] = useState(null);
-
+  const [peopleNumber, setPeopleNumber] = useState(null);
   const handlerAdditionals = (name) => {
+    setThematicId(null);
     setName(name);
     setIsDop(true);
   };
-
+  console.log(requestCards);
   useEffect(async () => {
     let data = [];
-    if (thematicId) {
-      const res = await fetch(
-        `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${categoryId}&thematicID=${thematicId}&start=${startValue}&end=${endValue}`
-      );
-      try {
-        const result = await res.json();
-        data.push(result);
-      } catch {}
-      setTypeId(null);
-      setRequestCards(data[0]);
-    } else {
-      setTypeId(catalogType[0].id);
+    if (thematicId === null && typeId === null && typeof typeId !== "string") {
+      if (catalogData.position === "Фуршетные наборы") {
+        setTypeId(catalogType[0].id);
+      }
     }
-  }, [thematicId, startValue, endValue]);
-
-  useEffect(async () => {
-    let data = [];
-    if (typeof typeId === "number") {
-      const res = await fetch(
-        `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${categoryId}&typeId=${typeId}&start=${startValue}&end=${endValue}`
-      );
-      try {
-        const result = await res.json();
-        data.push(result);
-      } catch {}
-      setRequestCards(data[0]);
+    if (
+      catalogData.position === "Фуршетные наборы" &&
+      catalogType[0].id !== typeId
+    ) {
+      setPeopleNumber(null);
     }
-  }, [typeId, startValue, endValue]);
 
-  // useEffect(() => {
-  //   if (requestCards && requestCards.length > 0) {
-  //     const array = [...requestCards];
-  //     const data = array.filter(
-  //       (item) => +item.price >= +startValue && +item.price <= +endValue
-  //     );
-  //     setRequestCards(data);
-  //   } else if (cards && cards.length > 0) {
-  //     const array = [...cards];
-  //     const data = array.filter(
-  //       (item) => +item.price >= +startValue && +item.price <= +startValue
-  //     );
-  //     setRequestCards(data);
-  //   }
-  // }, [startValue, endValue]);
+    if (typeof typeId !== "string") {
+      if (
+        typeof typeId === "number" ||
+        typeId === null ||
+        thematicId ||
+        startValue ||
+        endValue ||
+        peopleNumber
+      ) {
+        const res = await fetch(
+          `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${categoryId}&typeId=${typeId}&thematicID=${thematicId}&start=${startValue}&end=${endValue}&peopleNumber=${peopleNumber}`
+        );
+        try {
+          const result = await res.json();
+          if (thematicId) {
+            setTypeId(null);
+          }
+          data.push(result);
+          setRequestCards(data[0]);
+        } catch {
+          console.log("error");
+        }
+      }
+    }
+  }, [typeId, thematicId, peopleNumber, startValue, endValue]);
 
   // проверка минимального и максимального значения
   useEffect(async () => {
     const { min, max } = minMax(cards, requestCards);
     setMax(max);
     setMin(min);
-    setStartValue(min);
-    setEndValue(max);
   }, [cards, requestCards]);
 
   useEffect(() => {
@@ -106,10 +100,36 @@ function FullCatalog({
       const data = additionalsCards.filter(
         (item) => item.kategoriya_dopov.categoryName === name
       );
-      console.log(data, "[data]");
       setRequestCards(data);
     }
-  }, [name]);
+  }, [name, isDop]);
+
+  useEffect(() => {
+    if (typeof typeId === "string") {
+      const data = additionalsCards.filter(
+        (item) => item.kategoriya_dopov.categoryName === name
+      );
+      let filtered = [];
+      if (startValue) {
+        filtered = data.filter((item) => item.price >= startValue);
+      }
+      if (endValue) {
+        filtered
+          ? (filtered = filtered.filter((item) => item.price <= endValue))
+          : filtered.filter((item) => item.price <= endValue);
+      }
+      setRequestCards(filtered);
+    }
+  }, [startValue, endValue]);
+
+  useEffect(() => {
+    if (router.asPath.indexOf("#") < 1) {
+      setTypeId(catalogType[0].id);
+    }
+    if (catalogData.position !== "Фуршетные наборы") {
+      setTypeId(null);
+    }
+  }, []);
 
   return (
     <section className={s.section}>
@@ -150,7 +170,9 @@ function FullCatalog({
               max={max}
               isDop={isDop}
               setIsDop={setIsDop}
+              setName={setName}
               handlerAdditionals={handlerAdditionals}
+              catalogData={catalogData}
               // --------
               setStartValue={setStartValue}
               setEndValue={setEndValue}
@@ -161,13 +183,11 @@ function FullCatalog({
           <div className={s.interactive_block}>
             <div className={s.row_buttons}>
               {requestCards &&
-                requestCards?.length > 0 &&
-                requestCards[0].params?.peopleNumber && (
+                catalogData.position === "Фуршетные наборы" &&
+                catalogType[0].id === typeId && (
                   <div className={s.dropdown_person}>
                     <p className={s.text}>Кол-во, чел</p>
-                    <DropdownPerson
-                    // setPeopleNumber={setPeopleNumber}
-                    />
+                    <DropdownPerson setPeopleNumber={setPeopleNumber} />
                   </div>
                 )}
               <div className={s.dropdown_amount}>

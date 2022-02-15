@@ -32,15 +32,13 @@ import { getStationsPage } from "../../utils/api/getPages";
 import Head from "next/head";
 import CatalogSection from "../../component/CatalogSection/CatalogSection";
 import filterStations from "../../utils/api/filterStations";
+import FullCatalog from "../../component/FullCatalog/FullCatalog";
 
 export default function Stations({
-  cards,
-  typeCatalog,
-  thematics,
-  additionalsData,
   index,
-  preview,
-  error,
+  filteredCatalog,
+  thematics,
+  additionalsCards,
 }) {
   return (
     <>
@@ -59,15 +57,15 @@ export default function Stations({
         <SectionTwo data={index.sectionTwo} />
         <StudyBlock data={index.studyBlock} />
         {/* katalog */}
-        {/* <CatalogSection
-          categoryName={'Гастро-станции'}
+        <FullCatalog
           catalogData={index.catalogBlock}
-          additionals={additionalsData}
+          cards={filteredCatalog}
+          catalogType={index.type}
+          categoryId={index.kategoriya.id}
           thematics={thematics}
-          cards={cards}
-          catalogType={typeCatalog}
-          filterFunction={filterStations}
-        /> */}
+          additionals={index.additionals}
+          additionalsCards={additionalsCards}
+        />
         <BufetsInfoSection href={"/"} />
         <MasterClassInfo />
         <BarInfoSection />
@@ -80,54 +78,51 @@ export default function Stations({
 }
 
 export async function getStaticProps({ preview = null }) {
-  const allGastroStation = await fetch(
-    "http://localhost:3000/api/getStations"
-  ).then((res) => {
-    const data = res.json();
-    return data;
-  });
-  // //////////////////////////////////
-  const stationPage = await getStationsPage();
-  const stationType = await fetch(
-    "http://localhost:3000/api/getTypeStations/?populate=*"
-  ).then((res) => {
-    const data = res.json();
-    return data;
-  });
+  const indexPage = await getStationsPage();
+  const catalogData = await axios(
+    `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${indexPage.kategoriya.id}`
+  );
   const catalogThematics = await axios(
     "http://localhost:3000/api/getThematicsData"
   );
-  const furniture = await axios("http://localhost:3000/api/getMebel");
-  const decor = await axios("http://localhost:3000/api/getDecorData");
-  const staf = await axios("http://localhost:3000/api/getStafData");
-  const disinfection = await axios(
-    "http://localhost:3000/api/getDisinfectionData"
+  let aditList = ([] = indexPage.additionals.map((item, index) => {
+    return item.id;
+  }));
+  const additionalList = await axios(
+    `http://localhost:3000/api/additionals?list=${JSON.stringify(aditList)}`
   );
-  const additionalsData = [
-    {
-      name: "Мебель",
-      data: furniture.data,
-    },
-    {
-      name: "Декор",
-      data: decor.data,
-    },
-    {
-      name: "Персонал",
-      data: staf.data,
-    },
-    {
-      name: "Дезинфекция",
-      data: disinfection.data,
-    },
-  ];
+
+  let filterAdditionals = [];
+  indexPage.additionals.map((typeAdditionals, index) => {
+    additionalList.data.map((item) => {
+      if (item.kategoriya_dopov.id === typeAdditionals.id) {
+        filterAdditionals.push(item);
+        indexPage.additionals[index] = {
+          ...typeAdditionals,
+          count: indexPage.additionals[index].count + 1,
+        };
+      }
+    });
+  });
+
+  let filteredCatalog = [];
+  indexPage.type.map((typeItem, index) => {
+    catalogData.data.find((itemCard) => {
+      if (itemCard.type.includes(typeItem.id)) {
+        filteredCatalog.push(itemCard);
+        indexPage.type[index] = {
+          ...typeItem,
+          count: indexPage.type[index].count + 1,
+        };
+      }
+    });
+  });
   return {
     props: {
-      index: stationPage,
-      typeCatalog: stationType.data,
+      index: indexPage,
+      filteredCatalog: catalogData.data,
       thematics: catalogThematics.data.data,
-      additionalsData: additionalsData,
-      cards: allGastroStation,
+      additionalsCards: filterAdditionals,
     },
   };
 }

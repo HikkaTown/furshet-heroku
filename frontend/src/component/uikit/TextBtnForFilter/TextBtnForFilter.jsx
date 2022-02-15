@@ -8,15 +8,17 @@ export default function TextBtnForFilter({ typeId, id, count, name, onClick }) {
   const [isActive, setIsActive] = useState(false);
   useEffect(() => {
     if (typeof typeId === "number" && typeId === id) {
-      console.log("попал в число", typeId);
       setIsActive(true);
     } else if (typeof typeId === "number" && typeId !== id) {
       setIsActive(false);
+    } else if (typeof typeId === null) {
+      setIsActive(false);
     }
     if (typeof typeId === "string" && typeId === name) {
-      console.log("попал в строку");
       setIsActive(true);
     } else if (typeof typeId === "string" && typeId !== name) {
+      setIsActive(false);
+    } else if (typeId === null) {
       setIsActive(false);
     }
   }, [typeId]);
