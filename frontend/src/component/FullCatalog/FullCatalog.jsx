@@ -38,13 +38,14 @@ function FullCatalog({
   const [endValue, setEndValue] = useState(null);
   const [peopleNumber, setPeopleNumber] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(3);
+  const [pageSize, setPageSize] = useState(6);
   const [sortTypeName, setSortTypeName] = useState("");
-  const [pageSizeIncrement, setPageSizeIncrement] = useState(1);
+  const [pageSizeIncrement, setPageSizeIncrement] = useState(0);
 
   const MAX_PAGE = requestCards && Math.ceil(requestCards.length / pageSize);
 
   const handleChangePage = (index) => {
+    setPageSize(currentPage * 6);
     setPageSizeIncrement(1);
     setCurrentPage(index);
   };
@@ -245,8 +246,8 @@ function FullCatalog({
                 text={"Показать ещё"}
                 className={s.show_more}
                 onClick={() => {
-                  setPageSizeIncrement((prevstate) => prevstate + 1);
-                  setCurrentPage((prevstate) => prevstate + 1);
+                  setPageSize((prev) => pageSize * (currentPage + 1));
+                  setCurrentPage((prev) => prev + 1);
                 }}
               />
             )}
