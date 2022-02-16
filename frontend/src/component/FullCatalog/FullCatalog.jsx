@@ -38,12 +38,14 @@ function FullCatalog({
   const [endValue, setEndValue] = useState(null);
   const [peopleNumber, setPeopleNumber] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(6);
+  const [pageSize, setPageSize] = useState(3);
   const [sortTypeName, setSortTypeName] = useState("");
+  const [pageSizeIncrement, setPageSizeIncrement] = useState(1);
 
   const MAX_PAGE = requestCards && Math.ceil(requestCards.length / pageSize);
 
   const handleChangePage = (index) => {
+    setPageSizeIncrement(1);
     setCurrentPage(index);
   };
 
@@ -210,12 +212,13 @@ function FullCatalog({
               cards={requestCards || cards}
               pageSize={pageSize}
               currentPage={currentPage}
+              pageSizeIncrement={pageSizeIncrement}
             />
             {/*  pagination*/}
             <Pagination
               current={currentPage}
               total={requestCards ? requestCards.length : 0}
-              pageSize={6}
+              pageSize={pageSize}
               jumpNextIcon={"..."}
               jumpPrevIcon={"..."}
               prevIcon={
@@ -234,14 +237,16 @@ function FullCatalog({
               showTitle={false}
               showLessItems={true}
             />
-            {currentPage > MAX_PAGE - 1 ? (
+            {currentPage > MAX_PAGE - 1 ||
+            pageSize * pageSizeIncrement > requestCards.length ? (
               ""
             ) : (
               <SecondaryButton
                 text={"Показать ещё"}
                 className={s.show_more}
                 onClick={() => {
-                  handleChangePage(currentPage + 1);
+                  setPageSizeIncrement((prevstate) => prevstate + 1);
+                  setCurrentPage((prevstate) => prevstate + 1);
                 }}
               />
             )}

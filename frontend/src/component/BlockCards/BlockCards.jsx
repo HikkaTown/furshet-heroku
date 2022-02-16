@@ -6,12 +6,15 @@ import ThreePriceCard from "../uikit/ThreePriceCard/ThreePriceCard";
 import GastroStationCard from "../uikit/GastroStationCard/GastroStationCard";
 import MasterClassCard from "../uikit/MasterClassCard/MasterClassCard";
 
-function BlockCards({ cards, pageSize, currentPage }) {
+function BlockCards({ cards, pageSize, currentPage, pageSizeIncrement }) {
   return (
     <div className={s.content}>
       {cards && cards.length > 0 ? (
         cards
-          .slice(pageSize * (currentPage - 1), pageSize * currentPage)
+          .slice(
+            pageSize * (currentPage - 1),
+            pageSize * pageSizeIncrement * currentPage
+          )
           .map((item) => {
             if (item?.category?.categoryName === "Мастер-класс") {
               return (
