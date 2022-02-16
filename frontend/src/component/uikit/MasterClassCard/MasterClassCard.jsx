@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import s from "./MasterClassCard.module.scss";
 import cs from "classnames";
 import SliderForCard from "../SliderForCard/SliderForCard";
@@ -12,21 +12,30 @@ import converterNumber from "../../../utils/converterNumber";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import DescriptionInCard from "../DescriptionInCard/DescriptionInCard";
 import DeleteButton from "../DeleteButton/DeleteButton";
-import {addFavoriteItemToStore, deleteFavoriteFromStore} from "../../../redux/actions/favoriteActions";
-import {useDispatch, useSelector} from "react-redux";
-import {cartSelector} from "../../../redux/selectors/cartSelector";
-import {changeInCart, toggleToCart} from "../../../redux/actions/cartActions";
+import {
+  addFavoriteItemToStore,
+  deleteFavoriteFromStore,
+} from "../../../redux/actions/favoriteActions";
+import { useDispatch, useSelector } from "react-redux";
+import { cartSelector } from "../../../redux/selectors/cartSelector";
+import { changeInCart, toggleToCart } from "../../../redux/actions/cartActions";
 
-export default function MasterClassCard({data, className, categoryName}) {
+export default function MasterClassCard({ data, className, categoryName }) {
   const dispatch = useDispatch();
   const cartData = useSelector(cartSelector());
   const size = useWindowSize();
-  const cartFromBasket = cartData.find((item) => item.id === data.id && item.categoryName === categoryName);
+  const cartFromBasket = cartData.find(
+    (item) => item.id === data.id && item.categoryName === categoryName
+  );
   const hasInCart = cartFromBasket !== undefined;
   const [descriptionVision, setDescription] = useState(false);
-  const [isActive, setIsActive] = useState(hasInCart ? cartFromBasket.promotion : false);
-  const [value, setValue] = useState(hasInCart ? cartFromBasket.count : +data.minPerson);
-
+  const [isActive, setIsActive] = useState(
+    hasInCart ? cartFromBasket.promotion : false
+  );
+  const [value, setValue] = useState(
+    hasInCart ? cartFromBasket.count : +data.minPosition
+  );
+  console.log(data);
   const visibleDescription = (e) => {
     e.preventDefault();
     if (size.width >= 1175 || e._reactName === "onClick") {
@@ -41,52 +50,61 @@ export default function MasterClassCard({data, className, categoryName}) {
   };
 
   const handleAddInCart = () => {
-    dispatch(toggleToCart({
-      ...data,
-      categoryName: categoryName,
-      count: value,
-      promotion: isActive
-    }))
+    dispatch(
+      toggleToCart({
+        ...data,
+        categoryName: categoryName,
+        count: value,
+        promotion: isActive,
+      })
+    );
   };
 
   const handleDeleteFromCart = () => {
-    dispatch(toggleToCart({
-      ...cartFromBasket,
-    }))
+    dispatch(
+      toggleToCart({
+        ...cartFromBasket,
+      })
+    );
   };
 
   const setCount = (count) => {
     if (hasInCart) {
-      if (count >= data.minPerson) {
-        dispatch(changeInCart({
-          ...cartFromBasket,
-          count: count,
-        }))
+      if (count >= data.minPosition) {
+        dispatch(
+          changeInCart({
+            ...cartFromBasket,
+            count: count,
+          })
+        );
       } else {
-        dispatch(toggleToCart({
-          ...cartFromBasket,
-        }))
-        setValue(data.minPerson)
+        dispatch(
+          toggleToCart({
+            ...cartFromBasket,
+          })
+        );
+        setValue(data.minPosition);
       }
     } else {
-      if (count >= data.minPerson) {
+      if (count >= data.minPosition) {
         setValue(count);
       } else {
-        setValue(data.minPerson)
+        setValue(data.minPosition);
       }
     }
-  }
+  };
 
   const handlePromotion = () => {
     setIsActive(!isActive);
     if (hasInCart) {
-      dispatch(changeInCart({
-        ...cartFromBasket,
-        promotion: !isActive
-      }))
+      dispatch(
+        changeInCart({
+          ...cartFromBasket,
+          promotion: !isActive,
+        })
+      );
     }
-  }
-
+  };
 
   return (
     <div className={cs(s.card, className, isActive && s.card_active)}>
@@ -104,10 +122,10 @@ export default function MasterClassCard({data, className, categoryName}) {
         />
       )}
       <div className={s.favorite}>
-        <FavoriteButton id={data.id} categoryName={categoryName}/>
+        <FavoriteButton id={data.id} categoryName={categoryName} />
       </div>
       <div className={s.slider_block}>
-        <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc}/>
+        <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc} />
         <DescriptionInCard
           descriptionVision={descriptionVision}
           content={data.descriptionList}
@@ -125,19 +143,17 @@ export default function MasterClassCard({data, className, categoryName}) {
             <Counter
               count={hasInCart ? cartFromBasket.count : value}
               setCount={setCount}
-              minValue={+data.minPerson}
+              minValue={+data.minPosition}
             />
           </div>
         </div>
         <p className={s.nextPeople}>
           Доп человек{" "}
-          <span className={s.amount_nextPerson}>
-            +{data.nextPersonPrice} &#8381;
-          </span>
+          <span className={s.amount_nextPerson}>+{data.minPrice} &#8381;</span>
         </p>
         <div className={s.settings}>
           <div className={s.checkbox}>
-            <Checkbox isActive={isActive} setIsActive={handlePromotion}/>
+            <Checkbox isActive={isActive} setIsActive={handlePromotion} />
           </div>
           <p className={s.checkbox_text}>
             В нашей студии <span className={s.select}>-15%</span>
@@ -147,16 +163,26 @@ export default function MasterClassCard({data, className, categoryName}) {
           <p className={s.price}>
             <span className={s.amount}>
               {converterNumber(
-                hasInCart ? isActive ?
-                    (((cartFromBasket.count - data.minPerson) * data.nextPersonPrice) + +data.price) * 0.85 :
-                    ((cartFromBasket.count - data.minPerson) * data.nextPersonPrice) + +data.price :
-                  isActive ? (((value - +data.minPerson) * data.nextPersonPrice) + +data.price) * 0.85 : ((value - +data.minPerson) * data.nextPersonPrice) + +data.price
+                hasInCart
+                  ? isActive
+                    ? ((cartFromBasket.count - +data.minPosition) *
+                        +data.minPrice +
+                        +data.price) *
+                      0.85
+                    : (cartFromBasket.count - +data.minPosition) *
+                        +data.minPrice +
+                      +data.price
+                  : isActive
+                  ? ((value - +data.minPosition) * +data.minPrice +
+                      +data.price) *
+                    0.85
+                  : (value - +data.minPosition) * +data.minPrice + +data.price
               )}
             </span>
             <span className={s.currency}> &#8381;</span>
           </p>
           {hasInCart ? (
-            <DeleteButton onClick={handleDeleteFromCart}/>
+            <DeleteButton onClick={handleDeleteFromCart} />
           ) : (
             <PrimaryButton
               className={s.pay_button}

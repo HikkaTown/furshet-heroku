@@ -4,6 +4,7 @@
   max-width: 328px;
   align-items: baseline;
   width: 100vw;
+  margin-top: 16px;
   @include tablet {
     max-width: 680px;
   }
@@ -39,4 +40,10 @@
       margin-left: 0;
     }
   }
+}
+
+.error_find {
+  @include body2-normal($text-secondary);
+  padding: 0;
+  margin: 16px 0 0 0;
 }

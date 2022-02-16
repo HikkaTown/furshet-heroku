@@ -9,16 +9,12 @@ import BlockCards from "../BlockCards/BlockCards";
 // import ModalFilter from "../ModalFilter/ModalFilter";
 // import ModalSort from "../ModalSort/ModalSort";
 // import { sortToDownHelp, sortToUpHelp } from "./sort";
-import DropdownTematic from "../uikit/DropdownTematic/DropdownTematic";
 import { minMax } from "./findMinMax";
 import { useRouter } from "next/router";
-// import checkTypeId from "./helpsAdditionals";
-// import filterApiBuffets from "../../utils/api/filterApiBuffets";
-// import sortAmount from "../../utils/sortAmount";
-// import translit from "../../../../../arenda-kazino-4/utils/translit";
-// import Pagination from "rc-pagination";
-// import ArrowSectionButton from "../uikit/ArrowSectionButton/ArrowSectionButton";
-// import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
+import Pagination from "rc-pagination";
+import ArrowSectionButton from "../uikit/ArrowSectionButton/ArrowSectionButton";
+import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
+import checkPrice from "./checkPrice";
 
 function FullCatalog({
   categoryId,
@@ -29,10 +25,9 @@ function FullCatalog({
   additionals,
   additionalsCards,
 }) {
-  //-------------------
-
   const router = useRouter();
   const [requestCards, setRequestCards] = useState(null);
+  const [standartCard, setStandartCard] = useState(null);
   const [thematicId, setThematicId] = useState(null);
   const [typeId, setTypeId] = useState("");
   const [min, setMin] = useState(0);
@@ -42,12 +37,21 @@ function FullCatalog({
   const [startValue, setStartValue] = useState(null);
   const [endValue, setEndValue] = useState(null);
   const [peopleNumber, setPeopleNumber] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(6);
+  const [sortTypeName, setSortTypeName] = useState("");
+
+  const MAX_PAGE = requestCards && Math.ceil(requestCards.length / pageSize);
+
+  const handleChangePage = (index) => {
+    setCurrentPage(index);
+  };
+
   const handlerAdditionals = (name) => {
     setThematicId(null);
     setName(name);
     setIsDop(true);
   };
-  console.log(requestCards);
   useEffect(async () => {
     let data = [];
     if (thematicId === null && typeId === null && typeof typeId !== "string") {
@@ -81,6 +85,7 @@ function FullCatalog({
           }
           data.push(result);
           setRequestCards(data[0]);
+          setStandartCard(data[0]);
         } catch {
           console.log("error");
         }
@@ -121,6 +126,10 @@ function FullCatalog({
       setRequestCards(filtered);
     }
   }, [startValue, endValue]);
+
+  useEffect(() => {
+    checkPrice(sortTypeName, setRequestCards, requestCards, standartCard);
+  }, [sortTypeName]);
 
   useEffect(() => {
     if (router.asPath.indexOf("#") < 1) {
@@ -192,22 +201,20 @@ function FullCatalog({
                 )}
               <div className={s.dropdown_amount}>
                 <Dropdown
-                // sortTypeName={sortTypeName}
-                // setSortTypeName={setSortTypeName}
+                  sortTypeName={sortTypeName}
+                  setSortTypeName={setSortTypeName}
                 />
               </div>
             </div>
             <BlockCards
               cards={requestCards || cards}
-              // pageSize={pageSize}
-              // typeId={typeId}
-              // currentPage={currentPage}
-              // categoryName={categoryName}
+              pageSize={pageSize}
+              currentPage={currentPage}
             />
             {/*  pagination*/}
-            {/* <Pagination
+            <Pagination
               current={currentPage}
-              total={filteredCards.length}
+              total={requestCards ? requestCards.length : 0}
               pageSize={6}
               jumpNextIcon={"..."}
               jumpPrevIcon={"..."}
@@ -226,8 +233,8 @@ function FullCatalog({
               hideOnSinglePage={true}
               showTitle={false}
               showLessItems={true}
-            /> */}
-            {/* {currentPage > MAX_PAGE - 1 ? (
+            />
+            {currentPage > MAX_PAGE - 1 ? (
               ""
             ) : (
               <SecondaryButton
@@ -237,7 +244,7 @@ function FullCatalog({
                   handleChangePage(currentPage + 1);
                 }}
               />
-            )} */}
+            )}
           </div>
         </div>
       </div>

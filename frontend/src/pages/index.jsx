@@ -52,14 +52,6 @@ export default function Home({
           additionals={index.additionals}
           additionalsCards={additionalsCards}
         />
-        {/* <CatalogBuffets
-          categoryName={index.kategoriya.categoryName}
-          catalogData={index.catalogBlock}
-          catalogType={catalogType}
-          cards={fullCatalog}
-          additionals={additionalsData}
-          thematics={thematics}
-        /> */}
         <MasterClassInfo />
         {/* <BufetsInfoSection /> */}
         <BarInfoSection />

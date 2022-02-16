@@ -315,3 +315,22 @@ export const getMasterClassPage = async () => {
     return error;
   }
 };
+
+export const getBarPage = async () => {
+  const path = {
+    seoBlock: null,
+    sectionTwo: null,
+    studyBlock: null,
+    kategoriya: null,
+    tipy_tovarovs: null,
+    kategoriya_dopovs: null,
+  };
+  try {
+    const res = await axios.get(`${URL_SERVER}/bar/?${getQuery(path)}`);
+    const data = res.data.data;
+    const newData = parsePageStudy(data);
+    return newData;
+  } catch (error) {
+    return error;
+  }
+};

@@ -6,13 +6,13 @@ import ThreePriceCard from "../uikit/ThreePriceCard/ThreePriceCard";
 import GastroStationCard from "../uikit/GastroStationCard/GastroStationCard";
 import MasterClassCard from "../uikit/MasterClassCard/MasterClassCard";
 
-function BlockCards({ cards, pageSize, currentPage, categoryName, typeId }) {
+function BlockCards({ cards, pageSize, currentPage }) {
   return (
     <div className={s.content}>
-      {cards && cards.length > 0
-        ? // ? cards
-          //     .slice(pageSize * (currentPage - 1), pageSize * currentPage)
-          cards.map((item) => {
+      {cards && cards.length > 0 ? (
+        cards
+          .slice(pageSize * (currentPage - 1), pageSize * currentPage)
+          .map((item) => {
             if (item?.category?.categoryName === "Мастер-класс") {
               return (
                 <MasterClassCard
@@ -23,7 +23,10 @@ function BlockCards({ cards, pageSize, currentPage, categoryName, typeId }) {
                 />
               );
             }
-            if (item?.category?.categoryName === "Гастро-станции") {
+            if (
+              item?.category?.categoryName === "Гастро-станции" ||
+              item?.category?.categoryName === "Бар"
+            ) {
               return (
                 <GastroStationCard
                   className={s.card}
@@ -58,17 +61,14 @@ function BlockCards({ cards, pageSize, currentPage, categoryName, typeId }) {
               typeof item?.params === "string" ||
               item?.params === undefined
             ) {
-              return (
-                <ItemCard
-                  className={s.card}
-                  key={item.id}
-                  data={item}
-                  categoryName={typeId}
-                />
-              );
+              return <ItemCard className={s.card} key={item.id} data={item} />;
             }
           })
-        : "Оуу щит, тут пусто"}
+      ) : (
+        <p className={s.error_find}>
+          По вашему запросу ничего не нашлось... попробуйте изменить параметры
+        </p>
+      )}
     </div>
   );
 }

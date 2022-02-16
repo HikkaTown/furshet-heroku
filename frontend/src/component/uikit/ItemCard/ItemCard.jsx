@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartSelector } from "../../../redux/selectors/cartSelector";
 // карточка для обычных продуктов или стаффа
 
-export default function ItemCard({ data, className, categoryName }) {
+export default function ItemCard({ data, className }) {
   const dispatch = useDispatch();
   const cartData = useSelector(cartSelector());
   const cartFromBasket = cartData.find((item) => item.id);

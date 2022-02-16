@@ -6,6 +6,9 @@
   width: 100%;
   margin-bottom: 16px;
 
+  &:last-of-type {
+    margin-bottom: 0;
+  }
   &_name {
     @include body2-normal($primary-text);
   }

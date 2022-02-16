@@ -1,0 +1,22 @@
+.btn_tab {
+  margin-right: 8px;
+  margin-bottom: 8px;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+
+  &_active {
+    background-color: $wine-color !important;
+    border-color: $wine-color !important;
+    color: #fff !important;
+
+    &:hover {
+      background-color: $wine-color !important;
+    }
+  }
+}
+
+.block {
+  overflow: hidden;
+}

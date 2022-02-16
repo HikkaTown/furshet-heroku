@@ -1,0 +1,10 @@
+.thematics_btn {
+  margin-right: 8px;
+  margin-bottom: 8px;
+  padding: 6px 16px;
+  @include body3-normal($primary-text);
+}
+
+.thematics_btn_active {
+  background-color: #fab576;
+}

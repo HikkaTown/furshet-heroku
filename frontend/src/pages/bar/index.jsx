@@ -25,8 +25,15 @@ import filterMasterClass from "../../utils/api/filterMasterClass";
 import CatalogSection from "../../component/CatalogSection/CatalogSection";
 import axios from "axios";
 import filterBarCards from "../../utils/api/filterBarCards";
+import FullCatalog from "../../component/FullCatalog/FullCatalog";
+import { getBarPage } from "../../utils/api/getPages";
 
-export default function index({ index, cards, types, thematics, additionals }) {
+export default function index({
+  index,
+  filteredCatalog,
+  thematics,
+  additionalsCards,
+}) {
   return (
     <>
       <Head>
@@ -43,15 +50,15 @@ export default function index({ index, cards, types, thematics, additionals }) {
         <FirstSection data={index.textPage} startPos={0} bg={bg_bar} />
         <SectionTwo data={index.sectionTwo} />
         <StudyBlock data={index.studyBlock} />
-        {/* <CatalogSection
-          categoryName={'Выездные бары'}
+        <FullCatalog
           catalogData={index.catalogBlock}
-          catalogType={types}
+          cards={filteredCatalog}
+          catalogType={index.type}
+          categoryId={index.kategoriya.id}
           thematics={thematics}
-          cards={cards}
-          additionals={additionals}
-          filterFunction={filterBarCards}
-        /> */}
+          additionals={index.additionals}
+          additionalsCards={additionalsCards}
+        />
         <StationSliderSection
           secondBtn={false}
           dataImages={dataStationsSlider}
@@ -69,54 +76,51 @@ export default function index({ index, cards, types, thematics, additionals }) {
 }
 
 export async function getStaticProps({ preview = null }) {
-  const index = await fetch("http://localhost:3000/api/getBarPage").then(
-    (res) => {
-      const data = res.json();
-      return data;
-    }
-  );
-  const cards = await fetch("http://localhost:3000/api/getBarCards").then(
-    (res) => {
-      const data = res.json();
-      return data;
-    }
-  );
-  const types = await fetch("http://localhost:3000/api/getBarTypes").then(
-    (res) => {
-      const data = res.json();
-      return data;
-    }
+  const indexPage = await getBarPage();
+  const catalogData = await axios(
+    `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${indexPage.kategoriya.id}`
   );
   const catalogThematics = await axios(
     "http://localhost:3000/api/getThematicsData"
   );
-  const furniture = await axios("http://localhost:3000/api/getMebel");
-  const staf = await axios("http://localhost:3000/api/getStafData");
-  const disinfection = await axios(
-    "http://localhost:3000/api/getDisinfectionData"
+  let aditList = ([] = indexPage.additionals.map((item, index) => {
+    return item.id;
+  }));
+  const additionalList = await axios(
+    `http://localhost:3000/api/additionals?list=${JSON.stringify(aditList)}`
   );
 
-  const additionalsData = [
-    {
-      name: "Мебель",
-      data: furniture.data,
-    },
-    {
-      name: "Персонал",
-      data: staf.data,
-    },
-    {
-      name: "Дезинфекция",
-      data: disinfection.data,
-    },
-  ];
+  let filterAdditionals = [];
+  indexPage.additionals.map((typeAdditionals, index) => {
+    additionalList.data.map((item) => {
+      if (item.kategoriya_dopov.id === typeAdditionals.id) {
+        filterAdditionals.push(item);
+        indexPage.additionals[index] = {
+          ...typeAdditionals,
+          count: indexPage.additionals[index].count + 1,
+        };
+      }
+    });
+  });
+
+  let filteredCatalog = [];
+  indexPage.type.map((typeItem, index) => {
+    catalogData.data.find((itemCard) => {
+      if (itemCard.type.includes(typeItem.id)) {
+        filteredCatalog.push(itemCard);
+        indexPage.type[index] = {
+          ...typeItem,
+          count: indexPage.type[index].count + 1,
+        };
+      }
+    });
+  });
   return {
     props: {
+      index: indexPage,
+      filteredCatalog: catalogData.data,
       thematics: catalogThematics.data.data,
-      types: types.data,
-      cards: cards,
-      index: index,
-      additionals: additionalsData,
+      additionalsCards: filterAdditionals,
     },
   };
 }
