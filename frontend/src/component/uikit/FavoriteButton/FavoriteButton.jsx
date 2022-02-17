@@ -2,114 +2,58 @@ import React, { useEffect, useState } from "react";
 import cs from "classnames";
 import s from "./FavoriteButton.module.scss";
 import {
-  toggleFavoriteBar,
-  toggleFavoriteBuffets,
-  toggleFavoriteGastro,
-  toggleFavoriteMasterclass,
+  toggleFavoriteEat,
   toggleDop,
 } from "../../../redux/actions/favoriteActions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import {
-  favoriteSelectorBar,
-  favoriteSelectorBuffets,
+  favoriteSelectorEat,
   favoriteSelectorDop,
-  favoriteSelectorGastro,
-  favoriteSelectorMasterclass,
 } from "../../../redux/selectors/favoriteSelector";
 
-export default function FavoriteButton({ className, id, categoryName }) {
+export default function FavoriteButton({ className, data }) {
   const [added, setAdded] = useState(false);
   const dispatch = useDispatch();
-  const favoritesBuffets = useSelector(favoriteSelectorBuffets());
-  const favoritesGastro = useSelector(favoriteSelectorGastro());
-  const favoritesMasterClass = useSelector(favoriteSelectorMasterclass());
-  const favoritesBar = useSelector(favoriteSelectorBar());
+  const favoritesEat = useSelector(favoriteSelectorEat());
   const favoriteDops = useSelector(favoriteSelectorDop());
 
   const handlerClick = () => {
-    if (categoryName === "Фуршет") {
+    if (data.category.categoryName === "Фуршет") {
       setAdded(!added);
       dispatch(
-        toggleFavoriteBuffets({
-          id: id,
-          categoryName: categoryName,
-        })
-      );
-    } else if (categoryName === "Гастро-станции") {
-      setAdded(!added);
-      dispatch(
-        toggleFavoriteGastro({
-          id: id,
-          categoryName: categoryName,
-        })
-      );
-    } else if (categoryName === "Мастер-классы") {
-      setAdded(!added);
-      dispatch(
-        toggleFavoriteMasterclass({
-          id: id,
-          categoryName: categoryName,
-        })
-      );
-    } else if (categoryName === "Выездные бары") {
-      setAdded(!added);
-      dispatch(
-        toggleFavoriteBar({
-          id: id,
-          categoryName: categoryName,
+        toggleFavoriteEat({
+          ...data,
         })
       );
     } else {
       setAdded(!added);
       dispatch(
         toggleDop({
-          id: id,
-          categoryName: categoryName,
+          ...data,
         })
       );
     }
   };
   useEffect(() => {
-    if (categoryName === "Фуршет") {
+    if (data.category.categoryName === "Фуршет") {
       setAdded(
-        favoritesBuffets.find(
-          (item) => item.id === id && categoryName === item.categoryName
-        )
-      );
-    } else if (categoryName === "Гастро-станции") {
-      setAdded(
-        favoritesGastro.find(
-          (item) => item.id === id && categoryName === item.categoryName
-        )
-      );
-    } else if (categoryName === "Мастер-классы") {
-      setAdded(
-        favoritesMasterClass.find(
-          (item) => item.id === id && categoryName === item.categoryName
-        )
-      );
-    } else if (categoryName === "Выездные бары") {
-      setAdded(
-        favoritesBar.find(
-          (item) => item.id === id && categoryName === item.categoryName
+        favoritesEat.find(
+          (item) =>
+            item.id === data.id &&
+            data.category.categoryName === item.category.categoryName
         )
       );
     } else {
       setAdded(
         favoriteDops.find(
-          (item) => item.id === id && categoryName === item.categoryName
+          (item) =>
+            item.id === id &&
+            data.category.categoryName === item.category.categoryName
         )
       );
     }
-  }, [
-    favoritesBuffets,
-    favoritesGastro,
-    favoritesMasterClass,
-    favoritesBar,
-    id,
-    categoryName,
-  ]);
+  }, [favoritesEat, data]);
   return (
     <button
       onClick={handlerClick}

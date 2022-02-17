@@ -1,7 +1,7 @@
 .card {
   max-width: 328px;
   width: 328px;
-  height: 500px;
+  // min-height: 500px;
   box-sizing: border-box;
   border-radius: 8px;
   position: relative;
@@ -17,7 +17,7 @@
   @include desktop {
     max-width: 280px;
     width: 280px;
-    height: 444px;
+    // min-height: 444px;
   }
 
   @include desktop {

@@ -2,13 +2,13 @@
   display: flex;
   flex-wrap: wrap;
   max-width: 328px;
-  align-items: baseline;
+  align-items: flex-start;
   width: 100vw;
-  margin-top: 16px;
   @include tablet {
     max-width: 680px;
   }
   @include desktop {
+    margin-top: 16px;
     max-width: 100%;
     width: 100%;
   }
@@ -16,28 +16,19 @@
 
 .card {
   margin-bottom: 16px;
-  &:last-of-type {
-    margin-bottom: 0;
-  }
-
   @include tablet {
+    margin-bottom: 24px;
     margin-right: 24px;
-    &:nth-child(even) {
-      margin-right: 0;
-    }
-    &:last-of-type {
+    &:nth-child(2n + 2) {
       margin-right: 0;
     }
   }
   @include desktop {
-    margin: 0;
-    margin-left: 24px;
-    margin-bottom: 24px;
-    &:first-of-type {
-      margin-left: 0;
+    &:nth-child(2n + 2) {
+      margin-right: 24px;
     }
-    &:nth-child(4n + 4) {
-      margin-left: 0;
+    &:nth-child(3n + 3) {
+      margin-right: 0;
     }
   }
 }

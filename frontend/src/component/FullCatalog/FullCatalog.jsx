@@ -6,15 +6,26 @@ import Dropdown from "../uikit/Dropdown/Dropdown";
 import { LazyImageWrapper } from "../LazyImage";
 import FilterCatalog from "../FilterCatalog/FilterCatalog";
 import BlockCards from "../BlockCards/BlockCards";
-// import ModalFilter from "../ModalFilter/ModalFilter";
-// import ModalSort from "../ModalSort/ModalSort";
-// import { sortToDownHelp, sortToUpHelp } from "./sort";
 import { minMax } from "./findMinMax";
 import { useRouter } from "next/router";
 import Pagination from "rc-pagination";
 import ArrowSectionButton from "../uikit/ArrowSectionButton/ArrowSectionButton";
 import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
 import checkPrice from "./checkPrice";
+import { scrollToCatalog } from "./scrollToCatalog";
+import { checkTypeId } from "./checkTypeId";
+import { filterWithAmount } from "./filterWithAmount";
+import { selectDop } from "./selectDop";
+import { globalFilterCatalog } from "./globalFilterCatalog";
+import dynamic from "next/dynamic";
+
+const DynamicModalSort = dynamic(() => import("../ModalSort/ModalSort"), {
+  ssr: false,
+});
+
+const DynamicModalFilter = dynamic(() => import("../ModalFilter/ModalFilter"), {
+  ssr: false,
+});
 
 function FullCatalog({
   categoryId,
@@ -41,13 +52,25 @@ function FullCatalog({
   const [pageSize, setPageSize] = useState(6);
   const [sortTypeName, setSortTypeName] = useState("");
   const [pageSizeIncrement, setPageSizeIncrement] = useState(0);
+  const [isOpenedSort, setIsOpenedSort] = useState(false);
+  const [isOpenedFilter, setIsOpenedFilter] = useState(false);
 
-  const MAX_PAGE = requestCards && Math.ceil(requestCards.length / pageSize);
+  const MAX_PAGE = requestCards && Math.ceil(requestCards.length / 6);
+  const MAX_CARDS_FOR_PAGINATION = 6;
+
+  const handleOpenSort = () => {
+    setIsOpenedSort((prev) => !prev);
+  };
+
+  const handleOpenFilter = () => {
+    setIsOpenedFilter((prev) => !prev);
+  };
 
   const handleChangePage = (index) => {
-    setPageSize(currentPage * 6);
-    setPageSizeIncrement(1);
     setCurrentPage(index);
+    setPageSizeIncrement((prevState) => MAX_CARDS_FOR_PAGINATION * (index - 1));
+    setPageSize(MAX_CARDS_FOR_PAGINATION * index);
+    scrollToCatalog();
   };
 
   const handlerAdditionals = (name) => {
@@ -55,45 +78,21 @@ function FullCatalog({
     setName(name);
     setIsDop(true);
   };
-  useEffect(async () => {
-    let data = [];
-    if (thematicId === null && typeId === null && typeof typeId !== "string") {
-      if (catalogData.position === "Фуршетные наборы") {
-        setTypeId(catalogType[0].id);
-      }
-    }
-    if (
-      catalogData.position === "Фуршетные наборы" &&
-      catalogType[0].id !== typeId
-    ) {
-      setPeopleNumber(null);
-    }
-
-    if (typeof typeId !== "string") {
-      if (
-        typeof typeId === "number" ||
-        typeId === null ||
-        thematicId ||
-        startValue ||
-        endValue ||
-        peopleNumber
-      ) {
-        const res = await fetch(
-          `http://localhost:3000/api/getAllProductsToCatalog?categoryId=${categoryId}&typeId=${typeId}&thematicID=${thematicId}&start=${startValue}&end=${endValue}&peopleNumber=${peopleNumber}`
-        );
-        try {
-          const result = await res.json();
-          if (thematicId) {
-            setTypeId(null);
-          }
-          data.push(result);
-          setRequestCards(data[0]);
-          setStandartCard(data[0]);
-        } catch {
-          console.log("error");
-        }
-      }
-    }
+  useEffect(() => {
+    globalFilterCatalog(
+      thematicId,
+      typeId,
+      setTypeId,
+      catalogData,
+      catalogType,
+      peopleNumber,
+      setPeopleNumber,
+      startValue,
+      endValue,
+      categoryId,
+      setRequestCards,
+      setStandartCard
+    );
   }, [typeId, thematicId, peopleNumber, startValue, endValue]);
 
   // проверка минимального и максимального значения
@@ -104,30 +103,18 @@ function FullCatalog({
   }, [cards, requestCards]);
 
   useEffect(() => {
-    if (isDop) {
-      const data = additionalsCards.filter(
-        (item) => item.kategoriya_dopov.categoryName === name
-      );
-      setRequestCards(data);
-    }
+    selectDop(isDop, additionalsCards, name, setRequestCards);
   }, [name, isDop]);
 
   useEffect(() => {
-    if (typeof typeId === "string") {
-      const data = additionalsCards.filter(
-        (item) => item.kategoriya_dopov.categoryName === name
-      );
-      let filtered = [];
-      if (startValue) {
-        filtered = data.filter((item) => item.price >= startValue);
-      }
-      if (endValue) {
-        filtered
-          ? (filtered = filtered.filter((item) => item.price <= endValue))
-          : filtered.filter((item) => item.price <= endValue);
-      }
-      setRequestCards(filtered);
-    }
+    filterWithAmount(
+      typeId,
+      additionalsCards,
+      startValue,
+      endValue,
+      setRequestCards,
+      name
+    );
   }, [startValue, endValue]);
 
   useEffect(() => {
@@ -135,12 +122,7 @@ function FullCatalog({
   }, [sortTypeName]);
 
   useEffect(() => {
-    if (router.asPath.indexOf("#") < 1) {
-      setTypeId(catalogType[0].id);
-    }
-    if (catalogData.position !== "Фуршетные наборы") {
-      setTypeId(null);
-    }
+    checkTypeId(router, setTypeId, catalogType, catalogData);
   }, []);
 
   return (
@@ -149,7 +131,7 @@ function FullCatalog({
       <h2 className={s.head}>{catalogData.name}</h2>
       <div className={s.content}>
         <div className={s.row_buttons}>
-          <button className={s.filter_btn}>
+          <button onClick={handleOpenFilter} className={s.filter_btn}>
             <LazyImageWrapper
               src={"/uikit/catalog/icon_filter.svg"}
               className={[s.btn_icon]}
@@ -158,7 +140,7 @@ function FullCatalog({
             />{" "}
             Фильтр
           </button>
-          <button className={s.sort_btn}>
+          <button onClick={handleOpenSort} className={s.sort_btn}>
             <LazyImageWrapper
               src={"/uikit/catalog/icon_sorting.svg"}
               className={[s.btn_icon]}
@@ -219,7 +201,7 @@ function FullCatalog({
             <Pagination
               current={currentPage}
               total={requestCards ? requestCards.length : 0}
-              pageSize={pageSize}
+              pageSize={MAX_CARDS_FOR_PAGINATION}
               jumpNextIcon={"..."}
               jumpPrevIcon={"..."}
               prevIcon={
@@ -254,137 +236,40 @@ function FullCatalog({
           </div>
         </div>
       </div>
+      {isOpenedSort && (
+        <DynamicModalSort
+          setSortTypeName={setSortTypeName}
+          isOpened={isOpenedSort}
+          overlayClass={s.overlay}
+          onClose={handleOpenSort}
+          sortTypeName={sortTypeName}
+        />
+      )}
+      {isOpenedFilter && (
+        <DynamicModalFilter
+          types={catalogType}
+          thematics={thematics}
+          setThematicId={setThematicId}
+          thematicId={thematicId}
+          typeId={typeId}
+          setTypeId={setTypeId}
+          additionals={additionals}
+          min={min}
+          max={max}
+          isDop={isDop}
+          setIsDop={setIsDop}
+          setName={setName}
+          handlerAdditionals={handlerAdditionals}
+          catalogData={catalogData}
+          setStartValue={setStartValue}
+          setEndValue={setEndValue}
+          // -----
+          isOpened={isOpenedFilter}
+          overlayClass={s.overlay}
+          onClose={handleOpenFilter}
+        />
+      )}
     </section>
-    // <section className={s.section}>
-    //
-    //       <button onClick={handleOpenSort} className={s.sort_btn}>
-    //         <LazyImageWrapper
-    //           src={"/uikit/catalog/icon_sorting.svg"}
-    //           className={[s.btn_icon]}
-    //           wrapperClass={s.wrapper_icon}
-    //           lazy={true}
-    //         />{" "}
-    //         Сортировка
-    //       </button>
-    //     </div>
-    //     <div className={s.catalog_content}>
-    //       <div className={s.filter_catalog}>
-    //         <FilterCatalog
-    //           types={catalogType}
-    //           setStart={setStart}
-    //           setEnd={setEnd}
-    //           min={min}
-    //           max={max}
-    //           typeId={typeId}
-    //           setTypeId={setTypeId}
-    //           handlerReset={handlerReset}
-    //           additionals={additionals}
-    //           // ---
-    //           handlerAdditionals={handlerAdditionals}
-    //           handlerClickType={handlerClickType}
-    //         />
-    //       </div>
-    //       <div className={s.interactive_block}>
-    //         <div className={s.row_buttons}>
-    //           {typeof typeId === "number" && (
-    //             <div className={s.dropdown_thematic}>
-    //               <DropdownTematic
-    //                 thematicID={thematicID}
-    //                 setThematics={changeThematics}
-    //                 list={thematics}
-    //               />
-    //             </div>
-    //           )}
-    //           {visiblePeople && (
-    //             <div className={s.dropdown_person}>
-    //               <p className={s.text}>Кол-во, чел</p>
-    //               <DropdownPerson setPeopleNumber={setPeopleNumber} />
-    //             </div>
-    //           )}
-    //           <div className={s.dropdown_amount}>
-    //             <Dropdown
-    //               sortTypeName={sortTypeName}
-    //               setSortTypeName={setSortTypeName}
-    //             />
-    //           </div>
-    //         </div>
-    //         <BlockCards
-    //           cards={filteredCards || cards}
-    //           pageSize={pageSize}
-    //           typeId={typeId}
-    //           currentPage={currentPage}
-    //           categoryName={categoryName}
-    //         />
-    //         {/*  pagination*/}
-    //         <Pagination
-    //           current={currentPage}
-    //           total={filteredCards.length}
-    //           pageSize={6}
-    //           jumpNextIcon={"..."}
-    //           jumpPrevIcon={"..."}
-    //           prevIcon={
-    //             <ArrowSectionButton
-    //               className={cs(s.pagination_arrow, s.pagination_arrow_left)}
-    //             />
-    //           }
-    //           nextIcon={
-    //             <ArrowSectionButton
-    //               className={cs(s.pagination_arrow, s.pagination_arrow_right)}
-    //             />
-    //           }
-    //           className={s.pagination}
-    //           onChange={handleChangePage}
-    //           hideOnSinglePage={true}
-    //           showTitle={false}
-    //           showLessItems={true}
-    //         />
-    //         {currentPage > MAX_PAGE - 1 ? (
-    //           ""
-    //         ) : (
-    //           <SecondaryButton
-    //             text={"Показать ещё"}
-    //             className={s.show_more}
-    //             onClick={() => {
-    //               handleChangePage(currentPage + 1);
-    //             }}
-    //           />
-    //         )}
-    //       </div>
-    //     </div>
-    //     {isOpened && (
-    //       <ModalFilter
-    //         handlerReset={handlerReset}
-    //         overlayClass={s.overlay}
-    //         isOpened={isOpened}
-    //         onClose={handleCloseFilter}
-    //         types={catalogType}
-    //         setStart={setStart}
-    //         setEnd={setEnd}
-    //         min={min}
-    //         max={max}
-    //         typeId={typeId}
-    //         setTypeId={setTypeId}
-    //         additionals={additionals}
-    //         thematicID={thematicID}
-    //         setThematics={changeThematics}
-    //         // ---
-    //         handlerAdditionals={handlerAdditionals}
-    //         handlerClickType={handlerClickType}
-    //         visiblePeople={visiblePeople}
-    //         thematics={thematics}
-    //       />
-    //     )}
-    //     {isOpenedSort && (
-    //       <ModalSort
-    //         setSortTypeName={setSortTypeName}
-    //         isOpened={isOpenedSort}
-    //         overlayClass={s.overlay}
-    //         onClose={handleCloseSort}
-    //         sortTypeName={sortTypeName}
-    //       />
-    //     )}
-    //   </div>
-    // </section>
   );
 }
 

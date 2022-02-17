@@ -1,8 +1,5 @@
 import {
-  TOGGLE_FAVORITE_BAR,
-  TOGGLE_FAVORITE_BUFFETS,
-  TOGGLE_FAVORITE_GASTRO,
-  TOGGLE_FAVORITE_MASTERCLASS,
+  TOGGLE_FAVORITE_EAT,
   TOGGLE_FAVORITE_DOP,
 } from "../type/favoriteTypes";
 import { getFavoriteFromLocaleStorage } from "../../utils/getFavoriteFromLocaleStorage";
@@ -10,10 +7,7 @@ import { getFavoriteFromLocaleStorage } from "../../utils/getFavoriteFromLocaleS
 const savedFavorites = getFavoriteFromLocaleStorage();
 
 const initialState = {
-  favoritesBuffets: [],
-  favoritesGastro: [],
-  favoritesMasterClass: [],
-  favoritesBar: [],
+  favoritesEat: [],
   favoritesDop: [],
 };
 
@@ -24,30 +18,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         favorites: savedFavorites,
       };
-    case TOGGLE_FAVORITE_BUFFETS:
-      updateFavorites(state.favoritesBuffets, action.payload.item);
+    case TOGGLE_FAVORITE_EAT:
+      updateFavorites(state.favoritesEat, action.payload.item);
       return {
         ...state,
-        favoritesBuffets: [...state.favoritesBuffets],
-      };
-    case TOGGLE_FAVORITE_GASTRO:
-      console.log(action.payload.item);
-      updateFavorites(state.favoritesGastro, action.payload.item);
-      return {
-        ...state,
-        favoritesGastro: [...state.favoritesGastro],
-      };
-    case TOGGLE_FAVORITE_MASTERCLASS:
-      updateFavorites(state.favoritesMasterClass, action.payload.item);
-      return {
-        ...state,
-        favoritesMasterClass: [...state.favoritesMasterClass],
-      };
-    case TOGGLE_FAVORITE_BAR:
-      updateFavorites(state.favoritesBar, action.payload.item);
-      return {
-        ...state,
-        favoritesBar: [...state.favoritesBar],
+        favoritesEat: [...state.favoritesEat],
       };
     case TOGGLE_FAVORITE_DOP:
       updateFavorites(state.favoritesDop, action.payload.item);
@@ -60,7 +35,8 @@ const reducer = (state = initialState, action) => {
 const updateFavorites = (favorites, item) => {
   const index = favorites.findIndex(
     (card, index) =>
-      card.id === item.id && card.categoryName === item.categoryName
+      card.id === item.id &&
+      card.category.categoryName === item.category.categoryName
   );
   const isIncludes = index !== -1;
   if (isIncludes) {

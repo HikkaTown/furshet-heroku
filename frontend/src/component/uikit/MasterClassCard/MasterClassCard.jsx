@@ -122,7 +122,7 @@ export default function MasterClassCard({ data, className, categoryName }) {
         />
       )}
       <div className={s.favorite}>
-        <FavoriteButton id={data.id} categoryName={categoryName} />
+        <FavoriteButton data={data} />
       </div>
       <div className={s.slider_block}>
         <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc} />

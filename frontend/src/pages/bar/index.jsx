@@ -13,18 +13,13 @@ import SectionTwo from "../../component/SectionTwo/SectionTwo";
 import SeoBlock from "../../component/SeoBlock/SeoBlock";
 import FeedbackSection from "../../component/FeedbackSection/FeedbackSection";
 import MasterClassInfo from "../../component/MasterClassInfo/MasterClassInfo";
-import BarInfoSection from "../../component/BarInfoSection/BarInfoSection";
-import Question from "../../component/uikit/Question/Question";
 import AskingBlock from "../../component/AskingBlock/AskingBlock";
 import BufetsInfoSection from "../../component/BufetsInfoSection/BufetsInfoSection";
 import StudyBlock from "../../component/StudyBlock/StudyBlock";
 import FirstSection from "../../component/FirstSection/FirstSection";
-import CompleteFushetSection from "../../component/CompleteFushetSection/CompleteFushetSection";
 import Layout from "../../component/Layout/Layout";
-import filterMasterClass from "../../utils/api/filterMasterClass";
-import CatalogSection from "../../component/CatalogSection/CatalogSection";
+
 import axios from "axios";
-import filterBarCards from "../../utils/api/filterBarCards";
 import FullCatalog from "../../component/FullCatalog/FullCatalog";
 import { getBarPage } from "../../utils/api/getPages";
 

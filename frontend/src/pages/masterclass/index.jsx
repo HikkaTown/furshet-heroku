@@ -15,9 +15,7 @@ import StudyBlock from "../../component/StudyBlock/StudyBlock";
 import FirstSection from "../../component/FirstSection/FirstSection";
 import Layout from "../../component/Layout/Layout";
 import { getMasterClassPage } from "../../utils/api/getPages";
-import CatalogSection from "../../component/CatalogSection/CatalogSection";
 import axios from "axios";
-import filterMasterClass from "../../utils/api/filterMasterClass";
 import FullCatalog from "../../component/FullCatalog/FullCatalog";
 
 export default function index({

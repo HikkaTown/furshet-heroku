@@ -20,14 +20,6 @@ export default function CatalogNavigationText({
       {!!types &&
         types.map((item) => {
           const { id, name, count } = item;
-          if (
-            router.asPath.slice(router.asPath.indexOf("#") + 1) ===
-            translit(name)
-          ) {
-            document
-              .querySelector("#catalog")
-              .scrollIntoView({ block: "start", behavior: "smooth" });
-          }
           return (
             <TextBtnForFilter
               key={isAdditionals ? id + "ds" : id}

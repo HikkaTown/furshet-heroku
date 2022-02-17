@@ -35,7 +35,11 @@ export default function BufetsInfoSection({ href }) {
 
   return (
     <section className={s.section}>
-      {router.pathname === "/masterclass" ? "" : <SeparatorTop />}
+      {router.pathname === "/masterclass" || router.pathname === "/bar" ? (
+        ""
+      ) : (
+        <SeparatorTop className={s.reverse} />
+      )}
       <LazyBackgroundImage
         className={
           router.pathname === "/masterclass"

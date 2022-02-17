@@ -22,7 +22,7 @@ export default function Question({ quest, answer }) {
   useOnClickOutside(block, handleClose);
 
   return (
-    <div ref={block} onPointerLeave={handleClose} className={s.container}>
+    <div ref={block} onMouseLeave={handleClose} className={s.container}>
       <div
         onClick={handleOpen}
         className={isOpen ? cs(s.block, s.block_active) : s.block}

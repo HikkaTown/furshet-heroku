@@ -11,29 +11,29 @@ export default function FilterThematicsBlock({
   setEndValue,
   thematicId,
 }) {
-  const variantsAnimate = {
-    hidden: {
-      height: 0,
-      opacity: 0,
-    },
-    visible: {
-      opacity: 1,
-      height: "auto",
-    },
-    hidden2: {
-      opacity: 0,
-      height: 0,
-    },
-  };
+  // const variantsAnimate = {
+  //   hidden: {
+  //     height: 0,
+  //     opacity: 0,
+  //   },
+  //   visible: {
+  //     opacity: 1,
+  //     height: "auto",
+  //   },
+  //   hidden2: {
+  //     opacity: 0,
+  //     height: 0,
+  //   },
+  // };
 
   return (
-    <motion.div
-      variants={variantsAnimate}
-      initial="hidden"
-      animate="visible"
-      transition={{ duration: 0.3, type: "tween" }}
-      exit="hidden2"
-      className={s.block}
+    <div
+    // variants={variantsAnimate}
+    // initial="hidden"
+    // animate="visible"
+    // transition={{ duration: 0.3, type: "tween" }}
+    // exit="hidden2"
+    // className={s.block}
     >
       <SecondaryButton
         onClick={() => {
@@ -65,6 +65,6 @@ export default function FilterThematicsBlock({
             />
           );
         })}
-    </motion.div>
+    </div>
   );
 }

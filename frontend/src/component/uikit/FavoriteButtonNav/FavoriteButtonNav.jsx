@@ -3,35 +3,18 @@ import cs from "classnames";
 import s from "./FavoriteButtonNav.module.scss";
 import { useSelector } from "react-redux";
 import {
-  favoriteSelectorBar,
-  favoriteSelectorBuffets,
+  favoriteSelectorEat,
   favoriteSelectorDop,
-  favoriteSelectorGastro,
-  favoriteSelectorMasterclass,
 } from "../../../redux/selectors/favoriteSelector";
 
 function FavoriteButtonNav({ className, onClick }) {
-  const favoritesBuffets = useSelector(favoriteSelectorBuffets());
-  const favoritesGastro = useSelector(favoriteSelectorGastro());
-  const favoritesMasterClass = useSelector(favoriteSelectorMasterclass());
-  const favoritesBar = useSelector(favoriteSelectorBar());
+  const favoritesEat = useSelector(favoriteSelectorEat());
   const favoritesDops = useSelector(favoriteSelectorDop());
   const [lenght, setLenght] = useState(0);
   useEffect(() => {
-    let a =
-      favoritesMasterClass.length +
-      favoritesGastro.length +
-      favoritesBuffets.length +
-      favoritesBar.length +
-      favoritesDops.length;
+    let a = favoritesEat.length + favoritesDops.length;
     setLenght(a);
-  }, [
-    favoritesBuffets,
-    favoritesGastro,
-    favoritesMasterClass,
-    favoritesBar,
-    favoritesDops,
-  ]);
+  }, [favoritesEat, favoritesDops]);
 
   return (
     <button onClick={onClick} className={cs(s.button, className)}>

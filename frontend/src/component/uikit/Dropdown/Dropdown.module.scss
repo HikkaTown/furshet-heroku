@@ -7,7 +7,7 @@
   cursor: pointer;
   background-color: $white-color;
   border: 0.5px solid $text-secondary;
-  transition: background 0.5s;
+  transition: border 0.5s, background 0.5s;
   position: relative;
   z-index: 5;
   @include hover {

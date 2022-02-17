@@ -1,4 +1,4 @@
-import { sortToDownHelp, sortToUpHelp } from "../CatalogBuffets/sort";
+import { sortToDownHelp, sortToUpHelp } from "./sort";
 
 const checkPrice = (
   sortTypeName,

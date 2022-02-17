@@ -1,12 +1,4 @@
 import axios from "axios";
-
-import Checkbox from "../../component/uikit/Checkbox/Checkbox";
-import DropdownPerson from "../../component/uikit/DropdownPerson/DropdownPerson";
-import FurshetCard from "../../component/uikit/FurshetCard/FurshetCard";
-import GiftItem from "../../component/uikit/GitfItem/GiftItem";
-import ItemCard from "../../component/uikit/ItemCard/ItemCard";
-import NavigationButton from "../../component/uikit/NavigationButton/NavigationButton";
-import { useEffect } from "react";
 import {
   bg_bar,
   bg_home,
@@ -21,17 +13,13 @@ import SeoBlock from "../../component/SeoBlock/SeoBlock";
 import FeedbackSection from "../../component/FeedbackSection/FeedbackSection";
 import MasterClassInfo from "../../component/MasterClassInfo/MasterClassInfo";
 import BarInfoSection from "../../component/BarInfoSection/BarInfoSection";
-import Question from "../../component/uikit/Question/Question";
 import AskingBlock from "../../component/AskingBlock/AskingBlock";
 import BufetsInfoSection from "../../component/BufetsInfoSection/BufetsInfoSection";
 import StudyBlock from "../../component/StudyBlock/StudyBlock";
 import FirstSection from "../../component/FirstSection/FirstSection";
-import CompleteFushetSection from "../../component/CompleteFushetSection/CompleteFushetSection";
 import Layout from "../../component/Layout/Layout";
 import { getStationsPage } from "../../utils/api/getPages";
 import Head from "next/head";
-import CatalogSection from "../../component/CatalogSection/CatalogSection";
-import filterStations from "../../utils/api/filterStations";
 import FullCatalog from "../../component/FullCatalog/FullCatalog";
 
 export default function Stations({

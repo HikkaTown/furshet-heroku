@@ -3,9 +3,37 @@
   @include body2-normal($primary-text);
   padding: 11px 32px;
   background-color: $white-color;
+  overflow: hidden;
   border-radius: 30px;
   transition: 0.5s;
+  position: relative;
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 15px;
+    background-color: #fff;
+    top: 0;
+    left: -50%;
+    transform: skewX(20deg);
+    opacity: 0.4;
+    transition: left 0.5s;
+  }
   @include hover {
     background-color: #fab576;
+    &::before {
+      animation: blick 0.5s;
+    }
+  }
+}
+
+@keyframes blick {
+  from {
+    left: 0;
+  }
+
+  to {
+    left: 110%;
   }
 }

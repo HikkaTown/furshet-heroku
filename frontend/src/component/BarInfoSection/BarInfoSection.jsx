@@ -4,8 +4,10 @@ import s from "./BarInfoSection.module.scss";
 import useWindowSize from "../../hooks/useWindowSize";
 import { LazyBackgroundImage } from "../LazyBackgroundImage/LazyBackgroundImage";
 import AboutMoreButton from "../uikit/AboutMoreButton/AboutMoreButton";
-import SeparatorBottom from "../uikit/SeparatorBottom/SeparatorBottom";
+// import SeparatorBottom from "../uikit/SeparatorBottom/SeparatorBottom";
 import { useRouter } from "next/router";
+import SeparatorTop from "../uikit/SeparatorTop/SeparatorTop";
+import SeparatorBottom from "../uikit/SeparatorBottom/SeparatorBottom";
 export default function BarInfoSection() {
   const size = useWindowSize();
   const [background, setBackground] = useState("");
@@ -22,6 +24,7 @@ export default function BarInfoSection() {
 
   return (
     <section className={s.section}>
+      {router.asPath === "/masterclass" && <SeparatorTop />}
       <LazyBackgroundImage className={s.overlay} src={background}>
         <div className={s.container}>
           <h2 className={s.head}>Бар на ваш праздник</h2>
@@ -35,7 +38,7 @@ export default function BarInfoSection() {
           />
         </div>
       </LazyBackgroundImage>
-      <SeparatorBottom />
+      {router.asPath === "/" && <SeparatorBottom />}
     </section>
   );
 }

@@ -6,8 +6,16 @@ import { LazyImageWrapper } from "../LazyImage/LazyImage";
 import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
 import ArrowSectionButton from "../uikit/ArrowSectionButton/ArrowSectionButton";
 import AboutMoreButton from "../uikit/AboutMoreButton/AboutMoreButton";
-import FeedbackModal from "../FeedbackModal/FeedbackModal";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+
+const DynamicModalFeedback = dynamic(
+  () => import("../FeedbackModal/FeedbackModal"),
+  {
+    ssr: false,
+  }
+);
+
 export default function StationSlider({ dataImages, dataText, secondBtn }) {
   const router = useRouter();
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -91,7 +99,9 @@ export default function StationSlider({ dataImages, dataText, secondBtn }) {
           </div>
         )}
       </div>
-      {isOpened && <FeedbackModal isOpened={isOpened} onClose={handleClose} />}
+      {isOpened && (
+        <DynamicModalFeedback isOpened={isOpened} onClose={handleClose} />
+      )}
     </>
   );
 }

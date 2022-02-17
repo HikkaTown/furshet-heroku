@@ -1,7 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import s from "./FilterAmount.module.scss";
-import debounce from "../../../utils/debounce";
-import throttle from "../../../utils/throttle";
 import spaceDigits from "../../../utils/converterNumber";
 
 export default function FilterAmount({

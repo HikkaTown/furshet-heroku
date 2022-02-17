@@ -2,16 +2,22 @@ import React, { useEffect, useState } from "react";
 import cs from "classnames";
 import s from "./FilterCatalog.module.scss";
 import FilterAmount from "../uikit/FilterAmount/FilterAmount";
-import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
-import CatalogTabButton from "../uikit/CatalogTabButton/CatalogTabButton";
 import ConfirmFilter from "../uikit/ConfirmFilter/ConfirmFilter";
 import { useRouter } from "next/router";
 import translit from "../../utils/translit";
-import TextBtnForFilter from "../uikit/TextBtnForFilter/TextBtnForFilter";
 import CatalogNavigationText from "../CatalogNavigationText/CatalogNavigationText";
 import CatalogNavigationTabs from "../CatalogNavigationTabs/CatalogNavigationTabs";
-import FilterThematicsBlock from "../FilterThematicsBlock/FilterThematicsBlock";
-import { AnimatePresence, AnimateSharedLayout } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+import { scrollToCatalog } from "../FullCatalog/scrollToCatalog";
+import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+
+const DynamicFilter = dynamic(
+  () => import("../FilterThematicsBlock/FilterThematicsBlock"),
+  {
+    ssr: false,
+  }
+);
 
 function FilterCatalog({
   types,
@@ -48,7 +54,9 @@ function FilterCatalog({
   };
 
   const handleResetForm = () => {
-    handlerReset();
+    // handlerReset();
+    setTypeId(types[0].id);
+    setThematicId(null);
     onClose();
   };
 
@@ -63,6 +71,7 @@ function FilterCatalog({
           if (text === router.asPath.slice(router.asPath.indexOf("#") + 1)) {
             data = item.id;
             setTypeId(data);
+            scrollToCatalog();
           }
         });
       additionals &&
@@ -72,10 +81,30 @@ function FilterCatalog({
             data = item.name;
             setTypeId(item.name);
             handlerAdditionals(item.name);
+            scrollToCatalog();
           }
         });
     }
   }, []);
+
+  const variantsAnimate = {
+    hidden: {
+      opacity: 0,
+      height: 0,
+      paddingBottom: "16px",
+      paddingTop: "16px",
+    },
+    visible: {
+      height: "auto",
+      opacity: 1,
+    },
+    hidden2: {
+      paddingTop: 0,
+      paddingBottom: 0,
+      opacity: 0,
+      height: 0,
+    },
+  };
 
   return (
     <div className={s.block}>
@@ -102,16 +131,22 @@ function FilterCatalog({
         </div>
         <AnimatePresence>
           {!isDop && thematics && (
-            <div className={cs(s.row, s.thematics)}>
-              <FilterThematicsBlock
-                thematics={thematics}
+            <motion.div
+              variants={variantsAnimate}
+              initial="hidden"
+              animate="visible"
+              transition={{ duration: 0.3, type: "tween" }}
+              exit="hidden2"
+              className={cs(s.thematics)}
+            >
+              <DynamicFilter
                 thematics={thematics}
                 setThematicId={setThematicId}
                 setStartValue={setStartValue}
                 setEndValue={setEndValue}
                 thematicId={thematicId}
               />
-            </div>
+            </motion.div>
           )}
         </AnimatePresence>
         <div className={s.row}>
@@ -141,47 +176,19 @@ function FilterCatalog({
         </div>
         <div className={cs(s.row, s.additionals)}>
           {/* TODO: ЭТО ДОПЫ */}
-          {
-            additionals && (
-              <CatalogNavigationText
-                types={additionals}
-                typeId={typeId}
-                setIsDop={setIsDop}
-                setStartValue={setStartValue}
-                setEndValue={setEndValue}
-                setThematicId={setThematicId}
-                setTypeId={setTypeId}
-                isAdditionals={true}
-                handlerAdditionals={handlerAdditionals}
-              />
-            )
-
-            // additionals.map((item) => {
-            //   const { id, name, count } = item;
-            //   if (
-            //     router.asPath.slice(router.asPath.indexOf("#") + 1) ===
-            //     translit(name)
-            //   ) {
-            //     document
-            //       .querySelector("#catalog")
-            //       .scrollIntoView({ block: "start", behavior: "smooth" });
-            //   }
-            //   return (
-            //     <TextBtnForFilter
-            //       key={id}
-            //       onClick={(e) => {
-            //         router.push(`#${translit(name)}`);
-            //         handlerAdditionals(name);
-            //         setTypeId(name);
-            //       }}
-            //       id={id + "ds"}
-            //       typeId={typeId}
-            //       count={count}
-            //       name={name}
-            //     />
-            //   );
-            // })
-          }
+          {additionals && (
+            <CatalogNavigationText
+              types={additionals}
+              typeId={typeId}
+              setIsDop={setIsDop}
+              setStartValue={setStartValue}
+              setEndValue={setEndValue}
+              setThematicId={setThematicId}
+              setTypeId={setTypeId}
+              isAdditionals={true}
+              handlerAdditionals={handlerAdditionals}
+            />
+          )}
         </div>
         <ConfirmFilter
           onClick={() => {

@@ -40,7 +40,6 @@ export default function FurshetCard({ data, className, categoryName }) {
     dispatch(
       toggleToCart({
         ...data,
-        categoryName: categoryName,
         count: 1,
       })
     );
@@ -80,7 +79,7 @@ export default function FurshetCard({ data, className, categoryName }) {
         />
       )}
       <div className={s.favorite}>
-        <FavoriteButton id={data.id} categoryName={categoryName} />
+        <FavoriteButton data={data} />
       </div>
       <div className={s.slider_block}>
         <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc} />

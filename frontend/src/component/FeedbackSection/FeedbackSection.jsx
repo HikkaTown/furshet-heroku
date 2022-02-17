@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
-import cs from "classnames";
 import { LazyBackgroundImage } from "../LazyBackgroundImage/LazyBackgroundImage";
-import { LazyImageWrapper } from "../LazyImage/LazyImage";
 import s from "./FeedbackSection.module.scss";
 import { PHONE_NUMBER_LINK, PHONE_NUMBER_TEXT } from "../../utils/const";
 import PrimaryButton from "../uikit/PrimaryButton/PrimaryButton";
 import useWindowSize from "../../hooks/useWindowSize";
 import SeparatorTop from "../uikit/SeparatorTop/SeparatorTop";
 import SeparatorBottom from "../uikit/SeparatorBottom/SeparatorBottom";
-import FeedbackModal from "../FeedbackModal/FeedbackModal";
+import dynamic from "next/dynamic";
+
+const DynamicModalFeedback = dynamic(
+  () => import("../FeedbackModal/FeedbackModal"),
+  {
+    ssr: false,
+  }
+);
+
 // TODO: Сделать полную заливку фона на мобилке и планшете
 export default function FeedbackSection() {
   const size = useWindowSize();
@@ -55,7 +61,7 @@ export default function FeedbackSection() {
         <SeparatorBottom className={s.separator_bottom} />
       </LazyBackgroundImage>
       {isOpen && (
-        <FeedbackModal
+        <DynamicModalFeedback
           isButtonClose={true}
           isOpened={isOpen}
           onClose={handleClose}

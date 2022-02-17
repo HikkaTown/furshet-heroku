@@ -1,6 +1,12 @@
 import Head from "next/head";
 import axios from "axios";
-import { bg_home, dataFurshetText, dataFurshetSlider } from "../utils/const";
+import {
+  bg_home,
+  dataFurshetText,
+  dataFurshetSlider,
+  dataStationsSlider,
+  dataStationsText,
+} from "../utils/const";
 import StationSliderSection from "../component/StationSliderSection/StationSliderSection";
 import SectionTwo from "../component/SectionTwo/SectionTwo";
 import SeoBlock from "../component/SeoBlock/SeoBlock";
@@ -12,9 +18,7 @@ import FirstSection from "../component/FirstSection/FirstSection";
 import CompleteFushetSection from "../component/CompleteFushetSection/CompleteFushetSection";
 import Layout from "../component/Layout/Layout";
 import { getIndexPage } from "../utils/api/getPages";
-import CatalogBuffets from "../component/CatalogBuffets/CatalogBuffets";
 import FullCatalog from "../component/FullCatalog/FullCatalog";
-import qs from "qs";
 
 export default function Home({
   index,
@@ -52,8 +56,12 @@ export default function Home({
           additionals={index.additionals}
           additionalsCards={additionalsCards}
         />
+        <StationSliderSection
+          secondBtn={false}
+          dataImages={dataStationsSlider}
+          dataText={dataStationsText}
+        />
         <MasterClassInfo />
-        {/* <BufetsInfoSection /> */}
         <BarInfoSection />
         <AskingBlock />
         <FeedbackSection />

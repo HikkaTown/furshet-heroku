@@ -1,9 +1,9 @@
-import React, {useRef, useState} from "react";
+import React, { useRef, useState } from "react";
 import cs from "classnames";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import s from "./DropdownPerson.module.scss";
 
-export default function DropdownPerson({setPeopleNumber}) {
+export default function DropdownPerson({ setPeopleNumber }) {
   const [isActive, setIsActive] = useState(false);
   const ref = useRef(null);
   const header = useRef(null);
@@ -12,12 +12,11 @@ export default function DropdownPerson({setPeopleNumber}) {
     setIsActive(false);
   });
 
-
   const handlerSelectItem = (e) => {
     const regExp = /-?\d+(\.\d+)?/g;
     const SelectItem = e.target.textContent;
     header.current.textContent = SelectItem;
-    setPeopleNumber(+(header.current.textContent.match(regExp)));
+    setPeopleNumber(+header.current.textContent.match(regExp));
   };
 
   return (
@@ -31,7 +30,7 @@ export default function DropdownPerson({setPeopleNumber}) {
         }
       }}
       onPointerLeave={() => {
-        setIsActive(false)
+        setIsActive(false);
       }}
       className={isActive ? cs(s.dropdown, s.dropdown_active) : cs(s.dropdown)}
       ref={ref}
@@ -104,7 +103,7 @@ export default function DropdownPerson({setPeopleNumber}) {
         )}
         {header.current ? (
           header.current.textContent !== "до 20" ? (
-            <div className={s.dropdown_item}>до 10</div>
+            <div className={s.dropdown_item}>до 20</div>
           ) : (
             ""
           )

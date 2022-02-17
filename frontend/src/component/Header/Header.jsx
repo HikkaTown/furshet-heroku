@@ -10,8 +10,17 @@ import Navigation from "../Navigation/Navigation";
 import NavCallButton from "../uikit/NavCallButton/NavCallButton";
 import { useRouter } from "next/router";
 import OpenNavigationButton from "../uikit/OpenNavigationButton/OpenNavigationButton";
-import NavigationModal from "../NavigationModal/NavigationModal";
 import FavoriteButtonNav from "../uikit/FavoriteButtonNav/FavoriteButtonNav";
+
+import dynamic from "next/dynamic";
+
+const DynamicModalNavigation = dynamic(
+  () => import("../NavigationModal/NavigationModal"),
+  {
+    ssr: false,
+  }
+);
+
 // TODO: появляется скролл в самом верху
 export default function Header() {
   const router = useRouter();
@@ -90,7 +99,7 @@ export default function Header() {
           className={s.navigation_mobile}
         />
         {isOpened && (
-          <NavigationModal
+          <DynamicModalNavigation
             isOpened={isOpened}
             overlayClass={s.overlay_class}
             onClose={handleClose}
