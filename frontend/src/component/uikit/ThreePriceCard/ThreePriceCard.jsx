@@ -20,21 +20,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { cartSelector } from "../../../redux/selectors/cartSelector";
 import { changeInCart, toggleToCart } from "../../../redux/actions/cartActions";
 
-export default function ThreePriceCard({ data, className, categoryName }) {
+export default function ThreePriceCard({ data, className }) {
   const size = useWindowSize();
   const cartData = useSelector(cartSelector());
   const dispatch = useDispatch();
-  const cartFromBasket = cartData.find(
-    (item) => item.id === data.id && item.categoryName === categoryName
+  const cardFromBasket = cartData.find(
+    (item) =>
+      item.id === data.id &&
+      item.category.categoryName === data.category.categoryName
   );
-  const hasInCart = cartFromBasket !== undefined;
+  const hasInCart = cardFromBasket !== undefined;
 
   const [descriptionVision, setDescription] = useState(false);
   const [active, setActive] = useState(
-    hasInCart ? cartFromBasket.count : data.threeValue[0].count
+    hasInCart ? cardFromBasket.count : data.threeValue[0].count
   );
   const [price, setPrice] = useState(
-    hasInCart ? cartFromBasket.price : data.threeValue[0].amount
+    hasInCart ? cardFromBasket.price : data.threeValue[0].amount
   );
 
   const visibleDescription = (e) => {
@@ -54,7 +56,7 @@ export default function ThreePriceCard({ data, className, categoryName }) {
     if (hasInCart) {
       dispatch(
         changeInCart({
-          ...cartFromBasket,
+          ...cardFromBasket,
           count: itemCount,
           price: itemAmount,
         })
@@ -73,7 +75,6 @@ export default function ThreePriceCard({ data, className, categoryName }) {
         ...data,
         count: active,
         price: price,
-        categoryName: categoryName,
       })
     );
   };
@@ -81,7 +82,7 @@ export default function ThreePriceCard({ data, className, categoryName }) {
   const handleDeleteFromCart = (e) => {
     dispatch(
       toggleToCart({
-        ...cartFromBasket,
+        ...cardFromBasket,
       })
     );
   };

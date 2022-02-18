@@ -10,11 +10,10 @@ import {
 } from "../../redux/selectors/favoriteSelector";
 import TabsForFavorites from "../../component/uikit/TabsForFavorites/TabsForFavorites";
 import CardsBlockFavorites from "../../component/CardsBlockFavorites/CardsBlockFavorites";
-// TODO: Доделать страницу фаваритов
-export default function Index({ data }) {
+export default function Index() {
   const favoritesEat = useSelector(favoriteSelectorEat());
   const favoritesDop = useSelector(favoriteSelectorDop());
-  const [category, setCategory] = useState("Фуршет");
+  const [category, setCategory] = useState(null);
   const [visibleCards, setVisibleCards] = useState(null);
   const selectCategory = (text) => {
     setCategory(text);
@@ -27,12 +26,26 @@ export default function Index({ data }) {
   favoritesEat.forEach((item) => {
     if (item.category.categoryName === "Фуршет") {
       favoritesBuffets.push(item);
+      if (category === null) {
+        setCategory("Фуршет");
+      }
     } else if (item.category.categoryName === "Гастро-станции") {
       favoritesGastro.push(item);
-    } else if (item.category.categoryName === "Бар") {
-      favoritesBar.push(item);
+      if (category === null) {
+        setCategory("Гастро-станции");
+      }
     } else if (item.category.categoryName === "Мастер-класс") {
       favoritesMasterClass.push(item);
+      if (category === null) {
+        setCategory("Мастер-классы");
+      }
+    } else if (item.category.categoryName === "Бар") {
+      favoritesBar.push(item);
+      if (category === null) {
+        setCategory("Выездные бары");
+      }
+    } else {
+      setCategory("Дополнительно");
     }
   });
 

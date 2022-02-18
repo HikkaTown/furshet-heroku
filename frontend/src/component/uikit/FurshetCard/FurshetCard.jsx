@@ -43,7 +43,6 @@ export default function FurshetCard({ data, className, categoryName }) {
     );
   };
   const setCount = (value) => {
-    console.log(value);
     if (value !== 0) {
       dispatch(
         changeInCart({
@@ -52,7 +51,6 @@ export default function FurshetCard({ data, className, categoryName }) {
         })
       );
     } else if (value === 0) {
-      console.log(value);
       dispatch(
         toggleToCart({
           ...cardFromBasket,

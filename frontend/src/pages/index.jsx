@@ -26,7 +26,6 @@ export default function Home({
   thematics,
   additionalsCards,
 }) {
-  console.log(additionalsCards);
   return (
     <>
       <Head>

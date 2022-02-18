@@ -56,15 +56,6 @@ export default function ItemCard({ data, className }) {
     }
   };
 
-  // useEffect(() => {
-  //   dispatch(
-  //     changeInCart({
-  //       ...data,
-  //       count: count,
-  //     })
-  //   );
-  // }, [count]);
-
   return (
     <div className={cs(s.block, className)}>
       <div className={s.favorite}>
