@@ -25,3 +25,15 @@
   left: 50%;
   margin-left: -300px;
 }
+
+.dots {
+}
+
+.dot {
+  @include button height: 4px;
+  width: 56px;
+  margin-right: 4px;
+}
+
+.dot_active {
+}
