@@ -82,8 +82,18 @@
     top: 0;
     left: 0;
   }
-  transition: 1s;
-  @include hover {
-    transform: rotate(30deg);
+  animation: rotating 25s linear infinite;
+  // @include hover {
+  //   transform: rotate(30deg);
+  // }
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
   }
 }
