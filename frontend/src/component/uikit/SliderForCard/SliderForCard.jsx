@@ -6,7 +6,7 @@ import { LazyImageWrapper } from "../../LazyImage/LazyImage";
 import useWindowSize from "../../../hooks/useWindowSize";
 import { PATH_IMAGES } from "../../../utils/const";
 
-export default function SliderForCard({ sliderMob, sliderPc }) {
+export default function SliderForCard({ sliderMob, sliderPc, onClick }) {
   const size = useWindowSize();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
@@ -24,7 +24,10 @@ export default function SliderForCard({ sliderMob, sliderPc }) {
   });
   return (
     <>
-      <div className={cs("navigation-wrapper", s.slider_wrapper)}>
+      <div
+        className={cs("navigation-wrapper", s.slider_wrapper)}
+        onClick={onClick}
+      >
         <div ref={sliderRef} className={cs("keen-slider", s.slider)}>
           {sliderMob.map((item, index) => {
             return (

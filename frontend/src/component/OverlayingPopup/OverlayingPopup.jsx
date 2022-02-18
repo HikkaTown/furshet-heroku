@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import cs from "classnames";
 
 import Portal from "../Portal/Portal";
@@ -9,25 +9,39 @@ import SliderCloseButton from "../uikit/SliderCloseButton/SliderCloseButton";
 import useLockBodyScroll from "../../hooks/useLockBodyScroll";
 
 const OverlayingPopup = (props) => {
-  const {children, isOpened, onClose, isButtonClose, isBottom, isLeft, overlayClass} =
-    props;
+  const {
+    children,
+    isOpened,
+    onClose,
+    isButtonClose,
+    isBottom,
+    isLeft,
+    overlayClass,
+    child,
+  } = props;
   useEffect(() => {
-    isOpened ? document.getElementById('__next').style.overflow = 'hidden' : document.getElementById('__next').style.overflow = 'auto'
-  }, [])
+    isOpened
+      ? (document.getElementById("__next").style.overflow = "hidden")
+      : (document.getElementById("__next").style.overflow = "auto");
+  }, []);
   useLockBodyScroll();
   return (
     <Portal>
-      <div className={cs(overlayClass, s.container, isOpened && s.opened)} role="dialog">
-        <Overlay onClose={onClose} isLeft={isLeft}/>
+      <div
+        className={cs(overlayClass, s.container, isOpened && s.opened)}
+        role="dialog"
+      >
+        <Overlay onClose={onClose} isLeft={isLeft} />
         <div
           className={cs(
             s.childrenWrapper,
             isBottom && s.childrenWrapperBottom,
-            isLeft && s.childrenWrapperLeft
+            isLeft && s.childrenWrapperLeft,
+            child
           )}
         >
           {children}
-          {isButtonClose && <SliderCloseButton/>}
+          {isButtonClose && <SliderCloseButton />}
         </div>
       </div>
     </Portal>

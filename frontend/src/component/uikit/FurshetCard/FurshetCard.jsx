@@ -13,9 +13,11 @@ import SliderCloseButton from "../SliderCloseButton/SliderCloseButton";
 import { useDispatch, useSelector } from "react-redux";
 import { changeInCart, toggleToCart } from "../../../redux/actions/cartActions";
 import { cartSelector } from "../../../redux/selectors/cartSelector";
+import ModalPhoto from "../../ModalPhoto/ModalPhoto";
 
 export default function FurshetCard({ data, className, categoryName }) {
   const cartData = useSelector(cartSelector());
+  const [isOpened, setIsOpened] = useState(false);
   const dispatch = useDispatch();
   const cardFromBasket = cartData.find((item) => item.id === data.id);
   const hasInBasket = cardFromBasket !== undefined;
@@ -78,7 +80,13 @@ export default function FurshetCard({ data, className, categoryName }) {
         <FavoriteButton data={data} />
       </div>
       <div className={s.slider_block}>
-        <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc} />
+        <SliderForCard
+          onClick={() => {
+            setIsOpened((prev) => !prev);
+          }}
+          sliderMob={data.slidersMob}
+          sliderPc={data.slidersPc}
+        />
         <DescriptionInCard
           descriptionVision={descriptionVision}
           content={data.descriptionList}
@@ -128,6 +136,14 @@ export default function FurshetCard({ data, className, categoryName }) {
           )}
         </div>
       </div>
+      {isOpened && (
+        <ModalPhoto
+          isOpened={isOpened}
+          onClose={() => {
+            setIsOpened((prev) => !prev);
+          }}
+        />
+      )}
     </div>
   );
 }

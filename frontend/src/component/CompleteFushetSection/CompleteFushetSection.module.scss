@@ -83,9 +83,6 @@
     left: 0;
   }
   animation: rotating 25s linear infinite;
-  // @include hover {
-  //   transform: rotate(30deg);
-  // }
 }
 
 @keyframes rotating {
