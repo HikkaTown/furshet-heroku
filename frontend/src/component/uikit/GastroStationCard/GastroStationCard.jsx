@@ -11,10 +11,6 @@ import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import SliderCloseButton from "../SliderCloseButton/SliderCloseButton";
 import SliderForCard from "../SliderForCard/SliderForCard";
 import converterNumber from "../../../utils/converterNumber";
-import {
-  addFavoriteItemToStore,
-  deleteFavoriteFromStore,
-} from "../../../redux/actions/favoriteActions";
 import { useDispatch, useSelector } from "react-redux";
 import { cartSelector } from "../../../redux/selectors/cartSelector";
 import { changeInCart, toggleToCart } from "../../../redux/actions/cartActions";
@@ -23,9 +19,7 @@ export default function GastroStationCard({ data, className, categoryName }) {
   const cardData = useSelector(cartSelector());
   const dispatch = useDispatch();
   const size = useWindowSize();
-  const cartFromBasket = cardData.find(
-    (item) => item.id === data.id && item.categoryName === categoryName
-  );
+  const cartFromBasket = cardData.find((item) => item.id === data.id);
   const hasInBasket = cartFromBasket !== undefined;
   const [value, setValue] = useState(+data.minPosition);
   const [descriptionVision, setDescription] = useState(false);

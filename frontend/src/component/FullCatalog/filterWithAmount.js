@@ -8,7 +8,7 @@ export const filterWithAmount = (
 ) => {
   if (typeof typeId === "string") {
     const data = additionalsCards.filter(
-      (item) => item.kategoriya_dopov.categoryName === name
+      (item) => item.category.categoryName === name
     );
     let filtered = [];
     if (startValue) {

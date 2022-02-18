@@ -4,15 +4,12 @@
   background-color: $orange-light;
   border-radius: 30px;
   transition: 0.5s;
-  max-width: 123px;
-  width: 123px;
-  height: 44px;
+  padding: 10px 24px;
   @include hover {
-    //background-color: rgba($color: $orange-light, $alpha: 0.5);
     background-color: #fda92b;
   }
 
   @include tablet {
-    height: 36px;
+    padding: 6px 24px;
   }
 }

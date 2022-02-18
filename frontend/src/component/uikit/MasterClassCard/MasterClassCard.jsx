@@ -14,28 +14,31 @@ import DescriptionInCard from "../DescriptionInCard/DescriptionInCard";
 import DeleteButton from "../DeleteButton/DeleteButton";
 import {
   addFavoriteItemToStore,
+  changeFavoriteEat,
   deleteFavoriteFromStore,
+  toggleFavoriteEat,
 } from "../../../redux/actions/favoriteActions";
 import { useDispatch, useSelector } from "react-redux";
 import { cartSelector } from "../../../redux/selectors/cartSelector";
 import { changeInCart, toggleToCart } from "../../../redux/actions/cartActions";
+import { favoriteSelectorEat } from "../../../redux/selectors/favoriteSelector";
 
 export default function MasterClassCard({ data, className, categoryName }) {
   const dispatch = useDispatch();
   const cartData = useSelector(cartSelector());
+  const cartPormotion = useSelector(favoriteSelectorEat());
   const size = useWindowSize();
-  const cartFromBasket = cartData.find(
-    (item) => item.id === data.id && item.categoryName === categoryName
-  );
+  const cartFromBasket = cartData.find((item) => item.id === data.id);
+  const cartFavorite = cartPormotion.find((item) => item.id === data.id);
+  const hasInPromotion = cartFavorite !== undefined;
   const hasInCart = cartFromBasket !== undefined;
   const [descriptionVision, setDescription] = useState(false);
   const [isActive, setIsActive] = useState(
-    hasInCart ? cartFromBasket.promotion : false
+    !!cartFavorite?.promotion || !!cartFromBasket?.promotion
   );
   const [value, setValue] = useState(
     hasInCart ? cartFromBasket.count : +data.minPosition
   );
-  console.log(data);
   const visibleDescription = (e) => {
     e.preventDefault();
     if (size.width >= 1175 || e._reactName === "onClick") {
@@ -53,7 +56,6 @@ export default function MasterClassCard({ data, className, categoryName }) {
     dispatch(
       toggleToCart({
         ...data,
-        categoryName: categoryName,
         count: value,
         promotion: isActive,
       })
@@ -95,15 +97,19 @@ export default function MasterClassCard({ data, className, categoryName }) {
   };
 
   const handlePromotion = () => {
+    dispatch(
+      changeInCart({
+        ...cartFromBasket,
+        promotion: !isActive,
+      })
+    );
+    dispatch(
+      changeFavoriteEat({
+        ...data,
+        promotion: !isActive,
+      })
+    );
     setIsActive(!isActive);
-    if (hasInCart) {
-      dispatch(
-        changeInCart({
-          ...cartFromBasket,
-          promotion: !isActive,
-        })
-      );
-    }
   };
 
   return (
@@ -122,7 +128,7 @@ export default function MasterClassCard({ data, className, categoryName }) {
         />
       )}
       <div className={s.favorite}>
-        <FavoriteButton data={data} />
+        <FavoriteButton data={data} promotion={isActive} />
       </div>
       <div className={s.slider_block}>
         <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc} />

@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, { useRef, useState } from "react";
 import cs from "classnames";
 import {
   handlerDecrement,
@@ -9,7 +9,7 @@ import {
 } from "../../../utils/counterFunction";
 import s from "./CounterLight.module.scss";
 
-export default function CounterLight({count, setCount, id, categoryName}) {
+export default function CounterLight({ count, setCount, id, categoryName }) {
   const timer = useRef();
 
   const cb = (value) => {
@@ -35,9 +35,8 @@ export default function CounterLight({count, setCount, id, categoryName}) {
 
   const handlerDecrementValue = (e) => {
     e.preventDefault();
-    handlerDecrement(timer, setCount, count);
+    handlerDecrement(timer, setCount, count, 1);
   };
-
 
   const handlerOnClickDecrement = () => {
     onClickDecrement(count, setCount, 1);
@@ -50,7 +49,7 @@ export default function CounterLight({count, setCount, id, categoryName}) {
         onUp={handlerClearTimeout}
         onClick={handlerOnClickDecrement}
       />
-      <InputValue onChange={cb} initState={count}/>
+      <InputValue onChange={cb} initState={count} />
       <ButtonIncrement
         onIncrement={handlerAddValue}
         onUp={handlerClearTimeout}
@@ -60,7 +59,7 @@ export default function CounterLight({count, setCount, id, categoryName}) {
   );
 }
 
-const ButtonDecrement = ({onDown, onUp, onClick}) => {
+const ButtonDecrement = ({ onDown, onUp, onClick }) => {
   return (
     <button
       className={cs(s.button, s.decrement)}
@@ -88,7 +87,7 @@ const ButtonDecrement = ({onDown, onUp, onClick}) => {
     </button>
   );
 };
-const ButtonIncrement = ({onIncrement, onUp, onClick}) => {
+const ButtonIncrement = ({ onIncrement, onUp, onClick }) => {
   return (
     <button
       onClick={onClick}
@@ -124,7 +123,7 @@ const ButtonIncrement = ({onIncrement, onUp, onClick}) => {
   );
 };
 
-const InputValue = ({onChange, initState}) => {
+const InputValue = ({ onChange, initState }) => {
   const [counter, setCount] = useState(initState);
 
   const handlerChange = (e) => {

@@ -17,9 +17,7 @@ import { cartSelector } from "../../../redux/selectors/cartSelector";
 export default function FurshetCard({ data, className, categoryName }) {
   const cartData = useSelector(cartSelector());
   const dispatch = useDispatch();
-  const cardFromBasket = cartData.find(
-    (item) => item.id === data.id && item.categoryName === categoryName
-  );
+  const cardFromBasket = cartData.find((item) => item.id === data.id);
   const hasInBasket = cardFromBasket !== undefined;
   const size = useWindowSize();
   const [descriptionVision, setDescription] = useState(false);

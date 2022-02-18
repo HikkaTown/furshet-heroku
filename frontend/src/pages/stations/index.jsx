@@ -83,7 +83,7 @@ export async function getStaticProps({ preview = null }) {
   let filterAdditionals = [];
   indexPage.additionals.map((typeAdditionals, index) => {
     additionalList.data.map((item) => {
-      if (item.kategoriya_dopov.id === typeAdditionals.id) {
+      if (item.category.id === typeAdditionals.id) {
         filterAdditionals.push(item);
         indexPage.additionals[index] = {
           ...typeAdditionals,

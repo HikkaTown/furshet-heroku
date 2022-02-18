@@ -13,35 +13,62 @@ import {
 } from "../../../redux/actions/favoriteActions";
 import { useDispatch, useSelector } from "react-redux";
 import { cartSelector } from "../../../redux/selectors/cartSelector";
+import { changeInCart, toggleToCart } from "../../../redux/actions/cartActions";
 // карточка для обычных продуктов или стаффа
 
 export default function ItemCard({ data, className }) {
   const dispatch = useDispatch();
   const cartData = useSelector(cartSelector());
-  const cartFromBasket = cartData.find((item) => item.id);
-  const [isEdit, setIsEdit] = useState(false);
-  const [added, setAdded] = useState(data.isAdded);
-  const [price, setPrice] = useState(null);
-  const [count, setCount] = useState(data.count ? data.count : null);
-  const startPrice = +data.price;
+  const cardFromBasket = cartData.find(
+    (item) =>
+      item.id === data.id &&
+      item.category.categoryName === data.category.categoryName
+  );
+  const hasInCart = cardFromBasket !== undefined;
+  const [price, setPrice] = useState(
+    hasInCart ? data.price * cardFromBasket.count : data.price
+  );
   const handleAddInCart = (e) => {
     e.preventDefault();
-    setIsEdit(isEdit ? false : true);
-    setPrice(startPrice);
     setCount(1);
+    dispatch(
+      toggleToCart({
+        ...data,
+        count: 1,
+      })
+    );
   };
 
-  useEffect(() => {
-    setPrice(startPrice * count);
-  }, [count]);
+  const setCount = (value) => {
+    if (value !== 0) {
+      dispatch(
+        changeInCart({
+          ...cardFromBasket,
+          count: value,
+        })
+      );
+    } else if (value === 0) {
+      dispatch(
+        toggleToCart({
+          ...cardFromBasket,
+        })
+      );
+    }
+  };
+
+  // useEffect(() => {
+  //   dispatch(
+  //     changeInCart({
+  //       ...data,
+  //       count: count,
+  //     })
+  //   );
+  // }, [count]);
 
   return (
     <div className={cs(s.block, className)}>
       <div className={s.favorite}>
-        <FavoriteButton
-          id={data.id}
-          categoryName={data.kategoriya_dopov.categoryName}
-        />
+        <FavoriteButton data={data} />
       </div>
       <LazyImageWrapper
         wrapperClass={s.wrapper}
@@ -57,12 +84,17 @@ export default function ItemCard({ data, className }) {
       <div className={s.pay}>
         <p className={s.price}>
           <span className={s.amount}>
-            {converterNumber(price || startPrice)}
+            {converterNumber(
+              hasInCart ? cardFromBasket.price * cardFromBasket.count : price
+            )}
           </span>
           <span className={s.currency}> &#8381;</span>/шт
         </p>
-        {isEdit ? (
-          <CounterLight count={count} setCount={setCount} />
+        {hasInCart ? (
+          <CounterLight
+            count={hasInCart ? cardFromBasket.count : 1}
+            setCount={setCount}
+          />
         ) : (
           <AddBasketButton handleAddInCart={handleAddInCart} />
         )}

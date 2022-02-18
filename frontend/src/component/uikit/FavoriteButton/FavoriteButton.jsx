@@ -12,20 +12,35 @@ import {
   favoriteSelectorDop,
 } from "../../../redux/selectors/favoriteSelector";
 
-export default function FavoriteButton({ className, data }) {
+export default function FavoriteButton({ className, data, promotion }) {
   const [added, setAdded] = useState(false);
   const dispatch = useDispatch();
   const favoritesEat = useSelector(favoriteSelectorEat());
   const favoriteDops = useSelector(favoriteSelectorDop());
 
   const handlerClick = () => {
-    if (data.category.categoryName === "Фуршет") {
+    if (
+      data.category.categoryName === "Фуршет" ||
+      data.category.categoryName === "Гастро-станции" ||
+      data.category.categoryName === "Бар" ||
+      data.category.categoryName === "Мастер-класс"
+    ) {
       setAdded(!added);
-      dispatch(
-        toggleFavoriteEat({
-          ...data,
-        })
-      );
+      if (promotion) {
+        dispatch(
+          toggleFavoriteEat({
+            ...data,
+            promotion,
+          })
+        );
+      } else {
+        dispatch(
+          toggleFavoriteEat({
+            ...data,
+            promotion: promotion,
+          })
+        );
+      }
     } else {
       setAdded(!added);
       dispatch(
@@ -36,7 +51,12 @@ export default function FavoriteButton({ className, data }) {
     }
   };
   useEffect(() => {
-    if (data.category.categoryName === "Фуршет") {
+    if (
+      data.category.categoryName === "Фуршет" ||
+      data.category.categoryName === "Гастро-станции" ||
+      data.category.categoryName === "Бар" ||
+      data.category.categoryName === "Мастер-класс"
+    ) {
       setAdded(
         favoritesEat.find(
           (item) =>
@@ -48,7 +68,7 @@ export default function FavoriteButton({ className, data }) {
       setAdded(
         favoriteDops.find(
           (item) =>
-            item.id === id &&
+            item.id === data.id &&
             data.category.categoryName === item.category.categoryName
         )
       );

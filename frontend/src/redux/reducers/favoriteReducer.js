@@ -1,6 +1,8 @@
 import {
   TOGGLE_FAVORITE_EAT,
   TOGGLE_FAVORITE_DOP,
+  CHANGE_FAVORITE_EAT,
+  CHANGE_FAVORITE_DOP,
 } from "../type/favoriteTypes";
 import { getFavoriteFromLocaleStorage } from "../../utils/getFavoriteFromLocaleStorage";
 
@@ -27,6 +29,36 @@ const reducer = (state = initialState, action) => {
     case TOGGLE_FAVORITE_DOP:
       updateFavorites(state.favoritesDop, action.payload.item);
       return { ...state, favoritesDop: [...state.favoritesDop] };
+    case CHANGE_FAVORITE_EAT:
+      return {
+        ...state,
+        favoritesEat: state.favoritesEat.map((item) => {
+          if (
+            item.id === action.payload.item.id &&
+            item.category.categoryName ===
+              action.payload.item.category.categoryName
+          ) {
+            return action.payload.item;
+          } else {
+            return item;
+          }
+        }),
+      };
+    case CHANGE_FAVORITE_DOP:
+      return {
+        ...state,
+        favoritesDop: state.favoritesDop.map((item) => {
+          if (
+            item.id === action.payload.item.id &&
+            item.category.categoryName ===
+              action.payload.item.category.categoryName
+          ) {
+            return action.payload.item;
+          } else {
+            return item;
+          }
+        }),
+      };
     default:
       return state;
   }

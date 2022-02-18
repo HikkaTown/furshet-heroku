@@ -1,14 +1,12 @@
 .button {
   @include buttonDefault;
-  max-width: 195px;
-  width: 195px;
-  height: 48px;
   @include body2-normal($primary-text);
   border-radius: 30px;
   transition: 0.5s;
   background-color: $orange-color;
   overflow: hidden;
   position: relative;
+  padding: 11px 56px;
   &::before {
     content: "";
     display: block;
@@ -21,6 +19,11 @@
     transform: skewX(20deg);
     opacity: 0.4;
     transition: left 0.5s;
+  }
+
+  @include tablet {
+    padding: 6px 24px;
+    @include body3-medium($primary-text);
   }
 
   @include hover {

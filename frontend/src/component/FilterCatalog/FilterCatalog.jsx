@@ -38,14 +38,12 @@ function FilterCatalog({
   min,
   max,
   catalogData,
-  // ---
-
-  handlerReset,
-
   onClose,
+  className,
   //-----
   visiblePeople,
   handlerClickType,
+  handlerReset,
 }) {
   const router = useRouter();
   const [path, setPath] = useState("");
@@ -107,7 +105,7 @@ function FilterCatalog({
   };
 
   return (
-    <div className={s.block}>
+    <div className={cs(s.block, className)}>
       <button onClick={onClose} className={s.close}>
         <span className={s.close__line} />
         <span className={s.close__line} />

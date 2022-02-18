@@ -47,7 +47,9 @@ export default function NavigationButton({
             onClick(text);
           }}
         >
-          {!!length && <span className={s.count}>{length}</span>}
+          {length !== undefined && length > 0 && (
+            <span className={s.count}>{length}</span>
+          )}
           {text}
         </button>
       )}

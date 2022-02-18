@@ -69,6 +69,7 @@ function ModalFilter({
             setStartValue={setStartValue}
             setEndValue={setEndValue}
             onClose={onClose}
+            className={s.block_modal}
           />
         </motion.div>
       </OverlayingPopup>

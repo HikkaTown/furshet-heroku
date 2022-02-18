@@ -66,6 +66,7 @@
   border-top-right-radius: 8px;
   background-color: rgba(255, 255, 255, 0.5);
   position: relative;
+  overflow: hidden;
   @include desktop {
     max-width: 100%;
     width: 100vw;
@@ -149,14 +150,10 @@
 }
 
 .pay_button {
-  max-width: 123px;
-  width: 123px;
-  height: 44px;
-
+  padding: 10px 24px;
   @include body3-medium($primary-text);
-
-  @include desktop {
-    height: 36px;
+  @include tablet {
+    padding: 6px 24px;
   }
 }
 

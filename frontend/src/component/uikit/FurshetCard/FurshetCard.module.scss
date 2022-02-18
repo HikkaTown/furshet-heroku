@@ -34,9 +34,6 @@
   bottom: 24px;
   left: 12px;
   z-index: 1;
-  max-width: 141px;
-  width: 141px;
-  height: 32px;
   background-color: #82e586;
   cursor: default;
   @include body4($primary-text);
@@ -81,6 +78,7 @@
   overflow: hidden;
   background-color: #ffffff;
   position: relative;
+  overflow: hidden;
   @include desktop {
     max-width: 100%;
     width: 100vw;
@@ -127,14 +125,10 @@
 }
 
 .pay_button {
-  max-width: 123px;
-  width: 123px;
-  height: 44px;
-
+  padding: 10px 24px;
   @include body3-medium($primary-text);
-
   @include tablet {
-    height: 36px;
+    padding: 6px 24px;
   }
 }
 

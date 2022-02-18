@@ -16,7 +16,7 @@ const pareseAdditionals = (list) => {
       name: item.attributes.name,
       price: item.attributes.price,
       params: item.attributes?.params,
-      kategoriya_dopov: {
+      category: {
         id: item.attributes.kategoriya_dopov.data.id,
         categoryName:
           item.attributes.kategoriya_dopov.data.attributes.name_category,

@@ -13,6 +13,7 @@ import OpenNavigationButton from "../uikit/OpenNavigationButton/OpenNavigationBu
 import FavoriteButtonNav from "../uikit/FavoriteButtonNav/FavoriteButtonNav";
 
 import dynamic from "next/dynamic";
+import useHeaderFixed from "../../hooks/useHeaderFixed";
 
 const DynamicModalNavigation = dynamic(
   () => import("../NavigationModal/NavigationModal"),
@@ -23,13 +24,11 @@ const DynamicModalNavigation = dynamic(
 
 // TODO: появляется скролл в самом верху
 export default function Header() {
+  const { isMenuShow, isMenuFixed } = useHeaderFixed();
+
   const router = useRouter();
-  const [scroll, setScroll] = useState(0);
   const [path, setPath] = useState(false);
   const [isOpened, setOpen] = useState(false);
-  const handleScroll = () => {
-    setScroll(window.scrollY);
-  };
 
   const handleClose = () => {
     setOpen(false);
@@ -58,19 +57,12 @@ export default function Header() {
     }
   }, [router.pathname]);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.addEventListener("scroll", handleScroll);
-    }
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <header
       className={cs(
         s.header,
-        scroll > 300 && s.header_fixed,
-        path && s.header_spec
+        isMenuFixed && s.headerFixed,
+        isMenuShow && s.headerShow
       )}
     >
       <div className={s.container}>
