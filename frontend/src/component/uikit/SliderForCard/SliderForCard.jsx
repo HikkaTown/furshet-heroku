@@ -7,7 +7,7 @@ import useWindowSize from "../../../hooks/useWindowSize";
 import { PATH_IMAGES } from "../../../utils/const";
 import ModalPhoto from "../../ModalPhoto/ModalPhoto";
 
-export default function SliderForCard({ sliderMob, sliderPc }) {
+export default function SliderForCard({ sliderMob, sliderPc, sliderModal }) {
   const size = useWindowSize();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isOpened, setIsOpened] = useState(false);
@@ -79,7 +79,7 @@ export default function SliderForCard({ sliderMob, sliderPc }) {
             setIsOpened((prev) => !prev);
           }}
           index={currentSlide}
-          images={sliderPc}
+          images={sliderModal}
         />
       )}
     </>

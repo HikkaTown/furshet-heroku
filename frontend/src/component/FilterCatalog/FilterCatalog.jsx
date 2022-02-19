@@ -11,6 +11,7 @@ import { AnimatePresence } from "framer-motion";
 import { scrollToCatalog } from "../FullCatalog/scrollToCatalog";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import FilterThematicsBlock from "../FilterThematicsBlock/FilterThematicsBlock";
 
 const DynamicFilter = dynamic(
   () => import("../FilterThematicsBlock/FilterThematicsBlock"),
@@ -127,6 +128,7 @@ function FilterCatalog({
             setEndValue={setEndValue}
           />
         </div>
+        {/* {typeof window !== "undefined" && ( */}
         <AnimatePresence>
           {!isDop && thematics && (
             <motion.div
@@ -137,16 +139,18 @@ function FilterCatalog({
               exit="hidden2"
               className={cs(s.thematics)}
             >
-              <DynamicFilter
+              <FilterThematicsBlock
                 thematics={thematics}
                 setThematicId={setThematicId}
                 setStartValue={setStartValue}
                 setEndValue={setEndValue}
                 thematicId={thematicId}
+                classNameBlock={cs(s.thematics, s.block)}
               />
             </motion.div>
           )}
         </AnimatePresence>
+        {/* )} */}
         <div className={s.row}>
           {catalogData.position === "Фуршетные наборы" && (
             <CatalogNavigationText

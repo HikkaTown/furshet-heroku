@@ -2,7 +2,7 @@ import React from "react";
 import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
 import s from "./FilterThematicsBlock.module.scss";
 import cs from "classnames";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 
 export default function FilterThematicsBlock({
   thematics,
@@ -10,30 +10,31 @@ export default function FilterThematicsBlock({
   setStartValue,
   setEndValue,
   thematicId,
+  classNameBlock,
 }) {
-  // const variantsAnimate = {
-  //   hidden: {
-  //     height: 0,
-  //     opacity: 0,
-  //   },
-  //   visible: {
-  //     opacity: 1,
-  //     height: "auto",
-  //   },
-  //   hidden2: {
-  //     opacity: 0,
-  //     height: 0,
-  //   },
-  // };
+  const variantsAnimate = {
+    hidden: {
+      opacity: 0,
+      height: 0,
+    },
+    visible: {
+      height: "auto",
+      opacity: 1,
+    },
+    hidden2: {
+      opacity: 0,
+      height: 0,
+    },
+  };
 
   return (
-    <div
-    // variants={variantsAnimate}
-    // initial="hidden"
-    // animate="visible"
-    // transition={{ duration: 0.3, type: "tween" }}
-    // exit="hidden2"
-    // className={s.block}
+    <
+      // variants={variantsAnimate}
+      // initial="hidden"
+      // animate="visible"
+      // transition={{ duration: 0.3, type: "tween" }}
+      // exit="hidden2"
+      // className={cs(classNameBlock)}
     >
       <SecondaryButton
         onClick={() => {
@@ -47,24 +48,23 @@ export default function FilterThematicsBlock({
         )}
         text={"Без тематики"}
       />
-      {thematics &&
-        thematics.map((item) => {
-          return (
-            <SecondaryButton
-              key={item.id}
-              onClick={() => {
-                setThematicId(item.id);
-                setStartValue(null);
-                setEndValue(null);
-              }}
-              className={cs(
-                s.thematics_btn,
-                thematicId === item.id && s.thematics_btn_active
-              )}
-              text={item.name}
-            />
-          );
-        })}
-    </div>
+      {thematics.map((item, index) => {
+        return (
+          <SecondaryButton
+            key={item.id}
+            onClick={() => {
+              setThematicId(item.id);
+              setStartValue(null);
+              setEndValue(null);
+            }}
+            className={cs(
+              s.thematics_btn,
+              thematicId === item.id && s.thematics_btn_active
+            )}
+            text={item.name}
+          />
+        );
+      })}
+    </>
   );
 }

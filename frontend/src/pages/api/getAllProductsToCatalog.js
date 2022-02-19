@@ -22,6 +22,7 @@ const parseObj = (data) => {
     const descriptionList = attributes.descriptionList.map((item) => item.Text);
     const sliderMobData = attributes.slidersMob.data;
     const sliderPcData = attributes.slidersPc.data;
+    const sliderModalData = attributes.slidersModal.data;
     const typeCard = checkType(attributes.tipy_tovarovs.data);
     const category = {
       id: attributes.kategoriya.data.id,
@@ -35,6 +36,9 @@ const parseObj = (data) => {
       (item) => item.attributes.url
     );
     const sliderPc = Array.from(sliderPcData).map(
+      (item) => item.attributes.url
+    );
+    const sliderModal = Array.from(sliderModalData).map(
       (item) => item.attributes.url
     );
     let object = {
@@ -72,6 +76,7 @@ const parseObj = (data) => {
         : false,
       slidersMob: sliderMob,
       slidersPc: sliderPc,
+      sliderModal: sliderModal,
       nameFood: attributes?.foodName,
       vegan: attributes.vegan,
     };

@@ -100,7 +100,11 @@ export default function GastroStationCard({ data, className, categoryName }) {
         <FavoriteButton data={data} />
       </div>
       <div className={s.slider_block}>
-        <SliderForCard sliderMob={data.slidersMob} sliderPc={data.slidersPc} />
+        <SliderForCard
+          sliderMob={data.slidersMob}
+          sliderPc={data.slidersPc}
+          sliderModal={data.sliderModal}
+        />
         <DescriptionInCard
           descriptionVision={descriptionVision}
           content={data.descriptionList}

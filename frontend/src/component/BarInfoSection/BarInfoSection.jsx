@@ -24,7 +24,7 @@ export default function BarInfoSection() {
 
   return (
     <section className={s.section}>
-      {router.asPath === "/masterclass" && <SeparatorTop />}
+      {router.pathname === "/masterclass" && <SeparatorTop />}
       <LazyBackgroundImage className={s.overlay} src={background}>
         <div className={s.container}>
           <h2 className={s.head}>Бар на ваш праздник</h2>
@@ -38,7 +38,7 @@ export default function BarInfoSection() {
           />
         </div>
       </LazyBackgroundImage>
-      {router.asPath === "/" && <SeparatorBottom />}
+      {router.pathname === "/" && <SeparatorBottom />}
     </section>
   );
 }

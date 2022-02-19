@@ -78,6 +78,15 @@
       "relation": "manyToMany",
       "target": "api::tipy-tovarov.tipy-tovarov",
       "mappedBy": "katalogs"
+    },
+    "slidersModal": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }
