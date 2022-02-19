@@ -18,6 +18,7 @@ const OverlayingPopup = (props) => {
     isLeft,
     overlayClass,
     child,
+    classBtnClose,
   } = props;
   useEffect(() => {
     isOpened
@@ -41,7 +42,9 @@ const OverlayingPopup = (props) => {
           )}
         >
           {children}
-          {isButtonClose && <SliderCloseButton />}
+          {isButtonClose && (
+            <SliderCloseButton onClick={onClose} className={classBtnClose} />
+          )}
         </div>
       </div>
     </Portal>

@@ -9,14 +9,26 @@
 .slider {
   max-height: 600px;
   max-width: 600px;
+  width: 100%;
+  height: 100%;
 }
 
 .slide {
   background-color: #fff;
   max-height: 600px;
   max-width: 600px;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
+}
+
+.image {
+  height: 100%;
+  width: 100%;
+}
+
+.image_wrapper {
+  height: 100%;
+  width: 100%;
 }
 
 .overlay {
@@ -27,13 +39,54 @@
 }
 
 .dots {
+  position: absolute;
+  z-index: 2;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
 }
 
 .dot {
-  @include button height: 4px;
+  @include buttonDefault;
   width: 56px;
+  height: 4px;
   margin-right: 4px;
+  display: block;
+  background-color: #fff;
+  opacity: 0.4;
+  transition: 0.5s;
+  border-radius: 3px;
+  &:last-of-type {
+    margin-right: 0;
+  }
 }
 
 .dot_active {
+  opacity: 1;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+}
+
+.arrow_left {
+  left: -58px;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.arrow_right {
+  right: -58px;
+  transform: translateY(-50%);
+}
+
+.arrow_disabled {
+  opacity: 0;
+}
+
+.close_btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
 }

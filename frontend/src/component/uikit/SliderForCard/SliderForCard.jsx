@@ -5,10 +5,12 @@ import s from "./SliderForCard.module.scss";
 import { LazyImageWrapper } from "../../LazyImage/LazyImage";
 import useWindowSize from "../../../hooks/useWindowSize";
 import { PATH_IMAGES } from "../../../utils/const";
+import ModalPhoto from "../../ModalPhoto/ModalPhoto";
 
-export default function SliderForCard({ sliderMob, sliderPc, onClick }) {
+export default function SliderForCard({ sliderMob, sliderPc }) {
   const size = useWindowSize();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isOpened, setIsOpened] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [sliderRef, instanceRef] = useKeenSlider({
     initial: 0,
@@ -26,7 +28,9 @@ export default function SliderForCard({ sliderMob, sliderPc, onClick }) {
     <>
       <div
         className={cs("navigation-wrapper", s.slider_wrapper)}
-        onClick={onClick}
+        onClick={() => {
+          setIsOpened(true);
+        }}
       >
         <div ref={sliderRef} className={cs("keen-slider", s.slider)}>
           {sliderMob.map((item, index) => {
@@ -68,6 +72,16 @@ export default function SliderForCard({ sliderMob, sliderPc, onClick }) {
           </div>
         )}
       </div>
+      {isOpened && (
+        <ModalPhoto
+          isOpened={isOpened}
+          onClose={() => {
+            setIsOpened((prev) => !prev);
+          }}
+          index={currentSlide}
+          images={sliderPc}
+        />
+      )}
     </>
   );
 }
