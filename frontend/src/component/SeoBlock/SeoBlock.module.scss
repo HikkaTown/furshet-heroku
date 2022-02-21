@@ -8,7 +8,7 @@
 }
 
 .container {
-  max-width: 328px;
+  max-width: calc(100% - 32px);
   width: 100vw;
   margin: 0 auto;
   @include tablet {
@@ -61,10 +61,13 @@
 }
 
 .row {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   @include desktop {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    flex-direction: row;
     &:first-of-type {
       flex-direction: row-reverse;
     }

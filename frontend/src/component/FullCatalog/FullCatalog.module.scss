@@ -1,6 +1,6 @@
 .section {
   padding-top: 70px;
-  max-width: 328px;
+  max-width: calc(100% - 32px);
   width: 100vw;
   margin: 0 auto;
   position: relative;
