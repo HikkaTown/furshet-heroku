@@ -60,6 +60,7 @@ export default function ThreePriceCard({ data, className }) {
           ...cardFromBasket,
           count: itemCount,
           price: itemAmount,
+          totalPrice: itemAmount,
         })
       );
       setPrice(itemAmount);
@@ -76,6 +77,7 @@ export default function ThreePriceCard({ data, className }) {
         ...data,
         count: active,
         price: price,
+        totalPrice: price,
       })
     );
   };

@@ -1,3 +1,3 @@
-export const TOGGLE_TO_CART = 'ADD_TO_CART';
-export const CHANGE_IN_CART = 'CHANGE_IN_CART';
-export const CLEAR_CART_STORE = 'CLEAR_CART_STORE';
+export const TOGGLE_TO_CART = "ADD_TO_CART";
+export const CHANGE_IN_CART = "CHANGE_IN_CART";
+export const CLEAR_CART_STORE = "CLEAR_CART_STORE";

@@ -1,0 +1,174 @@
+.container {
+  padding: 24px 0;
+  max-width: calc(100% - 32px);
+  margin: 0 auto;
+}
+
+.cost {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0 0 24px 0;
+}
+
+.text {
+  @include body1-normal($primary-text);
+}
+
+.amount {
+  margin-left: auto;
+  @include body1-medium($primary-text);
+  margin-right: 8px;
+}
+
+.currency {
+  @include body1-medium($primary-text);
+}
+
+.next_btn {
+  width: 100%;
+  @include tablet {
+    max-width: 328px;
+    padding: 10px 24px;
+  }
+}
+
+.description {
+  padding: 0;
+  margin: 24px 0 0 0;
+}
+
+.inputs {
+  @include tablet {
+    display: flex;
+    justify-content: space-between;
+  }
+  @include desktop {
+    display: block;
+  }
+}
+
+.input {
+  max-width: 100%;
+  width: 100%;
+  margin-bottom: 8px;
+  border-radius: 30px;
+  @include tablet {
+    max-width: 328px;
+  }
+}
+
+.dropdown {
+  max-width: 100%;
+  width: 100%;
+  margin-bottom: 24px;
+  @include tablet {
+    max-width: 328px;
+  }
+}
+
+.dropdown_head {
+  max-width: 100%;
+  width: 100%;
+}
+
+.dropdown_list {
+  max-width: 100%;
+  width: 100%;
+  box-sizing: content-box;
+}
+
+.checkbox_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  @include tablet {
+    justify-content: flex-start;
+  }
+}
+
+.back_order {
+  margin: 0;
+  margin-left: 16px;
+  padding: 0;
+  @include body4($text-secondary);
+}
+
+.input_email {
+  @include buttonDefault;
+  cursor: text;
+  display: inline-block;
+  @include body3-normal($primary-text);
+  text-align: center;
+  max-width: 100%;
+  width: 100%;
+  height: 44px;
+  box-sizing: border-box;
+  background-color: $cream-color;
+  border-radius: 22px;
+  padding: 10px 24px;
+  transition: 0.5s;
+  border: 0.5px solid $cream-color;
+  margin-bottom: 24px;
+  &::placeholder {
+    color: $gray-color;
+  }
+
+  &:focus {
+    background-color: $white-color;
+    border: 0.5px solid #343434;
+  }
+
+  @include hover {
+    transition: 0.5s;
+    border: 0.5px solid #343434;
+  }
+
+  &_error {
+    border: 0.5px solid #910c5c;
+  }
+  @include tablet {
+    max-width: 328px;
+  }
+}
+
+.about_policy {
+  @include body4($text-secondary);
+  padding: 0;
+  margin: 0;
+}
+
+.link {
+  text-decoration: underline;
+  transition: 0.5s;
+  @include hover {
+    opacity: 0.5;
+  }
+}
+
+.submit_btn {
+  max-width: 100%;
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px 24px;
+  @include tablet {
+    max-width: 328px;
+  }
+}
+
+.title {
+  @include body1-normal($wine-color);
+  padding: 0;
+  margin: 0 0 24px 0;
+}
+
+.confirm_text {
+  @include body4($text-secondary);
+  padding: 0;
+  margin: 0;
+}
+
+.number {
+  @include body4($text-secondary);
+}

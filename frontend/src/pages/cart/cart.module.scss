@@ -1,0 +1,31 @@
+.section {
+  padding-top: 96px;
+}
+
+.container {
+  max-width: calc(100% - 32px);
+  width: 100vw;
+  margin: 0 auto 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  @include tablet {
+    justify-content: start;
+    max-width: 680px;
+    margin-bottom: 32px;
+  }
+  @include desktop {
+    max-width: 1192px;
+    margin-bottom: 48px;
+  }
+}
+
+.head {
+  @include headline2-mobile($primary-text);
+  margin: 0;
+  padding: 0;
+  @include tablet {
+    @include headline2($primary-text);
+    margin-right: 32px;
+  }
+}

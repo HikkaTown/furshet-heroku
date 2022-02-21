@@ -9,7 +9,13 @@ import {
 } from "../../../utils/counterFunction";
 import s from "./CounterLight.module.scss";
 
-export default function CounterLight({ count, setCount, id, categoryName }) {
+export default function CounterLight({
+  count,
+  setCount,
+  id,
+  categoryName,
+  minValue = 1,
+}) {
   const timer = useRef();
 
   const cb = (value) => {
@@ -35,11 +41,11 @@ export default function CounterLight({ count, setCount, id, categoryName }) {
 
   const handlerDecrementValue = (e) => {
     e.preventDefault();
-    handlerDecrement(timer, setCount, count, 1);
+    handlerDecrement(timer, setCount, count, minValue);
   };
 
   const handlerOnClickDecrement = () => {
-    onClickDecrement(count, setCount, 1);
+    onClickDecrement(count, setCount, minValue);
   };
 
   return (

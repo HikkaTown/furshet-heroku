@@ -46,6 +46,7 @@ export default function FurshetCard({ data, className, categoryName }) {
       toggleToCart({
         ...data,
         count: 1,
+        totalPrice: data.price * 1,
       })
     );
   };
@@ -55,6 +56,7 @@ export default function FurshetCard({ data, className, categoryName }) {
         changeInCart({
           ...cardFromBasket,
           count: value,
+          totalPrice: data.price * value,
         })
       );
     } else if (value === 0) {

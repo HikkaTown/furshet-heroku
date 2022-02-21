@@ -49,6 +49,7 @@ export default function GastroStationCard({ data, className, categoryName }) {
         ...data,
         categoryName: categoryName,
         count: value,
+        totalPrice: (value - data.minPosition) * data.minPrice + +data.price,
       })
     );
   };
@@ -68,6 +69,8 @@ export default function GastroStationCard({ data, className, categoryName }) {
           changeInCart({
             ...cartFromBasket,
             count: count,
+            totalPrice:
+              (count - data.minPosition) * data.minPrice + +data.price,
           })
         );
       } else {

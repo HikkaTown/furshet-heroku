@@ -3,7 +3,12 @@ import cs from "classnames";
 import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import s from "./DropdownCallback.module.scss";
 
-export default function DropdownCallback({ className }) {
+export default function DropdownCallback({
+  className,
+  classNameHeader,
+  classNameList,
+  setCallbackType,
+}) {
   const [isActive, setIsActive] = useState(false);
   const ref = useRef(null);
   const header = useRef(null);
@@ -15,6 +20,7 @@ export default function DropdownCallback({ className }) {
   const handlerSelectItem = (e) => {
     const SelectItem = e.target.textContent;
     header.current.textContent = SelectItem;
+    setCallbackType(SelectItem);
   };
 
   return (
@@ -34,7 +40,7 @@ export default function DropdownCallback({ className }) {
       }
       ref={ref}
     >
-      <div className={s.dropdown_head}>
+      <div className={cs(s.dropdown_head, classNameHeader)}>
         <span ref={header} className={s.head_text}>
           Общение по телефону
         </span>{" "}
@@ -59,8 +65,8 @@ export default function DropdownCallback({ className }) {
       <div
         className={
           isActive
-            ? cs(s.dropdown_list, s.dropdown_list_active)
-            : cs(s.dropdown_list)
+            ? cs(s.dropdown_list, s.dropdown_list_active, classNameList)
+            : cs(s.dropdown_list, classNameList)
         }
         onClick={handlerSelectItem}
       >

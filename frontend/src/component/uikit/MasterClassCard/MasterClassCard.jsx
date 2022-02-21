@@ -32,7 +32,6 @@ export default function MasterClassCard({ data, className, categoryName }) {
   const size = useWindowSize();
   const cartFromBasket = cartData.find((item) => item.id === data.id);
   const cartFavorite = cartPormotion.find((item) => item.id === data.id);
-  const hasInPromotion = cartFavorite !== undefined;
   const hasInCart = cartFromBasket !== undefined;
   const [descriptionVision, setDescription] = useState(false);
   const [isActive, setIsActive] = useState(
@@ -60,6 +59,16 @@ export default function MasterClassCard({ data, className, categoryName }) {
         ...data,
         count: value,
         promotion: isActive,
+        totalPrice: hasInCart
+          ? isActive
+            ? ((cartFromBasket.count - +data.minPosition) * +data.minPrice +
+                +data.price) *
+              0.85
+            : (cartFromBasket.count - +data.minPosition) * +data.minPrice +
+              +data.price
+          : isActive
+          ? ((value - +data.minPosition) * +data.minPrice + +data.price) * 0.85
+          : (value - +data.minPosition) * +data.minPrice + +data.price,
       })
     );
   };
@@ -79,6 +88,10 @@ export default function MasterClassCard({ data, className, categoryName }) {
           changeInCart({
             ...cartFromBasket,
             count: count,
+            totalPrice: isActive
+              ? ((count - +data.minPosition) * +data.minPrice + +data.price) *
+                0.85
+              : (count - +data.minPosition) * +data.minPrice + +data.price,
           })
         );
       } else {
@@ -103,6 +116,16 @@ export default function MasterClassCard({ data, className, categoryName }) {
       changeInCart({
         ...cartFromBasket,
         promotion: !isActive,
+        totalPrice: hasInCart
+          ? !isActive
+            ? ((cartFromBasket.count - +data.minPosition) * +data.minPrice +
+                +data.price) *
+              0.85
+            : (cartFromBasket.count - +data.minPosition) * +data.minPrice +
+              +data.price
+          : !isActive
+          ? ((value - +data.minPosition) * +data.minPrice + +data.price) * 0.85
+          : (value - +data.minPosition) * +data.minPrice + +data.price,
       })
     );
     dispatch(

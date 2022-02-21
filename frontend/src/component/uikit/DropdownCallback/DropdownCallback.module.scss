@@ -3,7 +3,7 @@
   max-width: 328px;
   width: 328px;
   box-sizing: border-box;
-  border-radius: 18px;
+  border-radius: 30px;
   cursor: pointer;
   background-color: $cream-color;
   border: 0.5px solid $cream-color;
@@ -45,7 +45,7 @@
 
   &_list_active {
     border: 0.5px solid $text-secondary;
-    border-radius: 18px;
+    border-radius: 30px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     box-sizing: border-box;

@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import cs from "classnames";
 import s from "./ItemCheckBox.module.scss";
 
-export default function ItemCheckBox() {
-  const [isCheck, setIsCheck] = useState(false);
-
+export default function ItemCheckBox({ isCheck, setIsCheck }) {
   return (
     <div
       onClick={() => {
