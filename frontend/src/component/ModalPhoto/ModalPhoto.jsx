@@ -7,6 +7,22 @@ import s from "./ModalPhoto.module.scss";
 import ArrowSectionButton from "../uikit/ArrowSectionButton/ArrowSectionButton";
 import { LazyImageWrapper } from "../LazyImage/LazyImage";
 import { PATH_IMAGES } from "../../utils/const";
+import { motion } from "framer-motion";
+
+const variantsAnimate = {
+  hidden: {
+    opacity: 0,
+    scale: 0,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+  },
+  hidden2: {
+    opacity: 0,
+    scale: 0,
+  },
+};
 
 export default function ModalPhoto({ isOpened, onClose, images, index }) {
   return (
@@ -18,18 +34,50 @@ export default function ModalPhoto({ isOpened, onClose, images, index }) {
         isButtonClose={true}
         classBtnClose={s.close_btn}
       >
-        <ModalSlider images={images} index={index} />
+        {typeof images === "string" ? (
+          <motion.div
+            variants={variantsAnimate}
+            initial="hidden"
+            animate="visible"
+            exit="hidden2"
+            transition={{ duration: 0.3, type: "tween" }}
+            className={s.solo_image_block}
+          >
+            <LazyImageWrapper
+              src={`${PATH_IMAGES}${images}`}
+              ratio={1}
+              className={[s.solo_image]}
+              wrapperClass={s.solo_image_wrapper}
+            />
+          </motion.div>
+        ) : (
+          <ModalSlider images={images} index={index} />
+        )}
       </OverlayingPopup>
     </Portal>
   );
 }
 
 function ModalSlider({ images, index }) {
+  const variantsAnimateSlider = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+    },
+    hidden2: {
+      opacity: 0,
+    },
+  };
   const [currentSlide, setCurrentSlide] = useState(index);
   const [loaded, setLoaded] = useState(false);
   const [sliderRef, instanceRef] = useKeenSlider({
     initial: index,
     loop: true,
+    slides: {
+      size: 1,
+    },
     slideChanged(slider) {
       setCurrentSlide(slider.track.details.rel);
     },
@@ -40,12 +88,20 @@ function ModalSlider({ images, index }) {
 
   return (
     <>
-      <div className={cs("navigation-wrapper", s.wrapper)}>
+      <motion.div
+        variants={variantsAnimateSlider}
+        initial="hidden"
+        animate="visible"
+        exit="hidden2"
+        transition={{ duration: 0.3, type: "tween" }}
+        className={cs("navigation-wrapper", s.wrapper)}
+      >
         <div ref={sliderRef} className={cs("keen-slider", s.slider)}>
           {images.map((item, index) => {
             return (
               <div key={index} className={cs("keen-slider__slide", s.slide)}>
                 <LazyImageWrapper
+                  ratio={1}
                   src={`${PATH_IMAGES}${item}`}
                   alt={"text"}
                   className={[s.image]}
@@ -93,7 +149,7 @@ function ModalSlider({ images, index }) {
             })}
           </div>
         )}
-      </div>
+      </motion.div>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import cs from "classnames";
 import s from "./ItemCard.module.scss";
 import { LazyImageWrapper } from "../../LazyImage/LazyImage";
@@ -7,16 +7,23 @@ import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import CounterLight from "../CounterLight/CounterLight";
 import { PATH_IMAGES } from "../../../utils/const";
 import converterNumber from "../../../utils/converterNumber";
-import {
-  addFavoriteItemToStore,
-  deleteFavoriteFromStore,
-} from "../../../redux/actions/favoriteActions";
 import { useDispatch, useSelector } from "react-redux";
 import { cartSelector } from "../../../redux/selectors/cartSelector";
 import { changeInCart, toggleToCart } from "../../../redux/actions/cartActions";
-// карточка для обычных продуктов или стаффа
+import { AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
+
+const DynamicModalPhoto = dynamic(() => import("../../ModalPhoto/ModalPhoto"), {
+  ssr: false,
+});
 
 export default function ItemCard({ data, className }) {
+  const [isOpened, setIsOpened] = useState(false);
+
+  const handleIsOpened = () => {
+    setIsOpened((prev) => !prev);
+  };
+
   const dispatch = useDispatch();
   const cartData = useSelector(cartSelector());
   const cardFromBasket = cartData.find(
@@ -67,6 +74,7 @@ export default function ItemCard({ data, className }) {
         src={`${PATH_IMAGES}${data.slidersPc}`}
         srcMobile={`${PATH_IMAGES}${data.slidersMob}`}
         alt={data.name}
+        onClick={handleIsOpened}
       />
       <div className={s.info}>
         <h3 className={s.name}>{data.name}</h3>
@@ -90,6 +98,15 @@ export default function ItemCard({ data, className }) {
           <AddBasketButton handleAddInCart={handleAddInCart} />
         )}
       </div>
+      <AnimatePresence>
+        {isOpened && (
+          <DynamicModalPhoto
+            onClose={handleIsOpened}
+            images={data.slidersModal}
+            isOpened={isOpened}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

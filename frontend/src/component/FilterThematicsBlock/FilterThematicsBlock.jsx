@@ -2,6 +2,7 @@ import React from "react";
 import SecondaryButton from "../uikit/SecondaryButton/SecondaryButton";
 import s from "./FilterThematicsBlock.module.scss";
 import cs from "classnames";
+import { motion } from "framer-motion";
 // import { motion } from "framer-motion";
 
 export default function FilterThematicsBlock({
@@ -16,25 +17,31 @@ export default function FilterThematicsBlock({
     hidden: {
       opacity: 0,
       height: 0,
+      paddingTop: 0,
+      paddingBottom: 0,
     },
     visible: {
       height: "auto",
       opacity: 1,
+      paddingTop: "16px",
+      paddingBottom: "16px",
     },
     hidden2: {
       opacity: 0,
       height: 0,
+      paddingTop: 0,
+      paddingBottom: 0,
     },
   };
 
   return (
-    <
-      // variants={variantsAnimate}
-      // initial="hidden"
-      // animate="visible"
-      // transition={{ duration: 0.3, type: "tween" }}
-      // exit="hidden2"
-      // className={cs(classNameBlock)}
+    <motion.div
+      variants={variantsAnimate}
+      initial="hidden"
+      animate="visible"
+      exit="hidden2"
+      transition={{ duration: 0.3, type: "tween" }}
+      className={cs(classNameBlock)}
     >
       <SecondaryButton
         onClick={() => {
@@ -65,6 +72,6 @@ export default function FilterThematicsBlock({
           />
         );
       })}
-    </>
+    </motion.div>
   );
 }

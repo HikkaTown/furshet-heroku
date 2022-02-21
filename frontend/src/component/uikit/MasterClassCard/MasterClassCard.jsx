@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import s from "./MasterClassCard.module.scss";
 import cs from "classnames";
 import SliderForCard from "../SliderForCard/SliderForCard";
@@ -10,18 +10,20 @@ import useWindowSize from "../../../hooks/useWindowSize";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import converterNumber from "../../../utils/converterNumber";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
-import DescriptionInCard from "../DescriptionInCard/DescriptionInCard";
 import DeleteButton from "../DeleteButton/DeleteButton";
-import {
-  addFavoriteItemToStore,
-  changeFavoriteEat,
-  deleteFavoriteFromStore,
-  toggleFavoriteEat,
-} from "../../../redux/actions/favoriteActions";
+import { changeFavoriteEat } from "../../../redux/actions/favoriteActions";
 import { useDispatch, useSelector } from "react-redux";
 import { cartSelector } from "../../../redux/selectors/cartSelector";
 import { changeInCart, toggleToCart } from "../../../redux/actions/cartActions";
 import { favoriteSelectorEat } from "../../../redux/selectors/favoriteSelector";
+import dynamic from "next/dynamic";
+
+const DynamicDescription = dynamic(
+  () => import("../DescriptionInCard/DescriptionInCard"),
+  {
+    ssr: false,
+  }
+);
 
 export default function MasterClassCard({ data, className, categoryName }) {
   const dispatch = useDispatch();
@@ -136,10 +138,12 @@ export default function MasterClassCard({ data, className, categoryName }) {
           sliderPc={data.slidersPc}
           sliderModal={data.sliderModal}
         />
-        <DescriptionInCard
-          descriptionVision={descriptionVision}
-          content={data.descriptionList}
-        />
+        {descriptionVision && (
+          <DynamicDescription
+            descriptionVision={descriptionVision}
+            content={data.descriptionList}
+          />
+        )}
       </div>
       <div
         className={s.content}

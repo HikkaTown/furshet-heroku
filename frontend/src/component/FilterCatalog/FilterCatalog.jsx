@@ -128,26 +128,16 @@ function FilterCatalog({
             setEndValue={setEndValue}
           />
         </div>
-        {/* {typeof window !== "undefined" && ( */}
         <AnimatePresence>
           {!isDop && thematics && (
-            <motion.div
-              variants={variantsAnimate}
-              initial="hidden"
-              animate="visible"
-              transition={{ duration: 0.3, type: "tween" }}
-              exit="hidden2"
-              className={cs(s.thematics)}
-            >
-              <FilterThematicsBlock
-                thematics={thematics}
-                setThematicId={setThematicId}
-                setStartValue={setStartValue}
-                setEndValue={setEndValue}
-                thematicId={thematicId}
-                classNameBlock={cs(s.thematics, s.block)}
-              />
-            </motion.div>
+            <FilterThematicsBlock
+              thematics={thematics}
+              setThematicId={setThematicId}
+              setStartValue={setStartValue}
+              setEndValue={setEndValue}
+              thematicId={thematicId}
+              classNameBlock={cs(s.thematics, s.block)}
+            />
           )}
         </AnimatePresence>
         {/* )} */}

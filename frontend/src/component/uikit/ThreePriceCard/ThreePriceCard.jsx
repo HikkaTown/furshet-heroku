@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import s from "./ThreePriceCard.module.scss";
 import cs from "classnames";
 import useWindowSize from "../../../hooks/useWindowSize";
-import Counter from "../Counter/Counter";
 import DeleteButton from "../DeleteButton/DeleteButton";
-import DescriptionInCard from "../DescriptionInCard/DescriptionInCard";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import OpacityButton from "../OpacityButton/OpacityButton";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
@@ -12,14 +10,17 @@ import SliderCloseButton from "../SliderCloseButton/SliderCloseButton";
 import SliderForCard from "../SliderForCard/SliderForCard";
 import converterNumber from "../../../utils/converterNumber";
 import CatalogTabButton from "../CatalogTabButton/CatalogTabButton";
-import {
-  addFavoriteItemToStore,
-  deleteFavoriteFromStore,
-} from "../../../redux/actions/favoriteActions";
 import { useDispatch, useSelector } from "react-redux";
 import { cartSelector } from "../../../redux/selectors/cartSelector";
 import { changeInCart, toggleToCart } from "../../../redux/actions/cartActions";
+import dynamic from "next/dynamic";
 
+const DynamicDescription = dynamic(
+  () => import("../DescriptionInCard/DescriptionInCard"),
+  {
+    ssr: false,
+  }
+);
 export default function ThreePriceCard({ data, className }) {
   const size = useWindowSize();
   const cartData = useSelector(cartSelector());
@@ -109,13 +110,15 @@ export default function ThreePriceCard({ data, className }) {
         <SliderForCard
           sliderMob={data.slidersMob}
           sliderPc={data.slidersPc}
-          data={data.sliderModal}
+          sliderModal={data.sliderModal}
         />
-        <DescriptionInCard
-          descriptionVision={descriptionVision}
-          content={data.descriptionList}
-          className={s.text_center}
-        />
+        {descriptionVision && (
+          <DynamicDescription
+            descriptionVision={descriptionVision}
+            content={data.descriptionList}
+            className={s.text_center}
+          />
+        )}
       </div>
       <div
         className={s.content}

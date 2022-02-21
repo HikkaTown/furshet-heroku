@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 import CounterLight from "../CounterLight/CounterLight";
 import s from "./FurshetCard.module.scss";
 import cs from "classnames";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import SliderForCard from "../SliderForCard/SliderForCard";
-import DescriptionInCard from "../DescriptionInCard/DescriptionInCard";
 import useWindowSize from "../../../hooks/useWindowSize";
 import converterNumber from "../../../utils/converterNumber";
 import OpacityButton from "../OpacityButton/OpacityButton";
@@ -13,7 +12,14 @@ import SliderCloseButton from "../SliderCloseButton/SliderCloseButton";
 import { useDispatch, useSelector } from "react-redux";
 import { changeInCart, toggleToCart } from "../../../redux/actions/cartActions";
 import { cartSelector } from "../../../redux/selectors/cartSelector";
-import ModalPhoto from "../../ModalPhoto/ModalPhoto";
+import dynamic from "next/dynamic";
+
+const DynamicDescription = dynamic(
+  () => import("../DescriptionInCard/DescriptionInCard"),
+  {
+    ssr: false,
+  }
+);
 
 export default function FurshetCard({ data, className, categoryName }) {
   const cartData = useSelector(cartSelector());
@@ -84,10 +90,12 @@ export default function FurshetCard({ data, className, categoryName }) {
           sliderPc={data.slidersPc}
           sliderModal={data.sliderModal}
         />
-        <DescriptionInCard
-          descriptionVision={descriptionVision}
-          content={data.descriptionList}
-        />
+        {descriptionVision && (
+          <DynamicDescription
+            descriptionVision={descriptionVision}
+            content={data.descriptionList}
+          />
+        )}
         {data.vegan && (
           <PrimaryButton className={s.vegan_btn} text="Вегетарианский" />
         )}

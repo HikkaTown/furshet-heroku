@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import s from "./GastroStationCard.module.scss";
 import cs from "classnames";
 import useWindowSize from "../../../hooks/useWindowSize";
 import Counter from "../Counter/Counter";
 import DeleteButton from "../DeleteButton/DeleteButton";
-import DescriptionInCard from "../DescriptionInCard/DescriptionInCard";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import OpacityButton from "../OpacityButton/OpacityButton";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
@@ -14,7 +13,14 @@ import converterNumber from "../../../utils/converterNumber";
 import { useDispatch, useSelector } from "react-redux";
 import { cartSelector } from "../../../redux/selectors/cartSelector";
 import { changeInCart, toggleToCart } from "../../../redux/actions/cartActions";
+import dynamic from "next/dynamic";
 
+const DynamicDescription = dynamic(
+  () => import("../DescriptionInCard/DescriptionInCard"),
+  {
+    ssr: false,
+  }
+);
 export default function GastroStationCard({ data, className, categoryName }) {
   const cardData = useSelector(cartSelector());
   const dispatch = useDispatch();
@@ -105,11 +111,13 @@ export default function GastroStationCard({ data, className, categoryName }) {
           sliderPc={data.slidersPc}
           sliderModal={data.sliderModal}
         />
-        <DescriptionInCard
-          descriptionVision={descriptionVision}
-          content={data.descriptionList}
-          className={s.text_center}
-        />
+        {descriptionVision && (
+          <DynamicDescription
+            descriptionVision={descriptionVision}
+            content={data.descriptionList}
+            className={s.text_center}
+          />
+        )}
       </div>
       <div
         className={s.content}

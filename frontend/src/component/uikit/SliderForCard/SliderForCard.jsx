@@ -5,7 +5,12 @@ import s from "./SliderForCard.module.scss";
 import { LazyImageWrapper } from "../../LazyImage/LazyImage";
 import useWindowSize from "../../../hooks/useWindowSize";
 import { PATH_IMAGES } from "../../../utils/const";
-import ModalPhoto from "../../ModalPhoto/ModalPhoto";
+import { AnimatePresence } from "framer-motion";
+import dynamic from "next/dynamic";
+
+const DynamicModalPhoto = dynamic(() => import("../../ModalPhoto/ModalPhoto"), {
+  ssr: false,
+});
 
 export default function SliderForCard({ sliderMob, sliderPc, sliderModal }) {
   const size = useWindowSize();
@@ -72,16 +77,18 @@ export default function SliderForCard({ sliderMob, sliderPc, sliderModal }) {
           </div>
         )}
       </div>
-      {isOpened && (
-        <ModalPhoto
-          isOpened={isOpened}
-          onClose={() => {
-            setIsOpened((prev) => !prev);
-          }}
-          index={currentSlide}
-          images={sliderModal}
-        />
-      )}
+      <AnimatePresence>
+        {isOpened && (
+          <DynamicModalPhoto
+            isOpened={isOpened}
+            onClose={() => {
+              setIsOpened((prev) => !prev);
+            }}
+            index={currentSlide}
+            images={sliderModal}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }

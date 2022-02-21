@@ -58,6 +58,16 @@
       "relation": "manyToMany",
       "target": "api::tematic.tematic",
       "inversedBy": "dopolnitelnye_tovaries"
+    },
+    "slidersModal": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
     }
   }
 }

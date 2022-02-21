@@ -3,10 +3,6 @@ import qs from "qs";
 const pareseAdditionals = (list) => {
   let resultArray = [];
   list.map((item) => {
-    // const { id } = item;
-    // const { name, price, params, kategoriya_dopov, kategoriyas } =
-    //   item.attributes;
-
     let kategoriya = [];
     item.attributes.kategoriyas.data.map((kat) => {
       kategoriya.push(kat.id);
@@ -24,6 +20,7 @@ const pareseAdditionals = (list) => {
       pages: kategoriya,
       slidersPc: item.attributes.slidersPc.data.attributes.url,
       slidersMob: item.attributes.slidersMob.data.attributes.url,
+      slidersModal: item.attributes.slidersModal.data.attributes.url,
     };
 
     resultArray.push(obj);
