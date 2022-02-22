@@ -10,7 +10,6 @@ import { useDispatch } from "react-redux";
 import { changeInCart } from "../../../redux/actions/cartActions";
 
 export default function CardBasketForThreeValue({ data }) {
-  console.log(data);
   const dispatch = useDispatch();
   const [active, setActive] = useState(data.count);
   const [price, setPrice] = useState(+data.price);
@@ -20,7 +19,7 @@ export default function CardBasketForThreeValue({ data }) {
     dispatch(
       changeInCart({
         ...data,
-        count: +itemCount,
+        count: itemCount,
         price: +itemAmount,
         totalPrice: +itemAmount,
       })

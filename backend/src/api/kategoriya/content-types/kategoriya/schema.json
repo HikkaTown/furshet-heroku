@@ -21,9 +21,9 @@
       "target": "api::catalog.catalog",
       "mappedBy": "kategoriya"
     },
-    "dopolnitelnye_tovary": {
+    "dopolnitelnye_tovaries": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::dopolnitelnye-tovary.dopolnitelnye-tovary",
       "inversedBy": "kategoriyas"
     }
