@@ -4,26 +4,26 @@ import { useSelector } from "react-redux";
 import { cartSelector } from "../../redux/selectors/cartSelector";
 import CartOrderContainer from "../CartOrderContainer/CartOrderContainer";
 import Navigation from "../Navigation/Navigation";
+import CardBasketForThreeValue from "../uikit/CardBasketForThreeValue/CardBasketForThreeValue";
 import CardForBasketFurshet from "../uikit/CardForBasketFurshet/CardForBasketFurshet";
 import CardForBasketGastro from "../uikit/CardForBasketGastro/CardForBasketGastro";
 import s from "./CartBlock.module.scss";
 export default function CartBlock() {
   const cartStore = useSelector(cartSelector());
 
-  // useEffect(() => {
   let totalPrice = 0;
   cartStore.map((item) => {
     totalPrice += item.totalPrice;
   });
-
-  // }, []);
 
   return (
     <div className={s.section}>
       <div className={s.cart_list}>
         {cartStore.length > 0 &&
           cartStore.map((item) => {
-            if (item.category.categoryName === "Фуршет") {
+            if (item?.threeValue) {
+              return <CardBasketForThreeValue key={item.id} data={item} />;
+            } else if (item.category.categoryName === "Фуршет") {
               return <CardForBasketFurshet key={item.id} data={item} />;
             } else if (
               item.category.categoryName === "Гастро-станции" ||
