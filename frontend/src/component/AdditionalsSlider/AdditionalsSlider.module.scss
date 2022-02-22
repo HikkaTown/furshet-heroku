@@ -1,0 +1,20 @@
+.wrapper {
+  max-width: calc(100% - 32px);
+  width: 100vw;
+  position: relative;
+  margin: 40px auto 0;
+  @include tablet {
+    max-width: 680px;
+  }
+  @include desktop {
+    max-width: 1192px;
+  }
+}
+
+.slider {
+}
+
+.slide {
+  background-color: #fff;
+  color: blue;
+}

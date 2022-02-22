@@ -8,12 +8,33 @@ import { useDispatch } from "react-redux";
 import { changeInCart, toggleToCart } from "../../../redux/actions/cartActions";
 export default function CardForBasketFurshet({ data }) {
   const dispatch = useDispatch();
+
+  const handlerTotalPrice = (value) => {
+    if (data.category.categoryName === "Фурушет") {
+      return data.price * value;
+    } else if (data.category.categoryName === "Мастер-класс") {
+      return data.promotion
+        ? ((data.count - +data.minPosition) * +data.minPrice + +data.price) *
+            0.85
+        : (data.count - +data.minPosition) * +data.minPrice + +data.price;
+    } else if (data.category.categoryName === "Гастро-станции") {
+      return (value - data.minPosition) * data.minPrice + +data.price;
+    } else if (data.category.categoryName === "Бар") {
+      return (value - data.minPosition) * data.minPrice + +data.price;
+    } else {
+      return data.price * value;
+    }
+  };
+
   const setCount = (value) => {
+    handlerTotalPrice(value);
+    console.log(value);
     if (value !== 0) {
       dispatch(
         changeInCart({
           ...data,
           count: value,
+          totalPrice: handlerTotalPrice(value),
         })
       );
     } else if (value === 0) {

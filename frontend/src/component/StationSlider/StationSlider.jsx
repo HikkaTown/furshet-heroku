@@ -8,6 +8,8 @@ import ArrowSectionButton from "../uikit/ArrowSectionButton/ArrowSectionButton";
 import AboutMoreButton from "../uikit/AboutMoreButton/AboutMoreButton";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import CatalogTabButton from "../uikit/CatalogTabButton/CatalogTabButton";
+import NavigationButton from "../uikit/NavigationButton/NavigationButton";
 
 const DynamicModalFeedback = dynamic(
   () => import("../FeedbackModal/FeedbackModal"),
@@ -35,6 +37,10 @@ export default function StationSlider({ dataImages, dataText, secondBtn }) {
     },
   });
 
+  const handlerFeedbackModal = () => {
+    setOpen((prev) => !prev);
+  };
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -54,10 +60,10 @@ export default function StationSlider({ dataImages, dataText, secondBtn }) {
                 text={"Свяжитесь со мной"}
               />
             ) : (
-              <AboutMoreButton
-                onClick={() => {
-                  dataText.callback(router);
-                }}
+              <NavigationButton
+                text="Свяжитесь со мной"
+                className={s.callback_btn}
+                onClick={handlerFeedbackModal}
               />
             )}
           </div>
@@ -100,7 +106,10 @@ export default function StationSlider({ dataImages, dataText, secondBtn }) {
         )}
       </div>
       {isOpened && (
-        <DynamicModalFeedback isOpened={isOpened} onClose={handleClose} />
+        <DynamicModalFeedback
+          isOpened={isOpened}
+          onClose={handlerFeedbackModal}
+        />
       )}
     </>
   );

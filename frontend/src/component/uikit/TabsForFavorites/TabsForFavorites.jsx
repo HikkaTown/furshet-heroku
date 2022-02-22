@@ -1,14 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import s from "./TabsForFavorites.module.scss";
 import NavigationButton from "../NavigationButton/NavigationButton";
 import cs from "classnames";
-import { useSelector } from "react-redux";
-import {
-  favoriteSelectorBar,
-  favoriteSelectorBuffets,
-  favoriteSelectorGastro,
-  favoriteSelectorMasterclass,
-} from "../../../redux/selectors/favoriteSelector";
 
 function TabsForFavorites({
   onClick,

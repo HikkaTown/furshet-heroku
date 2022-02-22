@@ -33,6 +33,7 @@ export default function ModalPhoto({ isOpened, onClose, images, index }) {
         child={s.overlay}
         isButtonClose={true}
         classBtnClose={s.close_btn}
+        overlayClass={s.overlay_class}
       >
         {typeof images === "string" ? (
           <motion.div

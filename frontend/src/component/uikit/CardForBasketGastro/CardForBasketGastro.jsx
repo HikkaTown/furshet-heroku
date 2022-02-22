@@ -9,12 +9,31 @@ import { changeInCart, toggleToCart } from "../../../redux/actions/cartActions";
 export default function CardForBasketGastro({ data }) {
   const [value, setValue] = useState(+data.minPosition);
   const dispatch = useDispatch();
+
+  const handlerTotalPrice = (value) => {
+    if (data.category.categoryName === "Фурушет") {
+      return data.price * value;
+    } else if (data.category.categoryName === "Мастер-класс") {
+      return data.promotion
+        ? ((data.count - +data.minPosition) * +data.minPrice + +data.price) *
+            0.85
+        : (data.count - +data.minPosition) * +data.minPrice + +data.price;
+    } else if (data.category.categoryName === "Гастро-станции") {
+      return (value - data.minPosition) * data.minPrice + +data.price;
+    } else if (data.category.categoryName === "Бар") {
+      return (value - data.minPosition) * data.minPrice + +data.price;
+    } else {
+      return data.price * value;
+    }
+  };
+
   const setCount = (count) => {
     if (count >= data.minPosition) {
       dispatch(
         changeInCart({
           ...data,
           count: count,
+          totalPrice: handlerTotalPrice(count),
         })
       );
     } else {

@@ -13,7 +13,12 @@ export default function FeedbackModal({ onClose, isOpened }) {
   return (
     <>
       <Portal>
-        <OverlayingPopup isOpened={isOpened} onClose={onClose} isLeft={true}>
+        <OverlayingPopup
+          isOpened={isOpened}
+          onClose={onClose}
+          isLeft={true}
+          overlayClass={s.overlay_class}
+        >
           <div className={s.container}>
             <div className={s.block}>
               <SliderCloseButton className={s.closeBtn} onClick={onClose} />

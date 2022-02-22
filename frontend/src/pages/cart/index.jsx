@@ -7,6 +7,7 @@ import CartBlock from "../../component/CartBlock/CartBlock";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCartStore } from "../../redux/actions/cartActions";
 import { cartSelector } from "../../redux/selectors/cartSelector";
+// import AdditionalsSlider from "../../component/AdditionalsSlider/AdditionalsSlider";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -28,8 +29,25 @@ export default function Cart() {
             )}
           </div>
           <CartBlock />
+          {/* <AdditionalsSlider /> */}
         </section>
       </Layout>
     </>
   );
 }
+
+// export async function getStaticProps({ preview = null }) {
+
+//   const additionalList = await axios(
+//     `http://localhost:3000/api/additionalsAll`
+//   );
+
+//   return {
+//     props: {
+//       index: indexPage,
+//       filteredCatalog: catalogData.data,
+//       thematics: catalogThematics.data.data,
+//       additionalsCards: filterAdditionals,
+//     },
+//   };
+// }

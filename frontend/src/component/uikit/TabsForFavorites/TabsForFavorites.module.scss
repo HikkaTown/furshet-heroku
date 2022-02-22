@@ -1,9 +1,17 @@
 .container {
   margin-bottom: 24px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 100%;
+  overflow-x: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .btn {
-  margin-bottom: 8px;
+  // margin-bottom: 8px;
+  min-width: fit-content;
   margin-right: 8px;
   @include tablet {
     margin-bottom: 16px !important;
@@ -20,11 +28,10 @@
   }
 
   &_active {
-    background-color: #FAB576 !important;
+    background-color: #fab576 !important;
   }
 
   @include desktop {
     margin-bottom: 0 !important;
   }
-
 }

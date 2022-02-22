@@ -89,3 +89,8 @@
 .arrow_left {
   margin-right: 16px;
 }
+
+.callback_btn {
+  padding: 11px 32px;
+  @include body2-normal($primary-text);
+}
