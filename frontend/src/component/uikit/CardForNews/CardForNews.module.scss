@@ -1,0 +1,88 @@
+.card {
+  border-radius: 8px;
+  display: inline-block;
+  max-width: calc(100%);
+  position: relative;
+  background-color: #fff;
+  @include hover {
+    filter: drop-shadow(0px 2px 4px rgba(71, 71, 71, 0.25));
+    z-index: 2;
+  }
+  @include tablet {
+    max-width: 280px;
+  }
+}
+
+.image {
+  max-width: 100%;
+  width: 100vw;
+  height: 156px;
+  @include tablet {
+    max-width: 280px;
+  }
+}
+
+.image_wrapper {
+  border-radius: 8px 8px 0px 0px;
+  overflow: hidden;
+  max-width: 100%;
+  width: 100vw;
+  height: 156px;
+  @include tablet {
+    max-width: 280px;
+  }
+}
+
+.card_info {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  min-height: 100px;
+  justify-content: space-between;
+}
+
+.card_name {
+  padding: 0;
+  margin: 0 0 4px 0;
+  @include body3-normal($primary-text);
+}
+
+.card_date {
+  padding: 0;
+  margin: 0;
+  @include body3-normal($gray-color);
+}
+
+.animate_block {
+  display: none;
+  background-color: #fff;
+  padding: 0 12px;
+  position: absolute;
+  top: 97%;
+  left: 0;
+  border-radius: 0px 0px 8px 8px;
+  width: 100%;
+}
+
+.card_description {
+  padding: 0;
+  margin: 0 0 12px 0;
+  @include body4($primary-text);
+}
+
+.btn {
+  margin-bottom: 12px !important;
+  background-color: $cream-color !important;
+  padding: 6px 24px !important;
+  @include hover {
+    background-color: $orange-color !important;
+  }
+
+  @include active {
+    background-color: $orange-brith;
+  }
+}

@@ -1,0 +1,49 @@
+.section {
+  padding-top: 96px;
+  @include desktop {
+    padding-top: 132px;
+  }
+}
+
+.container {
+  max-width: calc(100% - 32px);
+  width: 100vw;
+  margin: 0 auto;
+  @include tablet {
+    max-width: 680px;
+  }
+  @include desktop {
+    max-width: 1192px;
+  }
+}
+
+.cards_container {
+  max-width: calc(100% - 32px);
+  width: 100vw;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  @include tablet {
+    max-width: 680px;
+  }
+  @include desktop {
+    max-width: 1192px;
+  }
+}
+
+.head {
+  @include headline2-mobile($primary-text);
+  margin: 0 0 36px 0;
+  padding: 0;
+  @include tablet {
+    @include headline2($primary-text);
+    margin-bottom: 48px;
+  }
+}
+
+.card {
+  margin-bottom: 16px;
+  @include tablet {
+    margin-right: 16px;
+  }
+}

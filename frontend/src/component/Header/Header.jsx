@@ -45,6 +45,7 @@ export default function Header() {
   useEffect(() => {
     const paths = router.pathname;
     if (
+      paths === "/404" ||
       paths === "/news" ||
       paths === "/cart" ||
       paths === "/privacy" ||
@@ -62,13 +63,14 @@ export default function Header() {
       className={cs(
         s.header,
         isMenuFixed && s.headerFixed,
-        isMenuShow && s.headerShow
+        isMenuShow && s.headerShow,
+        path && s.shadow_header
       )}
     >
       <div className={s.container}>
         <Link prefetch={false} className={s.logo_link} href="/">
           <a className={s.link}>
-            <img className={s.logotip} src="uikit/logo.svg" alt="Главная" />
+            <img className={s.logotip} src="/uikit/logo.svg" alt="Главная" />
           </a>
         </Link>
         <Navigation

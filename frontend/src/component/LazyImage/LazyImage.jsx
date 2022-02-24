@@ -7,6 +7,7 @@ import clsx from "classnames";
 import { MOBILE, TABLET } from "./const";
 
 import s from "./LazyImage.module.css";
+import { useRef } from "react";
 
 let lazyLoadInstance = null;
 
@@ -29,15 +30,16 @@ const LazyImage = ({
   lazy = true,
 }) => {
   // const fallback = server ? PATH_TO_SERVER + src : src
-
+  const refElement = useRef(null);
   useEffect(() => {
     if (!lazyLoadInstance) {
       lazyLoadInstance = new LazyLoad({
         elements_selector: ".lazy",
       });
     }
-    lazyLoadInstance?.update();
-  }, []);
+    LazyLoad.resetStatus(refElement.current);
+    lazyLoadInstance.update();
+  }, [src, srcMobile, srcTablet]);
 
   const renderImage = () => (
     <>
@@ -91,6 +93,7 @@ const LazyImage = ({
           itemProp={itemprop || undefined}
           width={width}
           height={height}
+          ref={refElement}
         />
       </picture>
       {isNoscript && (

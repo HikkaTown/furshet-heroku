@@ -14,7 +14,7 @@ export default function Footer() {
             <Link prefetch={false} className={s.logo_link} href="/">
               <a>
                 <LazyImageWrapper
-                  src={"uikit/logo.svg"}
+                  src={"/uikit/logo.svg"}
                   className={[s.logo]}
                   wrapperClass={s.logo_wrapper}
                   alt="Логотип"

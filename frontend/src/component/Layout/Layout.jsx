@@ -1,3 +1,4 @@
+import { route } from "next/dist/server/router";
 import { useRouter } from "next/router";
 import React from "react";
 import Footer from "../Footer/Footer";
@@ -10,11 +11,10 @@ export default function Layout({ children }) {
       <Header />
       <main>{children}</main>
       {router.pathname === "/404" ||
-      router.pathname === "/news" ||
       router.pathname === "/favorites" ||
-      router.pathname === "/news" ||
       router.pathname === "/search" ||
-      router.pathname === "/cart" ? (
+      router.pathname === "/cart" ||
+      !router.pathname.indexOf("/news") ? (
         ""
       ) : (
         <Footer />
