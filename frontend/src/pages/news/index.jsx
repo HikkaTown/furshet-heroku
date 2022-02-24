@@ -4,27 +4,27 @@ import Head from "next/head";
 import s from "./index.module.scss";
 import CardForNews from "../../component/uikit/CardForNews/CardForNews";
 // TODO: Доделать страницу news
-export default function Index({ posts }) {
+export default function Index({ posts, index }) {
   return (
     <>
       <Head itemscope itemtype="http://schema.org/WPHeader">
-        {/* <title itemProp="headline">{META_NEWS_TITLE}</title> */}
+        <title itemProp="headline">{index.title}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        {/* <meta property="og:title" content={META_NEWS_TITLE} /> */}
+        <meta property="og:title" content={index.meta_title} />
 
         <meta
           itemProp="description"
           name="description"
-          // content={META_NEWS_DESCRIPTION}
+          content={index.meta_description}
         />
-        {/*<meta property="og:description" content={META_NEWS_DESCRIPTION} />*/}
+        <meta property="og:description" content={index.meta_description} />
         <meta property="og:site_name" content="Выездное казино" />
         {/*<meta property="og:url" content={DOMEN + "/news"} />*/}
         {/*<link rel="canonical" href={DOMEN + "/news"} />*/}
         <link
           rel="alternate"
           type="application/rss+xml"
-          // title={META_NEWS_TITLE}
+          // title={index.meta_title}
           // href={RSS}
         />
       </Head>
@@ -49,8 +49,11 @@ export default function Index({ posts }) {
 export async function getStaticProps() {
   const data = await fetch(`http://localhost:3000/api/getNews`);
   const result = await data.json();
+  const dataPage = await fetch(`http://localhost:3000/api/getMetaNewsPage`);
+  const resultPage = await dataPage.json();
   return {
     props: {
+      index: resultPage,
       posts: result,
     },
   };

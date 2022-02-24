@@ -46,7 +46,8 @@ export default function Header() {
     const paths = router.pathname;
     if (
       paths === "/404" ||
-      paths === "/news" ||
+      paths.includes("/news") ||
+      path === "/news" ||
       paths === "/cart" ||
       paths === "/privacy" ||
       paths === "/favorites" ||

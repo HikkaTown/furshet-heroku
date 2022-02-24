@@ -1,0 +1,24 @@
+{
+  "kind": "singleType",
+  "collectionName": "stranicza_novostejs",
+  "info": {
+    "singularName": "stranicza-novostej",
+    "pluralName": "stranicza-novostejs",
+    "displayName": "Страница Новостей"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "text"
+    },
+    "meta_title": {
+      "type": "text"
+    },
+    "meta_description": {
+      "type": "string"
+    }
+  }
+}
