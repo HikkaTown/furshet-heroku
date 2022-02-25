@@ -6,7 +6,6 @@ import cs from "classnames";
 import Navigation from "../Navigation/Navigation";
 import NavCallButton from "../uikit/NavCallButton/NavCallButton";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
-import useLockBodyScroll from "../../hooks/useLockBodyScroll";
 import { motion } from "framer-motion";
 
 export default function NavigationModal({ isOpened, onClose, overlayClass }) {

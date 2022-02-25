@@ -33,9 +33,12 @@
   padding-top: 168px;
   @include tablet {
     max-width: 584px;
-    padding-top: 140px;
+    // padding-top: 140px;
+    padding-top: 0;
+    transform: translateY(50%);
   }
   @include desktop {
+    transform: translateY(0);
     padding-top: 150px;
     max-width: 1192px;
     padding-top: 0;

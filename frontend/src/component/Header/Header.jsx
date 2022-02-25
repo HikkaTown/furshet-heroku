@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import s from "./Header.module.scss";
 import cs from "classnames";
-import FavoriteButton from "../uikit/FavoriteButton/FavoriteButton";
-import NavigationButton from "../uikit/NavigationButton/NavigationButton";
 import NavSearchButton from "../uikit/NavSearchButton/NavSearchButton";
 import NavCartButton from "../uikit/NavCartButton/NavCartButton";
 import Navigation from "../Navigation/Navigation";
@@ -14,6 +12,8 @@ import FavoriteButtonNav from "../uikit/FavoriteButtonNav/FavoriteButtonNav";
 
 import dynamic from "next/dynamic";
 import useHeaderFixed from "../../hooks/useHeaderFixed";
+import SearchInput from "../uikit/SearchInput/SearchInput";
+import { AnimatePresence, AnimateSharedLayout } from "framer-motion";
 
 const DynamicModalNavigation = dynamic(
   () => import("../NavigationModal/NavigationModal"),
@@ -29,6 +29,7 @@ export default function Header() {
   const router = useRouter();
   const [path, setPath] = useState(false);
   const [isOpened, setOpen] = useState(false);
+  const [searchOpened, setSearchOpened] = useState(null);
 
   const handleClose = () => {
     setOpen(false);
@@ -69,37 +70,63 @@ export default function Header() {
       )}
     >
       <div className={s.container}>
-        <Link prefetch={false} className={s.logo_link} href="/">
-          <a className={s.link}>
+        <Link prefetch={false} className={cs(s.logo_link)} href="/">
+          <a className={cs(s.link, searchOpened && s.display_none)}>
             <img className={s.logotip} src="/uikit/logo.svg" alt="Главная" />
           </a>
         </Link>
-        <Navigation
-          className={s.nav}
-          classNameBtn={s.navigation_btn}
-          classNameActive={s.navigationActive}
-        />
+
+        <AnimatePresence>
+          {!searchOpened ? (
+            <Navigation
+              className={cs(s.nav)}
+              classNameBtn={s.navigation_btn}
+              classNameActive={s.navigationActive}
+              searchState={searchOpened}
+            />
+          ) : (
+            <SearchInput
+              onClose={() => {
+                setSearchOpened((prev) => !prev);
+              }}
+            />
+          )}
+        </AnimatePresence>
+
         <div className={s.quick_btns}>
-          <NavSearchButton className={s.search} />
+          {!searchOpened && (
+            <NavSearchButton
+              onClick={() => {
+                setSearchOpened((prev) => !prev);
+              }}
+              className={s.search}
+            />
+          )}
           <FavoriteButtonNav
             onClick={handleOpenFavorites}
-            className={s.favorite}
+            className={cs(s.favorite, searchOpened && s.display_none)}
           />
-          <NavCartButton className={s.cart} />
+          <NavCartButton
+            className={cs(s.cart, searchOpened && s.display_none)}
+          />
         </div>
         <NavCallButton className={s.call_btn} />
-        <OpenNavigationButton
-          onClose={handleClose}
-          onClick={handleOpen}
-          className={s.navigation_mobile}
-        />
-        {isOpened && (
-          <DynamicModalNavigation
-            isOpened={isOpened}
-            overlayClass={s.overlay_class}
+        {!searchOpened && (
+          <OpenNavigationButton
             onClose={handleClose}
+            onClick={handleOpen}
+            className={cs(s.navigation_mobile)}
           />
         )}
+        <AnimatePresence>
+          {isOpened && (
+            <DynamicModalNavigation
+              isOpened={isOpened}
+              overlayClass={s.overlay_class}
+              onClose={handleClose}
+            />
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );

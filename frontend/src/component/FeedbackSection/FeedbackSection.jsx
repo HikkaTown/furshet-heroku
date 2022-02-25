@@ -7,6 +7,7 @@ import useWindowSize from "../../hooks/useWindowSize";
 import SeparatorTop from "../uikit/SeparatorTop/SeparatorTop";
 import SeparatorBottom from "../uikit/SeparatorBottom/SeparatorBottom";
 import dynamic from "next/dynamic";
+import { AnimatePresence } from "framer-motion";
 
 const DynamicModalFeedback = dynamic(
   () => import("../FeedbackModal/FeedbackModal"),
@@ -60,13 +61,15 @@ export default function FeedbackSection() {
         </div>
         <SeparatorBottom className={s.separator_bottom} />
       </LazyBackgroundImage>
-      {isOpen && (
-        <DynamicModalFeedback
-          isButtonClose={true}
-          isOpened={isOpen}
-          onClose={handleClose}
-        />
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <DynamicModalFeedback
+            isButtonClose={true}
+            isOpened={isOpen}
+            onClose={handleClose}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }

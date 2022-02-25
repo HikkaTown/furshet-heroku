@@ -1,0 +1,89 @@
+.input_block {
+  position: relative;
+  max-width: 100%;
+  width: 100vw;
+  background-color: #fff;
+  padding: 8px 48px;
+  border-radius: 30px;
+  border: 0.5px solid transparent;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  @include hover {
+    border-color: $text-secondary;
+  }
+  @include desktop {
+    margin-left: 32px;
+    margin-right: 32px;
+  }
+}
+
+.search_btn {
+  position: absolute;
+  left: 18.5px;
+  top: 50%;
+  transform: translateY(-50%);
+  @include buttonDefault;
+}
+
+.search_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include hover {
+    .icon_color {
+      stroke: #bea58c;
+    }
+  }
+}
+
+.icon_color {
+  stroke: #fcdaba;
+  transition: 0.3s;
+}
+
+.input {
+  outline: none;
+  background-color: none;
+  border: none;
+  width: 100%;
+  @include body4($text-secondary);
+  &:focus {
+    .input_block {
+      background-color: $cream-color;
+    }
+  }
+  &::placeholder {
+    color: $gray-color;
+  }
+}
+
+.clear {
+  position: absolute;
+  right: 0;
+  @include buttonDefault;
+  height: 20px;
+  max-width: 20px;
+  width: 20px;
+  right: 29px;
+  transition: 0.3s;
+  @include hover {
+    opacity: 0.5;
+  }
+}
+
+.line {
+  color: #fcdaba;
+  position: absolute;
+  display: inline-block;
+  height: 2px;
+  background-color: $primary-text;
+  max-width: 20px;
+  width: 20px;
+  &:nth-child(1) {
+    transform: rotate(45deg);
+  }
+  &:nth-child(2) {
+    transform: rotate(-45deg);
+  }
+}

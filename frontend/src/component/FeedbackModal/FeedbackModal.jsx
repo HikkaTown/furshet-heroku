@@ -7,9 +7,25 @@ import InputPhoneNumber from "../uikit/InputPhoneNumber/InputPhoneNumber";
 import DropdownCallback from "../uikit/DropdownCallback/DropdownCallback";
 import PrimaryButton from "../uikit/PrimaryButton/PrimaryButton";
 import s from "./FeedbackModal.module.scss";
+import { motion } from "framer-motion";
 
 // TODO: Сделать отрпавку формы
 export default function FeedbackModal({ onClose, isOpened }) {
+  const animateVariants = {
+    hidden: {
+      translateX: "100%",
+      opacity: 0,
+    },
+    visible: {
+      translateX: 0,
+      opacity: 1,
+    },
+
+    hidden2: {
+      translateX: "100%",
+      opacity: 0,
+    },
+  };
   return (
     <>
       <Portal>
@@ -19,7 +35,14 @@ export default function FeedbackModal({ onClose, isOpened }) {
           isLeft={true}
           overlayClass={s.overlay_class}
         >
-          <div className={s.container}>
+          <motion.div
+            className={s.container}
+            variants={animateVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden2"
+            transition={{ duration: 0.5, type: "tween" }}
+          >
             <div className={s.block}>
               <SliderCloseButton className={s.closeBtn} onClick={onClose} />
               <form className={s.content}>
@@ -43,7 +66,7 @@ export default function FeedbackModal({ onClose, isOpened }) {
                 />
               </form>
             </div>
-          </div>
+          </motion.div>
         </OverlayingPopup>
       </Portal>
     </>
