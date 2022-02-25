@@ -49,15 +49,25 @@
     },
     "kategoriyas": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::kategoriya.kategoriya",
-      "mappedBy": "dopolnitelnye_tovary"
+      "mappedBy": "dopolnitelnye_tovaries"
     },
     "tematikis": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::tematic.tematic",
       "inversedBy": "dopolnitelnye_tovaries"
+    },
+    "slidersModal": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ]
     }
   }
 }

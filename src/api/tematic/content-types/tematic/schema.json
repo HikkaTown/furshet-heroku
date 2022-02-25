@@ -25,7 +25,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::dopolnitelnye-tovary.dopolnitelnye-tovary",
-      "inversedBy": "tematikis"
+      "mappedBy": "tematikis"
     }
   }
 }
