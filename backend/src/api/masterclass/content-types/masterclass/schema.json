@@ -4,8 +4,7 @@
   "info": {
     "singularName": "masterclass",
     "pluralName": "masterclasses",
-    "displayName": "мастер-класс",
-    "description": ""
+    "displayName": "мастер-класс"
   },
   "options": {
     "draftAndPublish": true

@@ -96,7 +96,7 @@ export default async function handler(req, res) {
     end,
     peopleNumber
   );
-  const result = await axios.get(`${URL_SERVER}/catalogs?${string}`);
+  const result = await axios.get(`${URL_SERVER}/katalogs?${string}`);
   try {
     const data = await result.data.data;
     const newData = parseObj(data);

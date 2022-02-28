@@ -173,7 +173,7 @@ const parsePageStudy = (data) => {
   studyBlock.header = studyBlockData.header;
   studyBlock.title = studyBlockData.title;
   studyBlock.selectInHeader = studyBlockData.selectInHeader;
-  studyBlock.firstImageText = studyBlockData.firsImageText;
+  studyBlock.firstImageText = studyBlockData.firstImageText;
   studyBlock.secondImageText = studyBlockData.secondImageText;
   studyBlock.threeImageText = studyBlockData.threeImageText;
   studyBlock.fourImageText = studyBlockData.fourImageText;

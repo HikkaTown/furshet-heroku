@@ -1,5 +1,5 @@
 {
-  "name": "arenda-furshetov",
+  "name": "backend",
   "private": true,
   "version": "0.1.0",
   "description": "A Strapi application",
@@ -9,20 +9,18 @@
     "build": "strapi build",
     "strapi": "strapi"
   },
+  "devDependencies": {},
   "dependencies": {
-    "@strapi/plugin-i18n": "4.0.2",
-    "@strapi/plugin-users-permissions": "4.0.2",
-    "@strapi/strapi": "4.0.2",
-    "pg": "^8.7.3",
-    "pg-connection-string": "^2.5.0",
-    "sharp": "^0.29.3",
-    "sqlite3": "5.0.2"
+    "@strapi/strapi": "4.1.1",
+    "@strapi/plugin-users-permissions": "4.1.1",
+    "@strapi/plugin-i18n": "4.1.1",
+    "pg": "8.6.0"
   },
   "author": {
     "name": "A Strapi developer"
   },
   "strapi": {
-    "uuid": "d1424214-15fb-4017-a8a5-bd2de4538f61"
+    "uuid": "50e61b3f-4ee5-4597-bc37-471bf1de7d1e"
   },
   "engines": {
     "node": ">=12.x.x <=16.x.x",

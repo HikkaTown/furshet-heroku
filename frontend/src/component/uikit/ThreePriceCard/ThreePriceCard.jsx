@@ -152,7 +152,7 @@ export default function ThreePriceCard({ data, className }) {
         </div>
         <div className={s.pay}>
           <p className={s.price}>
-            <span className={s.amount}>{converterNumber(price)}</span>
+            <span className={s.amount}>{converterNumber(+price)}</span>
             <span className={s.currency}> &#8381;</span>
           </p>
           {hasInCart ? (

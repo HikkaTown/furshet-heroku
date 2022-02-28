@@ -4,8 +4,7 @@
   "info": {
     "singularName": "dopolnitelnye-tovary",
     "pluralName": "dopolnitelnye-tovaries",
-    "displayName": "дополнительныеТовары",
-    "description": ""
+    "displayName": "дополнительныеТовары"
   },
   "options": {
     "draftAndPublish": true
@@ -16,36 +15,46 @@
       "type": "text"
     },
     "price": {
-      "type": "integer"
+      "type": "biginteger"
     },
     "params": {
       "type": "richtext"
     },
     "slidersPc": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
       "allowedTypes": [
         "images",
         "files",
-        "videos"
-      ]
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     },
     "slidersMob": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
       "allowedTypes": [
         "images",
         "files",
-        "videos"
-      ]
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     },
-    "kategoriya_dopov": {
+    "slidersModal": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "tematikis": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::kategoriya-dopov.kategoriya-dopov",
-      "inversedBy": "dopolnitelnye_tovaries"
+      "relation": "manyToMany",
+      "target": "api::tematiki.tematiki",
+      "mappedBy": "dopolnitelnye_tovaries"
     },
     "kategoriyas": {
       "type": "relation",
@@ -53,21 +62,11 @@
       "target": "api::kategoriya.kategoriya",
       "mappedBy": "dopolnitelnye_tovaries"
     },
-    "tematikis": {
+    "kategoriya_dopov": {
       "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::tematic.tematic",
+      "relation": "manyToOne",
+      "target": "api::kategoriya-dopov.kategoriya-dopov",
       "inversedBy": "dopolnitelnye_tovaries"
-    },
-    "slidersModal": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ]
     }
   }
 }

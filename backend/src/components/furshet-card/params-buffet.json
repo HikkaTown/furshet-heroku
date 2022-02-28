@@ -6,7 +6,7 @@
   },
   "options": {},
   "attributes": {
-    "CountNumber": {
+    "countNumber": {
       "type": "biginteger"
     },
     "countVesInGramm": {

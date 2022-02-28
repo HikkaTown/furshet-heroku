@@ -18,7 +18,7 @@
       "type": "text"
     },
     "meta_description": {
-      "type": "string"
+      "type": "text"
     }
   }
 }

@@ -1,0 +1,100 @@
+{
+  "kind": "collectionType",
+  "collectionName": "katalogs",
+  "info": {
+    "singularName": "katalog",
+    "pluralName": "katalogs",
+    "displayName": "каталог",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "text"
+    },
+    "descriptionList": {
+      "type": "component",
+      "repeatable": true,
+      "component": "furshet-card.desc-list"
+    },
+    "params": {
+      "type": "component",
+      "repeatable": false,
+      "component": "furshet-card.params-buffet"
+    },
+    "vegan": {
+      "type": "boolean",
+      "default": false
+    },
+    "slidersPc": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "slidersMob": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "slidersModal": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "threeValue": {
+      "type": "component",
+      "repeatable": false,
+      "component": "unical-card.unical-position"
+    },
+    "tematics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tematiki.tematiki",
+      "mappedBy": "katalogs"
+    },
+    "countSetting": {
+      "type": "component",
+      "repeatable": false,
+      "component": "count-setting.count-setting"
+    },
+    "kategoriya": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::kategoriya.kategoriya",
+      "inversedBy": "katalogs"
+    },
+    "foodName": {
+      "type": "text"
+    },
+    "tipy_tovarovs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tipy-tovarov.tipy-tovarov",
+      "inversedBy": "katalogs"
+    },
+    "price": {
+      "type": "biginteger"
+    }
+  }
+}

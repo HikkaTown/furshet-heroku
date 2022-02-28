@@ -18,8 +18,8 @@
     "katalogs": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::catalog.catalog",
-      "inversedBy": "tipy_tovarovs"
+      "target": "api::katalog.katalog",
+      "mappedBy": "tipy_tovarovs"
     }
   }
 }

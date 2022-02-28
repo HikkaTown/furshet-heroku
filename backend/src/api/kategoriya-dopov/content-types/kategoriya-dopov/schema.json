@@ -4,7 +4,8 @@
   "info": {
     "singularName": "kategoriya-dopov",
     "pluralName": "kategoriya-dopovs",
-    "displayName": "категорияДопов"
+    "displayName": "категорияДопов",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true

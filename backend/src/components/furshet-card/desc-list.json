@@ -2,12 +2,12 @@
   "collectionName": "components_furshet_card_desc_lists",
   "info": {
     "displayName": "DescList",
-    "icon": "anchor"
+    "icon": "angry"
   },
   "options": {},
   "attributes": {
-    "Text": {
-      "type": "string"
+    "text": {
+      "type": "text"
     }
   }
 }

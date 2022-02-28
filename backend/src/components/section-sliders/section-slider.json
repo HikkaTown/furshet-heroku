@@ -2,51 +2,51 @@
   "collectionName": "components_section_sliders_section_sliders",
   "info": {
     "displayName": "sectionSlider",
-    "icon": "angle-down",
-    "description": ""
+    "icon": "angle-down"
   },
   "options": {},
   "attributes": {
-    "haed": {
+    "head": {
       "type": "text"
     },
     "subtitle": {
       "type": "text"
     },
     "slidersPc": {
-      "type": "media",
-      "multiple": true,
-      "required": false,
       "allowedTypes": [
         "images",
         "files",
-        "videos"
-      ]
-    },
-    "slidersMob": {
+        "videos",
+        "audios"
+      ],
       "type": "media",
-      "multiple": true,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ]
-    },
-    "href": {
-      "type": "string"
-    },
-    "redirectBlock": {
-      "type": "boolean"
+      "multiple": false
     },
     "slidersTablet": {
       "allowedTypes": [
         "images",
         "files",
-        "videos"
+        "videos",
+        "audios"
       ],
       "type": "media",
-      "multiple": true
+      "multiple": false
+    },
+    "slidersMob": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "href": {
+      "type": "text"
+    },
+    "redirectBlock": {
+      "type": "boolean"
     }
   }
 }

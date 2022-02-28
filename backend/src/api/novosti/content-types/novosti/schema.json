@@ -15,7 +15,7 @@
       "type": "text"
     },
     "description": {
-      "type": "text"
+      "type": "richtext"
     },
     "meta_title": {
       "type": "text"
@@ -30,16 +30,8 @@
       "allowedTypes": [
         "images",
         "files",
-        "videos"
-      ],
-      "type": "media",
-      "multiple": false
-    },
-    "slidersMob": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
+        "videos",
+        "audios"
       ],
       "type": "media",
       "multiple": false
@@ -48,7 +40,18 @@
       "allowedTypes": [
         "images",
         "files",
-        "videos"
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "slidersMob": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
       ],
       "type": "media",
       "multiple": false

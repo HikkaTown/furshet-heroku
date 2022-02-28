@@ -2,7 +2,8 @@
   "collectionName": "components_study_block_study_blocks",
   "info": {
     "displayName": "studyBlock",
-    "icon": "ambulance"
+    "icon": "angle-double-up",
+    "description": ""
   },
   "options": {},
   "attributes": {
@@ -13,49 +14,57 @@
       "type": "text"
     },
     "firstImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
-        "videos"
-      ],
-      "type": "media",
-      "multiple": false
+        "videos",
+        "audios"
+      ]
     },
-    "firsImageText": {
+    "firstImageText": {
       "type": "text"
     },
     "secondImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
-        "videos"
-      ],
-      "type": "media",
-      "multiple": false
-    },
-    "threeImage": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ],
-      "type": "media",
-      "multiple": false
-    },
-    "fourImage": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ],
-      "type": "media",
-      "multiple": false
+        "videos",
+        "audios"
+      ]
     },
     "secondImageText": {
       "type": "text"
     },
+    "threeImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
     "threeImageText": {
       "type": "text"
+    },
+    "fourImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "fourImageText": {
       "type": "text"

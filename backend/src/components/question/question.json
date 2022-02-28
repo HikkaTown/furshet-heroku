@@ -2,8 +2,7 @@
   "collectionName": "components_question_questions",
   "info": {
     "displayName": "question",
-    "icon": "angle-up",
-    "description": ""
+    "icon": "anchor"
   },
   "options": {},
   "attributes": {

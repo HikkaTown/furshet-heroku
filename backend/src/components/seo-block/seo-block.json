@@ -2,8 +2,7 @@
   "collectionName": "components_seo_block_seo_blocks",
   "info": {
     "displayName": "seoBlock",
-    "icon": "angle-double-down",
-    "description": ""
+    "icon": "american-sign-language-interpreting"
   },
   "options": {},
   "attributes": {
@@ -17,64 +16,64 @@
       "type": "richtext"
     },
     "firstImagePc": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
       "allowedTypes": [
         "images",
         "files",
-        "videos"
-      ]
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     },
     "firstImageTablet": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
       "allowedTypes": [
         "images",
         "files",
-        "videos"
-      ]
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     },
     "firstImageMobile": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
       "allowedTypes": [
         "images",
         "files",
-        "videos"
-      ]
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     },
     "secondImagePc": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
       "allowedTypes": [
         "images",
         "files",
-        "videos"
-      ]
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     },
     "secondImageTablet": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
       "allowedTypes": [
         "images",
         "files",
-        "videos"
-      ]
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     },
     "secondImageMobile": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
       "allowedTypes": [
         "images",
         "files",
-        "videos"
-      ]
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     },
     "firstImageAlt": {
       "type": "text"

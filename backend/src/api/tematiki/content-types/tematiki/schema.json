@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "kategoriyas",
+  "collectionName": "tematikis",
   "info": {
-    "singularName": "kategoriya",
-    "pluralName": "kategoriyas",
-    "displayName": "категория",
+    "singularName": "tematiki",
+    "pluralName": "tematikis",
+    "displayName": "Тематики",
     "description": ""
   },
   "options": {
@@ -12,20 +12,20 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "categoryName": {
+    "Name_Category": {
       "type": "string"
     },
     "dopolnitelnye_tovaries": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::dopolnitelnye-tovary.dopolnitelnye-tovary",
-      "inversedBy": "kategoriyas"
+      "inversedBy": "tematikis"
     },
     "katalogs": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::katalog.katalog",
-      "mappedBy": "kategoriya"
+      "inversedBy": "tematics"
     }
   }
 }

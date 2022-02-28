@@ -2,8 +2,7 @@
   "collectionName": "components_section_two_section_twos",
   "info": {
     "displayName": "sectionTwo",
-    "icon": "allergies",
-    "description": ""
+    "icon": "ambulance"
   },
   "options": {},
   "attributes": {
@@ -106,7 +105,8 @@
       "allowedTypes": [
         "images",
         "files",
-        "videos"
+        "videos",
+        "audios"
       ],
       "type": "media",
       "multiple": false
@@ -115,7 +115,8 @@
       "allowedTypes": [
         "images",
         "files",
-        "videos"
+        "videos",
+        "audios"
       ],
       "type": "media",
       "multiple": false

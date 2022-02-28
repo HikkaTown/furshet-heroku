@@ -4,8 +4,7 @@
   "info": {
     "singularName": "index",
     "pluralName": "indices",
-    "displayName": "Фуршет-Главная",
-    "description": ""
+    "displayName": "Фуршет-Главная"
   },
   "options": {
     "draftAndPublish": true
@@ -13,13 +12,13 @@
   "pluginOptions": {},
   "attributes": {
     "metaHead": {
-      "type": "string"
+      "type": "text"
     },
     "metaTitle": {
-      "type": "string"
+      "type": "text"
     },
     "h1": {
-      "type": "string"
+      "type": "text"
     },
     "titleP": {
       "type": "text"
@@ -35,7 +34,7 @@
       "component": "section-two.section-two"
     },
     "catalogName": {
-      "type": "text"
+      "type": "string"
     },
     "catalogMenu": {
       "type": "text"

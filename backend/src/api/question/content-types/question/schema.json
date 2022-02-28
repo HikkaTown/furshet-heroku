@@ -4,8 +4,7 @@
   "info": {
     "singularName": "question",
     "pluralName": "questions",
-    "displayName": "Вопросы",
-    "description": ""
+    "displayName": "Вопросы"
   },
   "options": {
     "draftAndPublish": true
@@ -13,9 +12,8 @@
   "pluginOptions": {},
   "attributes": {
     "question_item": {
-      "displayName": "question",
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "question.question"
     }
   }

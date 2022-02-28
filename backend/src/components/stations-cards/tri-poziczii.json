@@ -1,24 +1,24 @@
 {
-  "collectionName": "components_unical_card_unical_positions",
+  "collectionName": "components_stations_cards_tri_poziczii",
   "info": {
-    "displayName": "unicalPosition",
-    "icon": "angle-double-right"
+    "displayName": "три_позиции",
+    "icon": "angle-double-left"
   },
   "options": {},
   "attributes": {
     "firstPeople": {
-      "type": "biginteger"
+      "type": "text"
     },
     "secondPeople": {
-      "type": "biginteger"
+      "type": "string"
     },
     "threePeople": {
+      "type": "text"
+    },
+    "first_count": {
       "type": "biginteger"
     },
-    "First_count": {
-      "type": "biginteger"
-    },
-    "tecond_count": {
+    "second_count": {
       "type": "biginteger"
     },
     "three_count": {

@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
   const response = await fetch(
-    `http://localhost:1337/api/tematics/?populate=*`
+    `http://localhost:1337/api/tematikis/?populate=*`
   );
   try {
     const data = await response.json();
